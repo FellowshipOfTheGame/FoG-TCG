@@ -42,7 +42,7 @@ public class CreatureCard : Card {
         }
     }
 
-    public void takeDamage() {
+    public void TakeDamage() {
         var handler = this.OnTakeDamage;
         if (handler != null)
             handler();
