@@ -7,11 +7,16 @@ public class Card : MonoBehaviour {
     public string flavor;
 
 
+    [HideInSpector]
     public delegate void OnEnter();
 
+    [HideInSpector]
     public delegate void OnExit();
 
+    [HideInSpector]
     public delegate void OnTurnStart();
+
+    [HideInSpector]
     public delegate void OnTurnEnd();
 
 
