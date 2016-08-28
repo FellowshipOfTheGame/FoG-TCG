@@ -6,40 +6,44 @@ public class Card : MonoBehaviour {
     public string desc;
     public string flavor;
 
-    public delegate void onEnter();
-    public delegate void onExit();
-    public delegate void onTurnStart();
-    public delegate void onTurnEnd();
 
-    public void enter() {
+    public delegate void OnEnter();
+
+    public delegate void OnExit();
+
+    public delegate void OnTurnStart();
+    public delegate void OnTurnEnd();
+
+
+    public void Enter() {
         // Using this.onEnter is not thread safe
         // since there might be an interruption
         // between the check for null and the
         // call
-        var handler = this.onEnter;
+        var handler = this.OnEnter;
         if (handler != null)
             handler();
     }
 
-    public void exit() {
-        var handler = this.onExit;
+    public void Exit() {
+        var handler = this.OnExit;
         if (handler != null)
             handler();
     }
 
-    public void turnStart() {
-        var handler = this.onTurnStart;
+    public void TurnStart() {
+        var handler = this.OnTurnStart;
         if (handler != null)
             handler();
     }
 
-    public void turnEnd() {
-        var handler = this.onTurnEnd;
+    public void TurnEnd() {
+        var handler = this.OnTurnEnd;
         if (handler != null)
             handler();
     }
 
-    public boolean canBePlayed() {
+    public boolean CanBePlayed() {
         return true;
     }
 
