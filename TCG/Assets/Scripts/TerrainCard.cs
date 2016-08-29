@@ -1,14 +1,16 @@
-using System;
+using UnityEngine;
 
 public class TerrainCard : Card {
 
-    [HideInSpector]
-    public delegate void OnCreatureAttacked();
+    public delegate void CreatureAttackedDelegate();
+    [HideInInspector]
+    public CreatureAttackedDelegate OnCreatureAttacked;
 
-    [HideInSpector]
-    public delegate void OnCreatureAttack();
-	
-	public void CreatureAttacked() {
+    public delegate void CreatureAttackDelegate();
+    [HideInInspector]
+    public CreatureAttackDelegate OnCreatureAttack;
+
+    public void CreatureAttacked() {
 		var handler = this.OnCreatureAttacked;
         if (handler != null)
             handler();

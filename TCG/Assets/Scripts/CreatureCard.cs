@@ -1,19 +1,20 @@
-using System;
+using UnityEngine;
 
 public class CreatureCard : Card {
 
+    public delegate void AttackDelegate();
+    [HideInInspector]
+    public AttackDelegate OnAttack;
 
-    [HideInSpector]
-    public delegate void OnAttack();
+    public delegate void DamageDelegate();
+    [HideInInspector]
+    public DamageDelegate OnTakeDamage;
 
-    [HideInSpector]
-    public delegate void OnTakeDamage();
+    [HideInInspector]
+    public bool HasAttacked;
 
-    [HideInSpector]
-    public boolean HasAttacked;
-
-    [HideInSpector]
-    public boolean CanAttack;
+    [HideInInspector]
+    public bool CanAttack;
 
     public int MaxHp;
     public int HP;
@@ -31,14 +32,14 @@ public class CreatureCard : Card {
     }
 
     public void Attack() {
-        if (this.canAttack && !this.hasAttacked) {
+        if (this.CanAttack && !this.HasAttacked) {
             var handler = this.OnAttack;
             if (handler != null)
                 handler();
 
             // TODO attack
 
-            this.hasAttacked = true;
+            this.HasAttacked = true;
         }
     }
 

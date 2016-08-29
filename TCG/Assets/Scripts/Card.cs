@@ -1,4 +1,4 @@
-using System;
+using UnityEngine;
 
 public class Card : MonoBehaviour {
 
@@ -7,20 +7,24 @@ public class Card : MonoBehaviour {
     public string flavor;
 
 
-    [HideInSpector]
-    public delegate void OnEnter();
+    public delegate void EnterDelegate();
+    [HideInInspector]
+    public EnterDelegate OnEnter;
 
-    [HideInSpector]
-    public delegate void OnExit();
+    public delegate void ExitDelegate();
+    [HideInInspector]
+    public ExitDelegate OnExit;
 
-    [HideInSpector]
-    public delegate void OnTurnStart();
+    public delegate void TurnStartDelegate();
+    [HideInInspector]
+    public TurnStartDelegate OnTurnStart;
 
-    [HideInSpector]
-    public delegate void OnTurnEnd();
+    public delegate void TurnEndDelegate();
+    [HideInInspector]
+    public TurnEndDelegate OnTurnEnd;
 
 
-    public void Enter() {
+    public virtual void Enter() {
         // Using this.onEnter is not thread safe
         // since there might be an interruption
         // between the check for null and the
@@ -30,25 +34,25 @@ public class Card : MonoBehaviour {
             handler();
     }
 
-    public void Exit() {
+    public virtual void Exit() {
         var handler = this.OnExit;
         if (handler != null)
             handler();
     }
 
-    public void TurnStart() {
+    public virtual void TurnStart() {
         var handler = this.OnTurnStart;
         if (handler != null)
             handler();
     }
 
-    public void TurnEnd() {
+    public virtual void TurnEnd() {
         var handler = this.OnTurnEnd;
         if (handler != null)
             handler();
     }
 
-    public boolean CanBePlayed() {
+    public virtual bool CanBePlayed() {
         return true;
     }
 
