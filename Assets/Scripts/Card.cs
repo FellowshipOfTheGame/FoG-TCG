@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Card : MonoBehaviour {
+public class Card : ScriptableObject {
 
     public string title;
     public string desc;
