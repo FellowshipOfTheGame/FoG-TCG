@@ -3,11 +3,9 @@ using UnityEngine;
 public class TerrainCard : Card {
 
     public delegate void CreatureAttackedDelegate();
-    [HideInInspector]
     public event CreatureAttackedDelegate CreatureAttackedEvent;
 
     public delegate void CreatureAttackDelegate();
-    [HideInInspector]
     public event CreatureAttackDelegate CreatureAttackEvent;
 
     public void OnCreatureAttacked() {

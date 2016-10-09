@@ -8,19 +8,15 @@ public class Card : ScriptableObject {
 
 
     public delegate void EnterDelegate();
-    [HideInInspector]
     public event EnterDelegate EnterEvent;
 
     public delegate void ExitDelegate();
-    [HideInInspector]
     public event ExitDelegate ExitEvent;
 
     public delegate void TurnStartDelegate();
-    [HideInInspector]
     public event TurnStartDelegate TurnStartEvent;
 
     public delegate void TurnEndDelegate();
-    [HideInInspector]
     public event TurnEndDelegate TurnEndEvent;
 
 
