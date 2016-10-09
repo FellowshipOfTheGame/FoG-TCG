@@ -4,11 +4,11 @@ public class TerrainCard : Card {
 
     public delegate void CreatureAttackedDelegate();
     [HideInInspector]
-    public CreatureAttackedDelegate OnCreatureAttacked;
+    public event CreatureAttackedDelegate OnCreatureAttacked;
 
     public delegate void CreatureAttackDelegate();
     [HideInInspector]
-    public CreatureAttackDelegate OnCreatureAttack;
+    public event CreatureAttackDelegate OnCreatureAttack;
 
     public void CreatureAttacked() {
 		var handler = this.OnCreatureAttacked;

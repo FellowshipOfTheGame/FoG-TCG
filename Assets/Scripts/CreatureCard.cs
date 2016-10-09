@@ -4,11 +4,11 @@ public class CreatureCard : Card {
 
     public delegate void AttackDelegate();
     [HideInInspector]
-    public AttackDelegate OnAttack;
+    public event AttackDelegate OnAttack;
 
     public delegate void DamageDelegate();
     [HideInInspector]
-    public DamageDelegate OnTakeDamage;
+    public event DamageDelegate OnTakeDamage;
 
     [HideInInspector]
     public bool HasAttacked;

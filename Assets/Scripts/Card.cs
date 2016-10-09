@@ -9,19 +9,19 @@ public class Card : MonoBehaviour {
 
     public delegate void EnterDelegate();
     [HideInInspector]
-    public EnterDelegate OnEnter;
+    public event EnterDelegate OnEnter;
 
     public delegate void ExitDelegate();
     [HideInInspector]
-    public ExitDelegate OnExit;
+    public event ExitDelegate OnExit;
 
     public delegate void TurnStartDelegate();
     [HideInInspector]
-    public TurnStartDelegate OnTurnStart;
+    public event TurnStartDelegate OnTurnStart;
 
     public delegate void TurnEndDelegate();
     [HideInInspector]
-    public TurnEndDelegate OnTurnEnd;
+    public event TurnEndDelegate OnTurnEnd;
 
 
     public virtual void Enter() {
