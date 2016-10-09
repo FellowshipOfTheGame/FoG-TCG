@@ -22,13 +22,13 @@ public class CreatureCard : Card {
     public override void OnEnter() {
         this.CanAttack = false;
         this.HasAttacked = false;
-        base.Enter();
+        base.OnEnter();
     }
 
     public override void OnTurnStart() {
         this.CanAttack = true;
         this.HasAttacked = false;
-        base.TurnStart();
+        base.OnTurnStart();
     }
 
     public void OnAttack() {
