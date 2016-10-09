@@ -9,50 +9,50 @@ public class Card : MonoBehaviour {
 
     public delegate void EnterDelegate();
     [HideInInspector]
-    public event EnterDelegate OnEnter;
+    public event EnterDelegate EnterEvent;
 
     public delegate void ExitDelegate();
     [HideInInspector]
-    public event ExitDelegate OnExit;
+    public event ExitDelegate ExitEvent;
 
     public delegate void TurnStartDelegate();
     [HideInInspector]
-    public event TurnStartDelegate OnTurnStart;
+    public event TurnStartDelegate TurnStartEvent;
 
     public delegate void TurnEndDelegate();
     [HideInInspector]
-    public event TurnEndDelegate OnTurnEnd;
+    public event TurnEndDelegate TurnEndEvent;
 
 
-    public virtual void Enter() {
+    public virtual void OnEnter() {
         // Using this.onEnter is not thread safe
         // since there might be an interruption
         // between the check for null and the
         // call
-        var handler = this.OnEnter;
+        var handler = this.EnterEvent;
         if (handler != null)
             handler();
     }
 
-    public virtual void Exit() {
-        var handler = this.OnExit;
+    public virtual void OnExit() {
+        var handler = this.ExitEvent;
         if (handler != null)
             handler();
     }
 
-    public virtual void TurnStart() {
-        var handler = this.OnTurnStart;
+    public virtual void OnTurnStart() {
+        var handler = this.TurnStartEvent;
         if (handler != null)
             handler();
     }
 
-    public virtual void TurnEnd() {
-        var handler = this.OnTurnEnd;
+    public virtual void OnTurnEnd() {
+        var handler = this.TurnEndEvent;
         if (handler != null)
             handler();
     }
 
-    public virtual bool CanBePlayed() {
+    public virtual bool OnCanBePlayed() {
         return true;
     }
 
