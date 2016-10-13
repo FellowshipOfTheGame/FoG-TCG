@@ -45,7 +45,7 @@ public class CardManager : MonoBehaviour {
                 hand[handSize].transform.SetParent(canvas.transform, false);
                 if (handSize == 0)
                 {
-                    hand[handSize].transform.position = canvas.transform.position + new Vector3(-350, 0);
+                    hand[handSize].transform.position = canvas.transform.position + new Vector3(-350, -200);
                 }
                 else
                 {
