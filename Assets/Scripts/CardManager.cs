@@ -107,6 +107,14 @@ public class CardManager : MonoBehaviour {
                 }
 
             }
+            if(Input.GetButtonDown("Fire2") && handSize > 0)
+            {
+                print("banana");
+                Destroy(hand[0]);
+                hand.RemoveAt(0);
+                handSize--;
+                //shift hand to left
+            }
         }
     }
 
