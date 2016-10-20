@@ -62,6 +62,14 @@ public class CardManager : MonoBehaviour {
                 else
                 {
                     print("Deck building finished");
+                    for (int i = 0; i < deckSize; i++)
+                    {
+                        CardScriptableObject temp;
+                        int randSpace = Random.Range(0, deckSize);
+                        temp = deck[randSpace];
+                        deck[randSpace] = deck[i];
+                        deck[i] = temp;
+                    }
                     isDeckFinished = true;
                 }
             }
