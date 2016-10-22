@@ -473,8 +473,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Your deck:
 
-
-    Empty'
+'
 --- !u!222 &1649431607
 CanvasRenderer:
   m_ObjectHideFlags: 0
