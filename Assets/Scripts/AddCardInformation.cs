@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class AddCardInformation : MonoBehaviour {
 
-    public CardScriptableObject card;
+    public CardInformation card;
     public Text title;
     public Image image;
     public Text desc;

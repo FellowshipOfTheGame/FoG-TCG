@@ -65,8 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AddCardInformation.cs" />
     <Compile Include="Assets\Scripts\Card.cs" />
+    <Compile Include="Assets\Scripts\CardInformation.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
-    <Compile Include="Assets\Scripts\CardScriptableObject.cs" />
     <Compile Include="Assets\Scripts\CreatureCard.cs" />
     <Compile Include="Assets\Scripts\TerrainCard.cs" />
   </ItemGroup>

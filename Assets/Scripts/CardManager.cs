@@ -6,84 +6,83 @@ using System.Collections.Generic;
 public class CardManager : MonoBehaviour {
 
     public Canvas canvas;
+    public Text deckList;
 
-    List<CardScriptableObject> deck = new List<CardScriptableObject>();
+    [HideInInspector]
+    public List<CardInformation> database = new List<CardInformation>();
+
+    public List<int> collection = new List<int>();
+
+    List<CardInformation> deck = new List<CardInformation>();
     int deckSize = 0;
     List<GameObject> hand = new List<GameObject>();
     int handSize = 0;
-    public GameObject card;
-    public CardScriptableObject cartaGuaxininja;
-    public CardScriptableObject cartaYoko;
+
+    public GameObject cardPrefab;
+    public CardInformation cartaGuaxininja;
+    public CardInformation cartaYoko;
 
     bool isDeckFinished = false;
 
 
     // Use this for initialization
     void Start () {
-
-        print("BUILD YOUR DECK:");
-        print("LEFT CLICK TO ADD GUAXININJA");
-        print("RIGHT CLICK TO ADD YOKO");
-        print("SPACE BAR TO FINISH BUILDING");
-
-        /*deckSize = BuildDeck(deck);
-
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < 10; i++)
         {
-            deck.Add(cartaGuaxininja);
-            deck.Add(cartaYoko);
+            collection[i] = 3;
         }
-
-        for(int i = 0; i < 30; i++)
-        {
-            CardScriptableObject temp;
-            int randSpace = Random.Range(0, deckSize);
-            temp = deck[randSpace];
-            deck[randSpace] = deck[i];
-            deck[i] = temp;
-        }*/
+       
     }
 
     void Update()
     {
         if (!isDeckFinished)
         {
-            if(deckSize == 30)
+            if (deckSize == 30)
             {
                 print("Deck size limit reached!");
                 isDeckFinished = true;
             }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if(deckSize == 0)
+            else {
+                if (Input.anyKeyDown)
                 {
-                    print("Your deck must have at least one card!");
-                }
-                else
-                {
-                    print("Deck building finished");
-                    for (int i = 0; i < deckSize; i++)
+                    if (Input.inputString == " ")
                     {
-                        CardScriptableObject temp;
-                        int randSpace = Random.Range(0, deckSize);
-                        temp = deck[randSpace];
-                        deck[randSpace] = deck[i];
-                        deck[i] = temp;
+                        if (deckSize == 0)
+                        {
+                            print("Your deck must have at least one card!");
+                        }
+                        else
+                        {
+                            print("Deck building finished");
+                            for (int i = 0; i < deckSize; i++)
+                            {
+                                CardInformation temp;
+                                int randSpace = Random.Range(0, deckSize);
+                                temp = deck[randSpace];
+                                deck[randSpace] = deck[i];
+                                deck[i] = temp;
+                            }
+                            isDeckFinished = true;
+                        }
                     }
-                    isDeckFinished = true;
+                    else if (Input.inputString == "0" || Input.inputString == "1" || Input.inputString == "2" || Input.inputString == "3" || Input.inputString == "4" || Input.inputString == "5" || Input.inputString == "6" || Input.inputString == "7" || Input.inputString == "8" || Input.inputString == "9")
+                    {
+                        int keypressed = int.Parse(Input.inputString);
+                        if (collection[keypressed] == 0)
+                        {
+                            Debug.Log("You can't add that card");
+                        }
+                        else
+                        {
+                            collection[keypressed]--;
+                            deck.Add(database[keypressed]);
+                            deckSize++;
+                            Debug.Log(database[keypressed].title + " added");
+                            UpdateDeckList();
+                        }  
+                    }
                 }
-            }
-            else if (Input.GetButtonDown("Fire1"))
-            {
-                print("Added Guaxininja!");
-                deck.Add(cartaGuaxininja);
-                deckSize++;
-            }
-            else if (Input.GetButtonDown("Fire2"))
-            {
-                print("Added Yoko!");
-                deck.Add(cartaYoko);
-                deckSize++;
             }
         }
         if (isDeckFinished)
@@ -92,7 +91,7 @@ public class CardManager : MonoBehaviour {
             {
                 if (handSize < 10)
                 {
-                    hand.Add((GameObject)Instantiate(card, Vector3.zero, Quaternion.identity, canvas.transform));
+                    hand.Add((GameObject)Instantiate(cardPrefab, Vector3.zero, Quaternion.identity, canvas.transform));
                     hand[handSize].transform.SetParent(canvas.transform, false);
                     if (handSize == 0)
                     {
@@ -117,16 +116,25 @@ public class CardManager : MonoBehaviour {
             }
             if(Input.GetButtonDown("Fire2") && handSize > 0)
             {
-                print("banana");
                 Destroy(hand[0]);
                 hand.RemoveAt(0);
                 handSize--;
-                //shift hand to left
+                for(int i = 0; i < handSize; i++)
+                {
+                    hand[i].transform.position = new Vector2(hand[i].transform.position.x - 80, hand[i].transform.position.y);
+                }
             }
         }
     }
 
-    public static IEnumerator WaitInput(bool wait)
+    void UpdateDeckList()
+    {
+        deckList.text = deckList.text + System.Environment.NewLine + deck[deckSize-1].title;
+        //preciso dar sort em ordem alfabetica e adicionar "x2" ou "x3" em cartas repetidas
+        
+    }
+
+    /*public static IEnumerator WaitInput(bool wait)
     {
         while (wait)
         {
@@ -138,5 +146,5 @@ public class CardManager : MonoBehaviour {
             
             yield return null;
         }
-    }
+    }*/
 }

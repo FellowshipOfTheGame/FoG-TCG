@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: Yoko
   m_EditorClassIdentifier: 
   title: Yoko
-  desc: "Todo mundo acha que \xE9 mulher"
-  flavor: "Mas \xE9 homem..."
+  desc: "Todo mundo acha que \xE9 mulher, mas \xE9 homem..."
+  flavor: Autor - Guilherme
+  number: 8
