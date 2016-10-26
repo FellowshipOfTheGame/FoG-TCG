@@ -7,10 +7,16 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
     Vector2 mouseOffset;
 
+    Transform parentToReturnTo = null;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("OnBeginDrag");
+
         mouseOffset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
+
+        parentToReturnTo = this.transform.parent;
+        this.transform.SetParent(this.transform.parent.parent);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -24,5 +30,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("OnEndDrag");
+        this.transform.SetParent(parentToReturnTo);
     }
 }
