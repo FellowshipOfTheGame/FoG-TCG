@@ -64,10 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AddCardInformation.cs" />
+    <Compile Include="Assets\Scripts\AddCardInformationMinimized.cs" />
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\CardInformation.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
     <Compile Include="Assets\Scripts\CreatureCard.cs" />
+    <Compile Include="Assets\Scripts\DeckListManager.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\DropZone.cs" />
     <Compile Include="Assets\Scripts\TerrainCard.cs" />

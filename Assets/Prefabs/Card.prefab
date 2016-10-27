@@ -78,7 +78,7 @@ GameObject:
   - 225: {fileID: 225000012153722408}
   m_Layer: 5
   m_Name: Card
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,6 +239,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentToReturnTo: {fileID: 0}
+  placeholderParent: {fileID: 0}
+  placeholder: {fileID: 0}
+  minimizedCard: {fileID: 1000012509200632, guid: 6b8df54116c2b994c8523472a164d2c3,
+    type: 2}
 --- !u!114 &114000013227946930
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,10 +13,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public GameObject placeholder = null;
 
+    public GameObject minimizedCard;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
-
+        //if using placeholder
         placeholder = new GameObject();
         placeholder.transform.SetParent(this.transform.parent);
         LayoutElement le = placeholder.AddComponent<LayoutElement>();
@@ -26,7 +27,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         le.flexibleHeight = 0;
 
         placeholder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
-
+        
+        
+        //to follow the mouse wherever in the card area the player clicks
         mouseOffset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
 
         parentToReturnTo = this.transform.parent;
@@ -38,13 +41,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
-
         this.transform.position = eventData.position + mouseOffset;
 
         if(placeholder.transform.parent != placeholderParent)
         {
-            placeholder.transform.parent = placeholderParent;
+            placeholder.transform.SetParent(placeholderParent);
         }
 
         int newSiblingIndex = placeholderParent.childCount;
@@ -87,12 +88,21 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        if (this.tag == "Card" && placeholderParent.tag == "DeckList")
+        {
+            GameObject mc = (GameObject)Instantiate(minimizedCard, placeholderParent);
+            mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
+        }
         this.transform.SetParent(parentToReturnTo);
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+        Destroy(placeholder);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        Destroy(placeholder);
-
+        print(this.tag + "  " + placeholderParent.tag);
+        if (this.tag == "MinimizedCard" && placeholderParent.tag != "DeckList")
+        {
+            print("banana");
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -91,7 +91,7 @@ public class CardManager : MonoBehaviour {
             {
                 if (handSize < 10)
                 {
-                    hand.Add((GameObject)Instantiate(cardPrefab, Vector3.zero, Quaternion.identity, canvas.transform));
+                    hand.Add((GameObject)Instantiate(cardPrefab, canvas.transform));
                     hand[handSize].transform.SetParent(canvas.transform, false);
                     if (handSize == 0)
                     {
