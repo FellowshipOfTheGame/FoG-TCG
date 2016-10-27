@@ -74,9 +74,8 @@ GameObject:
   - 114: {fileID: 114000013227946930}
   - 114: {fileID: 114000012441847170}
   - 114: {fileID: 114000011911607296}
-  - 114: {fileID: 114000012135129560}
   - 114: {fileID: 114000012586672014}
-  - 114: {fileID: 114000011268441528}
+  - 225: {fileID: 225000012153722408}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -161,24 +160,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Title
---- !u!114 &114000011268441528
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013282045144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: 120
-  m_PreferredHeight: 180
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
 --- !u!114 &114000011911607296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,17 +178,6 @@ MonoBehaviour:
   m_PreferredHeight: 180
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
---- !u!114 &114000012135129560
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013282045144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11611e362585d1d4f83d36adfbafd21d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000012269175530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11611e362585d1d4f83d36adfbafd21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentToReturnTo: {fileID: 0}
 --- !u!114 &114000013227946930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -452,3 +423,14 @@ RectTransform:
   m_AnchoredPosition: {x: 2, y: -23.775002}
   m_SizeDelta: {x: 117.6, y: 36.75}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225000012153722408
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013282045144}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
