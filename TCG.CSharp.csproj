@@ -68,7 +68,9 @@
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\CardInformation.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
+    <Compile Include="Assets\Scripts\CollectionDraggable.cs" />
     <Compile Include="Assets\Scripts\CreatureCard.cs" />
+    <Compile Include="Assets\Scripts\DeckListDraggable.cs" />
     <Compile Include="Assets\Scripts\DeckListManager.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\DropZone.cs" />

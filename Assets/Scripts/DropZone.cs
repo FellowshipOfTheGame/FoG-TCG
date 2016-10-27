@@ -18,6 +18,11 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             d.placeholderParent = this.transform;
         }
+        CollectionDraggable cm = eventData.pointerDrag.GetComponent<CollectionDraggable>();
+        if(cm != null)
+        {
+            cm.currentZone = this.transform;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)

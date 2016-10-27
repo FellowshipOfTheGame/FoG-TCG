@@ -28,7 +28,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         placeholder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
         
-        
         //to follow the mouse wherever in the card area the player clicks
         mouseOffset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
 
@@ -47,7 +46,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             placeholder.transform.SetParent(placeholderParent);
         }
-
+        
         int newSiblingIndex = placeholderParent.childCount;
 
         for(int i=0; i < placeholderParent.childCount; i++)
@@ -98,10 +97,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         Destroy(placeholder);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        print(this.tag + "  " + placeholderParent.tag);
         if (this.tag == "MinimizedCard" && placeholderParent.tag != "DeckList")
         {
-            print("banana");
             Destroy(this.gameObject);
         }
     }
