@@ -17,11 +17,9 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
         cardCopy = Instantiate(this.gameObject);
         RectTransform rt = cardCopy.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(120, 180);
-        Destroy(cardCopy.GetComponent<LayoutElement>());
-        Destroy(cardCopy.GetComponent<CanvasGroup>());
         cardCopy.transform.SetParent(this.transform.parent.parent);
 
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
+        cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -37,7 +35,7 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
             mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
         }
 
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
+        cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = true;
         Destroy(cardCopy);
     }
 }
