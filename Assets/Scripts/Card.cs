@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Card : ScriptableObject {
 
-    public string title;
-    public string desc;
-    public string flavor;
+    public string Title;
+    public string Desc;
+    public string Flavor;
 
 
     public delegate void EnterDelegate();
