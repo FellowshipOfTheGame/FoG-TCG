@@ -30,7 +30,6 @@ public class CreatureCard : Card, IDamageable, IDamageSource {
     public int MaxHp;
     public int HP;
     public int Atk;
-    public string[] TypeLabels;
 
     public override void OnEnter() {
         this.CanAttack = false;
@@ -59,10 +58,6 @@ public class CreatureCard : Card, IDamageable, IDamageSource {
         }
 
         return false;
-    }
-
-    public string[] IDamageSource.GetTypeLabels() {
-        return TypeLabels;
     }
 
     public int IDamageable.TakeDamage(IDamageSource src, int dmg) {

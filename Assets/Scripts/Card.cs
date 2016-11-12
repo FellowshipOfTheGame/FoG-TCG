@@ -5,6 +5,7 @@ public class Card : ScriptableObject {
     public string Title;
     public string Desc;
     public string Flavor;
+    public string[] Tags;
 
 
     public delegate void EnterDelegate();
