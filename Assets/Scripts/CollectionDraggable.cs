@@ -38,6 +38,7 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
             mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
 
             OrderChildren(currentZone);
+            StartCoroutine(DeckListUpdateDelay());
         }
 
         cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -48,21 +49,32 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
     {
         if (currentZone.transform.childCount > 0)
         {
-            Transform currentChild;
-            Transform nextChild;
-            currentChild = currentZone.transform.GetChild(0);
-            for (int i = 1; i < currentZone.transform.childCount; i++)
+            string currentChildName;
+            string nextChildName;
+
+
+            for(int j = 1; j < currentZone.transform.childCount; j++)
             {
-                nextChild = currentZone.transform.GetChild(i);
-                print(currentChild + "  " + nextChild);
-                if (string.Compare(currentChild.GetComponent<AddCardInformationMinimized>().card.title, nextChild.GetComponent<AddCardInformationMinimized>().card.title) > 0)
+                for (int i = j; i > 0; i--)
                 {
-                    currentChild.SetSiblingIndex(i);
+                    currentChildName = currentZone.transform.GetChild(i - 1).GetComponent<AddCardInformationMinimized>().card.title;
+                    nextChildName = currentZone.transform.GetChild(i).GetComponent<AddCardInformationMinimized>().card.title;
+
+                    if (string.Compare(currentChildName, nextChildName) > 0)
+                    {
+                        currentZone.transform.GetChild(i).SetSiblingIndex(i-1);
+                    }
                 }
-
-                currentChild = nextChild;
-
             }
         }
+    }
+
+    IEnumerator DeckListUpdateDelay()
+    {
+
+        //returning 0 will make it wait 1 frame
+        yield return 0;
+
+        currentZone.GetComponent<DeckListManager>().CheckForMultiples();
     }
 }

@@ -178,7 +178,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
   title: {fileID: 114000011038941172}
-  quantity: {fileID: 114000011566399800}
+  quantityText: {fileID: 114000011566399800}
+  quantity: 1
 --- !u!114 &114000014213015338
 MonoBehaviour:
   m_ObjectHideFlags: 1
