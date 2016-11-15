@@ -74,8 +74,8 @@ GameObject:
   - 114: {fileID: 114000013227946930}
   - 114: {fileID: 114000012441847170}
   - 114: {fileID: 114000011911607296}
-  - 114: {fileID: 114000012586672014}
   - 225: {fileID: 225000012153722408}
+  - 114: {fileID: 114000014171658832}
   m_Layer: 5
   m_Name: Card
   m_TagString: Card
@@ -227,22 +227,6 @@ MonoBehaviour:
   image: {fileID: 114000010053240188}
   desc: {fileID: 114000012269175530}
   flavor: {fileID: 114000013238932782}
---- !u!114 &114000012586672014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013282045144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11611e362585d1d4f83d36adfbafd21d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentToReturnTo: {fileID: 0}
-  placeholderParent: {fileID: 0}
-  placeholder: {fileID: 0}
-  minimizedCard: {fileID: 1000012509200632, guid: 6b8df54116c2b994c8523472a164d2c3,
-    type: 2}
 --- !u!114 &114000013227946930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -303,6 +287,21 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Flavor Text
+--- !u!114 &114000014171658832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013282045144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502a3843de3b14a4d9f049fa9b073792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentZone: {fileID: 0}
+  minimizedCard: {fileID: 1000012509200632, guid: 6b8df54116c2b994c8523472a164d2c3,
+    type: 2}
+  collectionZone: {fileID: 0}
 --- !u!222 &222000011089519668
 CanvasRenderer:
   m_ObjectHideFlags: 1

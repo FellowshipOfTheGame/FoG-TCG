@@ -260,22 +260,22 @@ Prefab:
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 281
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -384
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
@@ -285,7 +285,7 @@ Prefab:
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
@@ -295,7 +295,7 @@ Prefab:
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010907718146, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
@@ -307,13 +307,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011911607296, guid: d11ceab930e135e45a29955ffb74f76e,
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
         type: 2}
-      propertyPath: m_PreferredHeight
-      value: 180
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114000012586672014, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
+      propertyPath: collectionZone
+      value: 
+      objectReference: {fileID: 763914847}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &345215508 stripped
@@ -783,7 +782,13 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 69706e83daa50d741b78c5843f60c52b,
         type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: collectionZone
+      value: 
+      objectReference: {fileID: 763914847}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1649431604
@@ -974,7 +979,13 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 7755d1938d705e34d9dd25fb83a5eb5a,
         type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: collectionZone
+      value: 
+      objectReference: {fileID: 763914847}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1905992299
@@ -1039,22 +1050,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1 &2092226618 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013282045144, guid: d11ceab930e135e45a29955ffb74f76e,
-    type: 2}
-  m_PrefabInternal: {fileID: 225863669}
---- !u!114 &2092226620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2092226618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502a3843de3b14a4d9f049fa9b073792, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentZone: {fileID: 0}
-  minimizedCard: {fileID: 1000012509200632, guid: 6b8df54116c2b994c8523472a164d2c3,
-    type: 2}

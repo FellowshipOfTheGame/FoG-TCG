@@ -12,6 +12,7 @@ public class AddCardInformation : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        name = card.title;
         title.text = card.title;
         desc.text = card.desc;
         flavor.text = card.flavor;
