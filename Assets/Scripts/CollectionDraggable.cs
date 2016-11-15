@@ -38,7 +38,7 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
             mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
 
             OrderChildren(currentZone);
-            StartCoroutine(DeckListUpdateDelay());
+            currentZone.GetComponent<DeckListManager>().CheckForMultiples();
         }
 
         cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -67,14 +67,5 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                 }
             }
         }
-    }
-
-    IEnumerator DeckListUpdateDelay()
-    {
-
-        //returning 0 will make it wait 1 frame
-        yield return 0;
-
-        currentZone.GetComponent<DeckListManager>().CheckForMultiples();
     }
 }
