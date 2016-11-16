@@ -12,6 +12,8 @@ public class CreatureCard : Card {
     public int HP;
     public int Atk;
 
+    // TODO algum jeito de encontrar o terreno dada a carta, seja pela posição
+    // ou por uma referência direta
 
     public override void OnEnter() {
         this.CanAttack = false;
