@@ -27,7 +27,7 @@ public class CreatureCard : Card {
         base.OnTurnStart();
     }
 
-    public override bool Attack(IDamageable target) {
+    public override bool Attack(Card target) {
         if (this.CanAttack && !this.HasAttacked) {
             int dmg = this.Atk;
 
@@ -44,7 +44,7 @@ public class CreatureCard : Card {
         return false;
     }
 
-    public override int TakeDamage(IDamageSource src, int dmg) {
+    public override int TakeDamage(Card src, int dmg) {
         OnIncomingDamage(src, ref dmg);
         OnTakeDamage(src, dmg);
         
