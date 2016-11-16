@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Card : ScriptableObject {
 
+    public static enum CardTag {
+        // TODO colocar tipos
+    };
+
     public delegate void EnterDelegate();
     public delegate void ExitDelegate();
     public delegate void TurnStartDelegate();
@@ -27,7 +31,7 @@ public class Card : ScriptableObject {
     public string Title;
     public string Desc;
     public string Flavor;
-    public string[] Tags;
+    public CardTag[] Tags;
 
     public virtual void OnEnter() {
         // Using this.onEnter is not thread safe
