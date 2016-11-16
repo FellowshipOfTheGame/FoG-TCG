@@ -3,9 +3,9 @@ using UnityEngine;
 public class TerrainCard : Card {
 
     public delegate void CreatureAttackedDelegate(CreatureCard src, CreatureCard target, ref int dmg);
-    public event CreatureAttackedDelegate CreatureAttackedEvent;
-
     public delegate void CreatureAttackDelegate(CreatureCard src, CreatureCard target, ref int dmg);
+
+    public event CreatureAttackedDelegate CreatureAttackedEvent;
     public event CreatureAttackDelegate CreatureAttackEvent;
 
     public virtual void OnCreatureAttacked(CreatureCard src, CreatureCard target, ref int dmg) {

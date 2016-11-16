@@ -3,33 +3,25 @@ using UnityEngine;
 public class Card : ScriptableObject {
 
     public delegate void EnterDelegate();
-    public event EnterDelegate EnterEvent;
-
     public delegate void ExitDelegate();
-    public event ExitDelegate ExitEvent;
-
     public delegate void TurnStartDelegate();
-    public event TurnStartDelegate TurnStartEvent;
-
     public delegate void TurnEndDelegate();
-    public event TurnEndDelegate TurnEndEvent;
-
     public delegate void OutgoingDamageDelegate(CreatureCard src, Card target, ref int dmg);
-    public event OutgoingDamageDelegate OutgoingDamageEvent;
-
     public delegate void DealDamageDelegate(CreatureCard src, Card target, int dmg);
-    public event DealDamageDelegate DealDamageEvent;
-
     public delegate void DamageDealtDelegate(CreatureCard src, Card target, int dmg);
-    public event DamageDealtDelegate DamageDealtEvent;
-
     public delegate void IncomingDamageDelegate(Card src, CreatureCard target, ref int dmg);
-    public event IncomingDamageDelegate IncomingDamageEvent;
-
     public delegate void TakeDamageDelegate(Card src, CreatureCard target, int dmg);
-    public event TakeDamageDelegate TakeDamageEvent;
-
     public delegate void DamageTakenDelegate(Card src, CreatureCard target, int dmg);
+
+    public event EnterDelegate EnterEvent;
+    public event ExitDelegate ExitEvent;
+    public event TurnStartDelegate TurnStartEvent;
+    public event TurnEndDelegate TurnEndEvent;
+    public event OutgoingDamageDelegate OutgoingDamageEvent;
+    public event DealDamageDelegate DealDamageEvent;
+    public event DamageDealtDelegate DamageDealtEvent;
+    public event IncomingDamageDelegate IncomingDamageEvent;
+    public event TakeDamageDelegate TakeDamageEvent;
     public event DamageTakenDelegate DamageTakenEvent;
 
     public string Title;
