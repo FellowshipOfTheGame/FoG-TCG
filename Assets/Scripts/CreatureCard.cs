@@ -12,8 +12,7 @@ public class CreatureCard : Card {
     public int HP;
     public int Atk;
 
-    // TODO algum jeito de encontrar o terreno dada a carta, seja pela posição
-    // ou por uma referência direta
+    public TerrainCard Terrain;
 
     public override void OnEnter() {
         this.CanAttack = false;
@@ -32,6 +31,7 @@ public class CreatureCard : Card {
             int dmg = this.Atk;
 
             OnOutgoingDamage(target, ref dmg);
+            Terrain.OnCreatureAttack(this, target, ref dmg);
             OnDealDamage(target, dmg);
 
             dmg = target.TakeDamage(this, dmg);
@@ -46,6 +46,7 @@ public class CreatureCard : Card {
 
     public override int TakeDamage(Card src, int dmg) {
         OnIncomingDamage(src, ref dmg);
+        Terrain.OnCreatureAttacked(src, this, ref dmg);
         OnTakeDamage(src, dmg);
         
         HP -= dmg;
