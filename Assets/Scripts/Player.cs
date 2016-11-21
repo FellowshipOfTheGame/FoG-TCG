@@ -5,6 +5,12 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 
     public static readonly uint HAND_MAX_SIZE = 10;
+    public static readonly uint FIELD_SIZE = 5;
+    public static readonly uint COMMANDER_SIZE = 3;
+
+    public static readonly uint TERRAINS = 0;
+    public static readonly uint CREATURES = 1;
+
     public List<Card> Hand;
     public List<Card> Deck;
 
