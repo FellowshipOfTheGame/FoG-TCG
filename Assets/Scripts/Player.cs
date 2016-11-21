@@ -13,11 +13,16 @@ public class Player : MonoBehaviour {
 
     public List<Card> Hand;
     public List<Card> Deck;
+    public Card[,] Field;
+    public CommanderCard Commander;
+    public uint CommanderPos;
 
     // TODO socket and stuff
 
     void Start() {
         Hand = new List<Card>();
+        Field = new Card[2, FIELD_SIZE];
+        CommanderPos = (FIELD_SIZE-COMMANDER_SIZE) / 2;
     }
 
     public bool DrawCard() {
