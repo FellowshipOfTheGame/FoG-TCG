@@ -17,6 +17,17 @@ public class Player : MonoBehaviour {
     public CommanderCard Commander;
     public uint CommanderPos;
 
+    private Card selectedCard;
+    public Card SelectedCard {
+        get {
+            return selectedCard;
+        }
+        set {
+            selectedCard = value;
+            // TODO notify Board / GameManager
+        }
+    }
+
     // TODO socket and stuff
 
     void Start() {
