@@ -13,7 +13,16 @@ public class Player : MonoBehaviour {
 
     public List<Card> Hand;
     public List<Card> Deck;
-    public Card[,] Field;
+
+    public TerrainCard[] Terrains;
+    public CreatureCard[] Creatures;
+
+    public Card[][] Field {
+        return new Card[][] {
+            Terrains,
+            Creatures
+        };
+    }
     public CommanderCard Commander;
     public uint CommanderPos;
 
@@ -32,7 +41,8 @@ public class Player : MonoBehaviour {
 
     void Start() {
         Hand = new List<Card>();
-        Field = new Card[2, FIELD_SIZE];
+        Terrains = new TerrainCard[FIELD_SIZE];
+        Creatures = new CreatureCard[FIELD_SIZE];
         CommanderPos = (FIELD_SIZE-COMMANDER_SIZE) / 2;
     }
 
