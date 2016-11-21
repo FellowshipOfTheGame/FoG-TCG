@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
         CommanderPos = (FIELD_SIZE-COMMANDER_SIZE) / 2;
     }
 
-    public bool DrawCard() {
+    public void DrawCard() {
         if (Deck.Count > 0) {
             Card Top = Deck[0];
             Deck.RemoveAt(0);
