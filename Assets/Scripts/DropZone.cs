@@ -18,10 +18,15 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             d.placeholderParent = this.transform;
         }
-        CollectionDraggable cm = eventData.pointerDrag.GetComponent<CollectionDraggable>();
-        if(cm != null)
+        CollectionDraggable cd = eventData.pointerDrag.GetComponent<CollectionDraggable>();
+        if(cd != null)
         {
-            cm.currentZone = this.transform;
+            cd.currentZone = this.transform;
+        }
+        DeckListDraggable dld = eventData.pointerDrag.GetComponent<DeckListDraggable>();
+        if (dld != null)
+        {
+            dld.currentZone = this.transform;
         }
     }
 
