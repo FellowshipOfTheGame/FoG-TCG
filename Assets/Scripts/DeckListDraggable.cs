@@ -69,6 +69,7 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             {
                 this.transform.SetParent(parentToReturnTo);
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
+                currentZone.GetComponent<DeckListManager>().OrderChildren();
             }
         }
         else
