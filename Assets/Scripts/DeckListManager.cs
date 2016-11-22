@@ -1,27 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class DeckListManager : MonoBehaviour {
 
     Transform currentChild;
     Transform nextChild;
-
-    public void UpdateChildrenQuantity()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            currentChild = transform.GetChild(i);
-            if (currentChild.GetComponent<AddCardInformationMinimized>().quantity == 1)
-            {
-                currentChild.GetComponent<AddCardInformationMinimized>().quantityText.text = " ";
-            }
-            else
-            {
-                currentChild.GetComponent<AddCardInformationMinimized>().quantityText.text = "x" + currentChild.GetComponent<AddCardInformationMinimized>().quantity;
-            }
-        }
-    }
 
     public void OrderChildren()
     {
@@ -59,6 +42,8 @@ public class DeckListManager : MonoBehaviour {
                 transform.GetChild(i).GetComponent<AddCardInformationMinimized>().quantityText.text = "x" + transform.GetChild(i).GetComponent<AddCardInformationMinimized>().quantity;
 
                 Destroy(transform.GetChild(i + 1).gameObject);
+
+
             }
             
         }
