@@ -37,35 +37,11 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
             GameObject mc = (GameObject)Instantiate(minimizedCard, currentZone);
             mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
 
-            OrderChildren(currentZone);
+            currentZone.GetComponent<DeckListManager>().OrderChildren();
             currentZone.GetComponent<DeckListManager>().CheckForMultiples();
         }
 
         cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = true;
         Destroy(cardCopy);
-    }
-
-    public void OrderChildren(Transform currentZone)
-    {
-        if (currentZone.transform.childCount > 0)
-        {
-            string currentChildName;
-            string nextChildName;
-
-
-            for(int j = 1; j < currentZone.transform.childCount; j++)
-            {
-                for (int i = j; i > 0; i--)
-                {
-                    currentChildName = currentZone.transform.GetChild(i - 1).GetComponent<AddCardInformationMinimized>().card.title;
-                    nextChildName = currentZone.transform.GetChild(i).GetComponent<AddCardInformationMinimized>().card.title;
-
-                    if (string.Compare(currentChildName, nextChildName) > 0)
-                    {
-                        currentZone.transform.GetChild(i).SetSiblingIndex(i-1);
-                    }
-                }
-            }
-        }
     }
 }

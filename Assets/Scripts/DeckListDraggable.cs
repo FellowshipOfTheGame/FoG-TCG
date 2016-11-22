@@ -16,11 +16,14 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public void OnBeginDrag(PointerEventData eventData)
     {
         mouseOffset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
 
-        parentToReturnTo = this.transform.parent;
-        this.transform.SetParent(this.transform.parent.parent);
-        print(transform.parent.name);
+        if (this.GetComponent<AddCardInformationMinimized>().quantity == 1)
+        {
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
+            parentToReturnTo = this.transform.parent;
+            this.transform.SetParent(this.transform.parent.parent);
+            print(transform.parent.name);
+        }
 
     }
 
