@@ -22,7 +22,6 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             GetComponent<CanvasGroup>().blocksRaycasts = false;
             parentToReturnTo = this.transform.parent;
             this.transform.SetParent(this.transform.parent.parent);
-            print(transform.parent.name);
         }
         else
         { 
@@ -50,7 +49,6 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
         else {
             this.transform.position = eventData.position + mouseOffset;
         }
-        print(currentZone);
 
     }
 
