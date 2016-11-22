@@ -1,22 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Slot : MonoBehaviour {
 
     public int posX, posy;
-    public bool IsFull;
-    public static bool posSelected;
+    public bool IsFull=false;
 
-    void OnMouseOver() {
-        if (Board.IsPlacingCard == true) {
-            Board.PosSelected = true;
-            Board.slot = transform.GetComponent<Slot>();
+    void Update(){
+        Vector3 myPos = transform.position;
+        Vector3 mouse = Input.mousePosition;
+
+        if (Mathf.Abs(mouse.x - myPos.x) <= 60 && Mathf.Abs(mouse.y - myPos.y) <= 40 && Hand.IsSelected && !IsFull){
+            Hand.CanPlace = true;
+            Hand.slot = this.transform;
         }else{
-            Board.PosSelected = false;
+            if (Hand.slot == this.transform){
+                Hand.CanPlace = false;
+                Hand.slot = null;
+            }
         }
-    }
-
-    void OnMouseExit(){
-        Board.PosSelected = false;
     }
 }
