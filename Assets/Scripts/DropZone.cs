@@ -13,11 +13,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             return;
         }
-        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-        if (d != null)
-        {
-            d.placeholderParent = this.transform;
-        }
         CollectionDraggable cd = eventData.pointerDrag.GetComponent<CollectionDraggable>();
         if(cd != null)
         {
@@ -36,19 +31,9 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             return;
         }
-        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-        if (d != null && d.placeholderParent == this.transform)
-        {
-            d.placeholderParent = d.parentToReturnTo;
-        }
     }
 
 	public void OnDrop(PointerEventData eventData)
     {
-        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-        if (d != null && this.tag != "DeckList")
-        {
-            d.parentToReturnTo = this.transform;
-        }
     }
 }

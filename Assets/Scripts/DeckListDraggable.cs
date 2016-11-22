@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.EventSystems;
-using System;
 
 public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -11,7 +8,10 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public Transform parentToReturnTo = null;
 
     public Transform currentZone;
+    public GameObject deckListZone;
 
+    GameObject cardCopy;
+    bool draggingCopy = false;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -24,12 +24,33 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             this.transform.SetParent(this.transform.parent.parent);
             print(transform.parent.name);
         }
+        else
+        { 
+            draggingCopy = true;
+            cardCopy = Instantiate(this.gameObject);
+            RectTransform rt = cardCopy.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(180, 30);
+            cardCopy.transform.SetParent(this.transform.parent.parent);
+            cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            currentZone = deckListZone.transform;
+            cardCopy.GetComponent<AddCardInformationMinimized>().quantity = 1;
+
+            this.GetComponent<AddCardInformationMinimized>().quantity--;
+            this.transform.parent.GetComponent<DeckListManager>().UpdateChildrenQuantity();
+        }
 
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        this.transform.position = eventData.position + mouseOffset;
+        if (draggingCopy)
+        {
+            cardCopy.transform.position = eventData.position + mouseOffset;
+        }
+        else {
+            this.transform.position = eventData.position + mouseOffset;
+        }
+        print(currentZone);
 
     }
 
@@ -37,13 +58,31 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         if (currentZone.tag == "DeckList")
         {
-            this.transform.SetParent(parentToReturnTo);
-            GetComponent<CanvasGroup>().blocksRaycasts = true;
+            if (draggingCopy)
+            {
+                this.GetComponent<AddCardInformationMinimized>().quantity++;
+                currentZone.GetComponent<DeckListManager>().UpdateChildrenQuantity();
+                Destroy(cardCopy);
+                draggingCopy = false;
+            }
+            else
+            {
+                this.transform.SetParent(parentToReturnTo);
+                GetComponent<CanvasGroup>().blocksRaycasts = true;
+            }
         }
         else
         {
-            Destroy(this.gameObject);
+            if (draggingCopy)
+            {
+                Destroy(cardCopy);
+                draggingCopy = false;
+            }
+            else {
+                Destroy(this.gameObject);
+            }
         }
+
 
     }
 }
