@@ -53,6 +53,11 @@ public class Hand : MonoBehaviour {
                     thisCard = null;
                     CanPlace = false;
 
+                    if (Board.CurrPlayer == 1)
+                        Board.CurrPlayer = 2;
+                    else
+                        Board.CurrPlayer = 1;
+
                     //Destroy(gameObject);
                 }else{
                     Destroy(thisCard);

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Board : MonoBehaviour {
 
+    public static int CurrPlayer=1;
 
     // Use this for initialization
     void Start () {
