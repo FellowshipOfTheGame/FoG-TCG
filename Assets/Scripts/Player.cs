@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
     public static readonly uint TERRAINS = 0;
     public static readonly uint CREATURES = 1;
 
+    public Board BoardInstance;
+
     public List<Card> Hand;
     public List<Card> Deck;
 
@@ -47,6 +49,7 @@ public class Player : MonoBehaviour {
         Terrains = new TerrainCard[FIELD_SIZE];
         Creatures = new CreatureCard[FIELD_SIZE];
         CommanderPos = (FIELD_SIZE-COMMANDER_SIZE) / 2;
+        BoardInstance = GameObject.FindObjectOfType(typeof(Board));
     }
 
     public void DrawCard() {
