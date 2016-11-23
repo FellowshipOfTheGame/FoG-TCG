@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Card : ScriptableObject {
 
-    public static enum CardTag {
+    public enum CardTag {
         // TODO colocar tipos
     };
 
