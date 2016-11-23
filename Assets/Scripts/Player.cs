@@ -53,9 +53,14 @@ public class Player : MonoBehaviour {
         if (Deck.Count > 0) {
             Card Top = Deck[0];
             Deck.RemoveAt(0);
-            if (Hand.Count < HAND_MAX_SIZE) {
-                Hand.Add(Top);
-            }
+            GiveCard(Top);
+        }
+        // TODO netcode stuff
+    }
+
+    public void GiveCard(Card c) {
+        if (Hand.Count < HAND_MAX_SIZE) {
+            Hand.Add(c);
         }
         // TODO netcode stuff
     }
