@@ -19,6 +19,7 @@ public class Board : MonoBehaviour {
     public int Turn;
 
     public int ToggleTurn() {
-        Turn = (Turn+1) % 2
+        Turn = (Turn+1) % 2;
+        return Turn;
     }
 }
