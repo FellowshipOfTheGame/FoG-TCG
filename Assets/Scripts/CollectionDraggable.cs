@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public DeckListManager deckListManager;
 
     GameObject cardCopy;
     Vector2 mouseOffset;
@@ -12,37 +13,63 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
     public GameObject minimizedCard;
 
     public GameObject collectionZone;
+    public GameObject deckList;
+
+    bool dragging = false;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        mouseOffset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
-        cardCopy = Instantiate(this.gameObject);
-        RectTransform rt = cardCopy.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(120, 180);
-        cardCopy.transform.SetParent(this.transform.parent.parent);
-        currentZone = collectionZone.transform;
+        if (deckListManager.GetDeckSize() < 30)
+        {
+            if (deckListManager.CheckCardCount(this.name))
+            {
+                mouseOffset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
+                cardCopy = Instantiate(this.gameObject);
+                RectTransform rt = cardCopy.GetComponent<RectTransform>();
+                rt.sizeDelta = new Vector2(120, 180);
+                cardCopy.transform.SetParent(this.transform.parent.parent);
+                currentZone = collectionZone.transform;
+                cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
-        cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                dragging = true;
+            }
+            else
+            {
+                print("You have too many of that card in your deck!");
+                dragging = false;
+            }
+        }
+        else
+        {
+            print("You have too many cards in your deck!");
+            dragging = false;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        cardCopy.transform.position = eventData.position + mouseOffset;
+        if (dragging)
+        {
+            cardCopy.transform.position = eventData.position + mouseOffset;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(currentZone.tag == "DeckList")
+        if (dragging)
         {
-            GameObject mc = (GameObject)Instantiate(minimizedCard, currentZone);
-            mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
-            mc.GetComponent<DeckListDraggable>().deckListZone = currentZone.gameObject;
+            if (currentZone.tag == "DeckList")
+            {
+                GameObject mc = (GameObject)Instantiate(minimizedCard, currentZone);
+                mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
+                mc.GetComponent<DeckListDraggable>().deckListZone = currentZone.gameObject;
 
-            currentZone.GetComponent<DeckListManager>().OrderChildren();
-            currentZone.GetComponent<DeckListManager>().CheckForMultiples();
+                currentZone.GetComponent<DeckListManager>().OrderChildren();
+                currentZone.GetComponent<DeckListManager>().CheckForMultiples();
+            }
+
+            cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            Destroy(cardCopy);
         }
-
-        cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        Destroy(cardCopy);
     }
 }

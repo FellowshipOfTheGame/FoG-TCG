@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler {
+public class DropZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     public bool vertical = true;
     public bool horizontal = false;
@@ -31,9 +31,5 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             return;
         }
-    }
-
-	public void OnDrop(PointerEventData eventData)
-    {
     }
 }

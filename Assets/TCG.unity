@@ -196,6 +196,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -440,6 +450,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -549,6 +569,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -658,6 +688,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -777,6 +817,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -981,6 +1031,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -1101,6 +1161,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
@@ -1273,6 +1343,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -1383,6 +1463,16 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -1502,6 +1592,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -1616,6 +1716,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -1817,6 +1927,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -1942,6 +2062,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
@@ -2052,6 +2182,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -2371,6 +2511,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -2552,6 +2702,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -2666,6 +2826,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0
@@ -2775,6 +2945,16 @@ Prefab:
       propertyPath: collectionZone
       value: 
       objectReference: {fileID: 1472401720}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckList
+      value: 
+      objectReference: {fileID: 95687212}
+    - target: {fileID: 114000014171658832, guid: d11ceab930e135e45a29955ffb74f76e,
+        type: 2}
+      propertyPath: deckListManager
+      value: 
+      objectReference: {fileID: 95687218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
   m_IsPrefabParent: 0

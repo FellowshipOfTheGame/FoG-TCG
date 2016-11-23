@@ -7,6 +7,32 @@ public class DeckListManager : MonoBehaviour {
     Transform currentChild;
     Transform nextChild;
 
+    int deckSize = 0;
+
+    public int GetDeckSize()
+    {
+        return deckSize;
+    }
+
+    public bool CheckCardCount(string cardName)
+    {
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            if(transform.GetChild(i).name == cardName)
+            {
+                if(transform.GetChild(i).GetComponent<AddCardInformationMinimized>().quantity < 3)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public void UpdateChildrenQuantity()
     {
         for (int i = 0; i < transform.childCount; i++)
