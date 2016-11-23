@@ -18,11 +18,14 @@ public class Player : MonoBehaviour {
     public CreatureCard[] Creatures;
 
     public Card[][] Field {
-        return new Card[][] {
-            Terrains,
-            Creatures
-        };
+        get {
+            return new Card[][] {
+                Terrains,
+                Creatures
+            };
+        }
     }
+
     public CommanderCard Commander;
     public uint CommanderPos;
 
