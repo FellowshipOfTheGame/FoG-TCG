@@ -64,6 +64,8 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                 mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
                 mc.GetComponent<DeckListDraggable>().deckListZone = currentZone.gameObject;
 
+                currentZone.GetComponent<DeckListManager>().deckSize++;
+
                 currentZone.GetComponent<DeckListManager>().OrderChildren();
                 currentZone.GetComponent<DeckListManager>().CheckForMultiples();
             }
