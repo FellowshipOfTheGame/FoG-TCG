@@ -3,15 +3,17 @@ using UnityEngine;
 public class CreatureCard : Card {
 
     public delegate void AttackDelegate();
+    [HideInInspector]
     public event AttackDelegate AttackEvent;
 
     public delegate void DamageDelegate();
+    [HideInInspector]
     public event DamageDelegate TakeDamageEvent;
 
-    [System.NonSerializedAttribute]
+    [HideInInspector]
     public bool HasAttacked;
 
-    [System.NonSerializedAttribute]
+    [HideInInspector]
     public bool CanAttack;
 
     public int MaxHp;
