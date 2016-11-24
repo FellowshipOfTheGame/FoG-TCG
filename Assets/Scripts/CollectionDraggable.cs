@@ -3,13 +3,14 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     public DeckListManager deckListManager;
 
     GameObject cardCopy;
     Vector2 mouseOffset;
     public Transform currentZone;
+    public GameObject deckListZone;
     public GameObject minimizedCard;
 
     public GameObject collectionZone;
@@ -68,10 +69,48 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
 
                 currentZone.GetComponent<DeckListManager>().OrderChildren();
                 currentZone.GetComponent<DeckListManager>().CheckForMultiples();
+                
             }
 
+            dragging = false;
             cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = true;
             Destroy(cardCopy);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!dragging)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (deckListManager.GetDeckSize() < 30)
+                {
+                    if (deckListManager.CheckCardCount(this.name))
+                    {
+                        GameObject mc = (GameObject)Instantiate(minimizedCard, deckListZone.transform);
+                        mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
+                        mc.GetComponent<DeckListDraggable>().deckListZone = deckListZone;
+
+                        deckListZone.GetComponent<DeckListManager>().deckSize++;
+
+                        deckListZone.GetComponent<DeckListManager>().OrderChildren();
+                        deckListZone.GetComponent<DeckListManager>().CheckForMultiples();
+                    }
+                    else
+                    {
+                        print("You have too many of that card in your deck!");
+                    }
+                }
+                else
+                {
+                    print("You have too many cards in your deck!");
+                }
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                print("MAIS INFORMAÇÕES DESSA CARTA");
+            }
         }
     }
 }
