@@ -7,6 +7,8 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
 {
     public DeckListManager deckListManager;
 
+    public Canvas canvas;
+
     GameObject cardCopy;
     Vector2 mouseOffset;
     public Transform currentZone;
@@ -27,7 +29,8 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                 cardCopy = Instantiate(this.gameObject);
                 RectTransform rt = cardCopy.GetComponent<RectTransform>();
                 rt.sizeDelta = new Vector2(120, 180);
-                cardCopy.transform.SetParent(this.transform.parent.parent);
+                cardCopy.transform.SetParent(canvas.transform);
+                cardCopy.transform.localScale = Vector3.one;
                 currentZone = collectionZone.transform;
                 cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
@@ -63,6 +66,8 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                 GameObject mc = (GameObject)Instantiate(minimizedCard, currentZone);
                 mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
                 mc.GetComponent<DeckListDraggable>().deckListZone = currentZone.gameObject;
+                mc.GetComponent<DeckListDraggable>().canvas = canvas;
+                mc.transform.localScale = Vector3.one;
 
                 currentZone.GetComponent<DeckListManager>().OrderChildren();
                 currentZone.GetComponent<DeckListManager>().CheckForMultiples();

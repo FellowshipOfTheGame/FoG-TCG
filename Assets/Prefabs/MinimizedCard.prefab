@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d91750f52052964596706d23233a66e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   parentToReturnTo: {fileID: 0}
   currentZone: {fileID: 0}
   deckListZone: {fileID: 0}

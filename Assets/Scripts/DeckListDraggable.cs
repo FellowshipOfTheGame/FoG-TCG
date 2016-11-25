@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
+    public Canvas canvas;
+
     Vector2 mouseOffset;
     public Transform parentToReturnTo = null;
 
@@ -21,7 +23,7 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             GetComponent<CanvasGroup>().blocksRaycasts = false;
             parentToReturnTo = this.transform.parent;
-            this.transform.SetParent(this.transform.parent.parent);
+            this.transform.SetParent(canvas.transform);
         }
         else
         { 
@@ -29,7 +31,8 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             cardCopy = Instantiate(this.gameObject);
             RectTransform rt = cardCopy.GetComponent<RectTransform>();
             rt.sizeDelta = new Vector2(180, 30);
-            cardCopy.transform.SetParent(this.transform.parent.parent);
+            cardCopy.transform.SetParent(canvas.transform);
+            cardCopy.transform.localScale = Vector3.one;
             cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
             currentZone = deckListZone.transform;
             cardCopy.GetComponent<AddCardInformationMinimized>().quantity = 1;
