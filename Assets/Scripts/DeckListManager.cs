@@ -7,7 +7,7 @@ public class DeckListManager : MonoBehaviour {
     Transform currentChild;
     Transform nextChild;
 
-    int deckSize = 0;
+    public int deckSize = 0;
 
     public int GetDeckSize()
     {

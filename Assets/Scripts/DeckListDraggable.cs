@@ -83,6 +83,7 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             else {
                 Destroy(this.gameObject);
             }
+            deckListZone.GetComponent<DeckListManager>().deckSize--;
         }
 
 
