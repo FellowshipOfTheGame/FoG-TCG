@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
 
     public Canvas canvas;
@@ -85,7 +85,19 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             }
             deckListZone.GetComponent<DeckListManager>().deckSize--;
         }
+    }
 
-
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        print(this.GetComponent<AddCardInformationMinimized>().quantity);
+        if(this.GetComponent<AddCardInformationMinimized>().quantity == 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            this.GetComponent<AddCardInformationMinimized>().quantity--;
+            deckListZone.GetComponent<DeckListManager>().UpdateChildrenQuantity();
+        }
     }
 }
