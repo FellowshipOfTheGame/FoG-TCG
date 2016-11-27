@@ -75,16 +75,14 @@
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\CardInformation.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
-    <Compile Include="Assets\Scripts\CollectionDraggable.cs" />
     <Compile Include="Assets\Scripts\CreatureCard.cs" />
     <Compile Include="Assets\Scripts\DeckListDraggable.cs" />
     <Compile Include="Assets\Scripts\DeckListManager.cs" />
-    <Compile Include="Assets\Scripts\Draggable.cs" />
-    <Compile Include="Assets\Scripts\DropZone.cs" />
     <Compile Include="Assets\Scripts\Field.cs" />
     <Compile Include="Assets\Scripts\Hand.cs" />
     <Compile Include="Assets\Scripts\Slot.cs" />
     <Compile Include="Assets\Scripts\TerrainCard.cs" />
+    <Compile Include="Assets\Scripts\TurnSignal.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

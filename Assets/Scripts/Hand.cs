@@ -28,8 +28,7 @@ public class Hand : MonoBehaviour {
                 if (!IsSelected)
                     transform.position = new Vector3(myPos.x, myPos.y + 10, myPos.z);
             }
-            else
-            {
+            else{
                 if (!IsSelected)
                     transform.position = new Vector3(myPos.x, myPos.y - 10, myPos.z);
             }
@@ -53,16 +52,19 @@ public class Hand : MonoBehaviour {
                     thisCard = null;
                     CanPlace = false;
 
-                    if (Board.CurrPlayer == 1)
-                        Board.CurrPlayer = 2;
-                    else
-                        Board.CurrPlayer = 1;
-
                     //Destroy(gameObject);
                 }else{
                     Destroy(thisCard);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Space)){
+                if (Board.CurrPlayer == 1)
+                    Board.CurrPlayer = 2;
+                else
+                    Board.CurrPlayer = 1;
+            }
+
         }
     }
 }
