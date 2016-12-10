@@ -22,16 +22,16 @@ public class Board : MonoBehaviour {
 
     public int Turn;
 
-
     public int ToggleTurn() {
-        foreach (Card[] Row in CurrentPlayer.Field)
-            foreach (Card C in Row)
-                C.OnTurnEnd();
+        foreach (Card[] row in CurrentPlayer.Field)
+            foreach (Card c in row)
+                c.OnTurnEnd();
         Turn = (Turn+1) & 1;
+
         OnToggleTurn();
-        foreach (Card[] Row in CurrentPlayer.Field)
-            foreach (Card C in Row)
-                C.OnTurnStart();
+        foreach (Card[] row in CurrentPlayer.Field)
+            foreach (Card c in row)
+                c.OnTurnStart();
 
         return Turn;
     }
