@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Card : ScriptableObject {
+public class Card : ScriptableObject, IPointerClickHandler {
 
     public enum CardTag {
         // TODO colocar tipos
@@ -32,6 +33,12 @@ public class Card : ScriptableObject {
     public string Desc;
     public string Flavor;
     public CardTag[] Tags;
+
+    public Board board;
+
+    void Awake() {
+        board = transform.parent.GetComponent<Board>();
+    }
 
     public virtual void OnEnter() {
         // Using this.onEnter is not thread safe
@@ -73,9 +80,12 @@ public class Card : ScriptableObject {
         return true;
     }
 
+    public void OnPointerClick(PointerEventData data) { // virtual?
+        board.OnPointerClick(this, data);
+    }
+
     protected void Die(Card src, int dmg) {
-        // TODO notificar GameManager e tals
-        // NÃO destruir GameObject
+        // TODO notify Board (maybe)
     }
 
     protected void OnIncomingDamage(Card src, ref int dmg) {

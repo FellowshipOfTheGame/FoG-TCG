@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Board : MonoBehaviour {
+public sealed class Board : MonoBehaviour {
 
     public delegate void ToggleTurnDelegate();
+    public delegate void CardSelectedDelegate(Card card);
+
     public event ToggleTurnDelegate ToggleTurnEvent;
+    public event CardSelectedDelegate CardSelectedEvent;
+
+    public BoardManager manager;
 
     private Player[] P;
     public Player P1 {
@@ -21,6 +27,10 @@ public class Board : MonoBehaviour {
     }
 
     public int Turn;
+
+    void Awake() {
+        manager = gameObject.AddComponent<BoardManager>();
+    }
 
     public int ToggleTurn() {
         foreach (Card[] row in CurrentPlayer.Field)
@@ -40,6 +50,12 @@ public class Board : MonoBehaviour {
         var handler = this.ToggleTurnEvent;
         if (handler != null)
             handler();
+    }
+
+    public void OnCardSelected(Card card) {
+        var handler = this.PointerClickEvent;
+        if (handler != null)
+            handler(card);
     }
 
 }

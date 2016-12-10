@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State : MonoBehaviour {
     
-    public void Enter();
-    public void Exit();
+    public abstract void Enter();
+    public abstract void Exit();
 
 }

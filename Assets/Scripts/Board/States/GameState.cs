@@ -1,9 +1,23 @@
 
-public class GameState : State {
+public abstract class GameState : State {
 
-    protected GameManager manager;
+    public BoardManager boardManager;
+    public Board board { get { return boardManager.board; }}
     
     void Awake() {
-        owner = transform.parent.GetComponent<GameManager>();
+        boardManager = transform.parent.GetComponent<GameManager>();
     }
+
+    public virtual void Enter() {
+        base.Enter();
+        AddListeners();
+    }
+
+    public virtual void Exit() {
+        RemoveListeners();
+        base.Exit();
+    }
+
+    protected abstract void AddListeners();
+    protected abstract void RemoveListeners();
 }
