@@ -63,24 +63,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AddCardInformation.cs" />
-    <Compile Include="Assets\Scripts\AddCardInformationMinimized.cs" />
+    <Compile Include="Assets\SaveLoad\Character.cs" />
+    <Compile Include="Assets\SaveLoad\Game.cs" />
+    <Compile Include="Assets\SaveLoad\Gameplay.cs" />
+    <Compile Include="Assets\SaveLoad\MainMenu.cs" />
+    <Compile Include="Assets\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\Card.cs" />
-    <Compile Include="Assets\Scripts\CardInformation.cs" />
     <Compile Include="Assets\Scripts\CardManager.cs" />
-    <Compile Include="Assets\Scripts\CollectionDraggable.cs" />
     <Compile Include="Assets\Scripts\CreatureCard.cs" />
-    <Compile Include="Assets\Scripts\DataDecks.cs" />
+    <Compile Include="Assets\Scripts\Data\AddCardInformation.cs" />
+    <Compile Include="Assets\Scripts\Data\AddCardInformationMinimized.cs" />
+    <Compile Include="Assets\Scripts\Data\CardInformation.cs" />
+    <Compile Include="Assets\Scripts\Data\DeckData.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Deck.cs" />
-    <Compile Include="Assets\Scripts\DeckListDraggable.cs" />
-    <Compile Include="Assets\Scripts\DeckListManager.cs" />
-    <Compile Include="Assets\Scripts\DropZone.cs" />
-    <Compile Include="Assets\Scripts\Menu.cs" />
-    <Compile Include="Assets\Scripts\PlaySceneMusic.cs" />
-    <Compile Include="Assets\Scripts\PlaySoundEffect.cs" />
-    <Compile Include="Assets\Scripts\Tabs.cs" />
+    <Compile Include="Assets\Scripts\DeckCreation\CollectionDraggable.cs" />
+    <Compile Include="Assets\Scripts\DeckCreation\CollectionManager.cs" />
+    <Compile Include="Assets\Scripts\DeckCreation\DeckListDraggable.cs" />
+    <Compile Include="Assets\Scripts\DeckCreation\DeckListManager.cs" />
+    <Compile Include="Assets\Scripts\DeckCreation\DropZone.cs" />
+    <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+    <Compile Include="Assets\Scripts\Menu\PlaySceneMusic.cs" />
+    <Compile Include="Assets\Scripts\Menu\PlaySoundEffect.cs" />
+    <Compile Include="Assets\Scripts\Menu\Tabs.cs" />
+    <Compile Include="Assets\Scripts\Menu\VolumeControl.cs" />
     <Compile Include="Assets\Scripts\TerrainCard.cs" />
-    <Compile Include="Assets\Scripts\VolumeControl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

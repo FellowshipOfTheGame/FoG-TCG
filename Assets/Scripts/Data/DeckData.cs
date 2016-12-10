@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public static class DataDecks{
+public static class DeckData{
 
-    public static List<Deck> SavedDecks = new List<Deck>();
+    public static List<Deck> savedDecks = new List<Deck>();
 
     public static void Save()
     {
-        SavedDecks.Add(Deck.current);
+        savedDecks.Add(Deck.current);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/savedDecks.tcgd");
-        bf.Serialize(file, DataDecks.SavedDecks);
+        bf.Serialize(file, DeckData.savedDecks);
         file.Close();
     }
 
@@ -23,7 +23,7 @@ public static class DataDecks{
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/savedDecks.tcgd", FileMode.Open);
-            DataDecks.SavedDecks = (List<Deck>)bf.Deserialize(file);
+            DeckData.savedDecks = (List<Deck>)bf.Deserialize(file);
             file.Close();
         }
     }

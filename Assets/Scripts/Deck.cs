@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Deck {
 
     public static Deck current;
-    public static string DeckName;
-    public static int DeckSize;
+    public static string deckName;
+    public static int deckSize;
 	public static List<CardInformation> Cards = new List<CardInformation>();
 }

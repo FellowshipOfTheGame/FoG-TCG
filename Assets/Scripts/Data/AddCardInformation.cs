@@ -9,6 +9,7 @@ public class AddCardInformation : MonoBehaviour {
     public Image image;
     public Text desc;
     public Text flavor;
+    public int quantity;
 
 	// Use this for initialization
 	void Start () {
