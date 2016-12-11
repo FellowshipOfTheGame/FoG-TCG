@@ -19,7 +19,7 @@ public class StateMachine : MonoBehaviour {
     }
 
     public T GetState<T>() where T : State {
-        return GetComponent<T>() ?? gameObject.AddComponent<T>();
+        return GetComponent<T>() ?? gameObject.AddComponent<T>() as T;
     }
 
     public void SetState<T>() where T : State {
