@@ -9,6 +9,7 @@ public class Menu : MonoBehaviour {
 	public Button VoltarStats;
 	public Button VoltarConta;
 	public Button VoltarConfig;
+	public Button VoltarDecks;
 	public Button VoltarOpt;
 	public Button VoltarCred;
 	public Button Login;
@@ -18,6 +19,7 @@ public class Menu : MonoBehaviour {
 	public GameObject GOJogar;
 	public GameObject GOCartas;
 	public GameObject GODecks;
+	public GameObject GONovoDeck;
 	public GameObject GOStats;
 	public GameObject GOConta;
 	public GameObject GOConfig;
@@ -52,6 +54,7 @@ public class Menu : MonoBehaviour {
 		GOJogar.SetActive (false);
 		GOCartas.SetActive (false);
 		GODecks.SetActive (false);
+		GONovoDeck.SetActive (false);
 		GOStats.SetActive (false);
 		GOConta.SetActive (false);
 		GOConfig.SetActive (false);
@@ -78,6 +81,12 @@ public class Menu : MonoBehaviour {
 		Desativar();
 		GODecks.SetActive (true);
 		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+	}
+
+	public void NovoDeckSelected() {
+		Desativar();
+		GONovoDeck.SetActive (true);
+		ES.SetSelectedGameObject (VoltarDecks.gameObject);
 	}
 
 	public void StatsSelected() {
