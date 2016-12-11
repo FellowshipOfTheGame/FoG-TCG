@@ -1,13 +1,13 @@
 
 public class OverviewState : GameState {
     
-    public void Enter() {
+    public override void Enter() {
         base.Enter();
         AddListeners();
         // TODO enable buttons & stuff
     }
 
-    public void Exit() {
+    public override void Exit() {
         // TODO disable buttons & stuff (maybe?)
         RemoveListeners();
         base.Exit();

@@ -1,12 +1,12 @@
 
 public class SelectTargetState : GameState {
 
-    public void Enter() {
+    public override void Enter() {
         base.Enter();
         AddListeners();
     }
 
-    public void Exit() {
+    public override void Exit() {
         RemoveListeners();
         base.Exit();
     }
