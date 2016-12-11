@@ -8,16 +8,4 @@ public abstract class GameState : State {
         boardManager = transform.parent.GetComponent<GameManager>();
     }
 
-    public virtual void Enter() {
-        base.Enter();
-        AddListeners();
-    }
-
-    public virtual void Exit() {
-        RemoveListeners();
-        base.Exit();
-    }
-
-    protected abstract void AddListeners();
-    protected abstract void RemoveListeners();
 }
