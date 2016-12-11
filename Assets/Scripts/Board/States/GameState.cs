@@ -1,11 +1,11 @@
 
 public abstract class GameState : State {
 
-    public BoardManager boardManager;
-    public Board board { get { return boardManager.board; }}
+    public BoardManager owner;
+    public Board board { get { return owner.board; }}
     
     void Awake() {
-        boardManager = transform.parent.GetComponent<GameManager>();
+        owner = transform.parent.GetComponent<GameManager>();
     }
 
 }

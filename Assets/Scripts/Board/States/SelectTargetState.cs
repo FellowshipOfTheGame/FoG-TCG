@@ -11,11 +11,11 @@ public class SelectTargetState : GameState {
         base.Exit();
     }
 
-    protected void AddListeners() {
+    void AddListeners() {
         board.CardSelectedEvent += SelectCard;
     }
 
-    protected void RemoveListeners() {
+    void RemoveListeners() {
         board.CardSelectedEvent -= SelectCard;
     }
 
