@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour {
 
-    protected State state;
-    public State CurrentState {
+    private State _state;
+    public State state {
         get {
             return state;
         }
@@ -23,6 +23,6 @@ public class StateMachine : MonoBehaviour {
     }
 
     public void SetState<T>() where T : State {
-        CurrentState = GetState<T>();
+        state = GetState<T>();
     }
 }
