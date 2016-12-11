@@ -21,7 +21,7 @@ public sealed class Board : MonoBehaviour {
     }
 
     void Awake() {
-        manager = gameObject.AddComponent<BoardManager>();
+        manager = gameObject.AddComponent<BoardManager>() as BoardManager;
     }
 
 }
