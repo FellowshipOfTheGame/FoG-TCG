@@ -6,7 +6,7 @@ public class PreTurnState : GameState {
             foreach (Card c in row)
                 c.OnTurnStart();
         // TODO process events queued by delegates
-        owner.SetState<OverviewState>();
+        SetState<OverviewState>();
     }
 
 }

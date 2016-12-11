@@ -8,7 +8,7 @@ public class PostTurnState : GameState {
         // TODO process events queued by delegates
         owner.turn = ~owner & 1;
         // TODO wait for any end of turn type animations or sprites
-        owner.SetState<PreTurnState>();
+        SetState<PreTurnState>();
     }
 
 }
