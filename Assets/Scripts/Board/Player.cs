@@ -11,59 +11,48 @@ public class Player : MonoBehaviour {
     public static readonly uint TERRAINS = 0;
     public static readonly uint CREATURES = 1;
 
-    public Board BoardInstance;
+    public Board board;
 
-    public List<Card> Hand;
-    public List<Card> Deck;
+    public List<Card> hand;
+    public List<Card> deck;
 
-    public TerrainCard[] Terrains;
-    public CreatureCard[] Creatures;
+    public TerrainCard[] terrains;
+    public CreatureCard[] creatures;
 
-    public Card[][] Field {
+    public Card[][] field {
         get {
             return new Card[][] {
-                Terrains,
-                Creatures
+                terrains,
+                creatures
             };
         }
     }
 
-    public CommanderCard Commander;
-    public uint CommanderPos;
-
-    private Card selectedCard;
-    public Card SelectedCard {
-        get {
-            return selectedCard;
-        }
-        set {
-            selectedCard = value;
-            // TODO notify Board / GameManager
-        }
-    }
+    public CommanderCard commander;
+    public uint commanderPos;
 
     // TODO socket and stuff
 
     void Start() {
-        Hand = new List<Card>();
-        Terrains = new TerrainCard[FIELD_SIZE];
-        Creatures = new CreatureCard[FIELD_SIZE];
-        CommanderPos = (FIELD_SIZE-COMMANDER_SIZE) / 2;
-        BoardInstance = GameObject.FindObjectOfType(typeof(Board));
+        hand = new List<Card>();
+        terrains = new TerrainCard[FIELD_SIZE];
+        creatures = new CreatureCard[FIELD_SIZE];
+        commanderPos = (FIELD_SIZE-COMMANDER_SIZE) / 2;
+        board = GameObject.FindObjectOfType(typeof(Board)) as Board;
     }
 
     public void DrawCard() {
-        if (Deck.Count > 0) {
-            Card Top = Deck[0];
-            Deck.RemoveAt(0);
-            GiveCard(Top);
+        if (deck.Count > 0) {
+            Card top = deck[0];
+            deck.RemoveAt(0);
+            GiveCard(top);
         }
         // TODO netcode stuff
     }
 
     public void GiveCard(Card c) {
-        if (Hand.Count < HAND_MAX_SIZE) {
-            Hand.Add(c);
+        if (hand.Count < HAND_MAX_SIZE) {
+            hand.Add(c);
         }
         // TODO netcode stuff
     }

@@ -1,22 +1,18 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Card : ScriptableObject, IPointerClickHandler {
-
-    public enum CardTag {
-        // TODO colocar tipos
-    };
+public class Card : MonoBehaviour, IPointerClickHandler {
 
     public delegate void EnterDelegate();
     public delegate void ExitDelegate();
     public delegate void TurnStartDelegate();
     public delegate void TurnEndDelegate();
-    public delegate void OutgoingDamageDelegate(CreatureCard src, Card target, ref int dmg);
-    public delegate void DealDamageDelegate(CreatureCard src, Card target, int dmg);
-    public delegate void DamageDealtDelegate(CreatureCard src, Card target, int dmg);
-    public delegate void IncomingDamageDelegate(Card src, CreatureCard target, ref int dmg);
-    public delegate void TakeDamageDelegate(Card src, CreatureCard target, int dmg);
-    public delegate void DamageTakenDelegate(Card src, CreatureCard target, int dmg);
+    public delegate void OutgoingDamageDelegate(Card src, Card target, ref int dmg);
+    public delegate void DealDamageDelegate(Card src, Card target, int dmg);
+    public delegate void DamageDealtDelegate(Card src, Card target, int dmg);
+    public delegate void IncomingDamageDelegate(Card src, Card target, ref int dmg);
+    public delegate void TakeDamageDelegate(Card src, Card target, int dmg);
+    public delegate void DamageTakenDelegate(Card src, Card target, int dmg);
 
     public event EnterDelegate EnterEvent;
     public event ExitDelegate ExitEvent;
@@ -37,7 +33,7 @@ public class Card : ScriptableObject, IPointerClickHandler {
     public Board board;
 
     void Awake() {
-        board = transform.parent.GetComponent<Board>();
+        board = gameObject.transform.parent.GetComponent<Board>();
     }
 
     public virtual void OnEnter() {
@@ -81,7 +77,7 @@ public class Card : ScriptableObject, IPointerClickHandler {
     }
 
     public void OnPointerClick(PointerEventData data) { // virtual?
-        board.OnPointerClick(this, data);
+        board.manager.OnCardSelected(this);
     }
 
     protected void Die(Card src, int dmg) {
@@ -91,25 +87,25 @@ public class Card : ScriptableObject, IPointerClickHandler {
     protected void OnIncomingDamage(Card src, ref int dmg) {
         var handler = this.IncomingDamageEvent;
         if (handler != null)
-            handler(target, this, dmg);
+            handler(src, this, ref dmg);
     }
 
     protected void OnTakeDamage(Card src, int dmg) {
         var handler = this.TakeDamageEvent;
         if (handler != null)
-            handler(target, this, dmg);
+            handler(src, this, dmg);
     }
 
     protected void OnDamageTaken(Card src, int dmg) {
         var handler = this.DamageTakenEvent;
         if (handler != null)
-            handler(target, this, dmg);
+            handler(src, this, dmg);
     }
 
     protected void OnOutgoingDamage(Card target, ref int dmg) {
         var handler = this.OutgoingDamageEvent;
         if (handler != null)
-            handler(this, target, dmg);
+            handler(this, target, ref dmg);
     }
 
     protected void OnDealDamage(Card target, int dmg) {

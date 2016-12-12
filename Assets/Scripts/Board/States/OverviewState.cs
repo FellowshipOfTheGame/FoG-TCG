@@ -14,17 +14,24 @@ public class OverviewState : GameState {
     }
 
     void AddListeners() {
-        board.CardSelectedEvent += SelectCard;
-        board.CardHoveredEvent += HoverCard;
+        owner.CardSelectedEvent += SelectCard;
+        owner.CardMouseEnterEvent += CardMouseEnter;
+        owner.CardMouseExitEvent += CardMouseExit;
     }
 
     void RemoveListeners() {
-        board.CardSelectedEvent -= SelectCard;
-        board.CardHoveredEvent -= HoverCard;
+        owner.CardMouseEnterEvent -= CardMouseEnter;
+        owner.CardMouseExitEvent -= CardMouseExit;
+        owner.CardSelectedEvent -= SelectCard;
     }
 
-    void HoverCard(Card c) {
+    void CardMouseEnter(Card c) {
         // TODO show info
+        // TODO hide prev card info
+    }
+
+    void CardMouseExit(Card c) {
+        // TODO hide info
     }
 
     void SelectCard(Card c) {

@@ -12,11 +12,11 @@ public class SelectTargetState : GameState {
     }
 
     void AddListeners() {
-        board.CardSelectedEvent += SelectCard;
+        owner.CardSelectedEvent += SelectCard;
     }
 
     void RemoveListeners() {
-        board.CardSelectedEvent -= SelectCard;
+        owner.CardSelectedEvent -= SelectCard;
     }
 
     void SelectCard(Card c) {

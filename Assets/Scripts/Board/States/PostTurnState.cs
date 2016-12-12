@@ -2,11 +2,11 @@
 public class PostTurnState : GameState {
 
     public override void Enter() {
-        foreach (Card[] row in board.CurrentPlayer.Field)
+        foreach (Card[] row in board.currentPlayer.field)
             foreach (Card c in row)
                 c.OnTurnEnd();
         // TODO process events queued by delegates
-        owner.turn = ~owner & 1;
+        owner.turn = ~owner.turn & 1;
         // TODO wait for any end of turn type animations or sprites
         SetState<PreTurnState>();
     }

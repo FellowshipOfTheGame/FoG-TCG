@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class TerrainCard : Card {
 
-    public delegate void CreatureAttackedDelegate(CreatureCard src, CreatureCard target, ref int dmg);
     public delegate void CreatureAttackDelegate(CreatureCard src, CreatureCard target, ref int dmg);
+    public delegate void CreatureAttackedDelegate(Card src, CreatureCard target, ref int dmg);
 
-    public event CreatureAttackedDelegate CreatureAttackedEvent;
     public event CreatureAttackDelegate CreatureAttackEvent;
-
-    public virtual void OnCreatureAttacked(CreatureCard src, CreatureCard target, ref int dmg) {
-		var handler = this.CreatureAttackedEvent;
-        if (handler != null)
-            handler(src, target, dmg);
-	}
+    public event CreatureAttackedDelegate CreatureAttackedEvent;
 	
 	public virtual void OnCreatureAttack(CreatureCard src, CreatureCard target, ref int dmg) {
 		var handler = this.CreatureAttackEvent;
         if (handler != null)
-            handler(src, target, dmg);
+            handler(src, target, ref dmg);
+	}
+
+    public virtual void OnCreatureAttacked(Card src, CreatureCard target, ref int dmg) {
+		var handler = this.CreatureAttackedEvent;
+        if (handler != null)
+            handler(src, target, ref dmg);
 	}
 
 }

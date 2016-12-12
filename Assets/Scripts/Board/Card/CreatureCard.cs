@@ -27,16 +27,17 @@ public class CreatureCard : Card {
     }
 
     public override bool Attack(Card target) {
-        if (this.CanAttack && !this.HasAttacked) {
+        CreatureCard creature = target as CreatureCard;
+        if (creature != null && this.CanAttack && !this.HasAttacked) {
             int dmg = this.Atk;
 
-            OnOutgoingDamage(target, ref dmg);
-            Terrain.OnCreatureAttack(this, target, ref dmg);
-            OnDealDamage(target, dmg);
+            OnOutgoingDamage(creature, ref dmg);
+            Terrain.OnCreatureAttack(this, creature, ref dmg);
+            OnDealDamage(creature, dmg);
 
-            dmg = target.TakeDamage(this, dmg);
+            dmg = creature.TakeDamage(this, dmg);
 
-            OnDamageDealt(target, dmg);
+            OnDamageDealt(creature, dmg);
 
             return true;
         }

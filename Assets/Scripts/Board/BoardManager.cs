@@ -2,9 +2,13 @@
 public class BoardManager : StateMachine {
     public delegate void ToggleTurnDelegate();
     public delegate void CardSelectedDelegate(Card card);
+    public delegate void CardMouseEnterDelegate(Card card);
+    public delegate void CardMouseExitDelegate(Card card);
 
     public event ToggleTurnDelegate ToggleTurnEvent;
     public event CardSelectedDelegate CardSelectedEvent;
+    public event CardMouseEnterDelegate CardMouseEnterEvent;
+    public event CardMouseExitDelegate CardMouseExitEvent;
 
     public Board board;
     public int turn;
@@ -25,7 +29,19 @@ public class BoardManager : StateMachine {
     }
 
     public void OnCardSelected(Card card) {
-        var handler = this.PointerClickEvent;
+        var handler = this.CardSelectedEvent;
+        if (handler != null)
+            handler(card);
+    }
+
+    public void OnCardMouseEnter(Card card) {
+        var handler = this.CardMouseEnterEvent;
+        if (handler != null)
+            handler(card);
+    }
+
+    public void OnCardMouseExit(Card card) {
+        var handler = this.CardMouseExitEvent;
         if (handler != null)
             handler(card);
     }

@@ -2,7 +2,7 @@
 public class PreTurnState : GameState {
 
     public override void Enter() {
-        foreach (Card[] row in board.CurrentPlayer.Field)
+        foreach (Card[] row in board.currentPlayer.field)
             foreach (Card c in row)
                 c.OnTurnStart();
         // TODO process events queued by delegates
