@@ -22,6 +22,8 @@ public sealed class Board : MonoBehaviour {
 
     void Awake() {
         manager = gameObject.AddComponent<BoardManager>() as BoardManager;
+        GameObject obj = new GameObject("Event Manager", typeof(EventManager));
+        obj.transform.parent = gameObject;
     }
 
 }
