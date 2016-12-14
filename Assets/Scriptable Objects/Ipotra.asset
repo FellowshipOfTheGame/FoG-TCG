@@ -11,6 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884e741cdaef03a4ebb8a85755d63a87, type: 3}
   m_Name: "\xCDpotra"
   m_EditorClassIdentifier: 
+  card: {fileID: 11400000}
+  id: 0
+  imagePath: 
   title: "\xCDpotra"
   desc: "Descri\xE7\xE3o muito longa"
   flavor: Autor - Gil

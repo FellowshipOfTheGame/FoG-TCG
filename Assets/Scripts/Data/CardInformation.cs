@@ -5,6 +5,8 @@ using System.Collections;
 public class CardInformation : ScriptableObject {
 
     public CardInformation card;
+    public int id;
+    public string imagePath;
     public string title;
     public string desc;
     public string flavor;

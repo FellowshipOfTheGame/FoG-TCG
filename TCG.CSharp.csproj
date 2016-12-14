@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Data\DeckData.cs" />
     <Compile Include="Assets\Scripts\Data\GameData.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\DataBaseManager.cs" />
     <Compile Include="Assets\Scripts\Deck.cs" />
     <Compile Include="Assets\Scripts\DeckCreation\CollectionDraggable.cs" />
     <Compile Include="Assets\Scripts\DeckCreation\CollectionManager.cs" />
@@ -89,6 +90,9 @@
     <Compile Include="Assets\Scripts\Menu\Tabs.cs" />
     <Compile Include="Assets\Scripts\Menu\VolumeControl.cs" />
     <Compile Include="Assets\Scripts\TerrainCard.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Files\Database.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
