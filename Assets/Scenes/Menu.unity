@@ -650,7 +650,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 1000013282045144, guid: d11ceab930e135e45a29955ffb74f76e, type: 2}
-  collectionArea: {fileID: 110979092}
+  minimizedCard: {fileID: 1000012509200632, guid: 6b8df54116c2b994c8523472a164d2c3,
+    type: 2}
+  deckListManager: {fileID: 615010221}
+  collectionZone: {fileID: 110979092}
+  deckList: {fileID: 615010220}
+  canvas: {fileID: 1773894549}
 --- !u!1 &128963623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1285,7 @@ RectTransform:
   m_Father: {fileID: 719234634}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5063,7 +5068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &686522604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14516,8 +14521,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 263846135}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.67058474}
+  m_AnchorMax: {x: 1, y: 0.999918}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
