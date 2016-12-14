@@ -31,6 +31,7 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                 RectTransform rt = cardCopy.GetComponent<RectTransform>();
                 rt.sizeDelta = new Vector2(120, 180);
                 cardCopy.transform.SetParent(canvas.transform);
+                //cardCopy.transform.SetParent(transform.parent.parent.parent.parent.parent.parent.transform);
                 cardCopy.transform.localScale = Vector3.one;
                 currentZone = collectionZone.transform;
                 cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;

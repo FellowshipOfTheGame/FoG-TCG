@@ -89,7 +89,6 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        print(this.GetComponent<AddCardInformationMinimized>().quantity);
         if(this.GetComponent<AddCardInformationMinimized>().quantity == 1)
         {
             Destroy(this.gameObject);

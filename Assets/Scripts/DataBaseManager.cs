@@ -19,9 +19,11 @@ public class DataBaseManager : MonoBehaviour {
 
         sr.Close();
 
-        for(int i = 0; i < GameData.dataBase.Count; i++)
-        {
-            print(GameData.dataBase[i].title);
+        //TEMPORARY
+        //WHEN WE HAVE PLAYER PROFILE/COLLECTION THIS WILL GO THERE
+        for (int i = 0; i < GameData.dataBase.Count; i++) {
+
+            PlayerData.collection[GameData.dataBase[i].card] = 3;
         }
     }
 }

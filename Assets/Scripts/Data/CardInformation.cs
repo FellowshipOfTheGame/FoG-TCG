@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [CreateAssetMenu(fileName = "CardScriptableObject", menuName = "Cards", order = 1)]
-public class CardInformation : ScriptableObject {
+public class CardInformation : ScriptableObject, IComparable<CardInformation> {
 
     public CardInformation card;
     public int id;
@@ -32,4 +33,8 @@ public class CardInformation : ScriptableObject {
         return ci2 <= ci1;
     }
 
+    public int CompareTo(CardInformation other)
+    {
+        return String.Compare(this.title, other.title);
+    }
 }

@@ -5,16 +5,33 @@ using System.Collections.Generic;
 public class CollectionManager : MonoBehaviour {
 
     public GameObject card;
-    public GameObject collectionArea;
+    public GameObject minimizedCard;
+
+    public Transform deckListManager;
+    public GameObject collectionZone;
+    public GameObject deckList;
+
+    public Canvas canvas;
+
     List<GameObject> cardsList;
 
 	void Start () {
+
         foreach (var ci in PlayerData.collection)
         {
-            GameObject newCard = (GameObject)Instantiate(card, collectionArea.transform);
+            GameObject newCard = (GameObject)Instantiate(card, collectionZone.transform);
+            newCard.GetComponent<CollectionDraggable>().deckListManager = deckList.GetComponent<DeckListManager>();
+            newCard.GetComponent<CollectionDraggable>().canvas = canvas;
+            newCard.GetComponent<CollectionDraggable>().collectionZone = collectionZone;
+            newCard.GetComponent<CollectionDraggable>().deckListZone = deckList;
+            newCard.GetComponent<CollectionDraggable>().deckList = deckList;
+            newCard.GetComponent<CollectionDraggable>().minimizedCard = minimizedCard;
+
+            RectTransform rt = newCard.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(120, 180);
+            rt.localScale = Vector3.one;
             newCard.GetComponent<AddCardInformation>().quantity = ci.Value;
             newCard.GetComponent<AddCardInformation>().card = ci.Key.card;
-            cardsList.Add(newCard);
         }
 
         UpdateCardQuantities();
