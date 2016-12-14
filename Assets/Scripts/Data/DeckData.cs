@@ -28,4 +28,12 @@ public static class DeckData{
         }
     }
 
+    public static void Update()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/savedDecks.tcgd");
+        bf.Serialize(file, DeckData.savedDecks);
+        file.Close();
+    }
+
 }

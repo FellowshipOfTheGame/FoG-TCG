@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Data\AddCardInformationMinimized.cs" />
     <Compile Include="Assets\Scripts\Data\CardInformation.cs" />
     <Compile Include="Assets\Scripts\Data\DeckData.cs" />
+    <Compile Include="Assets\Scripts\Data\GameData.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Deck.cs" />
     <Compile Include="Assets\Scripts\DeckCreation\CollectionDraggable.cs" />

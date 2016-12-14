@@ -13,12 +13,12 @@ public class CollectionManager : MonoBehaviour {
         {
             GameObject newCard = (GameObject)Instantiate(card, collectionArea.transform);
             newCard.GetComponent<AddCardInformation>().quantity = ci.Value;
-            //newCard.GetComponent<AddCardInformation>().card = ScriptableObject da carta
-            newCard.GetComponent<AddCardInformation>().title.text = ci.Key.title; //temp
-            UpdateCardQuantities();
+            newCard.GetComponent<AddCardInformation>().card = ci.Key.card;
             cardsList.Add(newCard);
         }
-	}
+
+        UpdateCardQuantities();
+    }
 
     void UpdateCardQuantities()
     {
