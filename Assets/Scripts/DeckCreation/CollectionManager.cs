@@ -13,6 +13,8 @@ public class CollectionManager : MonoBehaviour {
         {
             GameObject newCard = (GameObject)Instantiate(card, collectionArea.transform);
             newCard.GetComponent<AddCardInformation>().quantity = ci.Value;
+            //newCard.GetComponent<AddCardInformation>().card = ScriptableObject da carta
+            newCard.GetComponent<AddCardInformation>().title.text = ci.Key.title; //temp
             UpdateCardQuantities();
             cardsList.Add(newCard);
         }
@@ -20,6 +22,15 @@ public class CollectionManager : MonoBehaviour {
 
     void UpdateCardQuantities()
     {
-    
+        for (int i = 0; i < transform.childCount - 1; i++)
+        {
+
+            if (string.Compare(transform.GetChild(i).GetComponent<AddCardInformation>().card.title, transform.GetChild(i + 1).GetComponent<AddCardInformation>().card.title) == 0)
+            {
+                transform.GetChild(i).GetComponent<AddCardInformation>().quantity++;
+            
+                Destroy(transform.GetChild(i + 1).gameObject);
+            }
+        }
     }
 }
