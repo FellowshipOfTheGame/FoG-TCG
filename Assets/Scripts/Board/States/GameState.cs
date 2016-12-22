@@ -16,4 +16,12 @@ public abstract class GameState : State {
         owner.SetState<T>();
     }
 
+    protected void SetState<T>(object arg) where T : State {
+        owner.SetState<T>(arg);
+    }
+
+    protected void Return() {
+        owner.Return();
+    }
+
 }

@@ -1,11 +1,13 @@
 
 public class BoardManager : StateMachine {
     public delegate void ToggleTurnDelegate();
+    public delegate void ButtonPressedDelegate(GameObject obj);
     public delegate void CardSelectedDelegate(Card card);
     public delegate void CardMouseEnterDelegate(Card card);
     public delegate void CardMouseExitDelegate(Card card);
 
     public event ToggleTurnDelegate ToggleTurnEvent;
+    public event ButtonPressedDelegate ButtonPressedEvent;
     public event CardSelectedDelegate CardSelectedEvent;
     public event CardMouseEnterDelegate CardMouseEnterEvent;
     public event CardMouseExitDelegate CardMouseExitEvent;
@@ -24,6 +26,12 @@ public class BoardManager : StateMachine {
 
     public void OnToggleTurn() {
         var handler = this.ToggleTurnEvent;
+        if (handler != null)
+            handler();
+    }
+
+    public void OnButtonPressed(GameObject obj) {
+        var handler = this.ButtonPressedEvent;
         if (handler != null)
             handler();
     }

@@ -4,11 +4,13 @@ public class OverviewState : GameState {
     public override void Enter() {
         base.Enter();
         AddListeners();
+        owner.ClearHistory();
         // TODO enable buttons & stuff
     }
 
     public override void Exit() {
         // TODO disable buttons & stuff (maybe?)
+        // otherwise other states should turn off whatever they don't want
         RemoveListeners();
         base.Exit();
     }
@@ -17,17 +19,19 @@ public class OverviewState : GameState {
         owner.CardSelectedEvent += SelectCard;
         owner.CardMouseEnterEvent += CardMouseEnter;
         owner.CardMouseExitEvent += CardMouseExit;
+        owner.ButtonPressedEvent += ButtonPressed;
     }
 
     void RemoveListeners() {
+        owner.ButtonPressedEvent -= ButtonPressed;
         owner.CardMouseEnterEvent -= CardMouseEnter;
         owner.CardMouseExitEvent -= CardMouseExit;
         owner.CardSelectedEvent -= SelectCard;
     }
 
     void CardMouseEnter(Card c) {
-        // TODO show info
         // TODO hide prev card info
+        // TODO show info
     }
 
     void CardMouseExit(Card c) {
@@ -35,13 +39,12 @@ public class OverviewState : GameState {
     }
 
     void SelectCard(Card c) {
-        // TODO
-        // if (c in hand)
-        //     SetState<PlayCardState>();
-        // else if (c in board.CurrentPlayer.Field)
-        //     SetState<ActivateCardState>();
-        // else
-        //     ??? (player clicked in opposite player card)
+        SetState<SelectOptionState>(new object[] {c});
+    }
+
+    void ButtonPressedEvent(GameObject obj) {
+        if (obj == GuiManager.BtnEndTurn)
+            SetState<PostTurnState>();
     }
 
 }
