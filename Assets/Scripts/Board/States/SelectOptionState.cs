@@ -1,3 +1,4 @@
+using UnityEngine;
 
 public class SelectOptionState : GameState {
 
@@ -6,7 +7,7 @@ public class SelectOptionState : GameState {
     public override void Enter() {
         base.Enter();
         AddListeners();
-        c = arg[0] as Card;
+        c = args[0] as Card;
 
         //if (c in hand)
         //    SetState<SelectTarget>(new object[] {c.targetChecker});
@@ -21,11 +22,11 @@ public class SelectOptionState : GameState {
     }
 
     void AddListeners() {
-        owner.ButtonPressedEvent += ButtonPressed;
+        bm.ButtonPressedEvent += ButtonPressed;
     }
 
     void RemoveListeners() {
-        owner.ButtonPressedEvent -= ButtonPressed;
+        bm.ButtonPressedEvent -= ButtonPressed;
     }
 
     void ButtonPressed(GameObject obj) {

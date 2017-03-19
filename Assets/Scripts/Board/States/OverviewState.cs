@@ -1,10 +1,11 @@
+using UnityEngine;
 
 public class OverviewState : GameState {
     
     public override void Enter() {
         base.Enter();
         AddListeners();
-        owner.ClearHistory();
+        bm.ClearHistory();
         // TODO enable buttons & stuff
     }
 
@@ -16,17 +17,17 @@ public class OverviewState : GameState {
     }
 
     void AddListeners() {
-        owner.CardSelectedEvent += SelectCard;
-        owner.CardMouseEnterEvent += CardMouseEnter;
-        owner.CardMouseExitEvent += CardMouseExit;
-        owner.ButtonPressedEvent += ButtonPressed;
+        bm.CardSelectedEvent += SelectCard;
+        bm.CardMouseEnterEvent += CardMouseEnter;
+        bm.CardMouseExitEvent += CardMouseExit;
+        bm.ButtonPressedEvent += ButtonPressed;
     }
 
     void RemoveListeners() {
-        owner.ButtonPressedEvent -= ButtonPressed;
-        owner.CardMouseEnterEvent -= CardMouseEnter;
-        owner.CardMouseExitEvent -= CardMouseExit;
-        owner.CardSelectedEvent -= SelectCard;
+        bm.ButtonPressedEvent -= ButtonPressed;
+        bm.CardMouseEnterEvent -= CardMouseEnter;
+        bm.CardMouseExitEvent -= CardMouseExit;
+        bm.CardSelectedEvent -= SelectCard;
     }
 
     void CardMouseEnter(Card c) {
@@ -42,7 +43,7 @@ public class OverviewState : GameState {
         SetState<SelectOptionState>(new object[] {c});
     }
 
-    void ButtonPressedEvent(GameObject obj) {
+    void ButtonPressed(GameObject obj) {
         if (obj == GuiManager.BtnEndTurn)
             SetState<PostTurnState>();
     }

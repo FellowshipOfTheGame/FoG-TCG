@@ -6,7 +6,7 @@ public class PostTurnState : GameState {
             foreach (Card c in row)
                 c.OnTurnEnd();
         // TODO process events queued by delegates
-        owner.turn = ~owner.turn & 1;
+        bm.turn = ~bm.turn & 1;
         // TODO wait for any end of turn type animations or sprites
         SetState<PreTurnState>();
     }

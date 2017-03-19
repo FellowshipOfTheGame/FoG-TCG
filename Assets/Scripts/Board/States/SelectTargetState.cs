@@ -1,12 +1,14 @@
+using System;
+using UnityEngine;
 
 public class SelectTargetState : GameState {
 
-    private Predicate<GameObject> validSelection;
+    private Predicate<Card> validSelection;
 
     public override void Enter() {
         base.Enter();
         AddListeners();
-        validSelection = arg[0] as Predicate<GameObject>;
+        validSelection = args[0] as Predicate<Card>;
     }
 
     public override void Exit() {
@@ -15,16 +17,16 @@ public class SelectTargetState : GameState {
     }
 
     void AddListeners() {
-        owner.CardSelectedEvent += SelectCard;
-        owner.ActionCanceledEvent += Return;
+        bm.CardSelectedEvent += SelectCard;
+        bm.ActionCanceledEvent += Return;
     }
 
     void RemoveListeners() {
-        owner.ActionCanceledEvent -= Return;
-        owner.CardSelectedEvent -= SelectCard;
+        bm.ActionCanceledEvent -= Return;
+        bm.CardSelectedEvent -= SelectCard;
     }
 
-    void SelectCard(GameObject obj) {
+    void SelectCard(Card obj) {
         if (validSelection(obj)) {
             // TODO call OnCardPlayed somehow
             // TODO get position in board from obj

@@ -1,27 +1,27 @@
 
 public abstract class GameState : State {
 
-    public BoardManager owner {
+    public BoardManager bm {
         get;
         private set;
     }
 
-    public Board board { get { return owner.board; }}
+    public Board board { get { return bm.board; }}
 
     void Awake() {
-        owner = GetComponent<BoardManager>();
+        bm = GetComponent<BoardManager>();
     }
 
     protected void SetState<T>() where T : State {
-        owner.SetState<T>();
+        bm.SetState<T>();
     }
 
-    protected void SetState<T>(object arg) where T : State {
-        owner.SetState<T>(arg);
+    protected void SetState<T>(params object[] arg) where T : State {
+        bm.SetState<T>(arg);
     }
 
     protected void Return() {
-        owner.Return();
+        bm.Return();
     }
 
 }

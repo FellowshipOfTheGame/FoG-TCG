@@ -3,24 +3,14 @@ using System.Collections.Generic;
 
 public class StateMachine : MonoBehaviour {
 
+    public static readonly object[] emptyArray = new object[0];
+
     private Stack<Tuple<State, object[]>> prevStates =
                     new Stack<Tuple<State, object[]>>();
 
-    private State _state;
     public State state {
-        get {
-            return state;
-        }
-        set {
-            if (_state != value) {
-                if (_state != null)
-                    _state.Exit();
-                prevStates.Push(_state);
-                _state = value;
-                if (_state != null)
-                    _state.Enter();
-            }
-        }
+        get;
+        private set;
     }
 
     public void ClearHistory() {
@@ -29,28 +19,35 @@ public class StateMachine : MonoBehaviour {
 
     public void Return() {
         if (prevStates.Count > 0) {
-            if (_state != null)
-                _state.Exit();
+            if (state != null)
+                state.Exit();
             var t = prevStates.Pop();
-            _state = t.Item1;
-            _state.arg = t.Item2;
-            if (_state != null)
-                _state.Enter();
+            state = t.Item1;
+            if (state != null)
+                state.Enter(t.Item2);
         }
     }
 
     public T GetState<T>() where T : State {
-        return GetComponent<T>() ?? gameObject.AddComponent<T>() as T;
+        var s = GetComponent<T>();
+        if (s == null) {
+            s = gameObject.AddComponent<T>() as T;
+            s.machine = this;
+        }
+        return s;
     }
 
-    public void SetState<T>() where T : State {
-        SetState<T>(null);
-    }
-
-    public void SetState<T>(object[] arg) where T : State {
-        state.arg = null;
+    public void SetState<T>(params object[] arg) where T : State {
         var s = GetState<T>();
-        s.arg = arg;
+        if (state != null) {
+            prevStates.Push(new Tuple<State, object[]>(state, state.args));
+            state.Exit();
+        } else {
+            prevStates.Push(new Tuple<State, object[]>(null, null));
+        }
+
         state = s;
+        if (state != null)
+            state.Enter();
     }
 }
