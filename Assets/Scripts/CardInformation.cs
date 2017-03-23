@@ -8,4 +8,5 @@ public class CardInformation : ScriptableObject {
     public string desc;
     public string flavor;
     public int number;
+    public char type;
 }
