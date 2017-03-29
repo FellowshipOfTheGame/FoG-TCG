@@ -25,7 +25,7 @@ public class CaptControl : MonoBehaviour {
         mouseDist[1] = Input.mousePosition.y - transform.position.y;
 
         if (!draggingCapt) {
-            if (Mathf.Abs(mouseDist[0]) <= 25 && Mathf.Abs(mouseDist[1]) <= 137 && playerIndex == Board.currPlayer) {
+            if (Mathf.Abs(mouseDist[0]) <= 25 && Mathf.Abs(mouseDist[1]) <= 137 && Board.player[Board.currPlayer-1].GetComponent<PlayerStatus>().canMove) {
                 transform.GetComponent<Image>().color = new Color(slotColor.r + 0.1f, slotColor.g + 0.1f, slotColor.b + 0.1f);
 
                 if (Input.GetMouseButtonDown(0))
@@ -90,10 +90,10 @@ public class CaptControl : MonoBehaviour {
     }
 
     void DragCaptEnd() {
-        if (captSlot != null) {
-            transform.SetParent(captSlot.transform);
-            pos = captSlot.GetComponent<CaptSlot>().pos;
-            playerIndex = 0;
+        transform.SetParent(captSlot.transform);
+        if (pos!=captSlot.GetComponent<CaptSlot>().pos) {
+            Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canPlay = false;
+            Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canMove = false;
             draggingCapt = false;
         }
     }

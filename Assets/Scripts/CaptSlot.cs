@@ -13,12 +13,8 @@ public class CaptSlot : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (CaptControl.draggingCapt) {
-            if (Mathf.Abs(transform.position.y-captY) <= 45 && playerIndex == Board.currPlayer) {
+            if (Mathf.Abs(transform.position.y-captY) <= 45 && playerIndex == Board.currPlayer)
                 CaptControl.captSlot = transform.gameObject;
-            }else {
-                if (CaptControl.captSlot == transform.gameObject)
-                    CaptControl.captSlot = null;
-            }
         }
     }
 }

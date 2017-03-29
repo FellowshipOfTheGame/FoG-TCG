@@ -16,17 +16,20 @@ public class Hand : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        playerDeck = transform.parent.GetComponent<Deck>();
+    }
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         if (dragCard != null) {
             DragCard();
 
             if (Input.GetMouseButtonUp(0))
                 DragCardEnd();
         }
+
+        if (playerDeck.deckList.Count == 0)
+            transform.parent.GetComponent<PlayerStatus>().canBuy = false;
 	}
 
     //clicando na carta
@@ -45,19 +48,25 @@ public class Hand : MonoBehaviour {
 
     void DragCardEnd() {
         if (chosenSlot != null) {
+            //girar a carta
             dragCard.transform.position = chosenSlot.transform.position;
             if(Board.currPlayer==1)
                 dragCard.transform.RotateAround(dragCard.transform.position, Vector3.forward, 270);
             else
                 dragCard.transform.RotateAround(dragCard.transform.position, Vector3.forward, 90);
-
+       
+            //posicionar e registrar
             dragCard.transform.SetParent(chosenSlot.transform);
+            Board.cardMatriz[chosenSlot.GetComponent<Slot>().pos[0], chosenSlot.GetComponent<Slot>().pos[1]] = dragCard.GetComponent<AddCardInformation>().card.number;
             dragCard = null;
+            //setar slot
             chosenSlot.GetComponent<Slot>().IsFull = true;
             chosenSlot = null;
+            //finalizar
             Destroy(chosenCard);
             chosenCard = null;
-        }else {
+            Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canMove = false;
+        } else {
             Destroy(dragCard);
             dragCard = null;
             chosenSlot = null;
@@ -67,9 +76,7 @@ public class Hand : MonoBehaviour {
 
     //pegar uma carta aleatoria do deck
     public void PickUpCard() {
-        playerDeck = transform.parent.GetComponent<Deck>();
-
-        if (transform.childCount < 7 && playerDeck.deckList.Count > 0) {
+        if (transform.childCount < 7) {
             //escolhe uma carta; põe na mão; tira do deck
             int num = Random.Range(0, playerDeck.deckList.Count - 1);
             GameObject newCard = Instantiate(genericCard, transform);

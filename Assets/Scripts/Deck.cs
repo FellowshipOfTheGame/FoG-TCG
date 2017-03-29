@@ -5,4 +5,5 @@ using UnityEngine;
 public class Deck : MonoBehaviour {
 
     public List<CardInformation> deckList;
+
 }

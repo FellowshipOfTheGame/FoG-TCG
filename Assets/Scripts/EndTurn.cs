@@ -25,7 +25,11 @@ public class EndTurn : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)) {
                 Board.TurnChange();
             }
-        } else
-            gameObject.GetComponent<Image>().color = Color.white;
+        } else {
+            if(Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canPlay)
+                gameObject.GetComponent<Image>().color = Color.white;
+            else
+                gameObject.GetComponent<Image>().color = Color.green;
+        }
     }
 }

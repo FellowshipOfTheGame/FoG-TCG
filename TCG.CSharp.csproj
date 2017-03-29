@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Deck.cs" />
     <Compile Include="Assets\Scripts\EndTurn.cs" />
     <Compile Include="Assets\Scripts\Hand.cs" />
+    <Compile Include="Assets\Scripts\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\Slot.cs" />
     <Compile Include="Assets\Scripts\TerrainCard.cs" />
   </ItemGroup>

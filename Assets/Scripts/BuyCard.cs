@@ -20,18 +20,22 @@ public class BuyCard : MonoBehaviour{
         mouseDist[1] = Input.mousePosition.y - transform.position.y - 2;
 
         // se o mouse estiver encima do botão
-        if (Mathf.Abs(mouseDist[0]) <= 54.5f && Mathf.Abs(mouseDist[1]) <= 18.5f) {
+        if (Mathf.Abs(mouseDist[0]) <= 54.5f && Mathf.Abs(mouseDist[1]) <= 18.5f && Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canBuy) {
             gameObject.GetComponent<Image>().color = Color.yellow;
 
             // clicando no botão
             if (Input.GetMouseButtonDown(0)) {
                 //referencia a mão e o deck do jogador
-                playerHand = transform.parent.parent.FindChild("Player"+Board.currPlayer).FindChild("Hand");
+                playerHand = transform.parent.parent.FindChild("Player" + Board.currPlayer).FindChild("Hand");
 
                 playerHand.GetComponent<Hand>().PickUpCard();
             }
-        } else
-            gameObject.GetComponent<Image>().color = Color.white;
+        } else {
+            if (Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canBuy)
+                gameObject.GetComponent<Image>().color = Color.white;
+            else
+                gameObject.GetComponent<Image>().color = new Color(1.0f, 0.5f, 0.5f);
+        }
     }
  
 }
