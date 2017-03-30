@@ -16,3 +16,5 @@ MonoBehaviour:
   flavor: Autor - Binario
   number: 10
   type: 99
+  ATK: 1
+  HP: 7

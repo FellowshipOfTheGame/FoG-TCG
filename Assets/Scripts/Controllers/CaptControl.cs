@@ -41,6 +41,7 @@ public class CaptControl : MonoBehaviour {
             if (Input.GetMouseButtonUp(0))
                 DragCaptEnd();
         }
+
     }
 
     void DragCaptStart() {
@@ -92,6 +93,7 @@ public class CaptControl : MonoBehaviour {
     void DragCaptEnd() {
         transform.SetParent(captSlot.transform);
         if (pos!=captSlot.GetComponent<CaptSlot>().pos) {
+            pos = captSlot.GetComponent<CaptSlot>().pos;
             Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canPlay = false;
             Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canMove = false;
             draggingCapt = false;

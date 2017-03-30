@@ -10,9 +10,11 @@ public class Slot : MonoBehaviour {
     public bool IsFull;
     float[] mouseDist;
     Color slotColor;
+    public GameObject clone;
+    GameObject card = null;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         mouseDist = new float[2];
         slotColor = transform.GetComponent<Image>().color;
     }
@@ -57,8 +59,33 @@ public class Slot : MonoBehaviour {
             }
         } else {
             transform.GetComponent<Image>().color = new Color(slotColor.r, slotColor.g, slotColor.b);
-        }
-            
 
+            if (Mathf.Abs(mouseDist[0]) <= 65.5f && Mathf.Abs(mouseDist[1]) <= 45 && IsFull) {
+                if (card == null) {
+                    card = Instantiate(clone, transform.parent.parent) as GameObject;
+                    card.GetComponent<AddCardInformation>().card = transform.GetChild(0).gameObject.GetComponent<AddCardInformation>().card;
+                    if(pos[0]<=1)
+                        card.transform.position = transform.position + new Vector3(160.0f, 0.0f, 0.0f);
+                    else
+                        card.transform.position = transform.position + new Vector3(-160.0f, 0.0f, 0.0f);
+                }
+
+                if (Input.GetMouseButtonDown(0) && transform.GetChild(0).GetComponent<AddCardInformation>().card.type == 'c') {
+                    if (transform.GetChild(0).GetComponent<CardAttack>().canAttack)
+                        transform.GetChild(0).gameObject.GetComponent<CardAttack>().Attack();
+                    else
+                        Debug.Log("Can't Attack!");
+                }
+
+            } else {
+                if (card != null) {
+                    Destroy(card);
+                    card = null;
+                }
+            }
+
+        }
     }
+
+
 }

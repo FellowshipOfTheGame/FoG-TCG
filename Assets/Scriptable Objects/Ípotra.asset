@@ -16,3 +16,5 @@ MonoBehaviour:
   flavor: Autor - Gil
   number: 9
   type: 99
+  ATK: 4
+  HP: 1

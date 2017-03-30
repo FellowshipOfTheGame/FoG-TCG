@@ -8,7 +8,7 @@ public class Board : MonoBehaviour{
     public CardInformation[] deck1;
     public CardInformation[] deck2;
     public static int currPlayer=1;
-    public static int[,] cardMatriz;
+    public static GameObject[,] cardMatriz;
     public static GameObject[] player;
     public static GameObject[] capt;
     bool PlayerInTurn = false;
@@ -31,13 +31,14 @@ public class Board : MonoBehaviour{
         player[1].SetActive(false);
         capt[1].GetComponent<CaptControl>().enabled = false;
         info = transform.FindChild("Menu").FindChild("Infos").GetComponent<Text>();
-        cardMatriz = new int[4,5];
+        cardMatriz = new GameObject[4,5];
         int i;
         int j;
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 5; j++)
-                cardMatriz[i, j] = -1;
+                cardMatriz[i, j] = null;
         }
+
         PlayerInTurn = true;
         TurnStartTime = Time.time;
     }
@@ -45,6 +46,8 @@ public class Board : MonoBehaviour{
 	// Update is called once per frame
 	void Update () {
         info.text = "Curr Player:" + currPlayer + " (Time:" + Mathf.Floor(Time.time-TurnStartTime) + ")";
+        capt[0].transform.FindChild("Text").GetComponent<Text>().text = Board.player[0].GetComponent<PlayerStatus>().HP.ToString();
+        capt[1].transform.FindChild("Text").GetComponent<Text>().text = Board.player[1].GetComponent<PlayerStatus>().HP.ToString();
 
         if (PlayerInTurn) {
             if (Time.time - TurnStartTime >= 30)
@@ -63,6 +66,12 @@ public class Board : MonoBehaviour{
             player[1].GetComponent<PlayerStatus>().canPlay = true;
             player[1].GetComponent<PlayerStatus>().canMove = true;
             player[1].GetComponent<PlayerStatus>().canBuy = true;
+            int i;
+            for (i = 0; i <= 4; i++) {
+                if (cardMatriz[2, i] != null)
+                    cardMatriz[2, i].GetComponent<CardAttack>().canAttack = true;
+            }
+
             currPlayer = 2;
         } else {
             player[1].SetActive(false);
@@ -72,6 +81,12 @@ public class Board : MonoBehaviour{
             player[0].GetComponent<PlayerStatus>().canPlay = true;
             player[0].GetComponent<PlayerStatus>().canMove = true;
             player[0].GetComponent<PlayerStatus>().canBuy = true;
+            int i;
+            for (i = 0; i <= 4; i++) {
+                if(cardMatriz[1, i]!=null)
+                    cardMatriz[1, i].GetComponent<CardAttack>().canAttack = true;
+            }
+
             currPlayer = 1;
         }
     }

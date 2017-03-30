@@ -16,3 +16,5 @@ MonoBehaviour:
   flavor: Autora - Juliana
   number: 0
   type: 99
+  ATK: 3
+  HP: 2

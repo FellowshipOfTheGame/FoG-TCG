@@ -16,3 +16,5 @@ MonoBehaviour:
   flavor: "Autora - Anay\xE3"
   number: 4
   type: 99
+  ATK: 2
+  HP: 5

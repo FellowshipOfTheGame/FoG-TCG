@@ -57,7 +57,11 @@ public class Hand : MonoBehaviour {
        
             //posicionar e registrar
             dragCard.transform.SetParent(chosenSlot.transform);
-            Board.cardMatriz[chosenSlot.GetComponent<Slot>().pos[0], chosenSlot.GetComponent<Slot>().pos[1]] = dragCard.GetComponent<AddCardInformation>().card.number;
+            Board.cardMatriz[chosenSlot.GetComponent<Slot>().pos[0], chosenSlot.GetComponent<Slot>().pos[1]] = dragCard;
+            if (dragCard.GetComponent<AddCardInformation>().card.type == 'c') {
+                dragCard.GetComponent<CardAttack>().onTable = true;
+                dragCard.GetComponent<CardAttack>().canAttack = true;
+            }
             dragCard = null;
             //setar slot
             chosenSlot.GetComponent<Slot>().IsFull = true;

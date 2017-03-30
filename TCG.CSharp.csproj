@@ -75,21 +75,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AddCardInformation.cs" />
-    <Compile Include="Assets\Scripts\Board.cs" />
-    <Compile Include="Assets\Scripts\BuyCard.cs" />
-    <Compile Include="Assets\Scripts\CaptControl.cs" />
-    <Compile Include="Assets\Scripts\CaptSlot.cs" />
-    <Compile Include="Assets\Scripts\Card.cs" />
-    <Compile Include="Assets\Scripts\CardInHand.cs" />
-    <Compile Include="Assets\Scripts\CardInformation.cs" />
-    <Compile Include="Assets\Scripts\CreatureCard.cs" />
-    <Compile Include="Assets\Scripts\Deck.cs" />
-    <Compile Include="Assets\Scripts\EndTurn.cs" />
-    <Compile Include="Assets\Scripts\Hand.cs" />
-    <Compile Include="Assets\Scripts\PlayerStatus.cs" />
-    <Compile Include="Assets\Scripts\Slot.cs" />
-    <Compile Include="Assets\Scripts\TerrainCard.cs" />
+    <Compile Include="Assets\Scripts\CardAttack.cs" />
+    <Compile Include="Assets\Scripts\CardComponents\AddCardInformation.cs" />
+    <Compile Include="Assets\Scripts\CardComponents\Card.cs" />
+    <Compile Include="Assets\Scripts\CardComponents\CardInformation.cs" />
+    <Compile Include="Assets\Scripts\CardComponents\CreatureCard.cs" />
+    <Compile Include="Assets\Scripts\CardComponents\TerrainCard.cs" />
+    <Compile Include="Assets\Scripts\Controllers\BuyCard.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CaptControl.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CardInHand.cs" />
+    <Compile Include="Assets\Scripts\Controllers\EndTurn.cs" />
+    <Compile Include="Assets\Scripts\Definers\Board.cs" />
+    <Compile Include="Assets\Scripts\Definers\CaptSlot.cs" />
+    <Compile Include="Assets\Scripts\Definers\Deck.cs" />
+    <Compile Include="Assets\Scripts\Definers\Hand.cs" />
+    <Compile Include="Assets\Scripts\Definers\PlayerStatus.cs" />
+    <Compile Include="Assets\Scripts\Definers\Slot.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

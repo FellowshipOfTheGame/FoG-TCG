@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pos: 0000000000000000
   IsFull: 0
+  clone: {fileID: 1015447916738408, guid: 7be05a262efa04a42a4cfdff55896d8a, type: 2}
 --- !u!222 &222766970209521570
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -16,3 +16,5 @@ MonoBehaviour:
   flavor: Autor - Guilherme
   number: 8
   type: 99
+  ATK: 2
+  HP: 3
