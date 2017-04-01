@@ -16,3 +16,9 @@ MonoBehaviour:
   flavor: 
   number: 13
   type: 116
+  cost: 0
+  ATK: 0
+  HP: 0
+  manaToGive: 0
+  aspects: 
+  aspectsToGive: 4600

@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\CardComponents\CardInformation.cs" />
     <Compile Include="Assets\Scripts\CardComponents\CreatureCard.cs" />
     <Compile Include="Assets\Scripts\CardComponents\TerrainCard.cs" />
+    <Compile Include="Assets\Scripts\CardResourceGenerator.cs" />
     <Compile Include="Assets\Scripts\Controllers\BuyCard.cs" />
     <Compile Include="Assets\Scripts\Controllers\CaptControl.cs" />
     <Compile Include="Assets\Scripts\Controllers\CardInHand.cs" />

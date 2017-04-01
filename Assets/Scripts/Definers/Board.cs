@@ -11,7 +11,6 @@ public class Board : MonoBehaviour{
     public static GameObject[,] cardMatriz;
     public static GameObject[] player;
     public static GameObject[] capt;
-    bool PlayerInTurn = false;
     public static float TurnStartTime;
     Text info;
 
@@ -38,21 +37,21 @@ public class Board : MonoBehaviour{
             for (j = 0; j < 5; j++)
                 cardMatriz[i, j] = null;
         }
-
-        PlayerInTurn = true;
         TurnStartTime = Time.time;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        info.text = "Curr Player:" + currPlayer + " (Time:" + Mathf.Floor(Time.time-TurnStartTime) + ")";
+        info.text = "Curr Player:" + currPlayer;
         capt[0].transform.FindChild("Text").GetComponent<Text>().text = Board.player[0].GetComponent<PlayerStatus>().HP.ToString();
         capt[1].transform.FindChild("Text").GetComponent<Text>().text = Board.player[1].GetComponent<PlayerStatus>().HP.ToString();
 
-        if (PlayerInTurn) {
-            if (Time.time - TurnStartTime >= 30)
-                TurnChange();
-        }
+        //transform.FindChild("Menu").FindChild("ManaCount").GetChild(0).GetComponent<Text>().text = player[currPlayer - 1].GetComponent<PlayerStatus>().mana.ToString();
+        //transform.FindChild("Menu").FindChild("TimeShow").GetChild(0).GetComponent<Text>().text = Mathf.Floor(31 - Time.time + TurnStartTime).ToString();
+        if (Time.time - TurnStartTime >= 30)
+            TurnChange();
+        
+        
 
     }
 

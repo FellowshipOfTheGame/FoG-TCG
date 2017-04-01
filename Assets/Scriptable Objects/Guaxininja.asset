@@ -16,5 +16,9 @@ MonoBehaviour:
   flavor: HYYYEEEHAAAAA - Andi
   number: 1
   type: 99
+  cost: 0
   ATK: 2
   HP: 3
+  manaToGive: 0
+  aspects: 4100
+  aspectsToGive: 

@@ -1,6 +1,9 @@
 using UnityEngine;
+using System.Collections;
 
 public class TerrainCard : Card {
+
+    public ArrayList atributesToGive;
 
     public delegate void CreatureAttackedDelegate();
     [HideInInspector]

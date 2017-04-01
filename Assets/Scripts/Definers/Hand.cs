@@ -62,6 +62,18 @@ public class Hand : MonoBehaviour {
                 dragCard.GetComponent<CardAttack>().onTable = true;
                 dragCard.GetComponent<CardAttack>().canAttack = true;
             }
+            if (dragCard.GetComponent<AddCardInformation>().card.type == 't') {
+                int i;
+                ArrayList aspectsToAdd = dragCard.GetComponent<CardResourceGenerator>().aspectsToGive;
+                ArrayList PlayerAspectsList = transform.parent.GetComponent<PlayerStatus>().OwnAspects;
+
+                for (i=0;i< aspectsToAdd.Count; i++) {
+                    if(!PlayerAspectsList.Contains(aspectsToAdd[i]))
+                        PlayerAspectsList.Add(aspectsToAdd[i]);
+                }
+            }
+
+            Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().mana -= dragCard.GetComponent<CardInHand>().cost;
             dragCard = null;
             //setar slot
             chosenSlot.GetComponent<Slot>().IsFull = true;
