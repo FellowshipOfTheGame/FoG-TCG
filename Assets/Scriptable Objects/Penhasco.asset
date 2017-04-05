@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Penhasco
   m_EditorClassIdentifier: 
   title: Penhasco
-  desc: Terreno de Ar
+  desc: gera [ar]
   flavor: 
   number: 14
   type: 116

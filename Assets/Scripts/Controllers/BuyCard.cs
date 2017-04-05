@@ -16,11 +16,11 @@ public class BuyCard : MonoBehaviour{
 	
 	void Update () {
         //calcular distancia do mouse
-        mouseDist[0] = Input.mousePosition.x - transform.position.x - 0.5f;
+        mouseDist[0] = Input.mousePosition.x - transform.position.x + 0.5f;
         mouseDist[1] = Input.mousePosition.y - transform.position.y - 2;
 
         // se o mouse estiver encima do botão
-        if (Mathf.Abs(mouseDist[0]) <= 27.2f && Mathf.Abs(mouseDist[1]) <= 18.5f && Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canBuy) {
+        if (Mathf.Abs(mouseDist[0]) <= 25.8f && Mathf.Abs(mouseDist[1]) <= 18.5f && Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canBuy) {
             gameObject.GetComponent<Image>().color = Color.yellow;
 
             // clicando no botão

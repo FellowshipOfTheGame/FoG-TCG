@@ -9,16 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 884e741cdaef03a4ebb8a85755d63a87, type: 3}
-  m_Name: Montanha
+  m_Name: "Ver\xE3o de Din"
   m_EditorClassIdentifier: 
-  title: Montanha
-  desc: gera [terra]
-  flavor: 
-  number: 11
-  type: 116
+  title: "Ver\xE3o de Din"
+  desc: gera [fogo]
+  flavor: Quente
+  number: 16
+  type: 97
   cost: 0
   ATK: 0
   HP: 0
   manaToGive: 0
   aspects: 
-  aspectsToGive: 4500
+  aspectsToGive: 4600

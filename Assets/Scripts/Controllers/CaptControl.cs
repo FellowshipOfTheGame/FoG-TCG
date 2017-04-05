@@ -92,11 +92,11 @@ public class CaptControl : MonoBehaviour {
 
     void DragCaptEnd() {
         transform.SetParent(captSlot.transform);
+        draggingCapt = false;
         if (pos!=captSlot.GetComponent<CaptSlot>().pos) {
             pos = captSlot.GetComponent<CaptSlot>().pos;
             Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canPlay = false;
             Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canMove = false;
-            draggingCapt = false;
         }
     }
 }

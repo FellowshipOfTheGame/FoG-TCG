@@ -6,14 +6,13 @@ public class CardResourceGenerator : MonoBehaviour {
 
     public int manaToGive;
     public ArrayList aspectsToGive=new ArrayList();
+    public bool canFarm = false;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
-		
+		if (canFarm) {
+            Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().mana += manaToGive;
+            canFarm = false;
+        }
 	}
 }

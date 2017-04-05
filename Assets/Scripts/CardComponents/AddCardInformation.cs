@@ -48,6 +48,14 @@ public class AddCardInformation : MonoBehaviour {
                     gameObject.GetComponent<CardResourceGenerator>().aspectsToGive.Add(card.aspectsToGive[i]);
 
                 break;
+            case 'a':
+                gameObject.GetComponent<Image>().color = new Color(0.91f, 0.91f, 0.91f, gameObject.GetComponent<Image>().color.a);
+                gameObject.AddComponent<CardResourceGenerator>();
+                for (i = 0; i < card.aspectsToGive.Length; i++)
+                    gameObject.GetComponent<CardResourceGenerator>().aspectsToGive.Add(card.aspectsToGive[i]);
+
+                break;
+
         }
 
 	}

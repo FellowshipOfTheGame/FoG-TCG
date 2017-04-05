@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: "Vulc\xE3o"
   m_EditorClassIdentifier: 
   title: "Vulc\xE3o"
-  desc: Terreno de Fogo
+  desc: gera [fogo]
   flavor: 
   number: 13
   type: 116

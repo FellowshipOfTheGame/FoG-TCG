@@ -9,10 +9,14 @@ public class Board : MonoBehaviour{
     public CardInformation[] deck2;
     public static int currPlayer=1;
     public static GameObject[,] cardMatriz;
+    public static GameObject atm=null;
+    public static ArrayList AtmAspects = new ArrayList();
+    public static GameObject hologram=null;
     public static GameObject[] player;
     public static GameObject[] capt;
     public static float TurnStartTime;
-    Text info;
+
+    public float maxTime;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +33,7 @@ public class Board : MonoBehaviour{
         player[0].GetComponent<PlayerStatus>().canBuy = true;
         player[1].SetActive(false);
         capt[1].GetComponent<CaptControl>().enabled = false;
-        info = transform.FindChild("Menu").FindChild("Infos").GetComponent<Text>();
+  
         cardMatriz = new GameObject[4,5];
         int i;
         int j;
@@ -42,21 +46,30 @@ public class Board : MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update () {
-        info.text = "Curr Player:" + currPlayer;
         capt[0].transform.FindChild("Text").GetComponent<Text>().text = Board.player[0].GetComponent<PlayerStatus>().HP.ToString();
         capt[1].transform.FindChild("Text").GetComponent<Text>().text = Board.player[1].GetComponent<PlayerStatus>().HP.ToString();
+        transform.FindChild("Menu").FindChild("PlayerIndex").GetChild(0).GetComponent<Text>().text = "Player: " + currPlayer.ToString();
+        transform.FindChild("Menu").FindChild("ManaCount").GetChild(0).GetComponent<Text>().text = "Mana: " + player[currPlayer - 1].GetComponent<PlayerStatus>().mana.ToString();
 
-        //transform.FindChild("Menu").FindChild("ManaCount").GetChild(0).GetComponent<Text>().text = player[currPlayer - 1].GetComponent<PlayerStatus>().mana.ToString();
-        //transform.FindChild("Menu").FindChild("TimeShow").GetChild(0).GetComponent<Text>().text = Mathf.Floor(31 - Time.time + TurnStartTime).ToString();
-        if (Time.time - TurnStartTime >= 30)
+        if(maxTime + 1 - Time.time + TurnStartTime >= 10)
+            transform.FindChild("Menu").FindChild("TimeShow").GetChild(0).GetComponent<Text>().text = Mathf.Floor(maxTime + 1 - Time.time + TurnStartTime).ToString();
+        else
+            transform.FindChild("Menu").FindChild("TimeShow").GetChild(0).GetComponent<Text>().text = "0" + Mathf.Floor(maxTime + 1 - Time.time + TurnStartTime).ToString();
+
+        if (Time.time - TurnStartTime >= maxTime)
             TurnChange();
         
-        
-
     }
 
     public static void TurnChange() {
         TurnStartTime = Time.time;
+        if (Hand.dragCard != null) {
+            Destroy(Hand.dragCard);
+            Hand.dragCard = null;
+            Hand.chosenSlot = null;
+            Slot.choosingPlace = false;
+        }
+
         if (currPlayer == 1) {
             player[0].SetActive(false);
             player[1].SetActive(true);
@@ -88,6 +101,9 @@ public class Board : MonoBehaviour{
 
             currPlayer = 1;
         }
+        AtmButton.open = false;
+        Destroy(hologram);
+        hologram = null;
     }
 
     void LoadDeck(CardInformation[] deck,string player) {

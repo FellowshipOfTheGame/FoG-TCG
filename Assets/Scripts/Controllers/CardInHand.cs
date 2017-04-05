@@ -35,8 +35,13 @@ public class CardInHand : MonoBehaviour {
                     CanBePlayed = true;
                     transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Text>().color = Color.black;
                 } else {
-                    CanBePlayed = false;
-                    transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Text>().color = Color.red;
+                    if (Board.AtmAspects.Contains(aspects[i])) {
+                        CanBePlayed = true;
+                        transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Text>().color = Color.black;
+                    } else {
+                        CanBePlayed = false;
+                        transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Text>().color = Color.red;
+                    }
                 }
             }
             

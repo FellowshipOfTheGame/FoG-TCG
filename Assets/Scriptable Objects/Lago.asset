@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Lago
   m_EditorClassIdentifier: 
   title: Lago
-  desc: "Terreno de \xC1gua"
+  desc: "Gera [\xE1gua]"
   flavor: 
   number: 12
   type: 116
