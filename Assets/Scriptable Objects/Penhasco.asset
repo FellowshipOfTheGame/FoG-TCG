@@ -19,6 +19,6 @@ MonoBehaviour:
   cost: 0
   ATK: 0
   HP: 0
-  manaToGive: 0
+  manaToGive: 1
   aspects: 
   aspectsToGive: 4100

@@ -83,6 +83,10 @@ public class Board : MonoBehaviour{
                 if (cardMatriz[2, i] != null)
                     cardMatriz[2, i].GetComponent<CardAttack>().canAttack = true;
             }
+            for (i = 3; i <= 4; i++) {
+                if (cardMatriz[3, i] != null)
+                    cardMatriz[3, i].GetComponent<CardResourceGenerator>().canFarm = true;
+            }
 
             currPlayer = 2;
         } else {
@@ -94,6 +98,10 @@ public class Board : MonoBehaviour{
             player[0].GetComponent<PlayerStatus>().canMove = true;
             player[0].GetComponent<PlayerStatus>().canBuy = true;
             int i;
+            for (i = 0; i <= 4; i++) {
+                if (cardMatriz[0, i] != null)
+                    cardMatriz[0, i].GetComponent<CardResourceGenerator>().canFarm = true;
+            }
             for (i = 0; i <= 4; i++) {
                 if(cardMatriz[1, i]!=null)
                     cardMatriz[1, i].GetComponent<CardAttack>().canAttack = true;
