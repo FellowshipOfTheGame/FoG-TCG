@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fbb7256b4918d4484b009724fc8ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 11400000, guid: 1d17af3ea985a2648b7e9e3a96e16532, type: 2}
+  card: {fileID: 0}
   title: {fileID: 114732584596108334}
   image: {fileID: 114171554595719686}
   desc: {fileID: 114951671792474266}
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1230770209585012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0996aa7613eb7d4d8ca6a04aa3f14c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 12bcb1360813fb14c8f0932ae37806d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 0

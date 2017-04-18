@@ -75,24 +75,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AtmButton.cs" />
-    <Compile Include="Assets\Scripts\CardAttack.cs" />
-    <Compile Include="Assets\Scripts\CardComponents\AddCardInformation.cs" />
-    <Compile Include="Assets\Scripts\CardComponents\Card.cs" />
-    <Compile Include="Assets\Scripts\CardComponents\CardInformation.cs" />
-    <Compile Include="Assets\Scripts\CardComponents\CreatureCard.cs" />
-    <Compile Include="Assets\Scripts\CardComponents\TerrainCard.cs" />
-    <Compile Include="Assets\Scripts\CardResourceGenerator.cs" />
-    <Compile Include="Assets\Scripts\Controllers\BuyCard.cs" />
-    <Compile Include="Assets\Scripts\Controllers\CaptControl.cs" />
-    <Compile Include="Assets\Scripts\Controllers\CardInHand.cs" />
-    <Compile Include="Assets\Scripts\Controllers\EndTurn.cs" />
-    <Compile Include="Assets\Scripts\Definers\Board.cs" />
-    <Compile Include="Assets\Scripts\Definers\CaptSlot.cs" />
-    <Compile Include="Assets\Scripts\Definers\Deck.cs" />
-    <Compile Include="Assets\Scripts\Definers\Hand.cs" />
-    <Compile Include="Assets\Scripts\Definers\PlayerStatus.cs" />
-    <Compile Include="Assets\Scripts\Definers\Slot.cs" />
+    <Compile Include="Assets\Scripts\Card.cs" />
+    <Compile Include="Assets\Scripts\CardInformation.cs" />
+    <Compile Include="Assets\Scripts\CreatureCard.cs" />
+    <Compile Include="Assets\Scripts\Game\AtmButton.cs" />
+    <Compile Include="Assets\Scripts\Game\Board.cs" />
+    <Compile Include="Assets\Scripts\Game\BuyCard.cs" />
+    <Compile Include="Assets\Scripts\Game\CaptControl.cs" />
+    <Compile Include="Assets\Scripts\Game\CaptSlot.cs" />
+    <Compile Include="Assets\Scripts\Game\CardAttack.cs" />
+    <Compile Include="Assets\Scripts\Game\CardInHand.cs" />
+    <Compile Include="Assets\Scripts\Game\CardResourceGenerator.cs" />
+    <Compile Include="Assets\Scripts\Game\Deck.cs" />
+    <Compile Include="Assets\Scripts\Game\EndTurn.cs" />
+    <Compile Include="Assets\Scripts\Game\Hand.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerStatus.cs" />
+    <Compile Include="Assets\Scripts\Game\Slot.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Menu\AddCardInformation.cs" />
+    <Compile Include="Assets\Scripts\Menu\AddCardInformationMinimized.cs" />
+    <Compile Include="Assets\Scripts\Menu\CardManager.cs" />
+    <Compile Include="Assets\Scripts\Menu\CollectionDraggable.cs" />
+    <Compile Include="Assets\Scripts\Menu\DeckListDraggable.cs" />
+    <Compile Include="Assets\Scripts\Menu\DeckListManager.cs" />
+    <Compile Include="Assets\Scripts\Menu\DropZone.cs" />
+    <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+    <Compile Include="Assets\Scripts\Menu\PlaySceneMusic.cs" />
+    <Compile Include="Assets\Scripts\Menu\PlaySoundEffect.cs" />
+    <Compile Include="Assets\Scripts\Menu\Tabs.cs" />
+    <Compile Include="Assets\Scripts\Menu\VolumeControl.cs" />
+    <Compile Include="Assets\Scripts\TerrainCard.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

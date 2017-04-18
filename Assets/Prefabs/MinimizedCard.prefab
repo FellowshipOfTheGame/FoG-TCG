@@ -22,9 +22,9 @@ GameObject:
   - 222: {fileID: 222000011777166708}
   - 114: {fileID: 114000014213015338}
   - 114: {fileID: 114000011539356464}
-  - 114: {fileID: 114000010761585636}
   - 225: {fileID: 225000013170853846}
   - 114: {fileID: 114000013183918894}
+  - 114: {fileID: 114000012066684134}
   m_Layer: 5
   m_Name: MinimizedCard
   m_TagString: MinimizedCard
@@ -66,21 +66,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114000010761585636
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012509200632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11611e362585d1d4f83d36adfbafd21d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentToReturnTo: {fileID: 0}
-  placeholderParent: {fileID: 0}
-  placeholder: {fileID: 0}
-  minimizedCard: {fileID: 0}
 --- !u!114 &114000011038941172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,6 +150,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Quantity
+--- !u!114 &114000012066684134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012509200632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d91750f52052964596706d23233a66e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  parentToReturnTo: {fileID: 0}
+  currentZone: {fileID: 0}
+  deckListZone: {fileID: 0}
 --- !u!114 &114000013183918894
 MonoBehaviour:
   m_ObjectHideFlags: 1
