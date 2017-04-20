@@ -57,7 +57,7 @@ public class AddCardInformation : MonoBehaviour {
                 break;
         }
 
-        if (GameManager.currScene == 'm')
-            gameObject.AddComponent<CollectionDraggable>();
+        if (GameManager.currScene == 'g')
+            gameObject.AddComponent<CardInHand>();
 	}
 }

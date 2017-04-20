@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public static char currScene;
+    public static char currScene= 'm';
 
     void Awake() {
         DontDestroyOnLoad(transform.gameObject);
     }
-
-	// Use this for initialization
-	void Start () {
-        currScene = 'm';
-	}
 }

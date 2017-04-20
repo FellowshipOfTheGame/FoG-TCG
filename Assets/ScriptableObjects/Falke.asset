@@ -9,12 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 884e741cdaef03a4ebb8a85755d63a87, type: 3}
-  m_Name: Volgarr
+  m_Name: Falke
   m_EditorClassIdentifier: 
-  title: Volgarr
-  desc: "No caminho de um guerreiro h\xE1 apenas morte."
-  flavor: Autor - Soares
-  number: 7
+  title: Falke
+  desc: "Descri\xE7\xE3o muito longa"
+  flavor: Autora - Juliana
+  number: 0
   type: 99
+  cost: 0
   ATK: 3
-  HP: 6
+  HP: 2
+  manaToGive: 0
+  aspects: 4600
+  aspectsToGive: 

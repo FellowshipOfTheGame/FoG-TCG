@@ -75,11 +75,14 @@ public class Menu : MonoBehaviour {
 	public void CartasSelected() {
 		Desativar();
 		GOCartas.SetActive (true);
-		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+        GOCartas.transform.FindChild("MenuLateral").FindChild("Cards").GetChild(1).GetComponent<Text>().text = "";
+        GOCartas.transform.FindChild("MenuLateral").FindChild("Cards").GetChild(2).GetComponent<Text>().text = "";
+        ES.SetSelectedGameObject (VoltarConfig.gameObject);
 	}
 
 	public void DecksSelected() {
 		Desativar();
+        CollectionDraggable.canDrag = false;
         GODecks.transform.parent.gameObject.SetActive(true);
 		GODecks.SetActive (true);
 		ES.SetSelectedGameObject (VoltarConfig.gameObject);
@@ -88,7 +91,11 @@ public class Menu : MonoBehaviour {
 	public void NovoDeckSelected() {
 		Desativar();
 		GONovoDeck.SetActive (true);
-		ES.SetSelectedGameObject (VoltarDecks.gameObject);
+        CollectionDraggable.canDrag = true;
+        CollectionDraggable.collectionZone = GONovoDeck.transform.FindChild("MenuLateral").FindChild("Cards").FindChild("ScrollContent").GetChild(0).gameObject;
+        CollectionDraggable.deckListManager = CollectionDraggable.collectionZone.GetComponent<DeckListManager>();
+        CollectionDraggable.canvas = this.transform.GetComponent<Canvas>();
+        ES.SetSelectedGameObject (VoltarDecks.gameObject);
 	}
 
 	public void StatsSelected() {

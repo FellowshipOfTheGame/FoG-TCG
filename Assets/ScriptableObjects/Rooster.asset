@@ -9,12 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 884e741cdaef03a4ebb8a85755d63a87, type: 3}
-  m_Name: Rangi
+  m_Name: Rooster
   m_EditorClassIdentifier: 
-  title: Rangi
-  desc: "Sem descri\xE7\xE3o"
-  flavor: "Autora - Anay\xE3"
-  number: 4
+  title: Rooster
+  desc: "Descri\xE7\xE3o muito longa"
+  flavor: Autor - Gallo
+  number: 5
   type: 99
-  ATK: 2
+  cost: 0
+  ATK: 1
   HP: 5
+  manaToGive: 0
+  aspects: 41004600
+  aspectsToGive: 
