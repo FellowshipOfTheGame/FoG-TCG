@@ -1538,6 +1538,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genericCard: {fileID: 1230770209585012, guid: d11ceab930e135e45a29955ffb74f76e,
     type: 2}
+  illusionCard: {fileID: 1015447916738408, guid: 2434f9815e1afa3409198eec6aca198f,
+    type: 2}
   chosenCard: {fileID: 0}
 --- !u!114 &748304103
 MonoBehaviour:
@@ -3789,6 +3791,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genericCard: {fileID: 1230770209585012, guid: d11ceab930e135e45a29955ffb74f76e,
+    type: 2}
+  illusionCard: {fileID: 1015447916738408, guid: 2434f9815e1afa3409198eec6aca198f,
     type: 2}
   chosenCard: {fileID: 0}
 --- !u!114 &1663779843

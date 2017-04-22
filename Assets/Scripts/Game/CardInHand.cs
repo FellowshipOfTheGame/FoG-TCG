@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CardInHand : MonoBehaviour {
 
     bool CanBePlayed = false;
+    GameObject clone;
     public int cost;
     public char[] aspects;
     float[] mouseDist;
@@ -29,19 +30,19 @@ public class CardInHand : MonoBehaviour {
         if (transform.parent.name == "Hand") {
             if (cost <= transform.parent.parent.GetComponent<PlayerStatus>().mana) {
                 CanBePlayed = true;
-                transform.FindChild("Cost").GetComponent<Text>().color = Color.black;
+                transform.FindChild("Cost").GetComponent<Text>().color = Color.white;
                 int i;
                 for (i = 0; i < aspects.Length; i++) {
                     if (transform.parent.parent.GetComponent<PlayerStatus>().OwnAspects.Contains(aspects[i])) {
                         CanBePlayed = true;
-                        transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Text>().color = Color.black;
+                        transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Image>().color = Color.white;
                     } else {
                         if (Board.AtmAspects.Contains(aspects[i])) {
                             CanBePlayed = true;
-                            transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Text>().color = Color.black;
+                            transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Image>().color = Color.white;
                         } else {
                             CanBePlayed = false;
-                            transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Text>().color = Color.red;
+                            transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Image>().color = Color.black;
                         }
                     }
                 }
@@ -54,12 +55,25 @@ public class CardInHand : MonoBehaviour {
 
             if (Mathf.Abs(mouseDist[0]) <= 45 && Mathf.Abs(mouseDist[1]) <= 65.5f && Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canPlay) {
                 transform.position = new Vector3(transform.position.x, transform.parent.position.y + 10, transform.position.z);
+                if (clone == null) {
+                    clone = Instantiate(transform.parent.GetComponent<Hand>().illusionCard, transform.parent.parent) as GameObject;
+                    clone.GetComponent<AddCardInformation>().card = transform.GetComponent<AddCardInformation>().card;
+                    clone.transform.position = transform.position + new Vector3(0, 100, 0);
+                }
 
                 if (Input.GetMouseButtonDown(0) && CanBePlayed) {
+                    Destroy(clone);
+                    clone = null;
                     transform.parent.GetComponent<Hand>().DragCardStart(transform.gameObject);
                 }
-            } else
+            } else {
                 transform.position = new Vector3(transform.position.x, transform.parent.position.y, transform.position.z);
+                if (clone != null) {
+                    Destroy(clone);
+                    clone = null;
+                }
+                    
+            }
         }
     }
 

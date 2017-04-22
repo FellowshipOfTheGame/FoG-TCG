@@ -7,6 +7,7 @@ public class Hand : MonoBehaviour {
     //comprar cartas
     Deck playerDeck;
     public GameObject genericCard;
+    public GameObject illusionCard;
 
     //jogar cartas no campo
     Vector3 diff;
