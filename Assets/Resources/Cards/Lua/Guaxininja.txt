@@ -1,0 +1,13 @@
+﻿
+return {
+	Name = "guaxininja",
+	-- Type = "creature", TODO sistema de constantes
+	DisplayName = "Guaxininja",
+	Desc = "HYAAAAAAAAAAAAA",
+	-- Image = "imagem.png",
+	Attack = 1,
+	Health = 2,
+	Cost = 1,
+	Aspects = {},
+	Tags = {}
+}
