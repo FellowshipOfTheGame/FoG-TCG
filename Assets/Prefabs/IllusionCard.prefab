@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114088363546347950}
   - component: {fileID: 114853763683233074}
   - component: {fileID: 225327255621294852}
+  - component: {fileID: 114819843866784602}
   m_Layer: 5
   m_Name: IllusionCard
   m_TagString: Card
@@ -382,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7205882, g: 0.7205882, b: 0.721, a: 0.78431374}
+  m_Color: {r: 0.7205882, g: 0.7205882, b: 0.721, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -604,6 +605,24 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: C
+--- !u!114 &114819843866784602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015447916738408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9e4676bf4079248a1160e1a31c13c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ATK: 0
+  HP: 0
+  onTable: 0
+  canAttack: 0
+  cardColor: {r: 0, g: 0, b: 0, a: 0}
+  manaToGive: 0
+  canFarm: 0
 --- !u!114 &114853763683233074
 MonoBehaviour:
   m_ObjectHideFlags: 1

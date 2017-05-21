@@ -29,35 +29,29 @@ public class AddCardInformation : MonoBehaviour {
             aspects.transform.GetChild(i).gameObject.SetActive(false);
 
         for(i=0;i<card.aspects.Length;i++)
-            aspects.transform.FindChild(card.aspects[i].ToString()).gameObject.SetActive(true);
+            aspects.transform.Find(card.aspects[i].ToString()).gameObject.SetActive(true);
 
         switch (card.type) {
             case 'c':
                 gameObject.AddComponent<CreatureCard>();
                 gameObject.GetComponent<Image>().color = new Color(0.84f, 0.88f, 0.62f, gameObject.GetComponent<Image>().color.a);
-                gameObject.AddComponent<CardAttack>();
-                gameObject.GetComponent<CardAttack>().ATK = card.ATK;
-                gameObject.GetComponent<CardAttack>().HP = card.HP;
+                gameObject.GetComponent<CardInTable>().ATK = card.ATK;
+                gameObject.GetComponent<CardInTable>().HP = card.HP;
                 break;
             case 't':
                 gameObject.AddComponent<TerrainCard>();
                 gameObject.GetComponent<Image>().color = new Color(0.79f, 0.75f, 1.00f, gameObject.GetComponent<Image>().color.a);
-                gameObject.AddComponent<CardResourceGenerator>();
-                gameObject.GetComponent<CardResourceGenerator>().manaToGive = card.manaToGive;
+                gameObject.GetComponent<CardInTable>().manaToGive = card.manaToGive;
                 for (i = 0; i < card.aspectsToGive.Length; i++)
-                    gameObject.GetComponent<CardResourceGenerator>().aspectsToGive.Add(card.aspectsToGive[i]);
+                    gameObject.GetComponent<CardInTable>().aspectsToGive.Add(card.aspectsToGive[i]);
 
                 break;
             case 'a':
                 gameObject.GetComponent<Image>().color = new Color(0.91f, 0.91f, 0.91f, gameObject.GetComponent<Image>().color.a);
-                gameObject.AddComponent<CardResourceGenerator>();
                 for (i = 0; i < card.aspectsToGive.Length; i++)
-                    gameObject.GetComponent<CardResourceGenerator>().aspectsToGive.Add(card.aspectsToGive[i]);
+                    gameObject.GetComponent<CardInTable>().aspectsToGive.Add(card.aspectsToGive[i]);
 
                 break;
         }
-
-        if (GameManager.currScene == 'g')
-            gameObject.AddComponent<CardInHand>();
 	}
 }
