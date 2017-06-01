@@ -103,7 +103,7 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                     }
                 }
             } else {
-                Transform cardInfo = transform.parent.parent.parent.parent.parent.FindChild("MenuLateral").FindChild("Cards");
+                Transform cardInfo = transform.parent.parent.parent.parent.parent.Find("MenuLateral").Find("Cards");
                 cardInfo.GetChild(1).GetComponent<Text>().text = "Nome: " + transform.GetComponent<AddCardInformation>().card.title;
                 switch (transform.GetComponent<AddCardInformation>().card.type) {
                     case 'c':

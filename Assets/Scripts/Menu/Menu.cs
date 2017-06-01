@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -48,7 +49,8 @@ public class Menu : MonoBehaviour {
 
 	public void PlaySelected() {
         GameManager.currScene = 'g';
-        Application.LoadLevel("Game"); // carregar jogo(trocar Game pelo nome da scene)
+		SceneManager.LoadScene ("Game"); // LoadLevel é deprecado, usar LoadScene no lugar
+        //Application.LoadLevel("Game"); // carregar jogo(trocar Game pelo nome da scene)
 	}
 
 	public void Desativar() {
@@ -75,8 +77,8 @@ public class Menu : MonoBehaviour {
 	public void CartasSelected() {
 		Desativar();
 		GOCartas.SetActive (true);
-        GOCartas.transform.FindChild("MenuLateral").FindChild("Cards").GetChild(1).GetComponent<Text>().text = "";
-        GOCartas.transform.FindChild("MenuLateral").FindChild("Cards").GetChild(2).GetComponent<Text>().text = "";
+        GOCartas.transform.Find("MenuLateral").Find("Cards").GetChild(1).GetComponent<Text>().text = "";
+        GOCartas.transform.Find("MenuLateral").Find("Cards").GetChild(2).GetComponent<Text>().text = "";
         ES.SetSelectedGameObject (VoltarConfig.gameObject);
 	}
 
@@ -92,7 +94,7 @@ public class Menu : MonoBehaviour {
 		Desativar();
 		GONovoDeck.SetActive (true);
         CollectionDraggable.canDrag = true;
-        CollectionDraggable.collectionZone = GONovoDeck.transform.FindChild("MenuLateral").FindChild("Cards").FindChild("ScrollContent").GetChild(0).gameObject;
+        CollectionDraggable.collectionZone = GONovoDeck.transform.Find("MenuLateral").Find("Cards").Find("ScrollContent").GetChild(0).gameObject;
         CollectionDraggable.deckListManager = CollectionDraggable.collectionZone.GetComponent<DeckListManager>();
         CollectionDraggable.canvas = this.transform.GetComponent<Canvas>();
         ES.SetSelectedGameObject (VoltarDecks.gameObject);
