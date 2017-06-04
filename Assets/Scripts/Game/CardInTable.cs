@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class CardInTable : MonoBehaviour {
+public class CardInTable : MonoBehaviour, IPointerClickHandler {
 
     public int ATK;
     public int HP;
@@ -13,7 +14,7 @@ public class CardInTable : MonoBehaviour {
     public Color cardColor;
 
     public int manaToGive;
-    public ArrayList aspectsToGive = new ArrayList();
+    public int[] aspectsToGive = new int[4];
     public bool canFarm = false;
 
     void Start() {
@@ -75,5 +76,14 @@ public class CardInTable : MonoBehaviour {
         transform.parent.GetComponent<Slot>().IsFull = false;
         Board.cardMatriz[transform.parent.GetComponent<Slot>().pos[0], transform.parent.GetComponent<Slot>().pos[1]] = null;
         Destroy(transform.gameObject);
+    }
+
+    public void OnPointerClick(PointerEventData eventData) {
+        if (onTable) {
+            if (canAttack)
+                Attack();
+            else
+                Debug.Log("Can't Attack!");
+        }
     }
 }

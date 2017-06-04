@@ -20,5 +20,5 @@ MonoBehaviour:
   ATK: 3
   HP: 2
   manaToGive: 0
-  aspects: 4600
+  aspects: 01000000000000000000000000000000
   aspectsToGive: 

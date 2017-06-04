@@ -407,6 +407,7 @@ MonoBehaviour:
   canAttack: 0
   cardColor: {r: 0, g: 0, b: 0, a: 0}
   manaToGive: 0
+  aspectsToGive: 00000000000000000000000000000000
   canFarm: 0
 --- !u!114 &114299847830226116
 MonoBehaviour:

@@ -12,18 +12,14 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public GameObject miniCard;
     public GameObject illusionCard;
     public int cost;
-    public char[] aspects;
+    public int[] aspects;
     Vector3 diff;
     Vector3 OriginalPos;
 
     // Use this for initialization
     void Start() {
         cost = transform.GetComponent<AddCardInformation>().card.cost;
-        aspects = new char[transform.GetComponent<AddCardInformation>().card.aspects.Length];
-        int i;
-        for (i = 0; i < aspects.Length; i++)
-            aspects[i] = transform.GetComponent<AddCardInformation>().card.aspects[i];
-
+        aspects = transform.GetComponent<AddCardInformation>().card.aspects;
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -61,32 +57,27 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 GameObject newCard = Instantiate(miniCard,FindObjectOfType<Board>().transform) as GameObject;
                 newCard.GetComponent<AddCardInformation>().card = this.transform.GetComponent<AddCardInformation>().card;
                 newCard.transform.position = Hand.chosenSlot.transform.position;
+
                
                 newCard.GetComponent<CardInTable>().onTable = true;
                 if (this.GetComponent<AddCardInformation>().card.type == 'a') {
                     int i;
                     if (Hand.chosenSlot.transform.childCount > 0) {
-                        ArrayList aspectsToRemove = Board.atm.GetComponent<CardInTable>().aspectsToGive;
+                        int[] aspectsToRemove = Board.atm.GetComponent<CardInTable>().aspectsToGive;
 
-                        for (i = 0; i < aspectsToRemove.Count; i++) {
-                            if (Board.player[0].GetComponent<PlayerStatus>().OwnAspects.Contains(aspectsToRemove[i]))
-                                Board.player[0].GetComponent<PlayerStatus>().OwnAspects.Remove(aspectsToRemove[i]);
-
-                            if (Board.player[1].GetComponent<PlayerStatus>().OwnAspects.Contains(aspectsToRemove[i]))
-                                Board.player[1].GetComponent<PlayerStatus>().OwnAspects.Remove(aspectsToRemove[i]);
+                        for (i = 0; i < 4; i++) {
+                            Board.player[0].GetComponent<PlayerStatus>().OwnAspects[i] -= aspectsToRemove[i];
+                            Board.player[1].GetComponent<PlayerStatus>().OwnAspects[i] -= aspectsToRemove[i];
                         }
                         Destroy(Hand.chosenSlot.transform.GetChild(0).gameObject);
                     }
                     Board.atm = newCard;
                     newCard.transform.SetParent(Hand.chosenSlot.transform);
-                    ArrayList aspectsToAdd = transform.GetComponent<CardInTable>().aspectsToGive;
+                    int[] aspectsToAdd = transform.GetComponent<CardInTable>().aspectsToGive;
 
-                    for (i = 0; i < aspectsToAdd.Count; i++) {
-                        if (!Board.player[0].GetComponent<PlayerStatus>().OwnAspects.Contains(aspectsToAdd[i]))
-                            Board.player[0].GetComponent<PlayerStatus>().OwnAspects.Add(aspectsToAdd[i]);
-
-                        if (!Board.player[1].GetComponent<PlayerStatus>().OwnAspects.Contains(aspectsToAdd[i]))
-                            Board.player[1].GetComponent<PlayerStatus>().OwnAspects.Add(aspectsToAdd[i]);
+                    for (i = 0; i < 4; i++) {
+                        Board.player[0].GetComponent<PlayerStatus>().OwnAspects[i] += aspectsToAdd[i];
+                        Board.player[1].GetComponent<PlayerStatus>().OwnAspects[i] += aspectsToAdd[i];
                     }
 
                 } else if (this.GetComponent<AddCardInformation>().card.type == 't') {
@@ -105,12 +96,11 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
                     
 
-                    ArrayList aspectsToAdd = GetComponent<CardInTable>().aspectsToGive;
-                    ArrayList PlayerAspectsList = Board.player[Board.currPlayer-1].GetComponent<PlayerStatus>().OwnAspects;
+                    int[] aspectsToAdd = GetComponent<CardInTable>().aspectsToGive;
+                    int[] PlayerAspectsList = Board.player[Board.currPlayer-1].GetComponent<PlayerStatus>().OwnAspects;
 
-                    for (i = 0; i < aspectsToAdd.Count; i++) {
-                        if (!PlayerAspectsList.Contains(aspectsToAdd[i]))
-                            PlayerAspectsList.Add(aspectsToAdd[i]);
+                    for (i = 0; i < 4; i++) {
+                            PlayerAspectsList[i]+=aspectsToAdd[i];
                     }
                 } else if (this.GetComponent<AddCardInformation>().card.type == 'c') {
                     newCard.transform.SetParent(Hand.chosenSlot.transform);
@@ -142,25 +132,23 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     // Update is called once per frame
     void Update() {
-        if (inHand) {
+        if (inHand && Board.currPlayer==transform.parent.parent.GetComponent<PlayerStatus>().playerIndex) {
             if (cost <= transform.parent.parent.GetComponent<PlayerStatus>().mana) {
                 CanBePlayed = true;
                 transform.Find("Cost").GetComponent<Text>().color = Color.white;
-                int i;
-                for (i = 0; i < aspects.Length; i++) {
-                    if (transform.parent.parent.GetComponent<PlayerStatus>().OwnAspects.Contains(aspects[i])) {
-                        CanBePlayed = true;
-                        transform.Find("Aspects").Find(aspects[i].ToString()).GetComponent<Image>().color = Color.white;
-                    } else {
-                        if (Board.AtmAspects.Contains(aspects[i])) {
-                            CanBePlayed = true;
-                            transform.Find("Aspects").Find(aspects[i].ToString()).GetComponent<Image>().color = Color.white;
-                        } else {
-                            CanBePlayed = false;
-                            transform.Find("Aspects").Find(aspects[i].ToString()).GetComponent<Image>().color = Color.black;
-                        }
+                int i, j, aux = 0;
+                for (i = 0; i < 4; i++) {
+                    for (j = 1; j <= aspects[i]; j++) {
+                        if (transform.parent.parent.GetComponent<PlayerStatus>().OwnAspects[i] >= j)
+                            transform.Find("Aspects").GetChild(aux + j - 1).GetComponent<Image>().color = Color.white;
+                        else
+                            transform.Find("Aspects").GetChild(aux + j - 1).GetComponent<Image>().color = Color.black;
                     }
+                    aux += aspects[i];
+                    if (transform.parent.parent.GetComponent<PlayerStatus>().OwnAspects[i] < aspects[i])
+                        CanBePlayed = false;
                 }
+                  
 
             } else {
                 CanBePlayed = false;

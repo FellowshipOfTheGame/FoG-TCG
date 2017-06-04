@@ -6,34 +6,12 @@ using UnityEngine.UI;
 public class AspectLed : MonoBehaviour {
 
     public int playerIndex;
-
-	// Use this for initialization
-	void Start () {
-        int i;
-        for (i = 0; i < 4; i++)
-            transform.GetChild(0).GetComponent<Image>().enabled = false;
-	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (Board.player[playerIndex - 1].GetComponent<PlayerStatus>().OwnAspects.Contains('F'))
-            transform.Find("F").GetComponent<Image>().enabled = true;
-        else
-            transform.Find("F").GetComponent<Image>().enabled = false;
-
-        if (Board.player[playerIndex - 1].GetComponent<PlayerStatus>().OwnAspects.Contains('W'))
-            transform.Find("W").GetComponent<Image>().enabled = true;
-        else
-            transform.Find("W").GetComponent<Image>().enabled = false;
-
-        if (Board.player[playerIndex - 1].GetComponent<PlayerStatus>().OwnAspects.Contains('E'))
-            transform.Find("E").GetComponent<Image>().enabled = true;
-        else
-            transform.Find("E").GetComponent<Image>().enabled = false;
-
-        if (Board.player[playerIndex - 1].GetComponent<PlayerStatus>().OwnAspects.Contains('A'))
-            transform.Find("A").GetComponent<Image>().enabled = true;
-        else
-            transform.Find("A").GetComponent<Image>().enabled = false;
+            transform.Find("F").GetComponent<Text>().text = Board.player[playerIndex - 1].GetComponent<PlayerStatus>().OwnAspects[0].ToString();
+            transform.Find("W").GetComponent<Text>().text = Board.player[playerIndex - 1].GetComponent<PlayerStatus>().OwnAspects[1].ToString();
+            transform.Find("E").GetComponent<Text>().text = Board.player[playerIndex - 1].GetComponent<PlayerStatus>().OwnAspects[2].ToString();
+            transform.Find("A").GetComponent<Text>().text = Board.player[playerIndex - 1].GetComponent<PlayerStatus>().OwnAspects[3].ToString();
     }
 }

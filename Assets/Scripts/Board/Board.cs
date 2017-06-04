@@ -12,7 +12,7 @@ public sealed class Board : MonoBehaviour {
 	public static int currPlayer=1;
 	public static GameObject[,] cardMatriz;
 	public static GameObject atm=null;
-	public static ArrayList AtmAspects = new ArrayList();
+	public static int[] AtmAspects = new int[4];
 	public static GameObject hologram=null;
 	public static GameObject[] player;
 	public static GameObject[] capt;
@@ -50,15 +50,20 @@ public sealed class Board : MonoBehaviour {
 		int i;
 		int j;
 		for (i = 0; i < 4; i++) {
+            AtmAspects[i] = 0;
 			for (j = 0; j < 5; j++)
 				cardMatriz[i, j] = null;
 		}
-		TurnStartTime = Time.time;
+		
 
 		manager = gameObject.AddComponent<BoardManager>() as BoardManager;
 		GameObject obj = new GameObject("Event Manager", typeof(EventManager));
 		obj.transform.parent = gameObject.transform;
 	}
+
+    void Start() {
+        TurnStartTime = Time.time;
+    }
 
 	// Update is called once per frame
 	void Update () {

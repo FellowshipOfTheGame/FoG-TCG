@@ -13,6 +13,6 @@ public class CardInformation : ScriptableObject {
     public int ATK;
     public int HP;
     public int manaToGive;
-    public char[] aspects;
-    public char[] aspectsToGive;
+    public int[] aspects;
+    public int[] aspectsToGive;
 }

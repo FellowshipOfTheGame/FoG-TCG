@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour {
 
     void Awake() {
         pendingEvents = new Queue<GameEvent>();
-        board = transform.parent.GetComponent<Board>();
+        board = transform.GetComponent<Board>();
     }
 
     public void Enqueue(GameEvent e) {

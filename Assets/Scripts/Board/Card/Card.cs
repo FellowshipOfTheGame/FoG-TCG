@@ -93,7 +93,7 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 	}
 
 	public void OnPointerClick(PointerEventData data) { // virtual?
-		board.manager.OnCardSelected(this);
+       //board.manager.OnCardSelected(this);
 	}
 
 }

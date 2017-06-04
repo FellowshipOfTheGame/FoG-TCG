@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour,  IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler{
+public class Slot : MonoBehaviour,  IPointerEnterHandler, IPointerExitHandler{
 
     public int[] pos;
     public static bool choosingPlace=false;
@@ -37,15 +37,6 @@ public class Slot : MonoBehaviour,  IPointerEnterHandler, IPointerExitHandler, I
                 card.GetComponent<CanvasGroup>().blocksRaycasts = false;
                 card.transform.position = transform.position + new Vector3(0.0f, 100.0f, 0.0f);
             }
-        }
-    }
-
-    public void OnPointerClick(PointerEventData eventData) {
-        if (IsFull) {
-            if (transform.GetChild(0).GetComponent<CardInTable>().canAttack)
-                transform.GetChild(0).gameObject.GetComponent<CardInTable>().Attack();
-            else
-                Debug.Log("Can't Attack!");
         }
     }
 
