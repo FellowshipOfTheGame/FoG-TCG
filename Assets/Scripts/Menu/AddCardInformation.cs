@@ -28,8 +28,8 @@ public class AddCardInformation : MonoBehaviour {
         for (i = 0; i < 4; i++)
             aspects.transform.GetChild(i).gameObject.SetActive(false);
 
-        for(i=0;i<card.aspects.Length;i++)
-            aspects.transform.FindChild(card.aspects[i].ToString()).gameObject.SetActive(true);
+		for(i=0;i<card.aspects.Count;i++)
+            aspects.transform.Find(card.aspects[i].ToString()).gameObject.SetActive(true);
 
         switch (card.type) {
             case 'c':
@@ -44,14 +44,14 @@ public class AddCardInformation : MonoBehaviour {
                 gameObject.GetComponent<Image>().color = new Color(0.79f, 0.75f, 1.00f, gameObject.GetComponent<Image>().color.a);
                 gameObject.AddComponent<CardResourceGenerator>();
                 gameObject.GetComponent<CardResourceGenerator>().manaToGive = card.manaToGive;
-                for (i = 0; i < card.aspectsToGive.Length; i++)
+				for (i = 0; i < card.aspectsToGive.Count; i++)
                     gameObject.GetComponent<CardResourceGenerator>().aspectsToGive.Add(card.aspectsToGive[i]);
 
                 break;
             case 'a':
                 gameObject.GetComponent<Image>().color = new Color(0.91f, 0.91f, 0.91f, gameObject.GetComponent<Image>().color.a);
                 gameObject.AddComponent<CardResourceGenerator>();
-                for (i = 0; i < card.aspectsToGive.Length; i++)
+				for (i = 0; i < card.aspectsToGive.Count; i++)
                     gameObject.GetComponent<CardResourceGenerator>().aspectsToGive.Add(card.aspectsToGive[i]);
 
                 break;

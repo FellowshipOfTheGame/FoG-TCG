@@ -30,6 +30,7 @@ public class Menu : MonoBehaviour {
 
 	private EventSystem ES;
 	public PlaySceneMusic Music;
+	public GameManager GM;
 
 	void Update() {
 		ES = EventSystem.current;
@@ -75,8 +76,8 @@ public class Menu : MonoBehaviour {
 	public void CartasSelected() {
 		Desativar();
 		GOCartas.SetActive (true);
-        GOCartas.transform.FindChild("MenuLateral").FindChild("Cards").GetChild(1).GetComponent<Text>().text = "";
-        GOCartas.transform.FindChild("MenuLateral").FindChild("Cards").GetChild(2).GetComponent<Text>().text = "";
+        GOCartas.transform.Find("MenuLateral").Find("Cards").GetChild(1).GetComponent<Text>().text = "";
+        GOCartas.transform.Find("MenuLateral").Find("Cards").GetChild(2).GetComponent<Text>().text = "";
         ES.SetSelectedGameObject (VoltarConfig.gameObject);
 	}
 
@@ -86,13 +87,14 @@ public class Menu : MonoBehaviour {
         GODecks.transform.parent.gameObject.SetActive(true);
 		GODecks.SetActive (true);
 		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+		GM.LoadDecks ();
 	}
 
 	public void NovoDeckSelected() {
 		Desativar();
 		GONovoDeck.SetActive (true);
         CollectionDraggable.canDrag = true;
-        CollectionDraggable.collectionZone = GONovoDeck.transform.FindChild("MenuLateral").FindChild("Cards").FindChild("ScrollContent").GetChild(0).gameObject;
+        CollectionDraggable.collectionZone = GONovoDeck.transform.Find("MenuLateral").Find("Cards").Find("ScrollContent").GetChild(0).gameObject;
         CollectionDraggable.deckListManager = CollectionDraggable.collectionZone.GetComponent<DeckListManager>();
         CollectionDraggable.canvas = this.transform.GetComponent<Canvas>();
         ES.SetSelectedGameObject (VoltarDecks.gameObject);

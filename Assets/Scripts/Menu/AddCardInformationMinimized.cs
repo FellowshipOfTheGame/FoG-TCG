@@ -10,11 +10,9 @@ public class AddCardInformationMinimized : MonoBehaviour {
     public int quantity = 0;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         name = card.title; 
         title.text = card.title;
-        quantityText.text = " ";
-        quantity = 1;
+		quantityText.text = "x"+ quantity;
     }
 }

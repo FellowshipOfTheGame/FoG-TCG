@@ -6,6 +6,7 @@ public class DeckListManager : MonoBehaviour {
 
     Transform currentChild;
     Transform nextChild;
+	public Text qttd;
 
     public int deckSize = 0;
 
@@ -13,6 +14,13 @@ public class DeckListManager : MonoBehaviour {
     {
         return deckSize;
     }
+
+	public void setDeckSizeLabel() {
+		if (deckSize < 10) 
+			qttd.text = "0" + deckSize + " / 30";
+		else
+			qttd.text = "" + deckSize + " / 30";
+	}
 
     public bool CheckCardCount(string cardName)
     {
@@ -29,7 +37,7 @@ public class DeckListManager : MonoBehaviour {
                     return false;
                 }
             }
-        }
+		}
         return true;
     }
 

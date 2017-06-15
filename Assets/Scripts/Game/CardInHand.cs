@@ -15,7 +15,7 @@ public class CardInHand : MonoBehaviour {
     void Start() {
         mouseDist = new float[2];
         cost = transform.GetComponent<AddCardInformation>().card.cost;
-        aspects = new char[transform.GetComponent<AddCardInformation>().card.aspects.Length];
+        aspects = new char[transform.GetComponent<AddCardInformation>().card.aspects.Count];
         int i;
         for (i = 0; i < aspects.Length; i++)
             aspects[i] = transform.GetComponent<AddCardInformation>().card.aspects[i];
@@ -30,26 +30,26 @@ public class CardInHand : MonoBehaviour {
         if (transform.parent.name == "Hand") {
             if (cost <= transform.parent.parent.GetComponent<PlayerStatus>().mana) {
                 CanBePlayed = true;
-                transform.FindChild("Cost").GetComponent<Text>().color = Color.white;
+                transform.Find("Cost").GetComponent<Text>().color = Color.white;
                 int i;
                 for (i = 0; i < aspects.Length; i++) {
                     if (transform.parent.parent.GetComponent<PlayerStatus>().OwnAspects.Contains(aspects[i])) {
                         CanBePlayed = true;
-                        transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Image>().color = Color.white;
+                        transform.Find("Aspects").Find(aspects[i].ToString()).GetComponent<Image>().color = Color.white;
                     } else {
                         if (Board.AtmAspects.Contains(aspects[i])) {
                             CanBePlayed = true;
-                            transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Image>().color = Color.white;
+                            transform.Find("Aspects").Find(aspects[i].ToString()).GetComponent<Image>().color = Color.white;
                         } else {
                             CanBePlayed = false;
-                            transform.FindChild("Aspects").FindChild(aspects[i].ToString()).GetComponent<Image>().color = Color.black;
+                            transform.Find("Aspects").Find(aspects[i].ToString()).GetComponent<Image>().color = Color.black;
                         }
                     }
                 }
 
             } else {
                 CanBePlayed = false;
-                transform.FindChild("Cost").GetComponent<Text>().color = Color.red;
+                transform.Find("Cost").GetComponent<Text>().color = Color.red;
 
             }
 

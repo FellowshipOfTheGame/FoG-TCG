@@ -26,7 +26,7 @@ public class BuyCard : MonoBehaviour{
             // clicando no botão
             if (Input.GetMouseButtonDown(0)) {
                 //referencia a mão e o deck do jogador
-                playerHand = transform.parent.parent.FindChild("Player" + Board.currPlayer).FindChild("Hand");
+                playerHand = transform.parent.parent.Find("Player" + Board.currPlayer).Find("Hand");
 
                 playerHand.GetComponent<Hand>().PickUpCard();
             }

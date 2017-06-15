@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
-{
+public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler {
     public static DeckListManager deckListManager;
 
     public static Canvas canvas;
@@ -43,6 +42,8 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                 print("You have too many cards in your deck!");
                 dragging = false;
             }
+
+			currentZone.GetComponent<DeckListManager> ().setDeckSizeLabel ();
         }
     }
 
@@ -72,6 +73,8 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
             dragging = false;
             cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = true;
             Destroy(cardCopy);
+
+			currentZone.GetComponent<DeckListManager> ().setDeckSizeLabel ();
         }
     }
 
@@ -103,7 +106,7 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                     }
                 }
             } else {
-                Transform cardInfo = transform.parent.parent.parent.parent.parent.FindChild("MenuLateral").FindChild("Cards");
+                Transform cardInfo = transform.parent.parent.parent.parent.parent.Find("MenuLateral").Find("Cards");
                 cardInfo.GetChild(1).GetComponent<Text>().text = "Nome: " + transform.GetComponent<AddCardInformation>().card.title;
                 switch (transform.GetComponent<AddCardInformation>().card.type) {
                     case 'c':
@@ -121,6 +124,8 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                 cardInfo.GetChild(1).GetComponent<Text>().text += "\nDescrição";
                 cardInfo.GetChild(2).GetComponent<Text>().text = transform.GetComponent<AddCardInformation>().card.desc;
             }
+
+			currentZone.GetComponent<DeckListManager> ().setDeckSizeLabel ();
         }
     }
 }

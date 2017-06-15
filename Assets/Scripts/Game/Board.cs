@@ -23,11 +23,11 @@ public class Board : MonoBehaviour{
         LoadDeck(deck1, "Player1");
         LoadDeck(deck2, "Player2");
         player = new GameObject[2];
-        player[0] = transform.FindChild("Player1").gameObject;
-        player[1] = transform.FindChild("Player2").gameObject;
+        player[0] = transform.Find("Player1").gameObject;
+        player[1] = transform.Find("Player2").gameObject;
         capt = new GameObject[2];
-        capt[0] = transform.FindChild("Table").FindChild("Cmd1").FindChild("CaptSlot2").FindChild("Capt").gameObject;
-        capt[1] = transform.FindChild("Table").FindChild("Cmd2").FindChild("CaptSlot2").FindChild("Capt").gameObject;
+        capt[0] = transform.Find("Table").Find("Cmd1").Find("CaptSlot2").Find("Capt").gameObject;
+        capt[1] = transform.Find("Table").Find("Cmd2").Find("CaptSlot2").Find("Capt").gameObject;
         player[0].GetComponent<PlayerStatus>().canPlay = true;
         player[0].GetComponent<PlayerStatus>().canMove = true;
         player[0].GetComponent<PlayerStatus>().canBuy = true;
@@ -46,15 +46,15 @@ public class Board : MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update () {
-        capt[0].transform.FindChild("Text").GetComponent<Text>().text = Board.player[0].GetComponent<PlayerStatus>().HP.ToString();
-        capt[1].transform.FindChild("Text").GetComponent<Text>().text = Board.player[1].GetComponent<PlayerStatus>().HP.ToString();
-        transform.FindChild("Menu").FindChild("PlayerIndex").GetChild(0).GetComponent<Text>().text = "Player: " + currPlayer.ToString();
-        transform.FindChild("Menu").FindChild("ManaCount").GetChild(0).GetComponent<Text>().text = "Mana: " + player[currPlayer - 1].GetComponent<PlayerStatus>().mana.ToString();
+        capt[0].transform.Find("Text").GetComponent<Text>().text = Board.player[0].GetComponent<PlayerStatus>().HP.ToString();
+        capt[1].transform.Find("Text").GetComponent<Text>().text = Board.player[1].GetComponent<PlayerStatus>().HP.ToString();
+        transform.Find("Menu").Find("PlayerIndex").GetChild(0).GetComponent<Text>().text = "Player: " + currPlayer.ToString();
+        transform.Find("Menu").Find("ManaCount").GetChild(0).GetComponent<Text>().text = "Mana: " + player[currPlayer - 1].GetComponent<PlayerStatus>().mana.ToString();
 
         if(maxTime + 1 - Time.time + TurnStartTime >= 10)
-            transform.FindChild("Menu").FindChild("TimeShow").GetChild(0).GetComponent<Text>().text = Mathf.Floor(maxTime + 1 - Time.time + TurnStartTime).ToString();
+            transform.Find("Menu").Find("TimeShow").GetChild(0).GetComponent<Text>().text = Mathf.Floor(maxTime + 1 - Time.time + TurnStartTime).ToString();
         else
-            transform.FindChild("Menu").FindChild("TimeShow").GetChild(0).GetComponent<Text>().text = "0" + Mathf.Floor(maxTime + 1 - Time.time + TurnStartTime).ToString();
+            transform.Find("Menu").Find("TimeShow").GetChild(0).GetComponent<Text>().text = "0" + Mathf.Floor(maxTime + 1 - Time.time + TurnStartTime).ToString();
 
         if (Time.time - TurnStartTime >= maxTime)
             TurnChange();
@@ -117,6 +117,6 @@ public class Board : MonoBehaviour{
     void LoadDeck(CardInformation[] deck,string player) {
         int i;
         for (i = 0; i < deck.Length; i++)
-            transform.FindChild(player).GetComponent<Deck>().deckList.Add(deck[i]);       
+            transform.Find(player).GetComponent<Deck>().deckList.Add(deck[i]);       
     }
 }
