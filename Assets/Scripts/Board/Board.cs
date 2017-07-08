@@ -56,8 +56,9 @@ public sealed class Board : MonoBehaviour {
 		TurnStartTime = Time.time;
 
 		manager = gameObject.AddComponent<BoardManager>() as BoardManager;
-		GameObject obj = new GameObject("Event Manager", typeof(EventManager));
+		GameObject obj = new GameObject("Event Manager");
 		obj.transform.parent = gameObject.transform;
+		obj.AddComponent<EventManager> ();
 	}
 
 	// Update is called once per frame
