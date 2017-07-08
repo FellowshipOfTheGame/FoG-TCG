@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class AddCardInformation : MonoBehaviour {
-
+	/*
     public CardInformation card;
     public Text title;
     public Image image;
@@ -54,4 +54,5 @@ public class AddCardInformation : MonoBehaviour {
                 break;
         }
 	}
+	*/
 }

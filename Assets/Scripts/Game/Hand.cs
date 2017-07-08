@@ -27,17 +27,28 @@ public class Hand : MonoBehaviour {
 	}
 
  
-
+	/*
     //pegar uma carta aleatoria do deck
     public void PickUpCard() {
         if (transform.childCount < 7) {
             //escolhe uma carta; põe na mão; tira do deck
             int num = Random.Range(0, playerDeck.deckList.Count - 1);
             GameObject newCard = Instantiate(genericCard, transform);
-            newCard.GetComponent<AddCardInformation>().card = playerDeck.deckList[num];
+			// TODO carregar script lua
+            //newCard.GetComponent<AddCardInformation>().card = playerDeck.deckList[num];
             newCard.GetComponent<CardInHand>().inHand = true;
             playerDeck.deckList.RemoveAt(num);
             newCard = null;
         }
-    }
+    }*/
+	public string PickUpCard() {
+		if (transform.childCount < 7) {
+			//escolhe uma carta; põe na mão; tira do deck
+			int num = Random.Range(0, playerDeck.deckList.Count - 1);
+			string name = playerDeck.deckList [num];
+			playerDeck.deckList.RemoveAt(num);
+			return name;
+		}
+		return null;
+	}
 }

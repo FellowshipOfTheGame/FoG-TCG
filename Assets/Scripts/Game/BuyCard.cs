@@ -8,10 +8,12 @@ public class BuyCard : MonoBehaviour{
 
     Transform playerHand;
     float[] mouseDist;
+	Board board;
 	
 
     void Start() {
         mouseDist = new float[2];
+		board = (Board) FindObjectOfType (typeof(Board));
     }
 	
 	void Update () {
@@ -28,7 +30,9 @@ public class BuyCard : MonoBehaviour{
                 //referencia a mão e o deck do jogador
                 playerHand = transform.parent.parent.Find("Player" + Board.currPlayer).Find("Hand");
 
-                playerHand.GetComponent<Hand>().PickUpCard();
+                string cardName = playerHand.GetComponent<Hand>().PickUpCard();
+				GameObject card = board.LoadCard (cardName);
+				card.GetComponent<CardInHand> ().inHand = true;
             }
         } else {
             if (Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().canBuy)

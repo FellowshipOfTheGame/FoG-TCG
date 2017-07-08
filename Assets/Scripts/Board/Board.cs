@@ -7,8 +7,8 @@ using MoonSharp.Interpreter;
 
 public sealed class Board : MonoBehaviour {
 
-	public CardInformation[] deck1;
-	public CardInformation[] deck2;
+	public string[] deck1;
+	public string[] deck2;
 	public static int currPlayer=1;
 	public static GameObject[,] cardMatriz;
 	public static GameObject atm=null;
@@ -18,6 +18,8 @@ public sealed class Board : MonoBehaviour {
 	public static GameObject[] capt;
 	public static float TurnStartTime;
 	public static bool draggingCard = false;
+
+	public GameObject genericCard;
 
 	public float maxTime;
 
@@ -78,6 +80,13 @@ public sealed class Board : MonoBehaviour {
 
 	}
 
+	public GameObject LoadCard(string cardName) {
+		GameObject newCard = Instantiate(genericCard, transform);
+		newCard.GetComponent<Card>().LoadScript (cardName, luaEnv);
+		newCard.GetComponent<CardInHand>().inHand = true;
+		return newCard;
+	}
+
 	public static void TurnChange() {
 		TurnStartTime = Time.time;
 		if (Hand.dragCard != null) {
@@ -130,7 +139,7 @@ public sealed class Board : MonoBehaviour {
 		hologram = null;
 	}
 
-	void LoadDeck(CardInformation[] deck,string player) {
+	void LoadDeck(string[] deck,string player) {
 		int i;
 		for (i = 0; i < deck.Length; i++)
 			transform.Find(player).GetComponent<Deck>().deckList.Add(deck[i]);       

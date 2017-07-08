@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using MoonSharp.Interpreter;
 
 public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
     bool CanBePlayed = false;
     public bool inHand = false;
     GameObject clone;
+	Card card;
     public GameObject miniCard;
     public GameObject illusionCard;
     public int cost;
@@ -18,11 +20,15 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     // Use this for initialization
     void Start() {
-        cost = transform.GetComponent<AddCardInformation>().card.cost;
-        aspects = new char[transform.GetComponent<AddCardInformation>().card.aspects.Length];
+		card = GetComponent<Card> ();
+        //cost = transform.GetComponent<AddCardInformation>().card.cost;
+		cost = card["cost"].ToObject<int>();
+        //aspects = new char[transform.GetComponent<AddCardInformation>().card.aspects.Length];
+		Table tAspects = card["aspects"].Table;
+		aspects = new char[tAspects.Length];
         int i;
-        for (i = 0; i < aspects.Length; i++)
-            aspects[i] = transform.GetComponent<AddCardInformation>().card.aspects[i];
+        for (i = 0; i < tAspects.Length; i++)
+			aspects[i] = tAspects.Get(i+1).ToObject<string>()[0];
 
     }
 
@@ -31,7 +37,7 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             transform.position = new Vector3(transform.position.x, transform.parent.position.y + 10, transform.position.z);
 
         clone = Instantiate(illusionCard, transform.parent.parent) as GameObject;
-        clone.GetComponent<AddCardInformation>().card = transform.GetComponent<AddCardInformation>().card;
+		clone.GetComponent<CardInHand>().card = card;
         clone.transform.position = transform.position + new Vector3(0, 100, 0);
         clone.GetComponent<CanvasGroup>().blocksRaycasts = false;
         Board.hologram = clone;
@@ -59,11 +65,11 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (Hand.chosenSlot != null && CanBePlayed) {
                 Board.player[Board.currPlayer - 1].GetComponent<PlayerStatus>().mana -= transform.GetComponent<CardInHand>().cost;
                 GameObject newCard = Instantiate(miniCard,FindObjectOfType<Board>().transform) as GameObject;
-                newCard.GetComponent<AddCardInformation>().card = this.transform.GetComponent<AddCardInformation>().card;
+				newCard.GetComponent<CardInHand>().card = card;
                 newCard.transform.position = Hand.chosenSlot.transform.position;
                
                 newCard.GetComponent<CardInTable>().onTable = true;
-                if (this.GetComponent<AddCardInformation>().card.type == 'a') {
+				if (card["type"].ToObject<string>()[0] == 'a') {
                     int i;
                     if (Hand.chosenSlot.transform.childCount > 0) {
                         ArrayList aspectsToRemove = Board.atm.GetComponent<CardInTable>().aspectsToGive;
@@ -89,7 +95,7 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                             Board.player[1].GetComponent<PlayerStatus>().OwnAspects.Add(aspectsToAdd[i]);
                     }
 
-                } else if (this.GetComponent<AddCardInformation>().card.type == 't') {
+				} else if (card["type"].ToObject<string>()[0] == 't') {
                     int i;
 
                     newCard.GetComponent<CardInTable>().canFarm = true;
@@ -112,7 +118,7 @@ public class CardInHand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                         if (!PlayerAspectsList.Contains(aspectsToAdd[i]))
                             PlayerAspectsList.Add(aspectsToAdd[i]);
                     }
-                } else if (this.GetComponent<AddCardInformation>().card.type == 'c') {
+				} else if (card["type"].ToObject<string>()[0] == 'c') {
                     newCard.transform.SetParent(Hand.chosenSlot.transform);
                     Board.cardMatriz[Hand.chosenSlot.GetComponent<Slot>().pos[0], Hand.chosenSlot.GetComponent<Slot>().pos[1]] = newCard;
                     Hand.chosenSlot.GetComponent<Slot>().IsFull = true;

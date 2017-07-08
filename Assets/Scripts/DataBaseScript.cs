@@ -32,6 +32,7 @@ public class DataBaseScript : MonoBehaviour {
     }
 
     public void LoadAllCards(Transform abas) {
+		/*
         foreach (CardInformation card in CardData) {
             if (card.aspects.Length > 0) {
                 switch (card.aspects[0]) {
@@ -79,6 +80,6 @@ public class DataBaseScript : MonoBehaviour {
                 }
                 
             }
-        }
+        }*/
     }
 }

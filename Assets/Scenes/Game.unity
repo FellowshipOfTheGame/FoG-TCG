@@ -159,17 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506838cda94e58a40bf25df752a1f832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckList:
-  - {fileID: 11400000, guid: 398812df99ae04548846e511c7b611a4, type: 2}
-  - {fileID: 11400000, guid: ef0afc4e5b43ec84c91c8b0327e4a656, type: 2}
-  - {fileID: 11400000, guid: 3211692c28743a947913ec6c6e1c6cbe, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
+  deckList: []
 --- !u!1 &233766311
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,17 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506838cda94e58a40bf25df752a1f832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckList:
-  - {fileID: 11400000, guid: 69706e83daa50d741b78c5843f60c52b, type: 2}
-  - {fileID: 11400000, guid: 69706e83daa50d741b78c5843f60c52b, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
-  - {fileID: 11400000, guid: 231deba94ac025746a6ca74f6cb28acf, type: 2}
+  deckList: []
 --- !u!1 &637783518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2150,8 +2130,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f35441af582641d7bd736106325b1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deck1: []
-  deck2: []
+  deck1:
+  - 
+  - 
+  - 
+  - 
+  - 
+  deck2:
+  - 
+  - 
+  - 
+  - 
+  - 
+  genericCard: {fileID: 1230770209585012, guid: d11ceab930e135e45a29955ffb74f76e,
+    type: 2}
   maxTime: 60
   manager: {fileID: 0}
 --- !u!1 &1121410630
