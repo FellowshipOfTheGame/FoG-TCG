@@ -105,24 +105,6 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                         print("MAIS INFORMAÇÕES DESSA CARTA");
                     }
                 }
-            } else {
-                Transform cardInfo = transform.parent.parent.parent.parent.parent.Find("MenuLateral").Find("Cards");
-                cardInfo.GetChild(1).GetComponent<Text>().text = "Nome: " + transform.GetComponent<AddCardInformation>().card.title;
-                switch (transform.GetComponent<AddCardInformation>().card.type) {
-                    case 'c':
-                        cardInfo.GetChild(1).GetComponent<Text>().text += "\nTipo: Criatura";
-                        break;
-
-                    case 't':
-                        cardInfo.GetChild(1).GetComponent<Text>().text += "\nTipo: Terreno";
-                        break;
-
-                    case 'a':
-                        cardInfo.GetChild(1).GetComponent<Text>().text += "\nTipo: Atmosfera";
-                        break;
-                }
-                cardInfo.GetChild(1).GetComponent<Text>().text += "\nDescrição";
-                cardInfo.GetChild(2).GetComponent<Text>().text = transform.GetComponent<AddCardInformation>().card.desc;
             }
 
 			currentZone.GetComponent<DeckListManager> ().setDeckSizeLabel ();

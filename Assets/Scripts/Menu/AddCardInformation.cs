@@ -60,4 +60,10 @@ public class AddCardInformation : MonoBehaviour {
         if (GameManager.currScene == 'g')
             gameObject.AddComponent<CardInHand>();
 	}
+
+
+	public void click() {
+		LoadCard.clickedCard = card;
+		LoadCard.modificado = true;
+	}
 }

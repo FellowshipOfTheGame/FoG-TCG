@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 
 	private string Deckpath;
 	private string Cardpath;
+	private string AnotherPath;
 
 	//variaveis de carregar deck
 	public Transform ListaDeDecks;
@@ -41,6 +42,32 @@ public class GameManager : MonoBehaviour {
 		string filePath = Deckpath + savingDeck.name + ".json";
 		File.WriteAllText (filePath, JsonData);
 
+	}
+
+
+	public void SaveCard(CardInformation card) {
+		
+		string JsonData = JsonUtility.ToJson (card);
+		string filePath2 = Cardpath + card.title + ".json";
+		File.WriteAllText (filePath2, JsonData);
+
+	}
+
+	public void SaveInfos() {
+		string JsonData = JsonUtility.ToJson (GameData.playerInfo);
+		string filePath2 = AnotherPath + "config0" + ".json";
+		File.WriteAllText (filePath2, JsonData);
+	
+	}
+
+	public void DeleteDeck() {
+		int index = 0;
+		while (GameData.Decks [index++].name != LoadDeck.clickedDeck);
+
+		DeckInformation deck = GameData.Decks [index-1];
+		File.Delete (Deckpath + deck.name + ".json");
+
+		LoadDecks ();
 	}
 
 	public void LoadDecks() {
@@ -85,18 +112,57 @@ public class GameManager : MonoBehaviour {
 				string JsonCard = File.ReadAllText (file);
 				CardInformation aux = JsonUtility.FromJson<CardInformation> (JsonCard);
 
+				//para mudar alguma coisa nas cartas, usar essa parte comentada
+				/*string JsonData = JsonUtility.ToJson (aux);
+				string filePath2 = Cardpath + aux.title + ".json";
+				File.WriteAllText (filePath2, JsonData);*/
+
 				GameData.Cards.Add (aux);
 			}
 
+
 		}
+	}
+
+	public void LoadInfos() {
+		string[] ExistingConfigPaths = Directory.GetFiles(AnotherPath , "*.json");
+
+		ConfigInformation config = new ConfigInformation ();
+
+		if (ExistingConfigPaths.Length > 0) {
+			foreach (string filePath in ExistingConfigPaths) {
+				int index = filePath.LastIndexOf ("/");
+				string file = AnotherPath + filePath.Substring (index + 1);
+
+				if (File.Exists (file)) {
+					string JsonCard = File.ReadAllText (file);
+					config = JsonUtility.FromJson<ConfigInformation> (JsonCard);
+				}
+
+				GameData.playerInfo = config;
+			}
+		} else {
+			string JsonData = JsonUtility.ToJson (config);
+			string filePath2 = AnotherPath + "config0" + ".json";
+			File.WriteAllText (filePath2, JsonData);
+
+			GameData.playerInfo = config;
+		}
+	}
+
+	public void SelectDeck() {
+		GameData.playerInfo.ActiveDeck = LoadDeck.clickedDeck;
+		SaveInfos ();
 	}
 
     void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
 		Deckpath = Application.dataPath + "/Dados/Decks/"; 
-		Cardpath = Application.dataPath + "/Dados/Cards/"; 
+		Cardpath = Application.dataPath + "/Dados/Cards/";
+		AnotherPath = Application.dataPath + "/Dados/"; 
 
 		LoadCards ();
+		LoadInfos ();
 			
     }
 
@@ -104,7 +170,7 @@ public class GameManager : MonoBehaviour {
 
 public static class GameData {
 
-	public static string ActiveDeck;
+	public static ConfigInformation playerInfo = new ConfigInformation();
 	public static List<DeckInformation> Decks = new List<DeckInformation>();
 	public static List<CardInformation> Cards = new List<CardInformation>();
 

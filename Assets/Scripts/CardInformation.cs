@@ -13,6 +13,10 @@ public class CardInformation {
 	public int ATK;
 	public int HP;
 	public int manaToGive;
+	public int qtdd;
+	public int price;
+	public int lvl;
+	public int lvl_price;
 	public List<char> aspects = new List<char>();
 	public List<char> aspectsToGive = new List<char>();
 

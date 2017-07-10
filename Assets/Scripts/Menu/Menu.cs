@@ -18,6 +18,8 @@ public class Menu : MonoBehaviour {
 	public GameObject GOMenu;
 	public GameObject GOJogar;
 	public GameObject GOCartas;
+	public GameObject GOComprarC;
+	public GameObject GOGaleria;
 	public GameObject GODecks;
 	public GameObject GONovoDeck;
 	public GameObject GOStats;
@@ -55,6 +57,8 @@ public class Menu : MonoBehaviour {
 	public void Desativar() {
 		GOJogar.SetActive (false);
 		GOCartas.SetActive (false);
+		GOComprarC.SetActive (false);
+		GOGaleria.SetActive (false);
 		GODecks.SetActive (false);
 		GONovoDeck.SetActive (false);
 		GOStats.SetActive (false);
@@ -76,9 +80,19 @@ public class Menu : MonoBehaviour {
 	public void CartasSelected() {
 		Desativar();
 		GOCartas.SetActive (true);
-        GOCartas.transform.Find("MenuLateral").Find("Cards").GetChild(1).GetComponent<Text>().text = "";
-        GOCartas.transform.Find("MenuLateral").Find("Cards").GetChild(2).GetComponent<Text>().text = "";
-        ES.SetSelectedGameObject (VoltarConfig.gameObject);
+		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+	}
+
+	public void ComprarCSelected() {
+		Desativar();
+		GOComprarC.SetActive (true);
+		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+	}
+
+	public void GaleriaSelected() {
+		Desativar();
+		GOGaleria.SetActive (true);
+		ES.SetSelectedGameObject (VoltarConfig.gameObject);
 	}
 
 	public void DecksSelected() {

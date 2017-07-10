@@ -4,10 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LoadDeck : MonoBehaviour {
-	
+
 	public Text nome;
+	public InputField nomeI;
 	public Text commander;
 	public Text numCartas;
+
+	public Button selecionar;
+	public Button editar;
+	public Button deletar;
 
 	public DeckInformation deck;
 
@@ -30,15 +35,25 @@ public class LoadDeck : MonoBehaviour {
 
 		deck = GameData.Decks [index-1];
 
-		nome.text = deck.name;
-		commander.text = "" + deck.commander;
-		numCartas.text =  "" + deck.size;
-	
-		//esvazia a lista de cartas
-		foreach (Transform child in CardList.transform) {
-			GameObject.Destroy(child.gameObject);
+		limpar ();
+
+		if (nome != null) {
+			nome.text = deck.name;
+			if (deck.size < 10) numCartas.text = "0";
+			else numCartas.text = "";
+			numCartas.text +=  "" + deck.size;
+
+		} else {
+			nomeI.text = deck.name;
+			if (deck.size < 10) numCartas.text = "0";
+			else numCartas.text = "";
+			numCartas.text +=  "" + deck.size + " / 30";
+			CardList.GetComponent<DeckListManager> ().deckSize = deck.size;
 		}
-		
+		commander.text = "" + deck.commander;
+
+
+
 		int cartasCarregadas = 0;
 		for (int i = 0; i < deck.size; i++) {
 			GameObject aux = Instantiate (cardPrefab, CardList);
@@ -49,6 +64,11 @@ public class LoadDeck : MonoBehaviour {
 			aux.GetComponent<AddCardInformationMinimized> ().card = GameData.Cards [aux2-1];
 			aux.GetComponent<AddCardInformationMinimized> ().quantity = deck.Cards[i].number;
 
+			DeckListDraggable drag = aux.GetComponent<DeckListDraggable> ();
+			if (drag != null) {
+				drag.deckListZone = CardList.gameObject;
+				drag.canvas = CardList.GetComponentInParent<Canvas>();
+			}
 
 			if (deck.Cards [i].number > 1) {
 				cartasCarregadas += deck.Cards [i].number;
@@ -57,6 +77,33 @@ public class LoadDeck : MonoBehaviour {
 
 			if (cartasCarregadas >= deck.size)
 				break;
-		}	
+		}
+
+		if (selecionar != null) {
+			selecionar.interactable = true;
+			editar.interactable = true;
+			deletar.interactable = true;
+		}
 	}
+
+	public void limpar() {
+
+		if (nome != null) nome.text = "";
+		else nomeI.text = "";
+
+		commander.text = "";
+		numCartas.text =  "";
+
+		if (selecionar != null) {
+			selecionar.interactable = false;
+			editar.interactable = false;
+			deletar.interactable = false;
+		}
+		//esvazia a lista de cartas
+		foreach (Transform child in CardList.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+
+	}
+
 }
