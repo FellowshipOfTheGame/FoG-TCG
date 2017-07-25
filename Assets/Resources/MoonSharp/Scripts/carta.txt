@@ -1,0 +1,8 @@
+return {
+	title="Carta 01",
+	desc="aparece na tela",
+	flavor="sem flavor",
+	cost=1,
+	atk=2,
+	hp=3,
+}

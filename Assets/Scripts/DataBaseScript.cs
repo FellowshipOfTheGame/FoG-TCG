@@ -34,6 +34,7 @@ public class DataBaseScript : MonoBehaviour {
     public void LoadAllCards(Transform abas) {
         foreach (CardInformation card in CardData) {
             if (card.aspects.Length > 0) {
+                /*
                 switch (card.aspects[0]) {
                     case 'W':
                         newCard = Instantiate(genericCard, abas.Find("Aba1").GetChild(0).GetChild(0));
@@ -77,7 +78,7 @@ public class DataBaseScript : MonoBehaviour {
                         newCard.GetComponent<AddCardInformation>().card = card;
                         break;
                 }
-                
+                */
             }
         }
     }

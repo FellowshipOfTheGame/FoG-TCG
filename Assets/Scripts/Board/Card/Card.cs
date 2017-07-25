@@ -14,8 +14,6 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 
 	public Table Data;
 
-	public string Name;
-
 	public DynValue this[string attr] {
 		get { return Data.Get(attr); }
 		set { Data [attr] = DynValue.FromObject(board.luaEnv, value); }
@@ -23,13 +21,9 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 
 	public Board board;
 
-	void Awake() {
-		board = gameObject.transform.parent.GetComponent<Board>();
-	}
-
 	// LoadScript MUST be called from the Board who creates the instance
-	public void LoadScript(string name, Script s) {
-		Data = s.DoFile (name).Table;
+	public void LoadScript(string name) {
+		Data = board.luaEnv.DoFile (name).Table;
 
 		//SetDefaultValues ();
 		RegisterDefaultEvents ();
@@ -42,8 +36,7 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 	}*/
 
 	protected virtual void LoadAttributes() {
-		// TODO load image
-		Name = this["Name"].ToObject<string>();
+		// TODO load image	
 	}
 
 	protected virtual void RegisterDefaultEvents() {
