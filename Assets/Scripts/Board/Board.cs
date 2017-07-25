@@ -8,6 +8,7 @@ public class Board : MonoBehaviour {
     public Script luaEnv;
     public int currPlayer = 1;
     public GameObject[] players;
+    public GameObject slot;
 
     void Awake() {
         luaEnv = new Script();

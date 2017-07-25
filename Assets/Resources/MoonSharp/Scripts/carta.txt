@@ -1,8 +1,12 @@
 return {
-	title="Carta 01",
-	desc="aparece na tela",
-	flavor="sem flavor",
-	cost=1,
-	atk=2,
-	hp=3,
+	title = "Carta 01",
+	desc = "aparece na tela",
+	flavor = "sem flavor",
+	cost = 1,
+	atk = 2,
+	hp = 3,
+
+	OnEnter = function(args)
+	args[1] = 5
+	end
 }

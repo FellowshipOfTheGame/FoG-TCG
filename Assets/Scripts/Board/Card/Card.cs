@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using MoonSharp.Interpreter;
+using UnityEngine.UI;
 
-public class Card : MonoBehaviour, IPointerClickHandler {
+public class Card : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler {
 
 	public delegate void CardEventDelegate(Table args);
 
@@ -20,6 +21,7 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 	}
 
 	public Board board;
+    public Vector3 diff;
 
 	// LoadScript MUST be called from the Board who creates the instance
 	public void LoadScript(string name) {
@@ -64,9 +66,32 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 		return attr;
 	}
 
+    public void OnBeginDrag(PointerEventData eventData) {
+        Slot.isChoosingPlace = true;
+        diff = this.transform.position - Input.mousePosition;
+        this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
 
-	public virtual void OnEnter() {
+    public void OnDrag(PointerEventData eventData) {
+        this.transform.position = Input.mousePosition + diff;
+    }
+
+    public void OnEndDrag(PointerEventData eventData) {
+        if (board.slot != null) {
+            this.transform.SetParent(board.slot.transform);
+            this.transform.position = board.slot.transform.position;
+            this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            Slot.isChoosingPlace = false;
+
+            //this.OnEnter();
+        }
+    }
+
+
+    public virtual void OnEnter() {
+        
 		EnterEvent (null);
+        
 	}
 
 	public virtual void OnExit() {

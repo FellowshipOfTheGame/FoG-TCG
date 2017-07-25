@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224557425349803278}
   - component: {fileID: 222766970209521570}
   - component: {fileID: 114171927327298398}
-  - component: {fileID: 114919404592098192}
+  - component: {fileID: 114984096927226368}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.66176474, g: 0.5644464, b: 0.40387112, a: 0.206}
+  m_Color: {r: 0.8602941, g: 0.75477505, b: 0.5882893, a: 0.732}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114919404592098192
+--- !u!114 &114984096927226368
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -64,13 +64,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1472783460823120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4950dd83c753de4797571089d1b9353, type: 3}
+  m_Script: {fileID: 11500000, guid: f5d8b1aff94bacb4e8ba73b0fd9b6105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: 0000000000000000
-  IsFull: 0
-  clone: {fileID: 1015447916738408, guid: 2434f9815e1afa3409198eec6aca198f, type: 2}
-  card: {fileID: 0}
 --- !u!222 &222766970209521570
 CanvasRenderer:
   m_ObjectHideFlags: 1
