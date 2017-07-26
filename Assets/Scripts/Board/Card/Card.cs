@@ -67,7 +67,7 @@ public class Card : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragHandl
 	}
 
     public void OnBeginDrag(PointerEventData eventData) {
-        Slot.isChoosingPlace = true;
+        //Slot.isChoosingPlace = true;
         diff = this.transform.position - Input.mousePosition;
         this.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
@@ -81,7 +81,7 @@ public class Card : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragHandl
             this.transform.SetParent(board.slot.transform);
             this.transform.position = board.slot.transform.position;
             this.GetComponent<CanvasGroup>().blocksRaycasts = true;
-            Slot.isChoosingPlace = false;
+            //Slot.isChoosingPlace = false;
 
             //this.OnEnter();
         }
