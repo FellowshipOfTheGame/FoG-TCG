@@ -5,13 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public List<string> deckList;
+    public int mana;
+    public int[] aspects;
+
     public GameObject genericCard;
     public float cardDist;
     public float cardWeight;
 
     // Use this for initialization
     void Start () {
-		
+        aspects = new int[4];
+        int i;
+        for (i = 0; i < 4; i++)
+            aspects[i] = 0;
 	}
 	
 	// Update is called once per frame

@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class BuyCard : Clickable {
 
     Board board;
-    bool mouseOver = false;
 
     // Use this for initialization
     void Start () {
@@ -15,13 +14,5 @@ public class BuyCard : Clickable {
 
     public override void OnClick(int mouseButton) {
         board.players[board.currPlayer - 1].GetComponent<Player>().PickUpCard();
-    }
-	
-    public override void OnPointerEnter() {
-        mouseOver = true;
-    }
-
-    public override void OnPointerExit() {
-        mouseOver = false;
     }
 }

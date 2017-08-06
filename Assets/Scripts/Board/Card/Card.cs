@@ -21,7 +21,10 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 	}
 
 	public Board board;
+
+    [Space(5)]
     public int cost;
+    public int[] aspects;
     public char type;
     public int atk;
     public int hp;

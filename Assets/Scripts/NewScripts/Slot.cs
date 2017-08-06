@@ -23,7 +23,7 @@ public class Slot : Clickable {
     void Update() {
         
         if (isChoosingPlace) {
-            char cardType = board.dragCard.GetComponent<AddCardInformation>().type;
+            char cardType = board.dragCard.GetComponent<Card>().type;
             if ((cardType != 'a' && board.currPlayer == pos[0]) || (cardType == 'a' && pos[0] == 3))
                 rightPlace = true;
             else

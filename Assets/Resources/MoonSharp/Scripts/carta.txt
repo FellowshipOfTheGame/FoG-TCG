@@ -2,6 +2,7 @@ return {
 	title = "Carta 01",
 	type = 'c',
 	cost = 1,
+	aspects = {1, 1, 0, 0},
 	desc = "aparece na tela",
 	flavor = "sem flavor",
 	cost = 1,

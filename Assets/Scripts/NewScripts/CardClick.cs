@@ -8,7 +8,6 @@ public class CardClick : Clickable {
     public Board board;
     public float elevation;
     Vector3 diff;
-    bool mouseOver = false;
     bool isDragging = false;
     bool inHand = true;
     Vector3 originPos;
@@ -29,7 +28,7 @@ public class CardClick : Clickable {
 
     public override void OnClick(int mouseButton) {
         if (inHand) {
-            if (mouseButton == 0) {
+            if (mouseButton == 0 && CanBePlayed()) {
                 isDragging = true;
                 Slot.isChoosingPlace = true;
                 originPos = new Vector3(this.transform.position.x, this.transform.position.y - elevation, this.transform.position.z); ;
@@ -51,9 +50,11 @@ public class CardClick : Clickable {
     public void OnDropping() {
         isDragging = false;
         if (board.slot != null) {
+            this.transform.parent.GetComponent<Player>().mana -= this.GetComponent<Card>().cost;
             this.transform.SetParent(board.slot.transform);
             board.players[board.currPlayer - 1].GetComponent<Player>().RefreshChildPositon();
             this.transform.position = board.slot.transform.position;
+            inHand = false;
             //this.GetComponent<Card>().OnEnter();
         }else {
             this.transform.position = originPos;
@@ -64,14 +65,24 @@ public class CardClick : Clickable {
     }
 
     public override void OnPointerEnter() {
-        if (inHand)
+        if (inHand && CanBePlayed())
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + elevation, this.transform.position.z);
     }
 
     public override void OnPointerExit() {
-        if (inHand)
+        if (inHand && CanBePlayed())
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - elevation, this.transform.position.z);
     }
 
-    
+    public bool CanBePlayed() {
+        int i;
+        for (i = 0; i < 4; i++) {
+            if (this.transform.parent.GetComponent<Player>().aspects[i] < this.GetComponent<Card>().aspects[i])
+                return false;
+        }
+        if (this.transform.parent.GetComponent<Player>().mana >= this.GetComponent<Card>().cost)
+            return true;
+        else
+            return false;
+    }
 }
