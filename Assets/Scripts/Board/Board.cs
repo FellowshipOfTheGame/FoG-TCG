@@ -9,6 +9,8 @@ public class Board : MonoBehaviour {
     public int currPlayer = 1;
     public GameObject[] players;
     public GameObject slot;
+    public Vector3 mousePosition;
+    public GameObject dragCard;
 
     void Awake() {
         luaEnv = new Script();

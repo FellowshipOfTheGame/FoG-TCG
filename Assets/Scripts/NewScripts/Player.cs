@@ -6,6 +6,8 @@ public class Player : MonoBehaviour {
 
     public List<string> deckList;
     public GameObject genericCard;
+    public float cardDist;
+    public float cardWeight;
 
     // Use this for initialization
     void Start () {
@@ -27,6 +29,39 @@ public class Player : MonoBehaviour {
             newCard.GetComponent<Card>().LoadScript(deckList[index]);
             deckList.RemoveAt(index);
             newCard = null;
+            RefreshChildPositon();
         }
     }
+
+    public void RefreshChildPositon() {
+        Vector3 myPos = this.transform.position;
+        float initialShift;
+        if (this.transform.childCount % 2 == 0) {
+            initialShift = (cardDist + cardWeight) / 2;
+            int i, j = 0;
+            for(i= this.transform.childCount / 2 - 1; i >= 0; i--) {
+                this.transform.GetChild(i).position = new Vector3(myPos.x - initialShift - j * (cardDist + cardWeight), myPos.y, -3.55f);
+                j++;
+            }
+            j = 0;
+            for (i = this.transform.childCount / 2; i <= this.transform.childCount - 1; i++) {
+                this.transform.GetChild(i).position = new Vector3(myPos.x + initialShift + j * (cardDist + cardWeight), myPos.y, -3.55f);
+                j++;
+            }
+        }else {
+            initialShift = cardWeight + cardDist;
+            this.transform.GetChild((this.transform.childCount - 1) / 2).position = new Vector3(myPos.x, myPos.y, -3.55f);
+            int i, j = 0;
+            for (i = (this.transform.childCount - 1) / 2 - 1; i >= 0; i--) {
+                this.transform.GetChild(i).position = new Vector3(myPos.x - initialShift - j * (cardDist + cardWeight), myPos.y, -3.55f);
+                j++;
+            }
+            j = 0;
+            for (i = (this.transform.childCount - 1) / 2 + 1; i <= this.transform.childCount - 1; i++) {
+                this.transform.GetChild(i).position = new Vector3(myPos.x + initialShift + j * (cardDist + cardWeight), myPos.y, -3.55f);
+                j++;
+            }
+        }
+    }
+
 }

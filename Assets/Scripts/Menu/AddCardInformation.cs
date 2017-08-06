@@ -5,24 +5,28 @@ using UnityEngine.UI;
 public class AddCardInformation : MonoBehaviour {
 
     public Card info;
-    public Text title;
+    public char type;
+    public GameObject title;
     public Image image;
-    public Text desc;
-    public Text flavor;
-    public Text cost;
-    public Text atk;
-    public Text hp;
+    public GameObject desc;
+    public GameObject flavor;
+    public GameObject cost;
+    public GameObject atk;
+    public GameObject hp;
     public GameObject aspects;
 
     // Use this for initialization
     void Start() {
         name = info["title"].ToObject<string>();
-        title.text = info["title"].ToObject<string>();
-        desc.text = info["desc"].ToObject<string>();
-        flavor.text = info["flavor"].ToObject<string>();
-        cost.text = info["cost"].ToObject<int>().ToString();
-        atk.text = info["atk"].ToObject<int>().ToString();
-        hp.text = info["hp"].ToObject<int>().ToString();
+        title.GetComponent<TextMesh>().text = info["title"].ToObject<string>();
+        type= info["type"].ToObject<char>();
+        desc.GetComponent<TextMesh>().text = info["desc"].ToObject<string>();
+        flavor.GetComponent<TextMesh>().text = info["flavor"].ToObject<string>();
+        /*
+        cost.GetComponent<TextMesh>().text = info["cost"].ToObject<int>().ToString();
+        atk.GetComponent<TextMesh>().text = info["atk"].ToObject<int>().ToString();
+        hp.GetComponent<TextMesh>().text = info["hp"].ToObject<int>().ToString();
+        */
 
         /*
         int i, j;

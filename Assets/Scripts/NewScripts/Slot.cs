@@ -5,21 +5,44 @@ using UnityEngine.EventSystems;
 
 public class Slot : Clickable {
 
-	new SpriteRenderer renderer;
+    public static bool isChoosingPlace = false;
+    new SpriteRenderer renderer;
+    Color slotColor;
+    Board board;
+    public int[] pos;
+    bool rightPlace;
 
 	void Start() {
-		renderer = GetComponent<SpriteRenderer> ();
-		OnPointerExit ();
+        board = GameObject.FindObjectOfType<Board>() as Board;
+        renderer = GetComponent<SpriteRenderer> ();
+        slotColor = renderer.color;
+        renderer.color = Color.clear;
+
 	}
 
-	public override void OnClick () {}
+    void Update() {
+        
+        if (isChoosingPlace) {
+            char cardType = board.dragCard.GetComponent<AddCardInformation>().type;
+            if ((cardType != 'a' && board.currPlayer == pos[0]) || (cardType == 'a' && pos[0] == 3))
+                rightPlace = true;
+            else
+                rightPlace = false;
+        }
+    }
 
 	public override void OnPointerEnter() {
-		renderer.color = Color.white;
+        if (isChoosingPlace && rightPlace) {
+            renderer.color = slotColor;
+            board.slot = this.gameObject;
+        }
 	}
 
 	public override void OnPointerExit() {
-		renderer.color = Color.clear;
+        if (isChoosingPlace && rightPlace) {
+            renderer.color = Color.clear;
+            board.slot = null;
+        }
 	}
 		
 }
