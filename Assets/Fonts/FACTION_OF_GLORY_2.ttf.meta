@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5e9fc41756731b942a3634c8848ea07a
-timeCreated: 1492547823
+guid: d3b62b750d51e0c428543989e82dcaff
+timeCreated: 1501988448
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -12,7 +12,8 @@ TrueTypeFontImporter:
   fontName: FactionOfGlory
   fontNames:
   - FactionOfGlory
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5e9fc41756731b942a3634c8848ea07a, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
