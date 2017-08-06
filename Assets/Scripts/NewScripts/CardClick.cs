@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class CardClick : Clickable {
 
     public Board board;
+    public float elevation;
     Vector3 diff;
     bool mouseOver = false;
     bool isDragging = false;
@@ -23,23 +24,20 @@ public class CardClick : Clickable {
             OnDragging();
             if (Input.GetMouseButtonUp(0))
                 OnDropping();
-            
-        }
-        
-        if (mouseOver && Input.GetMouseButtonDown(0))
-            OnPointerClick();
-        
+        }   
     }
 
-    public void OnPointerClick() {
-        isDragging = true;
+    public override void OnClick(int mouseButton) {
         if (inHand) {
-            Slot.isChoosingPlace = true;
-            originPos = this.transform.position;
-            diff = this.transform.position - board.mousePosition;
-            diff.z = 0.0f;
-            this.GetComponent<BoxCollider>().enabled = false;
-            board.dragCard = this.gameObject;
+            if (mouseButton == 0) {
+                isDragging = true;
+                Slot.isChoosingPlace = true;
+                originPos = new Vector3(this.transform.position.x, this.transform.position.y - elevation, this.transform.position.z); ;
+                diff = this.transform.position - board.mousePosition;
+                diff.z = 0.0f;
+                this.GetComponent<BoxCollider>().enabled = false;
+                board.dragCard = this.gameObject;
+            }
         }
     }
 
@@ -66,10 +64,14 @@ public class CardClick : Clickable {
     }
 
     public override void OnPointerEnter() {
-        mouseOver = true;
+        if (inHand)
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + elevation, this.transform.position.z);
     }
 
     public override void OnPointerExit() {
-        mouseOver = false;
+        if (inHand)
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - elevation, this.transform.position.z);
     }
+
+    
 }

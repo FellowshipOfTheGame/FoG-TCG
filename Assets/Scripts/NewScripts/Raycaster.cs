@@ -24,10 +24,20 @@ public class Raycaster : MonoBehaviour {
                     Hit(c);
                 } else
                     NoHit();
-			} else {
-				NoHit ();
-			}
+            } else {
+                NoHit();
+            }
 		}
+
+        if (clickable != null) {
+            if (Input.GetMouseButtonDown(0)) {
+                clickable.OnClick(0);
+            }
+            if (Input.GetMouseButtonDown(1)) {
+                clickable.OnClick(1);
+            }
+
+        }
 	}
 
 	void Hit(Clickable hit) {

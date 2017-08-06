@@ -17,9 +17,16 @@ public class AddCardInformation : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        //add information in Card class
+        this.GetComponent<Card>().cost = info["cost"].ToObject<int>();
+        this.GetComponent<Card>().type = info["type"].ToObject<char>();
+        this.GetComponent<Card>().atk = info["atk"].ToObject<int>();
+        this.GetComponent<Card>().hp = info["hp"].ToObject<int>();
+
+        //draw infomation
         name = info["title"].ToObject<string>();
         title.GetComponent<TextMesh>().text = info["title"].ToObject<string>();
-        type= info["type"].ToObject<char>();
+        cost.GetComponent<TextMesh>().text = info["cost"].ToObject<int>().ToString();
         desc.GetComponent<TextMesh>().text = info["desc"].ToObject<string>();
         flavor.GetComponent<TextMesh>().text = info["flavor"].ToObject<string>();
         /*

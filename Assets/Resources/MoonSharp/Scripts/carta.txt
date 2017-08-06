@@ -1,6 +1,7 @@
 return {
 	title = "Carta 01",
 	type = 'c',
+	cost = 1,
 	desc = "aparece na tela",
 	flavor = "sem flavor",
 	cost = 1,

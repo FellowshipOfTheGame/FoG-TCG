@@ -13,13 +13,7 @@ public class BuyCard : Clickable {
         board = this.transform.parent.parent.GetComponent<Board>();
 	}
 
-    // Update is called once per frame
-    void Update() {
-        if (mouseOver && Input.GetMouseButtonDown(0))
-            OnPointerClick();
-    }
-
-    public void OnPointerClick() {
+    public override void OnClick(int mouseButton) {
         board.players[board.currPlayer - 1].GetComponent<Player>().PickUpCard();
     }
 	

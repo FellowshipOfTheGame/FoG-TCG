@@ -6,7 +6,7 @@ public class Clickable : MonoBehaviour {
 
 	public virtual void OnPointerEnter () {}
 	public virtual void OnPointerExit () {}
-	public virtual void OnClick () {}
+	public virtual void OnClick (int mouseButtonr) {}
 	public virtual void OnStartDrag () {}
 	public virtual void OnDrag () {}
 	public virtual void OnEndDrag() {}

@@ -21,7 +21,10 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 	}
 
 	public Board board;
-    public Vector3 diff;
+    public int cost;
+    public char type;
+    public int atk;
+    public int hp;
 
 	// LoadScript MUST be called from the Board who creates the instance
 	public void LoadScript(string name) {
