@@ -140,6 +140,7 @@ MonoBehaviour:
   slot: {fileID: 0}
   mousePosition: {x: 0, y: 0, z: 0}
   dragCard: {fileID: 0}
+  illusionPos: {fileID: 0}
 --- !u!4 &5963803
 Transform:
   m_ObjectHideFlags: 0
@@ -640,9 +641,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckList:
-  - carta
-  - carta
-  - carta
+  - creature
+  - creature
+  - creature
   mana: 1
   aspects: 
   genericCard: {fileID: 1752213681016546, guid: 621f138c7cfaf1345a2e54038654e3c2,
@@ -830,7 +831,7 @@ Transform:
   - {fileID: 1936404617}
   - {fileID: 651670364}
   m_Father: {fileID: 2128238486}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &649679440
 MonoBehaviour:
@@ -990,7 +991,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6a437ae7e6a941d4880af47fc9385f11, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6a437ae7e6a941d4880af47fc9385f11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1019,6 +1020,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a437ae7e6a941d4880af47fc9385f11, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &702362992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 702362993}
+  m_Layer: 0
+  m_Name: IllusionPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &702362993
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 702362992}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.25, y: 2.019049, z: -3.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2128238486}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &708328997
 Prefab:
   m_ObjectHideFlags: 0
@@ -1297,7 +1326,7 @@ Transform:
   - {fileID: 352036088}
   - {fileID: 483758425}
   m_Father: {fileID: 2128238486}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &869814663
 Prefab:
@@ -1438,7 +1467,7 @@ Transform:
   - {fileID: 2002078291}
   - {fileID: 794217578}
   m_Father: {fileID: 2128238486}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1409491407 stripped
 Transform:
@@ -1514,7 +1543,7 @@ Transform:
   m_LocalScale: {x: 0.18636802, y: 0.18672964, z: 1.6012855}
   m_Children: []
   m_Father: {fileID: 2128238486}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1509373819
 MonoBehaviour:
@@ -2048,7 +2077,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280749151001038, guid: c265c59565dc5ca43a4db3dab79c4bfd, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114651264105635882, guid: c265c59565dc5ca43a4db3dab79c4bfd,
         type: 2}
@@ -2083,6 +2112,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 702362993}
   - {fileID: 1509373818}
   - {fileID: 649679439}
   - {fileID: 1714461762}

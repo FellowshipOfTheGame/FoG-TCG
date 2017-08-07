@@ -29,6 +29,7 @@ public class AddCardInformation : MonoBehaviour {
         this.GetComponent<Card>().atk = info["atk"].ToObject<int>();
         this.GetComponent<Card>().hp = info["hp"].ToObject<int>();
         this.GetComponent<Card>().aspects = info["aspects"].ToObject<int[]>();
+        
 
         //draw infomation
         name = info["title"].ToObject<string>();
@@ -36,8 +37,8 @@ public class AddCardInformation : MonoBehaviour {
         cost.GetComponent<TextMesh>().text = info["cost"].ToObject<int>().ToString();
         desc.GetComponent<TextMesh>().text = info["desc"].ToObject<string>();
         flavor.GetComponent<TextMesh>().text = info["flavor"].ToObject<string>();
-        
-        
+
+
         int i, j, cont = 0;
         for (i = 0; i < this.GetComponent<Card>().aspects.Length; i++) {
             for (j = 1; j <= this.GetComponent<Card>().aspects[i]; j++) {

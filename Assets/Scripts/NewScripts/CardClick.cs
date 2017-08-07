@@ -7,6 +7,7 @@ public class CardClick : Clickable {
 
     public Board board;
     public float elevation;
+    public GameObject genericIllusion;
     Vector3 diff;
     bool isDragging = false;
     bool inHand = true;
@@ -65,11 +66,21 @@ public class CardClick : Clickable {
     }
 
     public override void OnPointerEnter() {
+        if (board.illusionPos.childCount != 0)
+            Destroy(board.illusionPos.GetChild(0));
+
+        GameObject illusion = Instantiate(genericIllusion, board.illusionPos) as GameObject;
+        illusion.GetComponent<IllusionScript>().original = this.gameObject;
+        illusion.transform.position = board.illusionPos.position;
+
         if (inHand && CanBePlayed())
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + elevation, this.transform.position.z);
     }
 
     public override void OnPointerExit() {
+        if (board.illusionPos.childCount != 0)
+            Destroy(board.illusionPos.GetChild(0).gameObject);
+
         if (inHand && CanBePlayed())
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - elevation, this.transform.position.z);
     }

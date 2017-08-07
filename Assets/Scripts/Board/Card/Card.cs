@@ -23,6 +23,7 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 	public Board board;
 
     [Space(5)]
+    public string infoName;
     public int cost;
     public int[] aspects;
     public char type;
@@ -31,6 +32,7 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 
 	// LoadScript MUST be called from the Board who creates the instance
 	public void LoadScript(string name) {
+        infoName = name;
 		Data = board.luaEnv.DoFile (name).Table;
 
 		//SetDefaultValues ();

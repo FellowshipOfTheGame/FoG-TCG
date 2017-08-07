@@ -11,6 +11,7 @@ public class Board : MonoBehaviour {
     public GameObject slot;
     public Vector3 mousePosition;
     public GameObject dragCard;
+    public Transform illusionPos;
 
     void Awake() {
         luaEnv = new Script();
@@ -20,6 +21,7 @@ public class Board : MonoBehaviour {
 	void Start () {
         players = new GameObject[2];
         players[0] = transform.Find("Player1").gameObject;
+        illusionPos = this.transform.Find("Table").Find("IllusionPos");
     }
 	
 	// Update is called once per frame
