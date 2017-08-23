@@ -458,6 +458,7 @@ MonoBehaviour:
   aspects: {fileID: 1454285318158274}
   spinVelocity: 0.04
   maxAngle: 2
+  spacament: 0.5
 --- !u!212 &212218816826910836
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -498,6 +499,8 @@ SpriteRenderer:
   m_Size: {x: 7.36, y: 8.53}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212435520605627598
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -538,6 +541,8 @@ SpriteRenderer:
   m_Size: {x: 7.04, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!224 &224864564827107160
 RectTransform:
   m_ObjectHideFlags: 1

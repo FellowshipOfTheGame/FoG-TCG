@@ -13,6 +13,9 @@ public class BuyCard : Clickable {
 	}
 
     public override void OnClick(int mouseButton) {
-        board.players[board.currPlayer - 1].GetComponent<Player>().PickUpCard();
+        if (board.players[board.currPlayer - 1].GetComponent<Player>().canBuy) {
+            board.players[board.currPlayer - 1].GetComponent<Player>().PickUpCard();
+            board.players[board.currPlayer - 1].GetComponent<Player>().canBuy = false;
+        }
     }
 }

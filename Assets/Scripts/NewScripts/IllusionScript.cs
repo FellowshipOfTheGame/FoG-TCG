@@ -17,6 +17,8 @@ public class IllusionScript : MonoBehaviour {
     public float spinVelocity;
     public float maxAngle;
     float angle;
+    [Space(5)]
+    public float spacament;
 
 
 
@@ -28,7 +30,6 @@ public class IllusionScript : MonoBehaviour {
         cost.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformation>().cost.GetComponent<TextMesh>().text;
         desc.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformation>().desc.GetComponent<TextMesh>().text;
         flavor.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformation>().flavor.GetComponent<TextMesh>().text;
-        float spacament = original.GetComponent<AddCardInformation>().spacament * (this.transform.localScale.x / original.transform.localScale.x);
 
         int i;
         for (i = 0; i < original.GetComponent<AddCardInformation>().aspects.transform.childCount; i++) {

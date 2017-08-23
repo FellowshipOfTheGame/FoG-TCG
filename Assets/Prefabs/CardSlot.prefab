@@ -66,6 +66,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pos: 0000000000000000
+  cards:
+  - {fileID: 0}
+  - {fileID: 0}
+  isFull: 0
+  genericIllusion: {fileID: 1508392673701036, guid: 2434f9815e1afa3409198eec6aca198f,
+    type: 2}
 --- !u!212 &212990908943031022
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -106,3 +112,5 @@ SpriteRenderer:
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

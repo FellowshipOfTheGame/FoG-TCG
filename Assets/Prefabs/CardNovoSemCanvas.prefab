@@ -536,6 +536,8 @@ SpriteRenderer:
   m_Size: {x: 7.36, y: 8.53}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212755338154244536
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -576,6 +578,8 @@ SpriteRenderer:
   m_Size: {x: 7.04, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!224 &224546522716988472
 RectTransform:
   m_ObjectHideFlags: 1

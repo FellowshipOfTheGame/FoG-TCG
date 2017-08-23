@@ -5,12 +5,18 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public List<string> deckList;
+    public int index;
     public int mana;
+    public int HP;
     public int[] aspects;
-
+    public Captain capt;
+    [Space(5)]
     public GameObject genericCard;
     public float cardDist;
     public float cardWeight;
+    [HideInInspector]
+    public bool canBuy = true;
+    public bool canPlay = true;
 
     // Use this for initialization
     void Start () {
@@ -24,6 +30,11 @@ public class Player : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void ResetTurn() {
+        canBuy = true;
+        canPlay = true;
+    }
 
     public void PickUpCard() { //load a random card from decklist
         if (this.transform.childCount <= 7 && deckList.Count > 0) {
@@ -69,5 +80,4 @@ public class Player : MonoBehaviour {
             }
         }
     }
-
 }

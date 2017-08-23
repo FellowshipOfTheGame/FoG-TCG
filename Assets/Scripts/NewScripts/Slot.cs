@@ -10,14 +10,19 @@ public class Slot : Clickable {
     Color slotColor;
     Board board;
     public int[] pos;
+    public GameObject[] cards = new GameObject[2]; //card[0]=terrain/atmosphere; card[1]=creature
     bool rightPlace;
+    public bool isFull;
+    public GameObject genericIllusion;
+
 
 	void Start() {
         board = GameObject.FindObjectOfType<Board>() as Board;
         renderer = GetComponent<SpriteRenderer> ();
         slotColor = renderer.color;
         renderer.color = Color.clear;
-
+        cards[0] = null;
+        cards[1] = null;
 	}
 
     void Update() {
@@ -28,21 +33,60 @@ public class Slot : Clickable {
                 rightPlace = true;
             else
                 rightPlace = false;
+
+            //checking if slot don't have a card with a same type
+            
+            if (cardType == 'c' && cards[1] == null) {
+                isFull = false;
+            } else if ((cardType == 't' || cardType == 'a') && cards[0] == null) {
+                isFull = false;
+            } else if (cardType == 's') {
+                isFull = false;
+            } else {
+                isFull = true;
+            }
+
         }
     }
 
 	public override void OnPointerEnter() {
-        if (isChoosingPlace && rightPlace) {
+       
+        if (isChoosingPlace && rightPlace && !isFull) {
             renderer.color = slotColor;
             board.slot = this.gameObject;
         }
+
+        if (this.transform.childCount != 0 && !isChoosingPlace)
+            MakeIllusion();
 	}
 
 	public override void OnPointerExit() {
-        if (isChoosingPlace && rightPlace) {
+        if (board.illusionPos.childCount != 0)
+            Destroy(board.illusionPos.GetChild(0).gameObject);
+
+        if (board.illusionPos2.childCount != 0)
+            Destroy(board.illusionPos2.GetChild(0).gameObject);
+
+        if (isChoosingPlace && rightPlace && !isFull) {
             renderer.color = Color.clear;
             board.slot = null;
         }
 	}
 		
+    void MakeIllusion() {
+        if (board.illusionPos.childCount != 0)
+            Destroy(board.illusionPos.GetChild(0).gameObject);
+
+        if (cards[1] != null) {
+            GameObject illusion = Instantiate(genericIllusion, board.illusionPos) as GameObject;
+            illusion.GetComponent<IllusionScript>().original = cards[1];
+            illusion.transform.position = board.illusionPos.position;
+        }
+
+        if (cards[0] != null) {
+            GameObject illusion = Instantiate(genericIllusion, board.illusionPos2) as GameObject;
+            illusion.GetComponent<IllusionScript>().original = cards[0];
+            illusion.transform.position = board.illusionPos2.position;
+        }
+    }
 }
