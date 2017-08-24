@@ -922,10 +922,10 @@ MonoBehaviour:
   - creature
   - creature
   - terrain
-  index: 0
-  mana: 20
-  HP: 0
-  aspects: 
+  index: 1
+  mana: 10
+  HP: 20
+  aspects: 00000000000000000000000000000000
   capt: {fileID: 1280703900}
   genericCard: {fileID: 1752213681016546, guid: 621f138c7cfaf1345a2e54038654e3c2,
     type: 2}
@@ -1771,7 +1771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 799361375}
   m_Layer: 0
-  m_Name: Field1
+  m_Name: Field2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1793,7 +1793,7 @@ Transform:
   - {fileID: 352036088}
   - {fileID: 483758425}
   m_Father: {fileID: 2128238486}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &869814663
 Prefab:
@@ -1969,10 +1969,10 @@ MonoBehaviour:
   - creature
   - creature
   - creature
-  index: 0
+  index: 2
   mana: 10
-  HP: 0
-  aspects: 
+  HP: 20
+  aspects: 00000000000000000000000000000000
   capt: {fileID: 1906189313}
   genericCard: {fileID: 1752213681016546, guid: 621f138c7cfaf1345a2e54038654e3c2,
     type: 2}
@@ -2163,7 +2163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360386022}
   m_Layer: 0
-  m_Name: Field2
+  m_Name: Field1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2185,7 +2185,7 @@ Transform:
   - {fileID: 2002078291}
   - {fileID: 794217578}
   m_Father: {fileID: 2128238486}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1393757852
 GameObject:
@@ -3224,8 +3224,8 @@ Transform:
   - {fileID: 649679439}
   - {fileID: 1133846469}
   - {fileID: 1714461762}
-  - {fileID: 799361375}
   - {fileID: 1360386022}
+  - {fileID: 799361375}
   - {fileID: 1584654922}
   - {fileID: 1280703899}
   - {fileID: 1906189317}

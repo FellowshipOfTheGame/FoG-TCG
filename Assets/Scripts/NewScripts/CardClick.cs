@@ -72,6 +72,7 @@ public class CardClick : Clickable {
             if (this.GetComponent<Card>().type == 'c') {
                 board.slot.GetComponent<Slot>().cards[1] = this.gameObject;
                 board.cardMatrix[pos[0], pos[1]] = this.gameObject;
+                this.GetComponent<Card>().pos = pos;
             } else if (this.GetComponent<Card>().type == 't') {
                 board.slot.GetComponent<Slot>().cards[0] = this.gameObject;
                 //make card terrain invisible and unclickable
@@ -83,13 +84,19 @@ public class CardClick : Clickable {
                 this.GetComponent<BoxCollider>().size = new Vector3(0.0f, 0.0f, 0.0f);
                 colliderSize = new Vector3(0.0f, 0.0f, 0.0f);
 
-                if(board.currPlayer == 1)
+                if (board.currPlayer == 1) {
                     board.cardMatrix[0, pos[1]] = this.gameObject;
-                else
+                    this.GetComponent<Card>().pos[0] = 0;
+                    this.GetComponent<Card>().pos[1] = pos[1];
+                } else {
                     board.cardMatrix[3, pos[1]] = this.gameObject;
-
+                    this.GetComponent<Card>().pos[0] = 3;
+                    this.GetComponent<Card>().pos[1] = pos[1];
+                }
             } else if (this.GetComponent<Card>().type == 'a') {
                 board.slot.GetComponent<Slot>().cards[0] = this.gameObject;
+                this.GetComponent<Card>().pos[0] = -1;
+                this.GetComponent<Card>().pos[1] = -1;
                 board.cardAtm = this.gameObject;
             }
             board.players[board.currPlayer - 1].capt.canMove = false;

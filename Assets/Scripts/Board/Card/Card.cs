@@ -26,6 +26,7 @@ public class Card : MonoBehaviour, IPointerClickHandler {
     public string infoName;
     public int cost;
     public int[] aspects;
+    public int[] pos = new int[2];
     public char type;
     public int atk;
     public int hp;

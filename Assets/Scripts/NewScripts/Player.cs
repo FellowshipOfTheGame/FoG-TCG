@@ -19,11 +19,11 @@ public class Player : MonoBehaviour {
     public bool canPlay = true;
 
     // Use this for initialization
-    void Start () {
+    void Start () {/*
         aspects = new int[4];
         int i;
         for (i = 0; i < 4; i++)
-            aspects[i] = 0;
+            aspects[i] = 0;*/
 	}
 	
 	// Update is called once per frame
