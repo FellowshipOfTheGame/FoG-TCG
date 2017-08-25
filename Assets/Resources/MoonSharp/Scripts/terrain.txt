@@ -1,7 +1,6 @@
 return {
 	title = "Carta 02",
 	type = 't',
-	cost = 1,
 	aspects = {0, 0, 0, 0},
 	desc = "gera aspecto",
 	flavor = "sem flavor",

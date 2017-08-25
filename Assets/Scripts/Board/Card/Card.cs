@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using MoonSharp.Interpreter;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour, IPointerClickHandler {
+[MoonSharpUserData]
+public class Card : MonoBehaviour {
 
 	public delegate void CardEventDelegate(Table args);
 
@@ -12,6 +13,14 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 	public event CardEventDelegate ExitEvent;
 	public event CardEventDelegate TurnStartEvent;
 	public event CardEventDelegate TurnEndEvent;
+
+    public event CardEventDelegate OutgoingDamageEvent;
+    public event CardEventDelegate AttackEvent;
+    public event CardEventDelegate DamageDealtEvent;
+
+    public event CardEventDelegate IncomingDamageEvent;
+    public event CardEventDelegate DefendEvent;
+    public event CardEventDelegate DamageTakenEvent;
 
 	public Table Data;
 
@@ -60,7 +69,23 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 		ExitEvent += LoadDefaultEventHandler ("OnExit");
 		TurnStartEvent += LoadDefaultEventHandler ("OnTurnStart");
 		TurnEndEvent += LoadDefaultEventHandler ("OnTurnEnd");
-	}
+
+        OutgoingDamageEvent = delegate { };
+        AttackEvent = delegate { };
+        DamageDealtEvent = delegate { };
+
+        OutgoingDamageEvent += LoadDefaultEventHandler("OnOutgoingDamage");
+        AttackEvent += LoadDefaultEventHandler("OnAttack");
+        DamageDealtEvent += LoadDefaultEventHandler("OnDamageDealt");
+
+        IncomingDamageEvent = delegate { };
+        DefendEvent = delegate { };
+        DamageTakenEvent = delegate { };
+
+        IncomingDamageEvent += LoadDefaultEventHandler("OnIncomingDamage");
+        DefendEvent += LoadDefaultEventHandler("OnDefendEvent");
+        DamageTakenEvent += LoadDefaultEventHandler("OnDamageTaken");
+    }
 
 	protected CardEventDelegate LoadDefaultEventHandler(string eventName) {
 		if (this [eventName].IsNil())
@@ -97,8 +122,37 @@ public class Card : MonoBehaviour, IPointerClickHandler {
 		return true;
 	}
 
-	public void OnPointerClick(PointerEventData data) { // virtual?
-       //board.manager.OnCardSelected(this);
-	}
+    private Table createTable(params object[] args)
+    {
+        return DynValue.FromObject(board.luaEnv, args as object[]).Table;
+    }
 
+    public void Attack()
+    {
+        int[] pos = transform.parent.GetComponent<Slot>().pos;
+        GameObject targetGO = GetComponent<Card>().board.cardMatrix[3 - pos[0], pos[1]];
+
+        if (targetGO == null)
+        {
+            // TODO tentar atacar comandante
+        } else
+        {
+            Card target = targetGO.GetComponent<Card>();
+            int dmg = this["atk"].ToObject<int>();
+            Table args = createTable(board, this, target, dmg);
+
+            this.OutgoingDamageEvent(args);
+            print(args[4]);
+            this.AttackEvent(args);
+            print(args[4]);
+            target.IncomingDamageEvent(args);
+            print(args[4]);
+            target.DefendEvent(args);
+            print(args[4]);
+            target.DamageTakenEvent(args);
+            print(args[4]);
+            this.DamageDealtEvent(args);
+            print(args[4]);
+        }
+    }
 }

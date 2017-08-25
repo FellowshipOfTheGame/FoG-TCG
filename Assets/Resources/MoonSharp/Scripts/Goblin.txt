@@ -1,0 +1,12 @@
+return{
+	title = "Goblin",
+	type = 'c',
+	aspects = {0, 0, 0, 0},
+	desc = "Ganha +1/+1 para cada outro Goblin em campo",
+	flavor = "Sempre dizem que cérebro ganha de músculo, mas um número muito maior de músculo ás vezes ganha de cérebro.",
+	cost = 1,
+	atk = 1,
+	hp = 1
+
+	--TO DO
+	}

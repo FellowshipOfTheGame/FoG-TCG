@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoonSharp.Interpreter;
 
+[MoonSharpUserData]
 public class Board : MonoBehaviour {
 
     public Script luaEnv;
@@ -19,7 +20,9 @@ public class Board : MonoBehaviour {
     public float limit;
     Vector3 playerPosition;
 
-    void Awake() {
+    void Awake()
+    {
+        UserData.RegisterAssembly();
         luaEnv = new Script();
     }
 

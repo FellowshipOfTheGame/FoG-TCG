@@ -15,7 +15,6 @@ public class Slot : Clickable {
     public bool isFull;
     public GameObject genericIllusion;
 
-
 	void Start() {
         board = GameObject.FindObjectOfType<Board>() as Board;
         renderer = GetComponent<SpriteRenderer> ();

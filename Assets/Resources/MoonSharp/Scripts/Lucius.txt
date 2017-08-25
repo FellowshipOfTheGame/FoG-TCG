@@ -1,0 +1,18 @@
+function poisoned(self, board)
+	self.hp = self.hp - 1;
+end
+
+return{
+	title = "Lucius",
+	type = 'c',
+	aspectos = {0, 1, 1, 0},
+	desc = "Envenenar",
+	flavor = "",
+	cost = 2,
+	atk = 2,
+	hp = 5
+
+	onDamageDealt = function(self, enemy) 
+		enemy.OnTurnStart = enemy.OnTurnStart + poisoned
+	end	
+	}

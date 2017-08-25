@@ -1,0 +1,16 @@
+return{
+	title = "Volgarr",
+	type = 'c',
+	aspects = {2, 0, 0, 0},
+	desc = "Atropelar",
+	flavor = "No caminho desse guerreiro há apenas a morte. Não a dele, é claro.",
+	cost = 4,
+	atk = 3,
+	hp = 6
+
+	onDamageDealt = function(self, board, enemy, enemyCommander)
+		if self.atk > enemy.hp
+			enemyCommander.hp = enemyCommander.hp - (self.atk - enemy.hp)
+		end
+	end
+	}

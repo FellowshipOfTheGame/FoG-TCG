@@ -1,0 +1,12 @@
+return{
+	title = "Rio",
+	type = 't',
+	aspectos {0, 0, 0, 0},
+	desc = "Gera 1 aspecto de Água",
+	flavor = "Rios são a manifestação do ciclo infinito da mudança: você nunca tocará nessa mesma água, nesse mesmo trecho de rio novamente.",
+	cost = 1
+
+	onEnter = function(self, board, player)
+		player.aspects[2] = player.aspects[2] + 1
+	end
+	}

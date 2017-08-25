@@ -2,14 +2,16 @@ return {
 	title = "Carta 01",
 	type = 'c',
 	cost = 1,
-	aspects = {1, 1, 0, 0},
+	aspects = {0, 0, 0, 0},
 	desc = "aparece na tela",
 	flavor = "sem flavor",
 	cost = 1,
 	atk = 2,
 	hp = 3,
-
-	OnEnter = function(args)
-	args[1] = 5
+	OnOutgoingDamage = function(args)
+		args[4] = args[4] + 1
+	end,
+	OnIncomingDamage = function(args)
+		args[4] = args[4] - 1
 	end
 }

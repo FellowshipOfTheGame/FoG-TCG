@@ -1,0 +1,11 @@
+return{
+	title = "Sol Forte",
+	type = 'a',
+	aspects = {1, 0, 0, 0},
+	desc = "TODAS as criaturas com aspecto e fogo têm +1/+0"
+	flavor = "Em dias como esse, pessoas matariam por um pouco de chuva.",
+	cost = 1
+
+--TO DO
+
+	}

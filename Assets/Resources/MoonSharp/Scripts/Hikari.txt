@@ -1,0 +1,16 @@
+return{
+	title = "Hikari",
+	type = 'c',
+	aspects = {0, 0, 0, 0},
+	desc = "Devorar(+1)"
+	flavor = "Não se sabe ao certo a origem dessa criatura. Com tantas similaridades com uma besta, deve mesmo ser tratada como humana?",
+	cost = 3,
+	atk = 2,
+	hp = 3
+	
+	onDamageDealt = function(self, enemy, dano)
+		if enemy.hp <= 0
+			self.atk = self.atk + 1;
+		end
+	end
+	}

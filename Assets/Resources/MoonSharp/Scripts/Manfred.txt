@@ -1,0 +1,17 @@
+return{
+	title = "Manfred",
+	type = 'c',
+	aspects = {1, 0, 0, 0},
+	desc = "Reposicionar",
+	flavor = "Manfred era piloto de uma aeronave bélica experimental durante a guerra, mas decidiu "pegá-la emprestada" para ter aventuras próprias",
+	cost = 2,
+	atk = 2,
+	hp = 2
+
+	reposition = function(self, board)
+		local pos = board.requestSelectPosition(alliedPosition)
+		if pos then
+			board.swap(self.position, pos)
+		end
+	end
+	}

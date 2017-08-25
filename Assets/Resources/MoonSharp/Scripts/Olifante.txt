@@ -1,0 +1,14 @@
+return{
+	title = "Olifante",
+	type = 'c',
+	aspectos = {0, 0, 2, 0},
+	desc = "Sofre -1 de dano em ataques"
+	flavor = "Dizem por aí que se você matar um desses, vai ouvir um anão bravo gritando 'Ainda assim, só conta como um!'",
+	cost = 3,
+	atk = 2,
+	hp = 6
+
+	onIncomingDamage = function(self, attacker, args)
+		args[1] = args[1] - 1;
+	end
+	}

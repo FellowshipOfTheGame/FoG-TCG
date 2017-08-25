@@ -1,0 +1,22 @@
+return{
+	title = "Nonami",
+	type = 'c',
+	aspects = {2, 0, 0, 0},
+	desc = "Fúria(+2)",
+	flavor = "Algumas pessoas não a levavam a sério olhando para seu rosto adorável. Elas mudam de ideia rapidamente",
+	cost = 3,
+	atk = 3,
+	hp = 4
+
+	onTakeDamage = function(self, board, damage)
+		if self.hp = nonami.hp and damage > 0
+			self.atk =  self.atk + 2
+		end
+	end
+
+	onHeal = function(self, board, healValue)
+		if (self.hp + healValue) >= nonami.hp
+			self.atk = self.atk -2
+		end
+	end
+	}
