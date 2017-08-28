@@ -923,7 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckList:
-  - teste2
+  - creature
   index: 1
   mana: 10
   HP: 20
