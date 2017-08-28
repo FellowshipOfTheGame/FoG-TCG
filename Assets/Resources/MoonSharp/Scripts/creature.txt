@@ -1,3 +1,11 @@
+local attackBuff = function(args)
+		args[4] = args[4] + 1
+end
+
+local resistOliphant = function(args)
+		args[4] = args[4] - 1
+end,
+
 return {
 	title = "Carta 01",
 	type = 'c',
@@ -8,10 +16,17 @@ return {
 	cost = 1,
 	atk = 2,
 	hp = 3,
-	OnOutgoingDamage = function(args)
-		args[4] = args[4] + 1
+	OnOutgoingDamage = attackBuff,
+	OnIncomingDamage = resistOliphant,
+	OnEnter = function(args)
+		local self = args[1]
+		self.Data.turnos_restantes = 3
 	end,
-	OnIncomingDamage = function(args)
-		args[4] = args[4] - 1
+	OnTurnEnd = function(args)
+		local self = args[1]
+		self.Data.turnos_restantes = self.Data.turnos_restantes - 1
+		if self.Data.turnos_restantes == 0 then
+			self.Remove()
+		end
 	end
 }

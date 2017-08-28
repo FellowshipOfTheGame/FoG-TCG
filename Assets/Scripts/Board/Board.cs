@@ -65,17 +65,19 @@ public class Board : MonoBehaviour {
             }
         }
 
-            if (illusionPos.childCount > 0) {
-                GameObject elevatedCard = illusionPos.GetChild(0).GetComponent<IllusionScript>().original;
-                Destroy(illusionPos.GetChild(0).gameObject);
-            }
+        if (illusionPos.childCount > 0) {
+            GameObject elevatedCard = illusionPos.GetChild(0).GetComponent<IllusionScript>().original;
+            Destroy(illusionPos.GetChild(0).gameObject);
+        }
 
-            if (illusionPos2.childCount > 0) {
-                GameObject elevatedCard = illusionPos2.GetChild(0).GetComponent<IllusionScript>().original;
-                Destroy(illusionPos2.GetChild(0).gameObject);
-            }
+        if (illusionPos2.childCount > 0) {
+            GameObject elevatedCard = illusionPos2.GetChild(0).GetComponent<IllusionScript>().original;
+            Destroy(illusionPos2.GetChild(0).gameObject);
+        }
 
         if (currPlayer == 1) {
+            EndPlayerTurn(0);
+
             players[0].gameObject.SetActive(false);
             players[0].capt.canMove = false;
             players[0].capt.canGenerate = false;
@@ -88,7 +90,11 @@ public class Board : MonoBehaviour {
             players[1].capt.canBuy = true;
             players[1].transform.position = playerPosition;
             currPlayer = 2;
+
+            StartPlayerTurn(1);
         }else {
+            EndPlayerTurn(1);
+
             players[1].gameObject.SetActive(false);
             players[1].capt.canMove = false;
             players[1].capt.canGenerate = false;
@@ -101,8 +107,36 @@ public class Board : MonoBehaviour {
             players[0].capt.canBuy = true;
             players[0].transform.position = playerPosition;
             currPlayer = 1;
+
+            StartPlayerTurn(0);
         }
         time = 0;
         players[currPlayer - 1].ResetTurn();
+    }
+
+    private void StartPlayerTurn(int player)
+    {
+        Board board = GameObject.FindObjectOfType<Board>();
+        int[] rows = new int[] {player == 0 ? 0 : 3, player == 0 ? 1 : 2 };
+        for (int i = 0; i < 5; i++)
+            foreach (int j in rows)
+            {
+                GameObject obj = board.cardMatrix[j, i];
+                if (obj != null)
+                    obj.GetComponent<Card>().OnTurnStart();
+            }
+    }
+
+    private void EndPlayerTurn(int player)
+    {
+        Board board = GameObject.FindObjectOfType<Board>();
+        int[] rows = new int[] { player == 0 ? 0 : 3, player == 0 ? 1 : 2 };
+        for (int i = 0; i < 5; i++)
+            foreach (int j in rows)
+            {
+                GameObject obj = board.cardMatrix[j, i];
+                if (obj != null)
+                    obj.GetComponent<Card>().OnTurnEnd();
+            }
     }
 }

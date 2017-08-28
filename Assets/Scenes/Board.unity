@@ -455,6 +455,11 @@ Prefab:
       propertyPath: m_Name
       value: Capt1
       objectReference: {fileID: 0}
+    - target: {fileID: 114795770612693320, guid: 49efa83076f1adc459894f3cb884c86a,
+        type: 2}
+      propertyPath: pos
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49efa83076f1adc459894f3cb884c86a, type: 2}
   m_IsPrefabParent: 0
@@ -918,10 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckList:
-  - terrain
-  - creature
-  - creature
-  - terrain
+  - teste2
   index: 1
   mana: 10
   HP: 20

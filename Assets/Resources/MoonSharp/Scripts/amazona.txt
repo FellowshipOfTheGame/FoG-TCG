@@ -2,9 +2,9 @@ return {
 	title = "Amazona",
 	type = 'c',
 	aspects = {0, 0, 0, 0},
-	desc = "aparece na tela",
-	flavor = "Corajosa guerreira de um reino distante, onde a sociedade é matriarcal e os homens são usados apenas para procriar e para trabalho braçal.",
+	desc = "desc",
+	flavor = "flavor",
 	cost = 2,
 	atk = 2,
-	hp = 3,
+	hp = 3
 }

@@ -1,10 +1,10 @@
-return{
+return {
 	title = "Diabrete",
 	type = 'c',
 	aspects = {1, 0, 0, 0},
 	desc = "",
-	flavor = "Adora pregar peças divertidas e completamente inofensivas. Pra ele pelo menos...",
+	flavor = "",
 	cost = 1,
 	atk = 2,
-	hp = 1,
-	}
+	hp = 1
+}

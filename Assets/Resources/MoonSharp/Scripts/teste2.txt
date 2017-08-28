@@ -1,0 +1,10 @@
+return {
+	title = "pode dar bosta",
+	type = 'c',
+	cost = 1,
+	atk = 999,
+	hp = 999,
+	aspects = {1, 1, 1, 1},
+	desc = "desc",
+	flavor = "flavor"
+}

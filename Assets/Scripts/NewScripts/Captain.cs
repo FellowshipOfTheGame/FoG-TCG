@@ -30,8 +30,6 @@ public class Captain : Clickable {
         }
 	}
 
-    
-
     public override void OnClick(int mouseButton) {
         if (mouseButton == 0 && canMove) {
             originalPos = this.transform.position.x;

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoonSharp.Interpreter;
 
+[MoonSharpUserData]
 public class Player : MonoBehaviour {
 
     public List<string> deckList;
@@ -19,11 +21,11 @@ public class Player : MonoBehaviour {
     public bool canPlay = true;
 
     // Use this for initialization
-    void Start () {/*
+    void Start () {
         aspects = new int[4];
         int i;
         for (i = 0; i < 4; i++)
-            aspects[i] = 0;*/
+            aspects[i] = 0;
 	}
 	
 	// Update is called once per frame
@@ -79,5 +81,13 @@ public class Player : MonoBehaviour {
                 j++;
             }
         }
+    }
+
+    public void Damage(Table args)
+    {
+        HP -= args.Get(4).ToObject<int>();
+        print(HP);
+        if (HP <= 0)
+            print("MORREU");
     }
 }

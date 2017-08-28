@@ -26,7 +26,7 @@ public class Card : MonoBehaviour {
 
 	public DynValue this[string attr] {
 		get { return Data.Get(attr); }
-		set { Data [attr] = DynValue.FromObject(board.luaEnv, value); }
+		set { Data[attr] = value; }
 	}
 
 	public Board board;
@@ -39,10 +39,12 @@ public class Card : MonoBehaviour {
     public char type;
     public int atk;
     public int hp;
+    public bool canAttack;
 
 	// LoadScript MUST be called from the Board who creates the instance
 	public void LoadScript(string name) {
         infoName = name;
+        print("tudo bao");
 		Data = board.luaEnv.DoFile (name).Table;
 
 		//SetDefaultValues ();
@@ -60,9 +62,9 @@ public class Card : MonoBehaviour {
 	}
 
 	protected virtual void RegisterDefaultEvents() {
-		EnterEvent = delegate {};
+		EnterEvent = delegate { canAttack = true; };
 		ExitEvent = delegate {};
-		TurnStartEvent = delegate {};
+		TurnStartEvent = delegate { canAttack = true; };
 		TurnEndEvent = delegate {};
 
 		EnterEvent += LoadDefaultEventHandler ("OnEnter");
@@ -71,7 +73,7 @@ public class Card : MonoBehaviour {
 		TurnEndEvent += LoadDefaultEventHandler ("OnTurnEnd");
 
         OutgoingDamageEvent = delegate { };
-        AttackEvent = delegate { };
+        AttackEvent = delegate { canAttack = false; };
         DamageDealtEvent = delegate { };
 
         OutgoingDamageEvent += LoadDefaultEventHandler("OnOutgoingDamage");
@@ -101,25 +103,19 @@ public class Card : MonoBehaviour {
 	}
 
     public virtual void OnEnter() {
-        
-		EnterEvent (null);
-        
+		EnterEvent (createTable(this));
 	}
 
 	public virtual void OnExit() {
-		ExitEvent (null);
+        ExitEvent (createTable(this));
 	}
 
 	public virtual void OnTurnStart() {
-		TurnStartEvent (null);
+		TurnStartEvent (createTable(this));
 	}
 
 	public virtual void OnTurnEnd() {
-		TurnEndEvent (null);
-	}
-
-	public virtual bool CanBePlayed() {
-		return true;
+		TurnEndEvent (createTable(this));
 	}
 
     private Table createTable(params object[] args)
@@ -129,30 +125,62 @@ public class Card : MonoBehaviour {
 
     public void Attack()
     {
-        int[] pos = transform.parent.GetComponent<Slot>().pos;
+        if (!canAttack)
+            return;
         GameObject targetGO = GetComponent<Card>().board.cardMatrix[3 - pos[0], pos[1]];
+
+        int dmg = this["atk"].ToObject<int>();
 
         if (targetGO == null)
         {
-            // TODO tentar atacar comandante
+            Captain cap = board.players[2 - pos[0]].capt;
+            if (Mathf.Abs(pos[1] - cap.pos) <= 1)
+            {
+                Player target = board.players[2 - pos[0]];
+                Table args = createTable(board, this, target, dmg);
+                this.OutgoingDamageEvent(args);
+                this.AttackEvent(args);
+                target.Damage(args);
+                this.DamageDealtEvent(args);
+            }
+                
         } else
         {
             Card target = targetGO.GetComponent<Card>();
-            int dmg = this["atk"].ToObject<int>();
             Table args = createTable(board, this, target, dmg);
 
             this.OutgoingDamageEvent(args);
-            print(args[4]);
             this.AttackEvent(args);
-            print(args[4]);
-            target.IncomingDamageEvent(args);
-            print(args[4]);
-            target.DefendEvent(args);
-            print(args[4]);
-            target.DamageTakenEvent(args);
-            print(args[4]);
+            target.Damage(args, false);
             this.DamageDealtEvent(args);
-            print(args[4]);
+            
+            if (target["hp"].ToObject<int>() <= 0)
+            {
+                //target.OnDeath();
+                target.Remove();
+            }
         }
+    }
+
+    public void Damage(Table args, bool checkDeath=true)
+    {
+        this.IncomingDamageEvent(args);
+        //print(args[4]);
+        this.DefendEvent(args);
+        //print(args[4]);
+        int currentHP = this["hp"].ToObject<int>();
+        int newHP = currentHP - args.Get(4).ToObject<int>();
+        this["hp"] = DynValue.FromObject(board.luaEnv, newHP);
+
+        if (checkDeath && newHP <= 0)
+            this.Remove();
+    }
+
+    public void Remove()
+    {
+        board.cardMatrix[pos[0], pos[1]] = null;
+        this.OnExit();
+        Destroy(this.gameObject);
+        print("DESTRUCTION");
     }
 }
