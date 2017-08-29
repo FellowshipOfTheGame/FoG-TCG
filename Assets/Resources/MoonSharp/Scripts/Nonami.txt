@@ -2,8 +2,8 @@ return{
 	title = "Nonami",
 	type = 'c',
 	aspects = {2, 0, 0, 0},
-	desc = "Fúria(+2)",
-	flavor = "Algumas pessoas não a levavam a sério olhando para seu rosto adorável. Elas mudam de ideia rapidamente",
+	desc = "Furia(+2)",
+	flavor = "Algumas pessoas nao a levavam a serio olhando para seu rosto adoravel. Elas mudam de ideia rapidamente",
 	cost = 3,
 	atk = 3,
 	hp = 4

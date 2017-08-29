@@ -2,8 +2,8 @@ return{
 	title = "Hikari",
 	type = 'c',
 	aspects = {0, 0, 0, 0},
-	desc = "Devorar(+1)"
-	flavor = "Não se sabe ao certo a origem dessa criatura. Com tantas similaridades com uma besta, deve mesmo ser tratada como humana?",
+	desc = "Devorar(+1)",
+	flavor = "Nao se sabe ao certo a origem dessa criatura. Com tantas similaridades com uma besta, deve mesmo ser tratada como humana?",
 	cost = 3,
 	atk = 2,
 	hp = 3,

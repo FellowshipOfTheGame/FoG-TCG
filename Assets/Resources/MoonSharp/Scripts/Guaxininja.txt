@@ -3,22 +3,10 @@ return{
 	type = 'c',
 	aspects = {0, 0, 0, 0},
 	desc = "Reposicionar",
-	flavor = "Após anos de missões perigosas, esse guaxinim se aposentou e arranjou um emprego num restaurante chinês, onde repassa seus ensinamentos de guerra por meio de biscoitinhos da sorte.",
+	flavor = "Apos anos de missoes perigosas, esse guaxinim se aposentou e arranjou um emprego num restaurante chines, onde repassa seus ensinamentos de guerra por meio de biscoitinhos da sorte.",
 	cost = 2,
 	atk = 1,
 	hp = 3,
 
--- Opções do menu de right click na carta
-	abilities = {
-
--- Nome de display no menu = função que executa se selecionar
-		reposition = function(self, board)
-
--- TODO implementar isso, tem que ser thread safe (usar corrotinas)
-			local pos = board.requestSelectPosition(alliedPosition)
-			if pos then
-				board.swap(self.position, pos)
-			end
-		end
-	}
+	--reposicionar
 }

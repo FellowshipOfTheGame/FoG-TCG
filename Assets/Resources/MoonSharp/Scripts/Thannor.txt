@@ -3,7 +3,7 @@ return{
 	type = 'c',
 	aspects = {0, 0, 2, 0},
 	desc = "Ganha +1/+2 se estiver sobre um terreno de terra",
-	flavor = "Treinado por seu pai a usar um arco longo para caçar desde pequeno, Thannor viu sua aldeia ser dizimada por orcs e foi forçado a fugir. Agora ele faz parte da resistência que luta para livrar a região do controle dos orcs que destruíram seu lar.",
+	flavor = "Treinado por seu pai a usar um arco longo para cacar desde pequeno, Thannor viu sua aldeia ser dizimada por orcs e foi forcado a fugir. Agora ele faz parte da resistencia que luta para livrar a regiao do controle dos orcs que destruiram seu lar.",
 	cost = 3,
 	atk = 3,
 	hp = 6

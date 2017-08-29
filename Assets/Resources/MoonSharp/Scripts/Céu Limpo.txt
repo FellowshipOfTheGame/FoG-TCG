@@ -1,12 +1,8 @@
-return{
-	title = "Céu Limpo",
-	type = 't',
-	aspectos = {0, 0, 0, 0},
-	desc = "Remove a atmosfera atual",
-	flavor = "Seria um sinal de esperança? Ou apenas a calmaria antes da tempestade?",
-	cost = 0
-
-	onEnter = function(self, board)
-		board.atmosphere.remove
-	end
-	}
+return {
+	title = "Ceu Limpo",
+	type = 'a',
+	aspects = {0, 0, 0, 0},
+	desc = "desc",
+	flavor = "flavor",
+	cost = 2
+}

@@ -3,7 +3,7 @@ return{
 	type = 'c',
 	aspects = {0, 0, 0, 0},
 	desc = "Ganha +1/+1 para cada outro Goblin em campo",
-	flavor = "Sempre dizem que cérebro ganha de músculo, mas um número muito maior de músculo ás vezes ganha de cérebro.",
+	flavor = "Sempre dizem que cerebro ganha de musculo, mas um numero muito maior de musculo as vezes ganha de cerebro.",
 	cost = 1,
 	atk = 1,
 	hp = 1

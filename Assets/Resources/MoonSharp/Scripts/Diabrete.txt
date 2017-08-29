@@ -2,8 +2,8 @@ return {
 	title = "Diabrete",
 	type = 'c',
 	aspects = {1, 0, 0, 0},
-	desc = "",
-	flavor = "",
+	desc = "desc",
+	flavor = "flavor",
 	cost = 1,
 	atk = 2,
 	hp = 1

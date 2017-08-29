@@ -2,8 +2,8 @@ return{
 	title = "Terraformar",
 	type = 'f',
 	aspectos = {0, 0, 0, 0},
-	desc = "Remove um terreno à sua escolha",
-	flavor = "Com persistência, concentração, e um pequeno meteoro, quase qualquer terreno pode perder suas características mais significativas.",
+	desc = "Remove um terreno a sua escolha",
+	flavor = "Com persistencia, concentracao, e um pequeno meteoro, quase qualquer terreno pode perder suas caracteristicas mais significativas.",
 	cost = 2,
 
 	abilities = {

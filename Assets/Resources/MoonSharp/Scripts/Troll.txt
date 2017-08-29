@@ -3,12 +3,12 @@ return{
 	type = 'c',
 	aspects = {0, 0, 1, 0},
 	desc = "Regenerar",
-	flavor = "Esse espécime fascinante pode morar em dois tipos de habitats distintos: debaixo de pontes, ou em fóruns da internet.",
+	flavor = "Esse especime fascinante pode morar em dois tipos de habitats distintos: debaixo de pontes, ou em foruns da internet.",
 	cost = 2,
 	atk = 1,
-	hp = 3
+	hp = 3,
 
-	onTurnStart = function(self, board)
+	onTurnStart = function(args)
 		self.hp = self.hp +1
 	end
 	}

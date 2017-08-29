@@ -1,12 +1,10 @@
-return{
+return {
 	title = "Arbusto",
 	type = 't',
-	aspectos = {0, 0, 0, 0},
-	desc = "Causa 1 de dano em criaturas inimigas que atacarem esta posição",
-	flavor = "",
+	aspects = {0, 0, 0, 0},
+	desc = "Causa 1 de dano em inimigos que atacam essa posicao",
+	flavor = "flavor",
 	cost = 1
 
-	onDefend = function(enemy)
-		enemy.hp = enemy.hp - 1;		
-	end
-	}
+	--porco espinho
+}

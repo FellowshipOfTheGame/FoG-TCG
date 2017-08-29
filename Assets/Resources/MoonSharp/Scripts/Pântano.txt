@@ -1,12 +1,12 @@
 return{
-	title = "Pântano",
+	title = "Pantano",
 	type = 't',
-	aspectos = {0, 0, 0, 0},
-	desc = "Gera 1 aspecto de Água e 1 aspecto de Terra",
-	flavor = "Na superfície, é o local de descanso das mais variadas criaturas. Uma inspeção mais cautelosa revela a quantidade de criação e renovação ocorrendo ali mesmo, dentre as águas lamacentas e as árvores retorcidas.",
+	aspects = {0, 0, 0, 0},
+	desc = "Gera 1 aspecto de Agua e 1 aspecto de Terra",
+	flavor = "Na superficie, e o local de descanso das mais variadas criaturas. Uma inspecao mais cautelosa revela a quantidade de criacao e renovacao ocorrendo ali mesmo, dentre as aguas lamacentas e as arvores retorcidas.",
 	cost = 3,
 	
-	onEnter = function(self, board, player)
+	onEnter = function(args)
 		player.aspects[2] = player.aspects[2] + 1
 		player.aspects[3] = player.aspects[3] + 1
 	end
