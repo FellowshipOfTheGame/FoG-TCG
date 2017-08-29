@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 9
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -145,6 +145,8 @@ MonoBehaviour:
   illusionPos2: {fileID: 0}
   time: 0
   limit: 20
+  initialHand: 3
+  miniMenu: {fileID: 0}
 --- !u!4 &5963803
 Transform:
   m_ObjectHideFlags: 0
@@ -211,20 +213,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -312,8 +300,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!1 &121306745
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +445,11 @@ Prefab:
         type: 2}
       propertyPath: pos
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212665756840139940, guid: 49efa83076f1adc459894f3cb884c86a,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49efa83076f1adc459894f3cb884c86a, type: 2}
@@ -923,7 +914,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckList:
-  - Thannor
+  - Manfred
+  - Ravina
+  - Ravina
+  - Diabrete
+  - Goblin
+  - Goblin
   index: 1
   mana: 10
   HP: 20
@@ -1078,8 +1074,6 @@ SpriteRenderer:
   m_Size: {x: 4.96, y: 1.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!4 &524960959 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4280749151001038, guid: c265c59565dc5ca43a4db3dab79c4bfd,
@@ -1262,8 +1256,6 @@ SpriteRenderer:
   m_Size: {x: 24.8, y: 35.079998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!1 &649679438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,7 +1332,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 8374f03f2a7a03140b6fb5a92d4176e7, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.719}
   m_FlipX: 0
@@ -1349,8 +1341,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!1 &651670363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,8 +1411,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!1001 &653865414
 Prefab:
   m_ObjectHideFlags: 0
@@ -1968,9 +1956,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckList:
-  - creature
-  - creature
-  - creature
+  - Arbusto
+  - Pantano
+  - amazona
+  - Guaxininja
+  - Hikari
+  - Arbusto
   index: 2
   mana: 10
   HP: 20
@@ -2281,8 +2272,6 @@ SpriteRenderer:
   m_Size: {x: 24.8, y: 35.079998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!4 &1509373818
 Transform:
   m_ObjectHideFlags: 0
@@ -2737,8 +2726,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!1001 &1887987474
 Prefab:
   m_ObjectHideFlags: 0
@@ -2866,6 +2853,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.57856
       objectReference: {fileID: 0}
+    - target: {fileID: 212665756840139940, guid: 49efa83076f1adc459894f3cb884c86a,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: -5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49efa83076f1adc459894f3cb884c86a, type: 2}
   m_IsPrefabParent: 0
@@ -2939,8 +2931,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!1 &1978436458
 GameObject:
   m_ObjectHideFlags: 0

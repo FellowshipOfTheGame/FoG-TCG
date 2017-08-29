@@ -99,10 +99,11 @@ public class Card : MonoBehaviour {
 		DynValue attr = this [attrName];
 		if (attr.IsNil ())
 			return null;
-		return attr;
+        return attr;
 	}
 
     public virtual void OnEnter() {
+
 		EnterEvent (createTable(this));
 	}
 

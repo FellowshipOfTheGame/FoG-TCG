@@ -18,6 +18,8 @@ public class Board : MonoBehaviour {
     public Transform illusionPos2;
     public float time;
     public float limit;
+    public float initialHand;
+    public MiniMenu miniMenu = null;
     Vector3 playerPosition;
 
     void Awake()
@@ -31,8 +33,16 @@ public class Board : MonoBehaviour {
         players = new Player[2];
         players[0] = transform.Find("Player1").GetComponent<Player>();
         playerPosition = players[0].transform.position;
+        players[0].mana = 1;
+
         players[1] = transform.Find("Player2").GetComponent<Player>();
         players[1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
+        players[1].mana = 1;
+        players[1].gameObject.SetActive(false);
+        players[1].capt.canMove = false;
+        players[1].capt.canGenerate = false;
+        players[1].capt.canBuy = false;
+
         illusionPos = this.transform.Find("Table").Find("IllusionPos");
         illusionPos2 = this.transform.Find("Table").Find("IllusionPos2");
         int i, j;
@@ -41,6 +51,10 @@ public class Board : MonoBehaviour {
                 cardMatrix[i, j] = null;
         }
         time = 0.0f;
+        for (i = 1; i <= initialHand; i++) {
+            players[0].PickUpCard();
+            players[1].PickUpCard();
+        }
     }
 	
 	// Update is called once per frame
@@ -74,6 +88,9 @@ public class Board : MonoBehaviour {
             GameObject elevatedCard = illusionPos2.GetChild(0).GetComponent<IllusionScript>().original;
             Destroy(illusionPos2.GetChild(0).gameObject);
         }
+
+        if (miniMenu != null)
+            miniMenu.DestroyMenu(true);
 
         if (currPlayer == 1) {
             EndPlayerTurn(0);
@@ -111,6 +128,9 @@ public class Board : MonoBehaviour {
             StartPlayerTurn(0);
         }
         time = 0;
+        if(players[currPlayer - 1].mana < 10)
+            players[currPlayer - 1].mana++;
+
         players[currPlayer - 1].ResetTurn();
     }
 

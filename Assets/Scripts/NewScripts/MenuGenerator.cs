@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MenuGenerator : MonoBehaviour{
 
+    Board board;
     public GameObject canvas;
     public GameObject genMenu;
     public GameObject genButton;
@@ -12,7 +13,7 @@ public class MenuGenerator : MonoBehaviour{
 
     // Use this for initialization
     void Start () {
-		
+        board = GameObject.FindObjectOfType<Board>() as Board;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +23,7 @@ public class MenuGenerator : MonoBehaviour{
 
     public GameObject CreateMiniMenu(int number, GameObject prev, GameObject next) {
         menu = Instantiate(genMenu, canvas.transform) as GameObject;
+        board.miniMenu = menu.GetComponent<MiniMenu>();
         menu.GetComponent<MiniMenu>().prevMenu = prev;
         menu.GetComponent<MiniMenu>().nextMenu = next;
         int i;

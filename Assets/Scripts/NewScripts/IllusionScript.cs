@@ -31,6 +31,11 @@ public class IllusionScript : MonoBehaviour {
         desc.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformation>().desc.GetComponent<TextMesh>().text;
         flavor.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformation>().flavor.GetComponent<TextMesh>().text;
 
+        if(original.GetComponent<Card>().type == 'c') {
+            atk.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformation>().atk.GetComponent<TextMesh>().text;
+            hp.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformation>().hp.GetComponent<TextMesh>().text;
+        }
+
         int i;
         for (i = 0; i < original.GetComponent<AddCardInformation>().aspects.transform.childCount; i++) {
             GameObject newAspect = Instantiate(original.GetComponent<AddCardInformation>().aspects.transform.GetChild(i).gameObject, aspects.transform);
