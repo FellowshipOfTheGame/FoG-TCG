@@ -4,7 +4,7 @@ end
 
 local resistOliphant = function(args)
 		args[4] = args[4] - 1
-end,
+end
 
 return {
 	title = "Carta 01",
