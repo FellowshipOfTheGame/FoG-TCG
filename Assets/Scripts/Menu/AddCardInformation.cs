@@ -24,6 +24,12 @@ public class AddCardInformation : MonoBehaviour {
         atk.text = card.ATK.ToString();
         hp.text = card.HP.ToString();
 
+		int aux2=0;
+		while (GameData.Images [aux2++].card != card.title && aux2 <= GameData.Images.Count);
+		if(GameData.Images[aux2-1].imagem != null)
+			image.sprite = GameData.Images[aux2-1].imagem;
+		else image.sprite = GameData.Images[GameData.Images.Count-1].imagem;
+
         int i;
         for (i = 0; i < 4; i++)
             aspects.transform.GetChild(i).gameObject.SetActive(false);

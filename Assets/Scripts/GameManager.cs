@@ -118,10 +118,20 @@ public class GameManager : MonoBehaviour {
 				File.WriteAllText (filePath2, JsonData);*/
 
 				GameData.Cards.Add (aux);
+
+				CardImage ci = new CardImage ();
+				ci.card = aux.title;
+				ci.imagem = Resources.Load<Sprite>(aux.title.ToLower());
+				GameData.Images.Add (ci);
 			}
-
-
 		}
+
+		CardImage def = new CardImage ();
+		def.card = "default";
+		def.imagem = Resources.Load<Sprite>("default");
+		if (def.imagem == null)
+			Debug.Log ("Vc  eh trouxa");
+		GameData.Images.Add (def);
 	}
 
 	public void LoadInfos() {
@@ -162,8 +172,7 @@ public class GameManager : MonoBehaviour {
 		AnotherPath = Application.dataPath + "/Dados/"; 
 
 		LoadCards ();
-		LoadInfos ();
-			
+		LoadInfos ();			
     }
 
 }
@@ -173,6 +182,6 @@ public static class GameData {
 	public static ConfigInformation playerInfo = new ConfigInformation();
 	public static List<DeckInformation> Decks = new List<DeckInformation>();
 	public static List<CardInformation> Cards = new List<CardInformation>();
-
+	public static List<CardImage> Images = new List<CardImage>();
 
 }
