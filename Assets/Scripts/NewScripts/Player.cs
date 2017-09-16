@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
         
             GameObject newCard = Instantiate(genericCard, this.transform);
             newCard.GetComponent<Card>().board = this.transform.parent.GetComponent<Board>();
-            newCard.GetComponent<AddCardInformation>().info = newCard.GetComponent<Card>();
+            newCard.GetComponent<AddCardInformationSemCanvas>().info = newCard.GetComponent<Card>();
             newCard.GetComponent<Card>().LoadScript(deckList[index]);
             deckList.RemoveAt(index);
             newCard = null;

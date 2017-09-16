@@ -89,10 +89,10 @@ GameObject:
   - component: {fileID: 224549813515116192}
   - component: {fileID: 222021155009919384}
   - component: {fileID: 114918831799977454}
-  - component: {fileID: 114299847830226116}
   - component: {fileID: 114503752671138372}
   - component: {fileID: 225168055289669392}
-  - component: {fileID: 114250665848800344}
+  - component: {fileID: 114554134588038776}
+  - component: {fileID: 114681055850959060}
   m_Layer: 5
   m_Name: Card
   m_TagString: Card
@@ -388,39 +388,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 0
   m_Text: A
---- !u!114 &114250665848800344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1230770209585012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef1be22d0a9c71b46a0e6310565eab75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  board: {fileID: 0}
-  diff: {x: 0, y: 0, z: 0}
---- !u!114 &114299847830226116
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1230770209585012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1fbb7256b4918d4484b009724fc8ca0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info: {fileID: 0}
-  title: {fileID: 114732584596108334}
-  image: {fileID: 114171554595719686}
-  desc: {fileID: 114951671792474266}
-  flavor: {fileID: 114744732493039616}
-  cost: {fileID: 114150706029582928}
-  atk: {fileID: 114217365281177408}
-  hp: {fileID: 114111737036451170}
-  aspects: {fileID: 1984367439358188}
 --- !u!114 &114387171497793070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -461,14 +428,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding:
     m_Left: 0
-    m_Right: 0
-    m_Top: 7
+    m_Right: -6
+    m_Top: 6
     m_Bottom: 0
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 18.8, y: 18.8}
-  m_Spacing: {x: 0, y: 1.26}
+  m_CellSize: {x: 10, y: 10}
+  m_Spacing: {x: 0, y: 6}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &114442253283553550
@@ -543,6 +510,41 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114554134588038776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1230770209585012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502a3843de3b14a4d9f049fa9b073792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentZone: {fileID: 0}
+  deckListZone: {fileID: 0}
+  minimizedCard: {fileID: 1000012509200632, guid: 6b8df54116c2b994c8523472a164d2c3,
+    type: 2}
+  deckList: {fileID: 0}
+--- !u!114 &114681055850959060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1230770209585012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fbb7256b4918d4484b009724fc8ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 114732584596108334}
+  image: {fileID: 114171554595719686}
+  desc: {fileID: 114951671792474266}
+  flavor: {fileID: 114744732493039616}
+  cost: {fileID: 114150706029582928}
+  atk: {fileID: 114217365281177408}
+  hp: {fileID: 114111737036451170}
+  aspects: {fileID: 1984367439358188}
 --- !u!114 &114732584596108334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -930,7 +932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 256, y: -161}
+  m_AnchoredPosition: {x: 199.3205, y: -301.46597}
   m_SizeDelta: {x: 90, y: 135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224764456200246104

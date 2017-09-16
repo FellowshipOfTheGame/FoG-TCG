@@ -156,7 +156,8 @@ GameObject:
   - component: {fileID: 114279218948556796}
   - component: {fileID: 114841421046843208}
   - component: {fileID: 65121572604801586}
-  - component: {fileID: 114497972969541728}
+  - component: {fileID: 114962849020481172}
+  - component: {fileID: 114867210703641792}
   m_Layer: 0
   m_Name: CardNovoSemCanvas
   m_TagString: Untagged
@@ -626,31 +627,6 @@ MonoBehaviour:
   atk: 0
   hp: 0
   canAttack: 0
---- !u!114 &114497972969541728
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752213681016546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1fbb7256b4918d4484b009724fc8ca0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info: {fileID: 0}
-  title: {fileID: 1421521012982736}
-  image: {fileID: 0}
-  desc: {fileID: 1311728914460966}
-  flavor: {fileID: 1220863719442204}
-  cost: {fileID: 1366434282388158}
-  atk: {fileID: 1266645601338532}
-  hp: {fileID: 1688638111868276}
-  aspects: {fileID: 1594037106630914}
-  fire: {fileID: 21300000, guid: 063b895ccc2e6184ebf97ff267882b41, type: 3}
-  water: {fileID: 21300000, guid: 1d43d350f18e51d40b0ea13f08066243, type: 3}
-  earth: {fileID: 21300000, guid: c5d23c837d643f54c8635ce1eadf2494, type: 3}
-  air: {fileID: 21300000, guid: e57bc79e4f681464d9772ab7ea1767ac, type: 3}
-  spacament: 0.15
 --- !u!114 &114841421046843208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -668,6 +644,51 @@ MonoBehaviour:
     type: 2}
   isDragging: 0
   originPos: {x: 0, y: 0, z: 0}
+--- !u!114 &114867210703641792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752213681016546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f348c13039d1c54a8ea2d43400512ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 0}
+  infoName: 
+  cost: 0
+  aspects: 
+  pos: 0000000000000000
+  type: 0
+  atk: 0
+  hp: 0
+  canAttack: 0
+--- !u!114 &114962849020481172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752213681016546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e964f3af78cf3444bc27aff750c9372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info: {fileID: 0}
+  title: {fileID: 1421521012982736}
+  image: {fileID: 0}
+  desc: {fileID: 1311728914460966}
+  flavor: {fileID: 1220863719442204}
+  cost: {fileID: 1366434282388158}
+  atk: {fileID: 1266645601338532}
+  hp: {fileID: 1688638111868276}
+  aspects: {fileID: 1594037106630914}
+  fire: {fileID: 21300000, guid: 063b895ccc2e6184ebf97ff267882b41, type: 3}
+  water: {fileID: 21300000, guid: 1d43d350f18e51d40b0ea13f08066243, type: 3}
+  earth: {fileID: 21300000, guid: c5d23c837d643f54c8635ce1eadf2494, type: 3}
+  air: {fileID: 21300000, guid: e57bc79e4f681464d9772ab7ea1767ac, type: 3}
+  spacament: 0
 --- !u!212 &212443627103501456
 SpriteRenderer:
   m_ObjectHideFlags: 1
