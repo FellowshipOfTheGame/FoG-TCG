@@ -87,7 +87,10 @@ public class Player : MonoBehaviour {
     {
         HP -= args.Get(4).ToObject<int>();
         print(HP);
-        if (HP <= 0)
+        if (HP <= 0) {
             print("MORREU");
+            Board.winner = 3 - index;
+            print("WINNER:" + Board.winner.ToString());
+        }
     }
 }

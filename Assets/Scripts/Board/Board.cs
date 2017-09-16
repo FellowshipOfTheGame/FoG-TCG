@@ -22,6 +22,8 @@ public class Board : MonoBehaviour {
     public MiniMenu miniMenu = null;
     Vector3 playerPosition;
 
+    public static int winner = 0; //winner = 0 -> ninguem venceu; winner = 1  -> player 1 venceu; winner = 2 -> player 2 venceu
+
     void Awake()
     {
         UserData.RegisterAssembly();

@@ -3,7 +3,7 @@ return {
 	type = 'c',
 	aspects = {0, 0, 1, 0},
 	desc = "Reposicionar, Recebe menos 1 de dano em ataques",
-	flavor = "Faust treinou toda sua vida em uma ordem reclusa de monges. Depois de anos de disciplina e trabalho duro, tornou-se um guerreiro extremamente formidável.",
+	flavor = "Faust treinou toda sua vida em uma ordem reclusa de monges. Depois de anos de disciplina e trabalho duro, tornou-se um guerreiro extremamente formidavel.",
 	cost = 3,
 	atk = 2,
 	hp = 4,
