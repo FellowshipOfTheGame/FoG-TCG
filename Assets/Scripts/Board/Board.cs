@@ -36,10 +36,12 @@ public class Board : MonoBehaviour {
         players[0] = transform.Find("Player1").GetComponent<Player>();
         playerPosition = players[0].transform.position;
         players[0].mana = 1;
+        //players[0].deckList = GameManager.chosenDeck;
 
         players[1] = transform.Find("Player2").GetComponent<Player>();
         players[1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
         players[1].mana = 1;
+        //players[1].deckList = GameManager.chosenDeck;
         players[1].gameObject.SetActive(false);
         players[1].capt.canMove = false;
         players[1].capt.canGenerate = false;

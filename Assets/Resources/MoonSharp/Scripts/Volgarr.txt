@@ -9,7 +9,7 @@ return{
 	hp = 6,
 
 	onDamageDealt = function(self, board, enemy, enemyCommander)
-		if self.atk > enemy.hp
+		if self.atk > enemy.hp then
 			enemyCommander.hp = enemyCommander.hp - (self.atk - enemy.hp)
 		end
 	end

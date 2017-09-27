@@ -4,7 +4,7 @@ return{
 	aspects = {0, 0, 0, 0},
 	desc = "Gera 1 aspecto de Terra",
 	flavor = "Amontoados de terra e rochas, ao contrario de florestas ou rios, nao podem ser cruzados ou modificados com facilidade. Por essa imutabilidade, armazenam e maturam poderosas energias, responsaveis por transformar ate a mais fragil lebre em algo muito mais resistente.",
-	cost = 1
+	cost = 1,
 
 	onEnter = function(self, board, player)
 		player.aspects[3] = player.aspects[3] + 1

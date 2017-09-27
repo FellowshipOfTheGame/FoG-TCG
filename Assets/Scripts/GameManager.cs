@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
 	public Transform ListaDeDecks;
 	public GameObject DeckPrefab;
 
+    public static List<string> chosenDeck;
+
 	public void SaveDeck() {
 		savingDeck = new DeckInformation ();
 
@@ -162,7 +164,8 @@ public class GameManager : MonoBehaviour {
 
 	public void SelectDeck() {
 		GameData.playerInfo.ActiveDeck = LoadDeck.clickedDeck;
-		SaveInfos ();
+        SetGameDeck(); //tirar depois
+        SaveInfos ();
 	}
 
     void Awake() {
@@ -173,6 +176,24 @@ public class GameManager : MonoBehaviour {
 
 		LoadCards ();
 		LoadInfos ();			
+    }
+
+    public void SetGameDeck() {
+        int index = 0;
+
+        while (GameData.Decks[index++].name != LoadDeck.clickedDeck) ;
+        DeckInformation deck = GameData.Decks[index - 1];
+        chosenDeck = new List<string>();
+
+        int i = 0, j = 0;
+        index = 0;
+        while (i < deck.size) {
+            for (j = 0; j < deck.Cards[index].number; j++) {
+                chosenDeck.Add(deck.Cards[index].name);
+            }
+            i += j;
+            index++;
+        }
     }
 
 }
