@@ -21,6 +21,7 @@ public class Board : MonoBehaviour {
     public float initialHand;
     public MiniMenu miniMenu = null;
     Vector3 playerPosition;
+    public bool loadDeckFromMenu;
 
     public static int winner = 0; //winner = 0 -> ninguem venceu; winner = 1  -> player 1 venceu; winner = 2 -> player 2 venceu
 
@@ -30,22 +31,33 @@ public class Board : MonoBehaviour {
         luaEnv = new Script();
     }
 
-	// Use this for initialization
-	void Start () {
-        players = new Player[2];
-        players[0] = transform.Find("Player1").GetComponent<Player>();
-        playerPosition = players[0].transform.position;
-        players[0].mana = 1;
-        //players[0].deckList = GameManager.chosenDeck;
+    void SetPlayer(int index) {
+        players[index - 1] = transform.Find("Player" + index.ToString()).GetComponent<Player>();
+        playerPosition = players[index - 1].transform.position;
+        players[index - 1].mana = 1;
+        if(loadDeckFromMenu && GameManager.chosenDeck != null)
+            players[index - 1].deckList = GameManager.chosenDeck;
+    }
 
-        players[1] = transform.Find("Player2").GetComponent<Player>();
-        players[1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
-        players[1].mana = 1;
-        //players[1].deckList = GameManager.chosenDeck;
-        players[1].gameObject.SetActive(false);
-        players[1].capt.canMove = false;
-        players[1].capt.canGenerate = false;
-        players[1].capt.canBuy = false;
+    void SwitchPlayerState(int index, bool newState) {
+        players[index - 1].gameObject.SetActive(newState);
+        players[index - 1].capt.canMove = newState;
+        players[index - 1].capt.canGenerate = newState;
+        players[index - 1].capt.canBuy = newState;
+
+        if (newState)
+            players[0].transform.position = players[1].transform.position = playerPosition;
+        else
+            players[0].transform.position = players[1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
+    }
+
+    // Use this for initialization
+    void Start () {
+        players = new Player[2];
+        SetPlayer(1);
+        SetPlayer(2);
+        SwitchPlayerState(1, true);
+        SwitchPlayerState(2, false);
 
         illusionPos = this.transform.Find("Table").Find("IllusionPos");
         illusionPos2 = this.transform.Find("Table").Find("IllusionPos2");
@@ -98,35 +110,17 @@ public class Board : MonoBehaviour {
 
         if (currPlayer == 1) {
             EndPlayerTurn(0);
-
-            players[0].gameObject.SetActive(false);
-            players[0].capt.canMove = false;
-            players[0].capt.canGenerate = false;
-            players[0].capt.canBuy = false;
-            players[0].transform.position = players[1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
-
-            players[1].gameObject.SetActive(true);
-            players[1].capt.canMove = true;
-            players[1].capt.canGenerate = true;
-            players[1].capt.canBuy = true;
-            players[1].transform.position = playerPosition;
+     
+            SwitchPlayerState(1, false);
+            SwitchPlayerState(2, true);
             currPlayer = 2;
 
             StartPlayerTurn(1);
         }else {
             EndPlayerTurn(1);
 
-            players[1].gameObject.SetActive(false);
-            players[1].capt.canMove = false;
-            players[1].capt.canGenerate = false;
-            players[1].capt.canBuy = false;
-            players[1].transform.position = players[1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
-
-            players[0].gameObject.SetActive(true);
-            players[0].capt.canMove = true;
-            players[0].capt.canGenerate = true;
-            players[0].capt.canBuy = true;
-            players[0].transform.position = playerPosition;
+            SwitchPlayerState(2, false);
+            SwitchPlayerState(1, true);
             currPlayer = 1;
 
             StartPlayerTurn(0);

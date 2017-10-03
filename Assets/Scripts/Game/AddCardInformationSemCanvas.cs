@@ -6,7 +6,7 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
 
     public Card info;
     public GameObject title;
-    public Image image;
+    public GameObject image;
     public GameObject desc;
     public GameObject flavor;
     public GameObject cost;
@@ -42,6 +42,12 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
         cost.GetComponent<TextMesh>().text = info["cost"].ToObject<int>().ToString();
         desc.GetComponent<TextMesh>().text = info["desc"].ToObject<string>();
         //flavor.GetComponent<TextMesh>().text = info["flavor"].ToObject<string>();
+
+        int aux = 0;
+        while (GameData.Images[aux++].card != info.name && aux < GameData.Images.Count) ;
+        if (GameData.Images[aux - 1].imagem != null)
+            image.GetComponent<SpriteRenderer>().sprite = GameData.Images[aux - 1].imagem;
+        else image.GetComponent<SpriteRenderer>().sprite = GameData.Images[GameData.Images.Count - 1].imagem;
 
 
         int i, j, cont = 0;

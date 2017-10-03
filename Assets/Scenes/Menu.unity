@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 11
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 8
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_ShadowMaskMode: 2
+  m_UseShadowmask: 1
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -1708,7 +1708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.011000001, y: 0}
   m_AnchorMax: {x: 0.17300001, y: 0.76900005}
-  m_AnchoredPosition: {x: 2.600006, y: -0.22996521}
+  m_AnchoredPosition: {x: 2.6000366, y: -0.22996521}
   m_SizeDelta: {x: -3.2999992, y: 1.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &110348289
@@ -9023,7 +9023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.011000001, y: 0}
   m_AnchorMax: {x: 0.17300001, y: 0.76900005}
-  m_AnchoredPosition: {x: 2.600006, y: -0.22996521}
+  m_AnchoredPosition: {x: 2.6000366, y: -0.22996521}
   m_SizeDelta: {x: -3.2999992, y: 1.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621340925
@@ -14005,6 +14005,7 @@ MonoBehaviour:
   m_PreferredHeight: 100
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &905460923
 MonoBehaviour:
   m_ObjectHideFlags: 0
