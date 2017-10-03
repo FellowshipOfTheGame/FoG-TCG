@@ -6,7 +6,9 @@ return{
 	flavor = "As profundas rachaduras que permeiam o planeta sao reminescentes de epocas anteriores, mais instaveis e violentas...",
 	cost = 1,
 	
-	onEnter = function(args)
+	OnEnter = function(args)
+		local board = args[1]
+		local player = board.players[board.currPlayer]
 		player.aspects[1] = player.aspects[1] + 1
 	end
 	}

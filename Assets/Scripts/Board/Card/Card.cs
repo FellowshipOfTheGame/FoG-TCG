@@ -46,7 +46,7 @@ public class Card : MonoBehaviour {
         infoName = name;
         print("tudo bao");
 		Data = board.luaEnv.DoFile (name).Table;
-
+        print(Data);
 		//SetDefaultValues ();
 		RegisterDefaultEvents ();
 	}
@@ -104,7 +104,7 @@ public class Card : MonoBehaviour {
 
     public virtual void OnEnter() {
 
-		EnterEvent (createTable(this));
+		EnterEvent (createTable(board, this));
 	}
 
 	public virtual void OnExit() {

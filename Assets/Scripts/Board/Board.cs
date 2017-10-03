@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using MoonSharp.Interpreter;
 
@@ -25,10 +26,21 @@ public class Board : MonoBehaviour {
 
     public static int winner = 0; //winner = 0 -> ninguem venceu; winner = 1  -> player 1 venceu; winner = 2 -> player 2 venceu
 
+    public static Card GetCardFromObject(DynValue obj)
+    {
+        return obj.ToObject<GameObject>().GetComponent<Card>();
+    }
+
+    public Card GetMatrixValue(int x, int y)
+    {
+        return cardMatrix[x, y].GetComponent<Card>();
+    }
+
     void Awake()
     {
         UserData.RegisterAssembly();
         luaEnv = new Script();
+        luaEnv.Globals["GetCard"] = (Func<DynValue, Card>) (obj => { return GetCardFromObject(obj); }) ;
     }
 
     void SetPlayer(int index) {

@@ -2,11 +2,37 @@ return{
 	title = "Goblin",
 	type = 'c',
 	aspects = {0, 0, 0, 0},
-	desc = "Ganha +1/+1 para cada outro Goblin em campo",
+	desc = "Ganha +1/+0 para cada outro Goblin em campo",
 	flavor = "Sempre dizem que cerebro ganha de musculo, mas um numero muito maior de musculo as vezes ganha de cerebro.",
 	cost = 1,
 	atk = 1,
-	hp = 1
+	hp = 1,
 
-	--TO DO
-	}
+	OnEnter = function(args)
+		local board = args[1]
+		local self = args[2]
+		for i=0,4 do
+			self.print(i)
+			self.print(self.pos[0])
+			local card = board.GetMatrixValue(self.pos[0],i)
+			if card.title == self.title then
+				self.Data.atk = self.Data.atk + 1;
+				card.Data.atk = card.Data.atk + 1;
+			end
+		end
+	end,
+	OnExit = function(args)
+		local board = args[1]
+		local self = args[2]
+		for i=0,4 do
+			local card = board.GetMatrixValue(self.pos[0],i)
+			if card.title == self.title then
+				card.Data.atk = card.Data.atk - 1;
+			end
+		end
+	end,
+	OnTurnEnd = function(args)
+		args[1].print('OI')
+		args[1].print(args[1].Data.atk)
+	end
+}
