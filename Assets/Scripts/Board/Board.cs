@@ -44,11 +44,17 @@ public class Board : MonoBehaviour {
         return null;
     }
 
+    public void Print(DynValue val)
+    {
+        print(val.ToString());
+    }
+
     void Awake()
     {
         UserData.RegisterAssembly();
         luaEnv = new Script();
         luaEnv.Globals["GetCard"] = (Func<DynValue, Card>) (obj => { return GetCardFromObject(obj); }) ;
+        luaEnv.Globals["print"] = (Action<DynValue>) (obj => { Print(obj); });
     }
 
     void SetPlayer(int index) {
