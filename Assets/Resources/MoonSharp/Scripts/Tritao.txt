@@ -8,5 +8,10 @@ return{
 	atk = 1,
 	hp = 2
 
---TO DO
-	}
+
+
+	onEnter = function(self,board,player)
+		hp = hp + (2 * players.aspects[2]);
+		atk = atk + players.aspects[2];
+	end
+}

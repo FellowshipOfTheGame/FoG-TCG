@@ -33,7 +33,15 @@ public class Board : MonoBehaviour {
 
     public Card GetMatrixValue(int x, int y)
     {
-        return cardMatrix[x, y].GetComponent<Card>();
+        //print("x " + x + " y " + y);
+        if (cardMatrix[x, y] != null)
+        {
+            //print(cardMatrix[x, y]);
+            return cardMatrix[x, y].GetComponent<Card>();
+        }
+
+        //print("null");
+        return null;
     }
 
     void Awake()

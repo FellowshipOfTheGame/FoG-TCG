@@ -157,6 +157,7 @@
     <None Include="Assets\Resources\MoonSharp\Scripts\Montanha.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Nonami.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Olifante.txt" />
+    <None Include="Assets\Resources\MoonSharp\Scripts\Oquefalta.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Pantano.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Ravina.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Rio.txt" />

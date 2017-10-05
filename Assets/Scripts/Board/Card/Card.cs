@@ -44,9 +44,7 @@ public class Card : MonoBehaviour {
 	// LoadScript MUST be called from the Board who creates the instance
 	public void LoadScript(string name) {
         infoName = name;
-        print("tudo bao");
 		Data = board.luaEnv.DoFile (name).Table;
-        print(Data);
 		//SetDefaultValues ();
 		RegisterDefaultEvents ();
 	}

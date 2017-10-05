@@ -8,9 +8,10 @@ return{
 	atk = 3,
 	hp = 6,
 
-	onDamageDealt = function(self, board, enemy, enemyCommander)
-		if self.atk > enemy.hp then
-			enemyCommander.hp = enemyCommander.hp - (self.atk - enemy.hp)
+	OnDamageDealt = function(args)
+		local board, self, enemy, dmg = unpack(args)
+		if self.Data.atk > enemy.Data.hp then
+			--enemyCommander.hp = enemyCommander.hp - (self.atk - enemy.hp)
 		end
 	end
 	}

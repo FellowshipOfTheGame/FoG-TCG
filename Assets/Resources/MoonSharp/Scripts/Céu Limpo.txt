@@ -5,4 +5,8 @@ return {
 	desc = "desc",
 	flavor = "flavor",
 	cost = 2
+
+	onEnter = function(self,board,player)
+		board.CardAtm.GetComponent<Card>().Remove()
+	end
 }

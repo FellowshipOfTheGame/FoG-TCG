@@ -12,27 +12,26 @@ return{
 		local board = args[1]
 		local self = args[2]
 		for i=0,4 do
-			self.print(i)
-			self.print(self.pos[0])
-			local card = board.GetMatrixValue(self.pos[0],i)
-			if card.title == self.title then
-				self.Data.atk = self.Data.atk + 1;
-				card.Data.atk = card.Data.atk + 1;
+			local card = board.GetMatrixValue(self.pos[1],i)
+			if card ~= nil then
+				if card.Data.title == self.Data.title then
+					self.Data.atk = self.Data.atk + 1;
+					card.Data.atk = card.Data.atk + 1;
+				end
 			end
 		end
+		self.Data.atk = self.Data.atk -1;
 	end,
 	OnExit = function(args)
 		local board = args[1]
 		local self = args[2]
 		for i=0,4 do
-			local card = board.GetMatrixValue(self.pos[0],i)
-			if card.title == self.title then
-				card.Data.atk = card.Data.atk - 1;
+			local card = board.GetMatrixValue(self.pos[1],i)
+			if card ~= nil then
+				if card.Data.title == self.Data.title then
+					card.Data.atk = card.Data.atk - 1;
+				end
 			end
 		end
-	end,
-	OnTurnEnd = function(args)
-		args[1].print('OI')
-		args[1].print(args[1].Data.atk)
 	end
 }

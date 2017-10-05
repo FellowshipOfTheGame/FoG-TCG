@@ -2,10 +2,22 @@ return{
 	title = "Sol Forte",
 	type = 'a',
 	aspects = {1, 0, 0, 0},
-	desc = "TODAS as criaturas com aspecto e fogo tem +1/+0"
+	desc = "TODAS as criaturas com aspecto e fogo tem +1/+1"
 	flavor = "Em dias como esse, pessoas matariam por um pouco de chuva.",
 	cost = 1
 
---TO DO
+	OnEnter = function(args)
+		local board = args[1]
+		local self = 
+		for i=0,5,1 do
+      		
+			local pos = cardMatrix[][i].GetElement<Card>() 
+      		if board.cardMatrix[][i].GetElement<Card>.aspect[0] > 0  then
+      			cardMatrix[][i].GetElement<Card>().hp = cardMatrix[][i].GetElement<Card>().hp + 1
+      			cardMatrix[][i].GetElement<Card>.atk = cardMatrix[][i].GetElement<Card>.atk + 1
+      		end
+    	end
+	end
+
 
 	}
