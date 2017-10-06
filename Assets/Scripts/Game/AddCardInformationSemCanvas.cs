@@ -43,12 +43,14 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
         desc.GetComponent<TextMesh>().text = info["desc"].ToObject<string>();
         //flavor.GetComponent<TextMesh>().text = info["flavor"].ToObject<string>();
 
-        /*int aux = 0;
-        while (GameData.Images[aux].card != info.name && aux < GameData.Images.Count - 1) aux++;
+        int aux = 0;
+        while (GameData.Images[aux++].card != info.name && aux < GameData.Images.Count - 1);
         if (GameData.Images[aux - 1].imagem != null)
             image.GetComponent<SpriteRenderer>().sprite = GameData.Images[aux - 1].imagem;
         else image.GetComponent<SpriteRenderer>().sprite = GameData.Images[GameData.Images.Count - 1].imagem;
-        */
+
+        float r = 5.715f / image.GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
+        image.transform.localScale = Vector3.one * r;
 
         int i, j, cont = 0;
         for (i = 0; i < this.GetComponent<Card>().aspects.Length; i++) {

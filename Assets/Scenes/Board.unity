@@ -1032,9 +1032,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckList:
+  - Amazona
   - Goblin
-  - Goblin
-  - Goblin
+  - Arbusto
+  - Pantano
   index: 1
   mana: 10
   HP: 20

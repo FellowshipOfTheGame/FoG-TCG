@@ -30,8 +30,12 @@ public class IllusionScript : MonoBehaviour {
         cost.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().cost.GetComponent<TextMesh>().text;
         desc.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().desc.GetComponent<TextMesh>().text;
         flavor.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().flavor.GetComponent<TextMesh>().text;
+        image.GetComponent<SpriteRenderer>().sprite = original.GetComponent<AddCardInformationSemCanvas>().image.GetComponent<SpriteRenderer>().sprite;
 
-        if(original.GetComponent<Card>().type == 'c') {
+        float r = 5.715f / image.GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
+        image.transform.localScale = Vector3.one * r;
+
+        if (original.GetComponent<Card>().type == 'c') {
             atk.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().atk.GetComponent<TextMesh>().text;
             hp.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().hp.GetComponent<TextMesh>().text;
         }
