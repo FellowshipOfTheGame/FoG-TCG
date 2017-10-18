@@ -7,8 +7,8 @@ return{
 	cost = 1,
 	
 	OnEnter = function(args)
-		local board = args[1]
-		local player = board.players[board.currPlayer]
-		player.aspects[1] = player.aspects[1] + 1
+		local board = args[1];
+		generate = {1, 0, 0, 0};
+		board.AddAspects(board.currPlayer, generate);
 	end
 	}

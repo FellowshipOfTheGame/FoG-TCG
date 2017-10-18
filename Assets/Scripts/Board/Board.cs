@@ -31,6 +31,11 @@ public class Board : MonoBehaviour {
         return obj.ToObject<GameObject>().GetComponent<Card>();
     }
 
+    public void AddAspects(int playerIndex, int[] aspects) {
+        for (int i = 0; i < 4; i++)
+            players[playerIndex - 1].aspects[i] += aspects[i];
+    }
+
     public Card GetMatrixValue(int x, int y)
     {
         //print("x " + x + " y " + y);

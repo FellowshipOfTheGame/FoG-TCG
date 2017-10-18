@@ -6,7 +6,9 @@ return{
 	flavor = "Rios sao a manifestacao do ciclo infinito da mudanca: voce nunca tocara nessa mesma agua, nesse mesmo trecho de rio novamente.",
 	cost = 1,
 
-	onEnter = function(args)
-		player.aspects[2] = player.aspects[2] + 1
+	OnEnter = function(args)
+		local board = args[1];
+		generate = {0, 1, 0, 0};
+		board.AddAspects(board.currPlayer, generate);
 	end
 	}
