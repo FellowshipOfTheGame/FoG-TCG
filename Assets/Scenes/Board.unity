@@ -147,7 +147,7 @@ MonoBehaviour:
   limit: 20
   initialHand: 3
   miniMenu: {fileID: 0}
-  loadDeckFromMenu: 0
+  loadDeckFromMenu: 1
 --- !u!4 &5963803
 Transform:
   m_ObjectHideFlags: 0

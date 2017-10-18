@@ -51,7 +51,7 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void PlaySelected() {
-        //GM.SetGameDeck();
+        GM.SetGameDeck();
         SceneManager.LoadScene("Board"); // carregar jogo(trocar Game pelo nome da scene)
 	}
 

@@ -164,7 +164,6 @@ public class GameManager : MonoBehaviour {
 
 	public void SelectDeck() {
 		GameData.playerInfo.ActiveDeck = LoadDeck.clickedDeck;
-        SetGameDeck(); //tirar depois
         SaveInfos ();
 	}
 
@@ -175,16 +174,23 @@ public class GameManager : MonoBehaviour {
 		AnotherPath = Application.dataPath + "/Dados/"; 
 
 		LoadCards ();
-		LoadInfos ();			
+		LoadInfos ();
     }
 
     public void SetGameDeck() {
         int index = 0;
-
-        while (GameData.Decks[index++].name != LoadDeck.clickedDeck) ;
-        DeckInformation deck = GameData.Decks[index - 1];
+        DeckInformation deck = new DeckInformation();
+        if (GameData.Decks.Count > 0) {
+            while (GameData.Decks[index++].name != LoadDeck.clickedDeck) ;
+            deck = GameData.Decks[index - 1];
+        }else {
+            string file = Deckpath + GameData.playerInfo.ActiveDeck + ".json";
+            if (File.Exists(file)) {
+                string JsonDeck = File.ReadAllText(file);
+                deck = JsonUtility.FromJson<DeckInformation>(JsonDeck);
+            }
+        }
         chosenDeck = new List<string>();
-
         int i = 0, j = 0;
         index = 0;
         while (i < deck.size) {
