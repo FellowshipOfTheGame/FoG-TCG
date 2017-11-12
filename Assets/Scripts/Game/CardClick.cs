@@ -41,7 +41,7 @@ public class CardClick : Clickable {
             {
                 isDragging = true;
                 Slot.isChoosingPlace = true;
-                originPos = new Vector3(this.transform.position.x, this.transform.position.y - elevation, this.transform.position.z); ;
+                originPos = new Vector3(this.transform.position.x, this.transform.parent.position.y, this.transform.position.z); ;
                 diff = this.transform.position - board.mousePosition;
                 diff.z = 0.0f;
                 this.GetComponent<BoxCollider>().enabled = false;

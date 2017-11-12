@@ -7,6 +7,12 @@ using MoonSharp.Interpreter;
 [MoonSharpUserData]
 public class Board : MonoBehaviour {
 
+    public float time;
+    public float limit;
+    public float initialHand;
+    public bool loadDeckFromMenu;
+    public int maxHP;
+    [Space(5)]
     public Script luaEnv;
     public int currPlayer = 1;
     public Player[] players;
@@ -17,12 +23,9 @@ public class Board : MonoBehaviour {
     public GameObject dragCard;
     public Transform illusionPos;
     public Transform illusionPos2;
-    public float time;
-    public float limit;
-    public float initialHand;
     public MiniMenu miniMenu = null;
     Vector3 playerPosition;
-    public bool loadDeckFromMenu;
+    public GameObject GameOverScr;
 
     public static int winner = 0; //winner = 0 -> ninguem venceu; winner = 1  -> player 1 venceu; winner = 2 -> player 2 venceu
 
@@ -63,11 +66,15 @@ public class Board : MonoBehaviour {
     }
 
     void SetPlayer(int index) {
-        players[index - 1] = transform.Find("Player" + index.ToString()).GetComponent<Player>();
-        playerPosition = players[index - 1].transform.position;
+        players[index - 1].HP = maxHP;
         players[index - 1].mana = 1;
-        if(loadDeckFromMenu && GameManager.chosenDeck != null)
-            players[index - 1].deckList = GameManager.chosenDeck;
+        if (loadDeckFromMenu && GameManager.chosenDeck != null) {
+            for (int i=0; i < GameManager.chosenDeck.Count; i++)
+                players[index - 1].deckList.Add(GameManager.chosenDeck[i]);
+        } else {
+            for (int i = 0; i < players[index - 1].originalDeck.Count; i++)
+                players[index - 1].deckList.Add(players[index - 1].originalDeck[i]);
+        }
     }
 
     void SwitchPlayerState(int index, bool newState) {
@@ -77,14 +84,17 @@ public class Board : MonoBehaviour {
         players[index - 1].capt.canBuy = newState;
 
         if (newState)
-            players[0].transform.position = players[1].transform.position = playerPosition;
+            players[index - 1].transform.position = playerPosition;
         else
-            players[0].transform.position = players[1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
+            players[index - 1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
     }
 
     // Use this for initialization
     void Start () {
         players = new Player[2];
+        players[0] = transform.Find("Player1").GetComponent<Player>();
+        players[1] = transform.Find("Player2").GetComponent<Player>();
+        playerPosition = players[0].transform.position;
         SetPlayer(1);
         SetPlayer(2);
         SwitchPlayerState(1, true);
@@ -102,6 +112,49 @@ public class Board : MonoBehaviour {
             players[0].PickUpCard();
             players[1].PickUpCard();
         }
+    }
+
+    public void EndGame() {
+        Time.timeScale = 0;
+        GameOverScr.SetActive(true);
+        GameOverScr.GetComponent<GameOverScreen>().Show();
+    }
+
+    public void ResetGame() {
+        Time.timeScale = 1;
+        GameOverScr.SetActive(false);
+        SetPlayer(1);
+        SetPlayer(2);
+        SwitchPlayerState(1, true);
+        SwitchPlayerState(2, false);
+
+        int i, j;
+        for (i = 0; i < 4; i++) {
+            for (j = 0; j < 5; j++) {
+                if (cardMatrix[i, j] != null)
+                    Destroy(cardMatrix[i, j]);
+
+                cardMatrix[i, j] = null;
+            }
+        }
+
+        time = 0.0f;
+        for (i = players[0].transform.childCount - 1; i>=0; i--)
+            Destroy(players[0].transform.GetChild(i).gameObject);
+
+        players[0].transform.DetachChildren();
+
+        for (i = players[1].transform.childCount - 1; i >= 0; i--)
+            Destroy(players[1].transform.GetChild(i).gameObject);
+
+        players[1].transform.DetachChildren();
+
+        for (i = 1; i <= initialHand; i++) {
+            players[0].PickUpCard();
+            players[1].PickUpCard();
+        }
+
+        currPlayer = 1;
     }
 	
 	// Update is called once per frame

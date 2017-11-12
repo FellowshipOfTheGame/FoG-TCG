@@ -6,6 +6,7 @@ using MoonSharp.Interpreter;
 [MoonSharpUserData]
 public class Player : MonoBehaviour {
 
+    public List<string> originalDeck;
     public List<string> deckList;
     public int index;
     public int mana;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour {
     public bool canBuy = true;
     public bool canPlay = true;
 
+    public Board board;
     // Use this for initialization
     void Start () {
         aspects = new int[4];
@@ -28,11 +30,6 @@ public class Player : MonoBehaviour {
             aspects[i] = 0;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void ResetTurn() {
         canBuy = true;
         canPlay = true;
@@ -57,7 +54,7 @@ public class Player : MonoBehaviour {
         if (this.transform.childCount % 2 == 0) {
             initialShift = (cardDist + cardWeight) / 2;
             int i, j = 0;
-            for(i= this.transform.childCount / 2 - 1; i >= 0; i--) {
+            for(i = this.transform.childCount / 2 - 1; i >= 0; i--) {
                 this.transform.GetChild(i).position = new Vector3(myPos.x - initialShift - j * (cardDist + cardWeight), myPos.y, -3.55f);
                 j++;
             }
@@ -87,9 +84,8 @@ public class Player : MonoBehaviour {
         HP -= args.Get(4).ToObject<int>();
         print(HP);
         if (HP <= 0) {
-            print("MORREU");
             Board.winner = 3 - index;
-            print("WINNER:" + Board.winner.ToString());
+            board.EndGame();
         }
     }
 }
