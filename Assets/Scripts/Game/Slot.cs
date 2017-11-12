@@ -28,7 +28,7 @@ public class Slot : Clickable {
         
         if (isChoosingPlace) {
             char cardType = board.dragCard.GetComponent<Card>().type;
-            if ((cardType != 'a' && board.currPlayer == pos[0]) || (cardType == 'a' && pos[0] == 3))
+            if ((cardType != 'a' && board.currPlayer == pos[0]) || (cardType == 'a' && pos[0] == 4))
                 rightPlace = true;
             else
                 rightPlace = false;
@@ -37,9 +37,9 @@ public class Slot : Clickable {
             
             if (cardType == 'c' && cards[1] == null) {
                 isFull = false;
-            } else if ((cardType == 't' || cardType == 'a') && cards[0] == null) {
+            } else if ((cardType == 't') && cards[0] == null) {
                 isFull = false;
-            } else if (cardType == 's') {
+            } else if (cardType == 's' || cardType == 'a') {
                 isFull = false;
             } else {
                 isFull = true;

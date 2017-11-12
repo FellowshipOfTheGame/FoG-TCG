@@ -66,6 +66,10 @@ public class CardClick : Clickable {
         if (board.slot != null) {
 
             this.transform.parent.GetComponent<Player>().mana -= this.GetComponent<Card>().cost;
+            if (this.GetComponent<Card>().type == 'a' && board.slot.transform.childCount > 0) {
+                board.slot.transform.GetChild(0).GetComponent<Card>().Remove();
+                board.slot.transform.DetachChildren();
+            }
             this.transform.SetParent(board.slot.transform);
             board.players[board.currPlayer - 1].GetComponent<Player>().RefreshChildPositon();
             this.transform.position = board.slot.transform.position;
@@ -100,7 +104,8 @@ public class CardClick : Clickable {
                     this.GetComponent<Card>().pos[1] = pos[1];
                 }
             } else if (this.GetComponent<Card>().type == 'a') {
-                board.slot.GetComponent<Slot>().cards[0] = this.gameObject;
+                board.slot.GetComponent<Slot>().cards[1] = this.gameObject;
+                board.slot.GetComponent<Slot>().cards[0] = null;
                 this.GetComponent<Card>().pos[0] = -1;
                 this.GetComponent<Card>().pos[1] = -1;
                 board.cardAtm = this.gameObject;

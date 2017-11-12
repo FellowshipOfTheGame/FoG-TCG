@@ -177,7 +177,9 @@ public class Card : MonoBehaviour {
 
     public void Remove()
     {
-        board.cardMatrix[pos[0], pos[1]] = null;
+        if(type != 'a')
+            board.cardMatrix[pos[0], pos[1]] = null;
+
         this.OnExit();
         Destroy(this.gameObject);
         print("DESTRUCTION");
