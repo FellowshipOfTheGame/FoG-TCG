@@ -55,25 +55,25 @@ public class Player : MonoBehaviour {
             initialShift = (cardDist + cardWeight) / 2;
             int i, j = 0;
             for(i = this.transform.childCount / 2 - 1; i >= 0; i--) {
-                this.transform.GetChild(i).position = new Vector3(myPos.x - initialShift - j * (cardDist + cardWeight), myPos.y, -3.55f);
+                this.transform.GetChild(i).position = new Vector3(myPos.x - initialShift - j * (cardDist + cardWeight), myPos.y, myPos.z);
                 j++;
             }
             j = 0;
             for (i = this.transform.childCount / 2; i <= this.transform.childCount - 1; i++) {
-                this.transform.GetChild(i).position = new Vector3(myPos.x + initialShift + j * (cardDist + cardWeight), myPos.y, -3.55f);
+                this.transform.GetChild(i).position = new Vector3(myPos.x + initialShift + j * (cardDist + cardWeight), myPos.y, myPos.z);
                 j++;
             }
         }else {
             initialShift = cardWeight + cardDist;
-            this.transform.GetChild((this.transform.childCount - 1) / 2).position = new Vector3(myPos.x, myPos.y, -3.55f);
+            this.transform.GetChild((this.transform.childCount - 1) / 2).position = new Vector3(myPos.x, myPos.y, myPos.z);
             int i, j = 0;
             for (i = (this.transform.childCount - 1) / 2 - 1; i >= 0; i--) {
-                this.transform.GetChild(i).position = new Vector3(myPos.x - initialShift - j * (cardDist + cardWeight), myPos.y, -3.55f);
+                this.transform.GetChild(i).position = new Vector3(myPos.x - initialShift - j * (cardDist + cardWeight), myPos.y, myPos.z);
                 j++;
             }
             j = 0;
             for (i = (this.transform.childCount - 1) / 2 + 1; i <= this.transform.childCount - 1; i++) {
-                this.transform.GetChild(i).position = new Vector3(myPos.x + initialShift + j * (cardDist + cardWeight), myPos.y, -3.55f);
+                this.transform.GetChild(i).position = new Vector3(myPos.x + initialShift + j * (cardDist + cardWeight), myPos.y, myPos.z);
                 j++;
             }
         }

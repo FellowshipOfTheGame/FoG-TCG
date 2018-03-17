@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: PergaminhoA
+  m_Controller: {fileID: 9100000, guid: 9b85907b304e95e43b517270d629c321, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 90379658ad168124c80b0dd8cb984687, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9db89f68662d49e45bfa93451785c155, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d03152b633e1e8f4a835cbc7225f7264, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 622cdb832553dc84d9c74471f2077b6f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d280bfc62de9dd54ba84e9968dfd1393, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 16462954ad38c494088547920161b3b8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ef467915987c2c746bd448f7201d3fb3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0ff558eb91b49084bbb04a3f861b4ee4, type: 2}

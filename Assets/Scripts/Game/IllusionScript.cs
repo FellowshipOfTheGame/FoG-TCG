@@ -5,13 +5,13 @@ using UnityEngine;
 public class IllusionScript : MonoBehaviour {
 
     public GameObject original;
-    public GameObject title;
-    public GameObject image;
-    public GameObject desc;
-    public GameObject flavor;
-    public GameObject cost;
-    public GameObject atk;
-    public GameObject hp;
+    public TextMesh title;
+    public SpriteRenderer image;
+    public TextMesh desc;
+    public TextMesh flavor;
+    public TextMesh cost;
+    public TextMesh atk;
+    public TextMesh hp;
     public GameObject aspects;
     [Space(5)]
     public float spinVelocity;
@@ -26,24 +26,27 @@ public class IllusionScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         name = original.name + "_proj";
-        title.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().title.GetComponent<TextMesh>().text;
-        cost.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().cost.GetComponent<TextMesh>().text;
-        desc.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().desc.GetComponent<TextMesh>().text;
-        flavor.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().flavor.GetComponent<TextMesh>().text;
-        image.GetComponent<SpriteRenderer>().sprite = original.GetComponent<AddCardInformationSemCanvas>().image.GetComponent<SpriteRenderer>().sprite;
+        title.text = original.GetComponent<AddCardInformationSemCanvas>().title.text;
+        cost.text = original.GetComponent<AddCardInformationSemCanvas>().cost.text;
+        desc.text = original.GetComponent<AddCardInformationSemCanvas>().desc.text;
+        flavor.text = original.GetComponent<AddCardInformationSemCanvas>().flavor.text;
+        image.sprite = original.GetComponent<AddCardInformationSemCanvas>().image.sprite;
 
-        float r = 5.715f / image.GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
+        float r = 3.0f / image.sprite.bounds.extents.x;
         image.transform.localScale = Vector3.one * r;
 
         if (original.GetComponent<Card>().type == 'c') {
-            atk.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().atk.GetComponent<TextMesh>().text;
-            hp.GetComponent<TextMesh>().text = original.GetComponent<AddCardInformationSemCanvas>().hp.GetComponent<TextMesh>().text;
+            atk.transform.parent.gameObject.SetActive(true);
+            atk.text = original.GetComponent<AddCardInformationSemCanvas>().atk.text;
+            hp.text = original.GetComponent<AddCardInformationSemCanvas>().hp.text;
         }
 
         int i;
         for (i = 0; i < original.GetComponent<AddCardInformationSemCanvas>().aspects.transform.childCount; i++) {
             GameObject newAspect = Instantiate(original.GetComponent<AddCardInformationSemCanvas>().aspects.transform.GetChild(i).gameObject, aspects.transform);
-            newAspect.transform.position = aspects.transform.position - new Vector3(0, i * spacament, 0);
+            newAspect.transform.position = aspects.transform.position + new Vector3(i * spacament, 0.0f, 0.0f);
+            if (i > 2)
+                newAspect.transform.position += new Vector3(0.45f, 0.0f, 0.0f);
         }
 
         angle = 0;

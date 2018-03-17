@@ -1,23 +1,40 @@
 return{
 	title = "Sol Forte",
 	type = 'a',
-	aspects = {1, 0, 0, 0},
-	desc = "TODAS as criaturas com aspecto e fogo tem +1/+1"
+	aspects = {0, 0, 0, 0},
+	desc = "TODAS as criaturas com aspecto e fogo tem +1/+1",
 	flavor = "Em dias como esse, pessoas matariam por um pouco de chuva.",
-	cost = 1
+	cost = 1,
 
 	OnEnter = function(args)
 		local board = args[1]
-		local self = 
-		for i=0,5,1 do
-      		
-			local pos = cardMatrix[][i].GetElement<Card>() 
-      		if board.cardMatrix[][i].GetElement<Card>.aspect[0] > 0  then
-      			cardMatrix[][i].GetElement<Card>().hp = cardMatrix[][i].GetElement<Card>().hp + 1
-      			cardMatrix[][i].GetElement<Card>.atk = cardMatrix[][i].GetElement<Card>.atk + 1
-      		end
-    	end
+		local self = args[2]
+		for n=1,2 do
+			for i=0,4 do
+				local card = board.GetMatrixValue(n,i)
+				if card ~= nil then
+					if card.Data.aspects[1] > 0 then
+						card.Data.atk = card.Data.atk + 1;
+					end
+					print(card.Data.atk)
+				end
+			end
+		end
+	end,
+
+	OnExit = function(args)
+		local board = args[1]
+		local self = args[2]
+		for n=1,2 do
+			for i=0,4 do
+				local card = board.GetMatrixValue(n,i)
+				if card ~= nil then
+					if card.Data.aspects[1] > 0 then
+						card.Data.atk = card.Data.atk - 1;
+					end
+				end
+				print(self.Data.atk)
+			end
+		end
 	end
-
-
-	}
+}

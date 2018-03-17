@@ -1,7 +1,7 @@
 return{
 	title = "Volgarr",
 	type = 'c',
-	aspects = {2, 0, 0, 0},
+	aspects = {0, 0, 0, 0},
 	desc = "Atropelar",
 	flavor = "No caminho desse guerreiro ha apenas a morte. Nao a dele, e claro.",
 	cost = 4,
@@ -10,8 +10,9 @@ return{
 
 	OnDamageDealt = function(args)
 		local board, self, enemy, dmg = unpack(args)
+		local player = 6/(board.currPlayer * 3)
 		if self.Data.atk > enemy.Data.hp then
-			--enemyCommander.hp = enemyCommander.hp - (self.atk - enemy.hp)
+			board.players[player].hP = board.players[player].hP + enemy.Data.hp
 		end
 	end
 	}

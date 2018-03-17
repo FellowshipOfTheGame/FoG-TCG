@@ -26,10 +26,11 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                 if (deckListManager.CheckCardCount(this.name)) {
                     mouseOffset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
                     cardCopy = Instantiate(this.gameObject);
+                    cardCopy.GetComponent<AddCardInformation>().card = this.GetComponent<AddCardInformation>().card;
                     RectTransform rt = cardCopy.GetComponent<RectTransform>();
                     rt.sizeDelta = new Vector2(90, 135);
                     cardCopy.transform.SetParent(canvas.transform);
-                    cardCopy.transform.localScale = Vector3.one;
+                    cardCopy.transform.localScale = this.transform.localScale;
                     currentZone = collectionZone.transform;
                     cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
 

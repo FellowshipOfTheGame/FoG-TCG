@@ -19,25 +19,31 @@ public class Menu : MonoBehaviour {
 	public GameObject GOMenu;
 	public GameObject GOJogar;
 	public GameObject GOCartas;
+    public GameObject GOEscolher;
 	public GameObject GOComprarC;
 	public GameObject GOGaleria;
 	public GameObject GODecks;
 	public GameObject GONovoDeck;
+    public GameObject GOLatDeck;
+    public GameObject GOLatCriaDeck;
 	public GameObject GOStats;
 	public GameObject GOConta;
 	public GameObject GOConfig;
+    public GameObject GOConfigMenu;
 	public GameObject GOOpcoes;
 	public GameObject GOCredit;
 	public GameObject GOLogin;
 	public GameObject GOCadast;
-
+    public GameObject GOConfirmSair;
+    public Book1C[] books;
 	private EventSystem ES;
 	public PlaySceneMusic Music;
 	public GameManager GM;
 
+    int cBook = 0;
 	void Update() {
 		ES = EventSystem.current;
-
+        /*
 		if (ES.currentSelectedGameObject == null){
 			if (GOMenu.activeInHierarchy)
 				ES.SetSelectedGameObject (Play.gameObject);
@@ -47,7 +53,7 @@ public class Menu : MonoBehaviour {
 
 			if (GOCredit.activeInHierarchy)
 				ES.SetSelectedGameObject (VoltarCred.gameObject);
-		}
+		}*/
 	}
 
 	public void PlaySelected() {
@@ -72,53 +78,90 @@ public class Menu : MonoBehaviour {
 		GOMenu.SetActive (false);
 	}
 
+    public void MudarLivro() {
+        books[cBook].transform.parent.gameObject.SetActive(false);
+        cBook++;
+        if (cBook > 2)
+            cBook = 0;
+
+        books[cBook].transform.parent.gameObject.SetActive(true);
+    }
+
 	public void JogarSelected() {
-        Desativar();
+        cBook = 0;
 		GOJogar.SetActive (true);
-		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+        books[0].anim.SetTrigger("Open");
 	}
 
 	public void CartasSelected() {
-		Desativar();
+        cBook = 1;
 		GOCartas.SetActive (true);
-		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+        GOComprarC.SetActive(false);
+        GOGaleria.SetActive(false);
+        books[1].nextPage = GOEscolher;
+        books[1].changePage();
+        books[1].anim.SetTrigger("Open");
 	}
 
+    public void VoltarCartas() {
+        books[1].nextPage = GOEscolher;
+        books[1].anim.SetTrigger("Back");
+    }
+
 	public void ComprarCSelected() {
-		Desativar();
-		GOComprarC.SetActive (true);
-		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+        books[1].nextPage = GOComprarC;
+        books[1].anim.SetTrigger("Go");
 	}
 
 	public void GaleriaSelected() {
-		Desativar();
-		GOGaleria.SetActive (true);
-		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+        books[1].nextPage = GOGaleria;
+        books[1].anim.SetTrigger("Go");
+        GOGaleria.SetActive (true);
 	}
 
 	public void DecksSelected() {
-		Desativar();
+        cBook = 2;
         CollectionDraggable.canDrag = false;
-        GODecks.transform.parent.gameObject.SetActive(true);
-		GODecks.SetActive (true);
-		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+        GODecks.SetActive(false);
+        GONovoDeck.SetActive(false);
+        books[2].nextPage = GODecks;
+        books[2].nextSide = GOLatDeck;
+        books[2].anim.SetTrigger("Open");
 		GM.LoadDecks ();
 	}
 
+    public void VoltarDeck() {
+        CollectionDraggable.canDrag = false;
+        books[2].nextPage = GODecks;
+        books[2].nextSide = GOLatDeck;
+        books[2].anim.SetTrigger("Prev");
+    }
+
 	public void NovoDeckSelected() {
-		Desativar();
-		GONovoDeck.SetActive (true);
         CollectionDraggable.canDrag = true;
-        CollectionDraggable.collectionZone = GONovoDeck.transform.Find("MenuLateral").Find("Cards").Find("ScrollContent").GetChild(0).gameObject;
+        CollectionDraggable.collectionZone = GOLatCriaDeck.transform.Find("Cards").Find("ScrollContent").GetChild(0).gameObject;
         CollectionDraggable.deckListManager = CollectionDraggable.collectionZone.GetComponent<DeckListManager>();
         CollectionDraggable.canvas = this.transform.GetComponent<Canvas>();
-        ES.SetSelectedGameObject (VoltarDecks.gameObject);
+        books[2].nextPage = GONovoDeck;
+        books[2].nextSide = GOLatCriaDeck;
+        books[2].anim.SetTrigger("Next");
 	}
 
-	public void StatsSelected() {
-		Desativar();
-		GOStats.SetActive (true);
-		ES.SetSelectedGameObject (VoltarConfig.gameObject);
+    public void ConfigSelected() {
+        GOConfig.GetComponent<Animator>().SetTrigger("Move");
+    }
+
+    public void VoltarConfiguracao() {
+        GOConfig.GetComponent<Animator>().SetTrigger("Move");
+    }
+
+    public void VoltarAba() {
+        GOConfig.GetComponent<Animator>().SetTrigger("Prev");
+    }
+
+    public void StatsSelected() {
+        Pergaminho.activeTab = GOStats.GetComponent<Animator>();
+        GOConfig.GetComponent<Animator>().SetTrigger("Next");
 	}
 
 	public void ContaSelected() {
@@ -127,23 +170,15 @@ public class Menu : MonoBehaviour {
 		ES.SetSelectedGameObject (VoltarConfig.gameObject);
 	}
 
-	public void ConfigSelected() {
-		Desativar();
-		GOConfig.SetActive (true);
-		ES.SetSelectedGameObject (VoltarCred.gameObject);		
-	}
-
 	public void OpcoesSelected() {
-		Desativar();
-		GOOpcoes.SetActive (true);
-		ES.SetSelectedGameObject (VoltarCred.gameObject);		
-	}
+        Pergaminho.activeTab = GOOpcoes.GetComponent<Animator>();
+        GOConfig.GetComponent<Animator>().SetTrigger("Next");
+    }
 
 	public void CreditsSelected() {
-		Desativar();
-		GOCredit.SetActive (true);
-		ES.SetSelectedGameObject (VoltarCred.gameObject);		
-	}
+        Pergaminho.activeTab = GOCredit.GetComponent<Animator>();
+        GOConfig.GetComponent<Animator>().SetTrigger("Next");
+    }
 
 	public void LoginSelected() {
 		Desativar();
@@ -158,10 +193,18 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void VoltarMenu() {
-		Desativar();
+        books[cBook].anim.SetTrigger("Close");
 		GOMenu.SetActive (true);
 		ES.SetSelectedGameObject (Play.gameObject);
 	}
+
+    public void SureExit() {
+        GOConfirmSair.GetComponent<Animator>().SetTrigger("Move");
+    }
+
+    public void ConfirmExit() {
+        GOConfirmSair.GetComponent<Animator>().SetTrigger("Exit");
+    }
 
 	public void ExitSelected() {
 		Application.Quit ();

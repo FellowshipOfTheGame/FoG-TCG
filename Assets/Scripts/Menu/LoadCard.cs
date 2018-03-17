@@ -7,19 +7,26 @@ public class LoadCard : MonoBehaviour {
 
 	public Text dinheiro;
 
-	public Text infos;
+	public Text nome;
+    public Text tipo;
+    public Text custo;
+    public Image image;
 	public Text descricao;
-
+    public Text flavor;
+    public Text atk;
+    public Text hp;
 	public Text qtdd;
 	public Text preco;
-	public Text nivel;
-	public Text preco_nivel;
+	//public Text nivel;
+	//public Text preco_nivel;
 
 	public Button comprar;
-	public Button upgrade;
+	//public Button upgrade;
 
 	public static CardInformation clickedCard = null;
+    public static Sprite chosenArt = null;
 	public static bool modificado = true;
+    public bool inGallery;
 
 	void Update() {
 		if (modificado) {
@@ -29,39 +36,51 @@ public class LoadCard : MonoBehaviour {
 	}
 
 	public void LoadInfo() {
-		dinheiro.text = ""+GameData.playerInfo.money;
-
 		if(clickedCard != null) {
-			if (GameData.playerInfo.money >= clickedCard.price*(clickedCard.qtdd+1) && clickedCard.qtdd < 3) 
-				comprar.interactable = true;
-			else
-				comprar.interactable = false;
-
-			if (GameData.playerInfo.money >= clickedCard.lvl_price && clickedCard.lvl < 3) 
-				upgrade.interactable = true;
-			else
-				upgrade.interactable = false;
-			
-
-			infos.text = "Nome: " + clickedCard.title;
-
-			switch (clickedCard.type) {
+            nome.transform.parent.gameObject.SetActive(true);
+            nome.text = clickedCard.title;
+            custo.text = clickedCard.cost.ToString();
+            atk.text = "--";
+            hp.text = "--";
+            switch (clickedCard.type) {
 				case 'c':
-					infos.text += "\nTipo: Criatura"; break;
+					tipo.text = "Criatura";
+                    atk.text = clickedCard.ATK.ToString();
+                    hp.text = clickedCard.HP.ToString();
+                    break;
 				case 't':
-					infos.text += "\nTipo: Terreno"; break;
+                    tipo.text = "Terreno"; break;
 				case 'a':
-					infos.text += "\nTipo: Atmosfera"; break;
+                    tipo.text = "Atmosfera"; break;
 			}
+            image.gameObject.SetActive(true);
+            image.sprite = chosenArt;
+      
+			descricao.text = clickedCard.desc;
+            flavor.text = clickedCard.flavor;
 
-			infos.text += "\nDescrição: ";
-			descricao.text = "\t" + clickedCard.desc;
-
-			qtdd.text = "0"+ clickedCard.qtdd;
-			preco.text = ""+  clickedCard.price * (clickedCard.qtdd+1);
-			nivel.text = "0"+  clickedCard.lvl;
-			preco_nivel.text = ""+  clickedCard.lvl_price;
-		
+            if (!inGallery) {
+                if (GameData.playerInfo.money >= clickedCard.price * (clickedCard.qtdd + 1) && clickedCard.qtdd < 3) {
+                    comprar.interactable = true;
+                    comprar.gameObject.SetActive(true);
+                } else {
+                    comprar.interactable = false;
+                    comprar.gameObject.SetActive(false);
+                }
+                /*
+                if (GameData.playerInfo.money >= clickedCard.lvl_price && clickedCard.lvl < 3) 
+                    upgrade.interactable = true;
+                else
+                    upgrade.interactable = false;
+                */
+                dinheiro.text = "" + GameData.playerInfo.money;
+                qtdd.text = "0" + clickedCard.qtdd.ToString();
+                preco.text = (clickedCard.price * (clickedCard.qtdd + 1)).ToString();
+                /*
+                nivel.text = "0"+  clickedCard.lvl;
+                preco_nivel.text = ""+  clickedCard.lvl_price;
+                */
+            }
 		}
 	}
 }

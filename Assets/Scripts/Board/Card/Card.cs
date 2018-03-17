@@ -106,7 +106,7 @@ public class Card : MonoBehaviour {
 	}
 
 	public virtual void OnExit() {
-        ExitEvent (createTable(this));
+        ExitEvent (createTable(board, this));
 	}
 
 	public virtual void OnTurnStart() {
@@ -177,7 +177,7 @@ public class Card : MonoBehaviour {
 
     public void Remove()
     {
-        if(type != 'a')
+        if (type != 'a')
             board.cardMatrix[pos[0], pos[1]] = null;
 
         this.OnExit();

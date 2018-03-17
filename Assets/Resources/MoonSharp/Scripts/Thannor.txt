@@ -1,12 +1,34 @@
 return{
 	title = "Thannor",
 	type = 'c',
-	aspects = {0, 0, 2, 0},
+	aspects = {0, 0, 0, 0},
 	desc = "Ganha +1/+2 se estiver sobre um terreno de terra",
 	flavor = "Treinado por seu pai a usar um arco longo para cacar desde pequeno, Thannor viu sua aldeia ser dizimada por orcs e foi forcado a fugir. Agora ele faz parte da resistencia que luta para livrar a regiao do controle dos orcs que destruiram seu lar.",
 	cost = 3,
 	atk = 3,
-	hp = 6
+	hp = 6,
 
---TO DO
-	}
+	OnEnter = function(args)
+		local board = args[1]
+		local self =  args[2]
+		local player = board.currPlayer
+		local terrain
+		if player == 1 then
+			terrain =  board.GetMatrixValue(0,self.pos[2])
+		end 
+		if player == 2 then
+			 terrain =  board.GetMatrixValue(4,self.pos[2])
+		end
+		
+		if terrain ~= nil then
+			if terrain.Data.elements[3] > 0 then
+				self.Data.atk = self.Data.atk + 1
+				self.Data.hp = self.Data.hp + 2
+				print("Aumented")
+				print(self.Data.hp)
+			end
+		end
+
+
+	end
+}

@@ -1,0 +1,40 @@
+Guaxininja --- Reposicionar
+Faust ----- Reposicionar
+Manfred -- Reposicionar
+
+
+
+
+---------------MOREORLESS-----------------------------------
+Sol Forte --- Ele percorre todo o tabuleiro a add mais um em quem é de fogo. Problema : Temos que fazer isso para cada carta que entra em jogo. Criar evento
+Arbursto  ------ Criar Evento
+Céu Limpo ------ Problema: Colocar a carta em cima de outra atmosfera
+Terraformar ------- Criar função no board
+
+	public void removeAtmos()
+	{
+		cardAtm.GetComponent<Card>().Remove();
+		Debug.Log ("Hey");
+	}
+
+-------------- DONE ------------------------------
+Goblin 	   -------- Finished
+Hikari	   -------- Finished
+Olifante   --------	Finished
+
+Troll      -------- Finished   x
+Thannor    -------- Finished   x
+Tritão     -------- Finished   x            
+Nonami	   -------- Dar uma olhadinha no código x
+Volgarr    -------- Finished   x
+
+Ravina     -------- Finished   x
+Montanha   -------- Finished   x
+Rio        -------- Finished   x
+Pantano    -------- Finished   x
+
+----------------------- TEST -----------------------------------------
+Lucius     -------- Não consigo jogar o lucius no game
+
+
+22 cartas

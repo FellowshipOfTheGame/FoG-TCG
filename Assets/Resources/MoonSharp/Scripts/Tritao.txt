@@ -6,10 +6,14 @@ return{
 	flavor = "Nas profundezas dos Grandes Lagos, uma nacao de guerreiros vive em isolamento, especialistas em tecnicas marciais com o tridente.",
 	cost = 4,
 	atk = 1,
-	hp = 2
+	hp = 2,
 
-	onEnter = function(self,board,player)
-		hp = hp + (2 * players.aspects[2]);
-		atk = atk + players.aspects[2];
+	OnEnter = function(args)
+		local self = args[2]
+		local board = args[1]
+		local player = board.players[board.currPlayer]
+		self.Data.hp = self.Data.hp + (2 * player.aspects[2])
+		self.Data.atk = self.Data.atk + 1
+		print(self.Data.hp)
 	end
 }

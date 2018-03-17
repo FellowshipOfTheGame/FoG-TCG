@@ -16,7 +16,7 @@ public class Tabs : MonoBehaviour {
 		Tab3.SetActive (false);
 		Tab4.SetActive (false);
 		Tab5.SetActive (false);
-		Tab6.SetActive (false);
+		//Tab6.SetActive (false);
 	}
 
 	public void ShowTab1() {

@@ -2,6 +2,7 @@ return{
 	title = "Ravina",
 	type = 't',
 	aspects = {0, 0, 0, 0},
+	elements = {1, 0, 0, 0},
 	desc = "Gera 1 aspecto de Fogo",
 	flavor = "As profundas rachaduras que permeiam o planeta sao reminescentes de epocas anteriores, mais instaveis e violentas...",
 	cost = 1,

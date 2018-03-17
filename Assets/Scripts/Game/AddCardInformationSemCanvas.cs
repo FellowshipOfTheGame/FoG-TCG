@@ -5,14 +5,18 @@ using UnityEngine.UI;
 public class AddCardInformationSemCanvas : MonoBehaviour {
 
     public Card info;
-    public GameObject title;
-    public GameObject image;
-    public GameObject desc;
-    public GameObject flavor;
-    public GameObject cost;
-    public GameObject atk;
-    public GameObject hp;
+    public TextMesh title;
+    public SpriteRenderer image;
+    public TextMesh desc;
+    public TextMesh flavor;
+    public TextMesh cost;
+    public TextMesh atk;
+    public TextMesh hp;
     public GameObject aspects;
+    [Space(5)]
+    public SpriteRenderer minImage;
+    public TextMesh minAtk;
+    public TextMesh minHp;
 
     [Space(10)]
     public Sprite fire;
@@ -28,33 +32,53 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
         this.GetComponent<Card>().type = info["type"].ToObject<char>();
         this.GetComponent<Card>().aspects = info["aspects"].ToObject<int[]>();
         if(this.GetComponent<Card>().type == 'c') {
+            atk.transform.parent.gameObject.SetActive(true);
             this.GetComponent<Card>().atk = info["atk"].ToObject<int>();
-            atk.GetComponent<TextMesh>().text = info["atk"].ToObject<int>().ToString();
+            atk.text = info["atk"].ToObject<int>().ToString();
             this.GetComponent<Card>().hp = info["hp"].ToObject<int>();
-            hp.GetComponent<TextMesh>().text = info["hp"].ToObject<int>().ToString();
-
+            hp.text = info["hp"].ToObject<int>().ToString();
+            minAtk.text = atk.text;
+            minHp.text = hp.text;
         }
         
-
         //draw infomation
         name = info["title"].ToObject<string>();
-        title.GetComponent<TextMesh>().text = info["title"].ToObject<string>();
-        cost.GetComponent<TextMesh>().text = info["cost"].ToObject<int>().ToString();
-        desc.GetComponent<TextMesh>().text = info["desc"].ToObject<string>();
+        title.text = info["title"].ToObject<string>();
+        cost.text = info["cost"].ToObject<int>().ToString();
+        string d = info["desc"].ToObject<string>();
+        desc.text = "";
+
+        int lineSize = 27;
+        while (d.Length >= lineSize) {
+            if (d.Substring(lineSize, 1) != " ") {
+                string a = d.Substring(0, lineSize);
+                desc.text += a.Substring(0, a.LastIndexOf(" ")) + "\n";
+                d = d.Substring(a.LastIndexOf(" "));
+            }else {
+                desc.text += d.Substring(0, lineSize) + "\n";
+                d = d.Substring(lineSize);
+            }
+        }
+        desc.text += d;
+
         //flavor.GetComponent<TextMesh>().text = info["flavor"].ToObject<string>();
 
-
+        Sprite aux = Resources.Load<Sprite>(name.ToLower());
+        if (aux != null) { image.sprite = aux; }
+        /*
         if (GameManager.chosenDeck != null) {
             int aux = 0;
             while (GameData.Images[aux++].card != info.name && aux < GameData.Images.Count - 1) ;
             if (GameData.Images[aux - 1].imagem != null)
-                image.GetComponent<SpriteRenderer>().sprite = GameData.Images[aux - 1].imagem;
+                image.sprite = GameData.Images[aux - 1].imagem;
             else
-                image.GetComponent<SpriteRenderer>().sprite = GameData.Images[GameData.Images.Count - 1].imagem;
-        }
-
-        float r = 5.715f / image.GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
+                image.sprite = GameData.Images[GameData.Images.Count - 1].imagem;
+        }*/
+        float r = 3.0f / image.sprite.bounds.extents.x;
         image.transform.localScale = Vector3.one * r;
+        minImage.sprite = image.GetComponent<SpriteRenderer>().sprite;
+        r = 3.7f / minImage.sprite.bounds.extents.y;
+        minImage.transform.localScale = Vector3.one * r;
 
         int i, j, cont = 0;
         for (i = 0; i < this.GetComponent<Card>().aspects.Length; i++) {
@@ -62,8 +86,10 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
                 GameObject newAspect = new GameObject("aspect" + cont.ToString());
                 newAspect.transform.SetParent(aspects.transform);
                 newAspect.AddComponent<SpriteRenderer>();
-                newAspect.transform.position = aspects.transform.position - new Vector3(0, cont * spacament, 0);
-                newAspect.transform.localScale = new Vector3(1.6f, 1.6f, 1.0f);
+                newAspect.transform.position = aspects.transform.position + new Vector3(cont * spacament, 0, 0);
+                if (cont > 2)
+                    newAspect.transform.position += new Vector3(0.135f, 0.0f, 0.0f);
+                newAspect.transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
                 switch (i) {
                     case 0:
                         newAspect.GetComponent<SpriteRenderer>().sprite = fire;

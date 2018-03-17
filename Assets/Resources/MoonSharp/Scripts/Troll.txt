@@ -8,7 +8,9 @@ return{
 	atk = 1,
 	hp = 3,
 
-	onTurnStart = function(args)
-		self.hp = self.hp +1
+	OnTurnStart = function(args)
+		local self = args[1]
+		self.Data.hp = self.Data.hp + 1
+		print(self.Data.hp)
 	end
 	}

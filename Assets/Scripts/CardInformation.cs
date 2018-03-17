@@ -17,8 +17,8 @@ public class CardInformation {
 	public int price;
 	public int lvl;
 	public int lvl_price;
-	public List<char> aspects = new List<char>();
-	public List<char> aspectsToGive = new List<char>();
+	public int[] aspects;
+	public int[] aspectsToGive;
 
 }
 /*
