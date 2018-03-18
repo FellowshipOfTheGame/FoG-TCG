@@ -15,7 +15,7 @@ public class Captain : Clickable {
     Board board;
     bool dragging = false;
     Vector3 diff;
-
+    public AnimationManager[] anims;
 	// Use this for initialization
 	void Start () {
         board = GameObject.FindObjectOfType<Board>() as Board;

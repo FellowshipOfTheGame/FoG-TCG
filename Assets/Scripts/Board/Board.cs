@@ -232,7 +232,7 @@ public class Board : MonoBehaviour {
     private void EndPlayerTurn(int player)
     {
         Board board = GameObject.FindObjectOfType<Board>();
-        int[] rows = new int[] { player == 0 ? 0 : 3, player == 0 ? 1 : 2 };
+        int[] rows = new int[] { player == 0 ? 0 : 3, player == 0 ? 1 : 2 }; Debug.Log(rows[0] + "," + rows[1]);
         for (int i = 0; i < 5; i++)
             foreach (int j in rows)
             {

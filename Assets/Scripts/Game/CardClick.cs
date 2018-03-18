@@ -42,9 +42,13 @@ public class CardClick : Clickable {
             this.GetComponent<BoxCollider>().size = colliderSize;
 
         if (!inHand) {
-            minAtk.text = info.Data.Get("atk").ToString();
-            minHp.text = info.Data.Get("hp").ToString();
+            //refreshCard();
         }
+    }
+
+    public void refreshCard() {
+        minAtk.text = info.Data.Get("atk").ToString();
+        minHp.text = info.Data.Get("hp").ToString();
     }
 
     public override void OnClick(int mouseButton) {

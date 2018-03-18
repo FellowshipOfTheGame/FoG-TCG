@@ -23,7 +23,7 @@ public class Card : MonoBehaviour {
     public event CardEventDelegate DamageTakenEvent;
 
 	public Table Data;
-
+    public AnimationManager am;
 	public DynValue this[string attr] {
 		get { return Data.Get(attr); }
 		set { Data[attr] = value; }
@@ -110,10 +110,12 @@ public class Card : MonoBehaviour {
 	}
 
 	public virtual void OnTurnStart() {
+        canAttack = true;
 		TurnStartEvent (createTable(this));
 	}
 
 	public virtual void OnTurnEnd() {
+        canAttack = false;
 		TurnEndEvent (createTable(this));
 	}
 
@@ -127,6 +129,10 @@ public class Card : MonoBehaviour {
         if (!canAttack)
             return;
         GameObject targetGO = GetComponent<Card>().board.cardMatrix[3 - pos[0], pos[1]];
+        if (board.currPlayer == 1)
+            am.setAnim("atk");
+        else
+            am.setAnim("atk2");
 
         int dmg = this["atk"].ToObject<int>();
 
@@ -136,6 +142,7 @@ public class Card : MonoBehaviour {
             if (Mathf.Abs(pos[1] - cap.pos) <= 1)
             {
                 Player target = board.players[2 - pos[0]];
+                target.capt.anims[pos[1] - cap.pos + 1].setAnim("hit");
                 Table args = createTable(board, this, target, dmg);
                 this.OutgoingDamageEvent(args);
                 this.AttackEvent(args);
@@ -146,6 +153,7 @@ public class Card : MonoBehaviour {
         } else
         {
             Card target = targetGO.GetComponent<Card>();
+            target.am.setAnim("hit");
             Table args = createTable(board, this, target, dmg);
 
             this.OutgoingDamageEvent(args);
@@ -156,7 +164,9 @@ public class Card : MonoBehaviour {
             if (target["hp"].ToObject<int>() <= 0)
             {
                 //target.OnDeath();
-                target.Remove();
+                //target.Remove();
+                target.am.transform.SetParent(this.transform.parent);
+                target.am.setAnim("die");
             }
         }
     }
@@ -175,8 +185,7 @@ public class Card : MonoBehaviour {
             this.Remove();
     }
 
-    public void Remove()
-    {
+    public void Remove(){
         if (type != 'a')
             board.cardMatrix[pos[0], pos[1]] = null;
 
