@@ -12,6 +12,11 @@ public class Board : MonoBehaviour {
     public float initialHand;
     public bool loadDeckFromMenu;
     public int maxHP;
+    public float critic;
+    [Space(5)]
+    public AudioSource audioPlayer;
+    public AudioClip startMusic;
+    public AudioClip endMusic;
     [Space(5)]
     public Script luaEnv;
     public int currPlayer = 1;
@@ -164,6 +169,17 @@ public class Board : MonoBehaviour {
         }
         time += Time.deltaTime;
 	}
+
+    public void changeMusic(bool isEnd) {
+        if (isEnd && audioPlayer.clip == startMusic) {
+            audioPlayer.PlayOneShot(endMusic);
+            audioPlayer.volume = 0.5f;
+        }
+        if (!isEnd && audioPlayer.clip == endMusic) {
+            audioPlayer.PlayOneShot(startMusic);
+            audioPlayer.volume = 1.0f;
+        }
+    }
 
     public void EndTurn() {
         if (Slot.isChoosingPlace) {

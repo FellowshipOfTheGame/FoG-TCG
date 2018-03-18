@@ -79,10 +79,14 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public void Damage(Table args)
-    {
+    public void Damage(Table args){
+        int prevHP = HP;
         HP -= args.Get(4).ToObject<int>();
         print(HP);
+
+        if (prevHP > board.critic && HP <= board.critic)
+            board.changeMusic(true);
+
         if (HP <= 0) {
             Board.winner = 3 - index;
             board.EndGame();
