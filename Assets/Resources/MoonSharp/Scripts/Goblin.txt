@@ -11,14 +11,22 @@ return{
 	OnEnter = function(args)
 		local board = args[1]
 		local self = args[2]
+		local ctrl = 0
 		for i=0,4 do
 			local card = board.GetMatrixValue(self.pos[1],i)
 			if card ~= nil then
 				if card.Data.title == self.Data.title then
 					self.Data.atk = self.Data.atk + 1;
 					card.Data.atk = card.Data.atk + 1;
+					if card ~= self then
+						ctrl = 1
+						card.changeAnimation("buff");
+					end
 				end
 			end
+		end
+		if ctrl == 1 then
+			self.changeAnimation("buff");
 		end
 		self.Data.atk = self.Data.atk - 2;
 		print(self.Data.atk)
@@ -31,6 +39,7 @@ return{
 			if card ~= nil then
 				if card.Data.title == self.Data.title then
 					card.Data.atk = card.Data.atk - 1;
+					card.changeAnimation("debuff");
 				end
 			end
 		end

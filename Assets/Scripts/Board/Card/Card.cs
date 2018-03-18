@@ -193,4 +193,8 @@ public class Card : MonoBehaviour {
         Destroy(this.gameObject);
         print("DESTRUCTION");
     }
+
+    public void changeAnimation(string anim) {
+        am.setAnim(anim);
+    }
 }
