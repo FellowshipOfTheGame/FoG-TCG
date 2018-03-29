@@ -22,7 +22,9 @@ public class Card : MonoBehaviour {
     public event CardEventDelegate DefendEvent;
     public event CardEventDelegate DamageTakenEvent;
 
-	public Table Data;
+    public event CardEventDelegate NewCardInFieldEvent;
+
+    public Table Data;
     public AnimationManager am;
 	public DynValue this[string attr] {
 		get { return Data.Get(attr); }
@@ -85,6 +87,9 @@ public class Card : MonoBehaviour {
         IncomingDamageEvent += LoadDefaultEventHandler("OnIncomingDamage");
         DefendEvent += LoadDefaultEventHandler("OnDefendEvent");
         DamageTakenEvent += LoadDefaultEventHandler("OnDamageTaken");
+
+        NewCardInFieldEvent = delegate { };
+        NewCardInFieldEvent += LoadDefaultEventHandler("OnNewCardInField");
     }
 
 	protected CardEventDelegate LoadDefaultEventHandler(string eventName) {
@@ -118,6 +123,10 @@ public class Card : MonoBehaviour {
         canAttack = false;
 		TurnEndEvent (createTable(this));
 	}
+
+    public virtual void OnNewCardInField(Card newCard) {
+        NewCardInFieldEvent(createTable(board, this, newCard));
+    }
 
     public Table createTable(params object[] args)
     {

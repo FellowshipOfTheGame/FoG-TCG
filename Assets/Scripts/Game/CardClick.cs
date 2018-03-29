@@ -133,6 +133,7 @@ public class CardClick : Clickable {
             board.players[board.currPlayer - 1].capt.canMove = false;
             board.slot = null;
             this.GetComponent<Card>().OnEnter();
+            board.CallCardPlacedEvents(this.GetComponent<Card>());
         } else {
             this.transform.position = originPos;
         }

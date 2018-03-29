@@ -181,6 +181,17 @@ public class Board : MonoBehaviour {
         }
     }
 
+    public void CallCardPlacedEvents(Card c) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (cardMatrix[i, j] != null && cardMatrix[i, j] != c.gameObject)
+                    cardMatrix[i, j].GetComponent<Card>().OnNewCardInField(c);
+            }
+        }
+        if (cardAtm != null)
+            cardAtm.GetComponent<Card>().OnNewCardInField(c);
+    }
+
     public void EndTurn() {
         if (Slot.isChoosingPlace) {
             Slot.isChoosingPlace = false;

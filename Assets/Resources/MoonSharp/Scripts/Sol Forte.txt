@@ -14,12 +14,21 @@ return{
 				local card = board.GetMatrixValue(n,i)
 				if card ~= nil then
 					if card.Data.aspects[1] > 0 then
+						card.changeAnimation("buff");
 						card.Data.atk = card.Data.atk + 1;
 					end
 					print(card.Data.atk)
 				end
 			end
 		end
+	end,
+
+	OnNewCardInField = function(args)
+		local card = args[3]
+			if card.type == 'c' and card.Data.aspects[1] > 0 then
+				card.changeAnimation("buff");
+				card.Data.atk = card.Data.atk + 1;
+			end
 	end,
 
 	OnExit = function(args)
@@ -30,6 +39,7 @@ return{
 				local card = board.GetMatrixValue(n,i)
 				if card ~= nil then
 					if card.Data.aspects[1] > 0 then
+						card.changeAnimation("debuff");
 						card.Data.atk = card.Data.atk - 1;
 					end
 				end

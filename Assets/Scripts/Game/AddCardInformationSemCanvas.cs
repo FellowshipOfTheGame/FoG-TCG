@@ -37,6 +37,7 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
             atk.text = info["atk"].ToObject<int>().ToString();
             this.GetComponent<Card>().hp = info["hp"].ToObject<int>();
             hp.text = info["hp"].ToObject<int>().ToString();
+            minAtk.transform.parent.parent.gameObject.SetActive(true);
             minAtk.text = atk.text;
             minHp.text = hp.text;
         }
