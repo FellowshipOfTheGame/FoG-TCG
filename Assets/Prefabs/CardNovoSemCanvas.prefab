@@ -1220,6 +1220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86aa110e27714e499ad3fd91f0485d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spr: {fileID: 0}
+  oneShot: 0
 --- !u!114 &114841421046843208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1255,6 +1257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   am: {fileID: 114050190468198732}
   board: {fileID: 0}
+  animPrefab: {fileID: 1264105013646484, guid: e790f4402c940e342916137c8cfd5d6e, type: 2}
   infoName: Volgarr
   cost: 0
   aspects: 

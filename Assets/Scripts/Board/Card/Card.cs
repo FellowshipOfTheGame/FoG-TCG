@@ -30,7 +30,7 @@ public class Card : MonoBehaviour {
 	}
 
 	public Board board;
-
+    public GameObject animPrefab;
     [Space(5)]
     public string infoName;
     public int cost;
@@ -119,7 +119,7 @@ public class Card : MonoBehaviour {
 		TurnEndEvent (createTable(this));
 	}
 
-    private Table createTable(params object[] args)
+    public Table createTable(params object[] args)
     {
         return DynValue.FromObject(board.luaEnv, args as object[]).Table;
     }
@@ -128,33 +128,37 @@ public class Card : MonoBehaviour {
     {
         if (!canAttack)
             return;
+        Table args;
         GameObject targetGO = GetComponent<Card>().board.cardMatrix[3 - pos[0], pos[1]];
-        if (board.currPlayer == 1)
-            am.setAnim("atk");
-        else
-            am.setAnim("atk2");
-
+        
         int dmg = this["atk"].ToObject<int>();
 
-        if (targetGO == null)
-        {
+        if (targetGO == null){
             Captain cap = board.players[2 - pos[0]].capt;
-            if (Mathf.Abs(pos[1] - cap.pos) <= 1)
-            {
+            if (Mathf.Abs(pos[1] - cap.pos) <= 1) {
+                if (board.currPlayer == 1)
+                    am.setAnim("atk");
+                else
+                    am.setAnim("atk2");
+
                 Player target = board.players[2 - pos[0]];
                 target.capt.anims[pos[1] - cap.pos + 1].setAnim("hit");
-                Table args = createTable(board, this, target, dmg);
+                args = createTable(board, this, target, dmg);
                 this.OutgoingDamageEvent(args);
                 this.AttackEvent(args);
                 target.Damage(args);
                 this.DamageDealtEvent(args);
             }
-                
-        } else
-        {
+
+        } else {
+            if (board.currPlayer == 1)
+                am.setAnim("atk");
+            else
+                am.setAnim("atk2");
+
             Card target = targetGO.GetComponent<Card>();
             target.am.setAnim("hit");
-            Table args = createTable(board, this, target, dmg);
+            args = createTable(board, this, target, dmg);
 
             this.OutgoingDamageEvent(args);
             this.AttackEvent(args);
@@ -165,9 +169,14 @@ public class Card : MonoBehaviour {
             {
                 //target.OnDeath();
                 //target.Remove();
-                target.am.transform.SetParent(this.transform.parent);
                 target.am.setAnim("die");
             }
+        }
+        GameObject targetTerrain = GetComponent<Card>().board.cardMatrix[(pos[0] + 2) % 4, pos[1]];
+        if (targetTerrain != null) {
+            Card aux = targetTerrain.GetComponent<Card>();
+            args = createTable(board, aux, this, dmg);
+            aux.IncomingDamageEvent(args);
         }
     }
 
@@ -181,8 +190,11 @@ public class Card : MonoBehaviour {
         int newHP = currentHP - args.Get(4).ToObject<int>();
         this["hp"] = DynValue.FromObject(board.luaEnv, newHP);
 
-        if (checkDeath && newHP <= 0)
-            this.Remove();
+        if (checkDeath && newHP <= 0) {
+            //Remove();
+            am.transform.SetParent(this.transform.parent);
+            addAnimation("die");
+        }
     }
 
     public void Remove(){
@@ -196,5 +208,13 @@ public class Card : MonoBehaviour {
 
     public void changeAnimation(string anim) {
         am.setAnim(anim);
+    }
+
+    public void addAnimation(string anim) {
+        GameObject temp = Instantiate(animPrefab, this.transform);
+        AnimationManager am2 = temp.GetComponent<AnimationManager>();
+        am2.LoadAll();
+        am2.oneShot = true;
+        am2.setAnim(anim);
     }
 }

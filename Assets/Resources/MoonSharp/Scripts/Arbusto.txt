@@ -4,7 +4,13 @@ return {
 	aspects = {0, 0, 0, 0},
 	desc = "Causa 1 de dano em inimigos que atacam essa posicao",
 	flavor = "flavor",
-	cost = 1
+	cost = 1,
+	
+	OnIncomingDamage = function(args)
+		local target = args[3]
+		local self = args[2]
 
-	--porco espinho
+		target.addAnimation("hit");
+		target.Damage(self.createTable(args[1], args[2], args[3], 1), true)
+	end
 }

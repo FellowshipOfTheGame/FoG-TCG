@@ -11,5 +11,11 @@ return{
 		local board = args[1];
 		generate = {0, 1, 1, 0};
 		board.AddAspects(board.currPlayer, generate);
+	end,
+
+	OnExit = function(args)
+		local board = args[1];
+		generate = {0,-1,-1,0};
+		board.AddAspects(3-board.currPlayer, generate);
 	end
 	}

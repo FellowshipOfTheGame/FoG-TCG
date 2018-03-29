@@ -1,19 +1,32 @@
 return{
 	title = "Terraformar",
-	type = 's',
-	aspectos = {0, 0, 0, 0},
+	type = 't',
+	aspects = {0, 0, 0, 0},
 	desc = "Remove um terreno a sua escolha",
 	flavor = "Com persistencia, concentracao, e um pequeno meteoro, quase qualquer terreno pode perder suas caracteristicas mais significativas.",
 	cost = 2,
 
-	abilities = {
-		
-		removeTerrain = function(board)
-			local pos = board.requestSelectPosition(enemyPosition)
-			if pos then
-				board.removeTerrain(pos)
-			end
+
+
+	OnEnter = function(args)
+		local board = args[1]
+		local self =  args[2]
+		local player = board.currPlayer
+		local terrain
+		if player == 1 then
+			terrain =  board.GetMatrixValue(3,self.pos[2])
+		end 
+		if player == 2 then
+			 terrain =  board.GetMatrixValue(0,self.pos[2])
 		end
-		}
+		
+		if terrain ~= nil then
+			terrain.Remove()
+		end
+
+		self.Remove()
+
+	end
+
 	
 	}
