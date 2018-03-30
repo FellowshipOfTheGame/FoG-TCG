@@ -17,6 +17,8 @@ public class CardClick : Clickable {
     TextMesh minAtk, minHp;
     Card info;
     public float[] limit;
+    GameObject model3D;
+
     // Use this for initialization
     void Start () {
         board = GameObject.FindObjectOfType<Board>() as Board;
@@ -26,6 +28,7 @@ public class CardClick : Clickable {
         info = this.GetComponent<AddCardInformationSemCanvas>().info;
         minAtk = this.GetComponent<AddCardInformationSemCanvas>().minAtk;
         minHp = this.GetComponent<AddCardInformationSemCanvas>().minHp;
+        model3D = null;
     }
 	
 	// Update is called once per frame
@@ -107,11 +110,24 @@ public class CardClick : Clickable {
                 board.cardMatrix[pos[0], pos[1]] = this.gameObject;
                 this.GetComponent<Card>().pos = pos;
                 minCard.SetActive(true);
+            } else if (this.GetComponent<Card>().type == 's') {
+                this.GetComponent<Card>().pos = pos;
             } else if (this.GetComponent<Card>().type == 't') {
                 board.slot.GetComponent<Slot>().cards[0] = this.gameObject;
-                //make card terrain and unclickable
+                //make card terrain invisible and unclickable
                 this.GetComponent<BoxCollider>().size = new Vector3(0.0f, 0.0f, 0.0f);
                 colliderSize = new Vector3(0.0f, 0.0f, 0.0f);
+
+                //spawn 3D model
+                int index = 0;
+                while (index < board.data.allTerrains.Length && board.data.allTerrains[index].name != "T_" + info.name)
+                    index++;
+
+                if (index < board.data.allTerrains.Length) {
+                    model3D = Instantiate(board.data.allTerrains[index], board.slot.transform);
+                    model3D.transform.localPosition = Vector3.zero;
+                } else
+                    Debug.Log("cannot find 3D model of " + info.name);
 
                 if (board.currPlayer == 1) {
                     board.cardMatrix[0, pos[1]] = this.gameObject;
@@ -193,5 +209,9 @@ public class CardClick : Clickable {
                 illusion.transform.position = board.illusionPos2.position;
             }
         }
+    }
+
+    public void DestroyTerrain() {
+        Destroy(model3D);
     }
 }

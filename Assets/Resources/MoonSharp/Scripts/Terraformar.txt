@@ -1,6 +1,6 @@
 return{
 	title = "Terraformar",
-	type = 't',
+	type = 's',
 	aspects = {0, 0, 0, 0},
 	desc = "Remove um terreno a sua escolha",
 	flavor = "Com persistencia, concentracao, e um pequeno meteoro, quase qualquer terreno pode perder suas caracteristicas mais significativas.",

@@ -19,19 +19,20 @@ public class Board : MonoBehaviour {
     public AudioClip endMusic;
     [Space(5)]
     public Script luaEnv;
-    public int currPlayer = 1;
+    [HideInInspector] public int currPlayer = 1;
     public Player[] players;
-    public GameObject[,] cardMatrix = new GameObject[4,5];
+    [HideInInspector] public GameObject[,] cardMatrix = new GameObject[4,5];
     public GameObject cardAtm;
-    public GameObject slot;
+    [HideInInspector] public GameObject slot;
     public Vector3 mousePosition;
-    public GameObject dragCard;
+    [HideInInspector] public GameObject dragCard;
     public Transform illusionPos;
     public Transform illusionPos2;
-    public MiniMenu miniMenu = null;
+    [HideInInspector] public MiniMenu miniMenu = null;
+    [HideInInspector] public ResourceData data;
     Vector3 playerPosition;
     public GameObject GameOverScr;
-
+    int counter = 1;
     public static int winner = 0; //winner = 0 -> ninguem venceu; winner = 1  -> player 1 venceu; winner = 2 -> player 2 venceu
 
     public static Card GetCardFromObject(DynValue obj)
@@ -68,6 +69,7 @@ public class Board : MonoBehaviour {
         luaEnv = new Script();
         luaEnv.Globals["GetCard"] = (Func<DynValue, Card>) (obj => { return GetCardFromObject(obj); }) ;
         luaEnv.Globals["print"] = (Action<DynValue>) (obj => { Print(obj); });
+        data = this.GetComponent<ResourceData>();
     }
 
     void SetPlayer(int index) {
@@ -225,6 +227,10 @@ public class Board : MonoBehaviour {
             SwitchPlayerState(1, false);
             SwitchPlayerState(2, true);
             currPlayer = 2;
+            if (counter < 10)
+                players[1].mana = counter + 1;
+            else
+                players[1].mana = 10;
 
             StartPlayerTurn(1);
         }else {
@@ -233,13 +239,15 @@ public class Board : MonoBehaviour {
             SwitchPlayerState(2, false);
             SwitchPlayerState(1, true);
             currPlayer = 1;
+            counter++;
+            if (counter <= 10)
+                players[0].mana = counter;
+            else
+                players[0].mana = 10;
 
             StartPlayerTurn(0);
         }
         time = 0;
-        if(players[currPlayer - 1].mana < 10)
-            players[currPlayer - 1].mana++;
-
         players[currPlayer - 1].ResetTurn();
     }
 

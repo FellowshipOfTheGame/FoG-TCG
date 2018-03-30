@@ -304,6 +304,7 @@
     <Compile Include="Assets\Scripts\Board\Events\EventManager.cs" />
     <Compile Include="Assets\Scripts\Board\Events\GameEvent.cs" />
     <Compile Include="Assets\Scripts\Board\GUI\GuiManager.cs" />
+    <Compile Include="Assets\Scripts\Board\ResourceData.cs" />
     <Compile Include="Assets\Scripts\Board\States\GameOverState.cs" />
     <Compile Include="Assets\Scripts\Board\States\GameState.cs" />
     <Compile Include="Assets\Scripts\Board\States\OverviewState.cs" />
@@ -332,6 +333,7 @@
     <Compile Include="Assets\Scripts\Game\Slot.cs" />
     <Compile Include="Assets\Scripts\Game\SlotCanvas.cs" />
     <Compile Include="Assets\Scripts\Game\StatusDisplay.cs" />
+    <Compile Include="Assets\Scripts\Game\Terrain3D.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Menu\AddCardInformation.cs" />
     <Compile Include="Assets\Scripts\Menu\AddCardInformationMinimized.cs" />

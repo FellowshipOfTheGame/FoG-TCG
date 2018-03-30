@@ -210,6 +210,9 @@ public class Card : MonoBehaviour {
         if (type != 'a')
             board.cardMatrix[pos[0], pos[1]] = null;
 
+        if (type == 't')
+            this.GetComponent<CardClick>().DestroyTerrain();
+
         this.OnExit();
         Destroy(this.gameObject);
         print("DESTRUCTION");

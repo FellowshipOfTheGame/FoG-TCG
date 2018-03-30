@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5963803}
   - component: {fileID: 5963802}
+  - component: {fileID: 5963804}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -158,6 +159,7 @@ MonoBehaviour:
   illusionPos: {fileID: 702362993}
   illusionPos2: {fileID: 360422577}
   miniMenu: {fileID: 0}
+  data: {fileID: 0}
   GameOverScr: {fileID: 2062350732}
 --- !u!4 &5963803
 Transform:
@@ -177,6 +179,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5963804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5963801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62499e09901913d4fa9e1e0f2debb701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allTerrains: []
 --- !u!1 &6267004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,6 +2200,7 @@ MonoBehaviour:
   - Ravina
   - Diabrete
   - Sol Forte
+  - Montanha
   deckList: []
   index: 1
   mana: 10
@@ -4776,6 +4791,7 @@ MonoBehaviour:
   - Goblin
   - Goblin
   - Ceu Limpo
+  - Terraformar
   deckList: []
   index: 2
   mana: 10
