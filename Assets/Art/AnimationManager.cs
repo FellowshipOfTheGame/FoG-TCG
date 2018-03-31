@@ -36,9 +36,6 @@ public class AnimationManager : MonoBehaviour {
             anim.enabled = true;
             anim.runtimeAnimatorController = allAnim[i];
         }
-
-        if (oneShot)
-            Debug.Log(anim.enabled);
     }
     public void refresh() {
         if (myCardInTable != null)
@@ -54,14 +51,14 @@ public class AnimationManager : MonoBehaviour {
     }
 
     public void stopAnim() {
-        anim.enabled = false;
         spr.enabled = false;
         if (oneShot)
-            finish();
+            Destroy(this.gameObject);
     }
 
     public void remove() {
         myCard.Remove();
+        oneShot = true;
     }
 
     public void finish() {

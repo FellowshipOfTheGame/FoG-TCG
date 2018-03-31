@@ -29,7 +29,6 @@ return{
 			self.changeAnimation("buff");
 		end
 		self.Data.atk = self.Data.atk - 2;
-		print(self.Data.atk)
 	end,
 	OnExit = function(args)
 		local board = args[1]

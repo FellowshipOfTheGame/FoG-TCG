@@ -1445,6 +1445,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95445625696934668, guid: 8079a8520f4b9154384938e88cc2efdb,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7dcf023ec0a244844b845e23d58c80e5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8079a8520f4b9154384938e88cc2efdb, type: 2}
   m_IsPrefabParent: 0
@@ -2198,7 +2203,7 @@ MonoBehaviour:
   - Manfred
   - Goblin
   - Ravina
-  - Diabrete
+  - Faust
   - Sol Forte
   - Montanha
   deckList: []
@@ -4788,10 +4793,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalDeck:
   - Goblin
-  - Goblin
-  - Goblin
+  - Montanha
+  - Rio
   - Ceu Limpo
   - Terraformar
+  - Lucius
   deckList: []
   index: 2
   mana: 10

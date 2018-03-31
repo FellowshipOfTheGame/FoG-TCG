@@ -1257,7 +1257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   am: {fileID: 114407821498166272}
   board: {fileID: 0}
-  animPrefab: {fileID: 0}
+  animPrefab: {fileID: 1264105013646484, guid: e790f4402c940e342916137c8cfd5d6e, type: 2}
   infoName: Volgarr
   cost: 0
   aspects: 
@@ -1266,6 +1266,8 @@ MonoBehaviour:
   atk: 0
   hp: 0
   canAttack: 0
+  haveModifier: 0
+  timer: 0
 --- !u!114 &114962849020481172
 MonoBehaviour:
   m_ObjectHideFlags: 1

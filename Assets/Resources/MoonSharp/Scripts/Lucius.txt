@@ -1,18 +1,25 @@
-function poisoned(self, board)
-	self.hp = self.hp - 1;
-end
-
 return{
 	title = "Lucius",
 	type = 'c',
-	aspectos = {0, 1, 1, 0},
+	aspects = {0, 1, 1, 0},
 	desc = "Envenenar",
 	flavor = "",
 	cost = 2,
 	atk = 2,
-	hp = 5
+	hp = 5,
 
-	onDamageDealt = function(self, enemy) 
-		enemy.OnTurnStart = enemy.OnTurnStart + poisoned
-	end	
-	}
+	OnDamageDealt = function(args)
+		local self = args[2]
+		local enemy = args[3]
+		enemy.addModifier(self, "Poisoned");
+	end,
+
+	Poisoned = function(args)
+		local self = args[2]
+		self.addAnimation("hit");
+		self.Data.hp = self.Data.hp - 1
+		if self.Data.hp <= 0 then
+			self.Die();
+		end
+	end
+}

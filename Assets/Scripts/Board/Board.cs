@@ -209,12 +209,10 @@ public class Board : MonoBehaviour {
         }
 
         if (illusionPos.childCount > 0) {
-            GameObject elevatedCard = illusionPos.GetChild(0).GetComponent<IllusionScript>().original;
             Destroy(illusionPos.GetChild(0).gameObject);
         }
 
         if (illusionPos2.childCount > 0) {
-            GameObject elevatedCard = illusionPos2.GetChild(0).GetComponent<IllusionScript>().original;
             Destroy(illusionPos2.GetChild(0).gameObject);
         }
 
@@ -267,7 +265,7 @@ public class Board : MonoBehaviour {
     private void EndPlayerTurn(int player)
     {
         Board board = GameObject.FindObjectOfType<Board>();
-        int[] rows = new int[] { player == 0 ? 0 : 3, player == 0 ? 1 : 2 }; Debug.Log(rows[0] + "," + rows[1]);
+        int[] rows = new int[] { player == 0 ? 0 : 3, player == 0 ? 1 : 2 };
         for (int i = 0; i < 5; i++)
             foreach (int j in rows)
             {

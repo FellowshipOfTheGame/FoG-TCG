@@ -23,6 +23,7 @@ public class Card : MonoBehaviour {
     public event CardEventDelegate DamageTakenEvent;
 
     public event CardEventDelegate NewCardInFieldEvent;
+    public event CardEventDelegate ModifierEvent;
 
     public Table Data;
     public AnimationManager am;
@@ -33,15 +34,15 @@ public class Card : MonoBehaviour {
 
 	public Board board;
     public GameObject animPrefab;
-    [Space(5)]
-    public string infoName;
-    public int cost;
-    public int[] aspects;
-    public int[] pos = new int[2];
-    public char type;
-    public int atk;
-    public int hp;
-    public bool canAttack;
+    [HideInInspector] public string infoName;
+    [HideInInspector] public int cost;
+    [HideInInspector] public int[] aspects;
+    [HideInInspector] public int[] pos = new int[2];
+    [HideInInspector] public char type;
+    [HideInInspector] public int atk;
+    [HideInInspector] public int hp;
+    [HideInInspector] public bool canAttack, haveModifier = false;
+    [HideInInspector] public int timer = 0;
 
 	// LoadScript MUST be called from the Board who creates the instance
 	public void LoadScript(string name) {
@@ -89,7 +90,10 @@ public class Card : MonoBehaviour {
         DamageTakenEvent += LoadDefaultEventHandler("OnDamageTaken");
 
         NewCardInFieldEvent = delegate { };
+        ModifierEvent = delegate { };
+
         NewCardInFieldEvent += LoadDefaultEventHandler("OnNewCardInField");
+        ModifierEvent += LoadDefaultEventHandler("Modifier");
     }
 
 	protected CardEventDelegate LoadDefaultEventHandler(string eventName) {
@@ -116,6 +120,8 @@ public class Card : MonoBehaviour {
 
 	public virtual void OnTurnStart() {
         canAttack = true;
+        if (haveModifier)
+            ModifierEvent(createTable(board, this));
 		TurnStartEvent (createTable(this));
 	}
 
@@ -200,10 +206,13 @@ public class Card : MonoBehaviour {
         this["hp"] = DynValue.FromObject(board.luaEnv, newHP);
 
         if (checkDeath && newHP <= 0) {
-            //Remove();
-            am.transform.SetParent(this.transform.parent);
-            addAnimation("die");
+            Die();
+            
         }
+    }
+    public void Die() {
+        am.transform.SetParent(this.transform.parent);
+        addAnimation("die");
     }
 
     public void Remove(){
@@ -228,5 +237,10 @@ public class Card : MonoBehaviour {
         am2.LoadAll();
         am2.oneShot = true;
         am2.setAnim(anim);
+    }
+
+    public void addModifier(Card card, string eventName) {
+        ModifierEvent += card.LoadDefaultEventHandler(eventName);
+        haveModifier = true;
     }
 }
