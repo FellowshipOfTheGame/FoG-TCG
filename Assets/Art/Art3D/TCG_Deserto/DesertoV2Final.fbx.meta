@@ -1,0 +1,164 @@
+fileFormatVersion: 2
+guid: 3b0172809612e914fa9c6dcb80d6e6de
+timeCreated: 1522621686
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: esfinge
+    100004: obelisco1.base
+    100006: obelisco1.base.001
+    100008: obelisco1.base.002
+    100010: obelisco1.base.003
+    100012: obelisco1new
+    100014: obelisco2new
+    100016: obelisco3new
+    100018: obelisco4new
+    100020: piramide1
+    100022: piramide2
+    100024: piramide3
+    100026: PlaneHighPoly
+    100028: PlaneLowPoly
+    400000: //RootNode
+    400002: esfinge
+    400004: obelisco1.base
+    400006: obelisco1.base.001
+    400008: obelisco1.base.002
+    400010: obelisco1.base.003
+    400012: obelisco1new
+    400014: obelisco2new
+    400016: obelisco3new
+    400018: obelisco4new
+    400020: piramide1
+    400022: piramide2
+    400024: piramide3
+    400026: PlaneHighPoly
+    400028: PlaneLowPoly
+    2100000: piramide
+    2100002: obelisco_corpo
+    2100004: obelisco_base
+    2100006: sand
+    2100008: esfinge
+    2300000: esfinge
+    2300002: obelisco1.base
+    2300004: obelisco1.base.001
+    2300006: obelisco1.base.002
+    2300008: obelisco1.base.003
+    2300010: obelisco1new
+    2300012: obelisco2new
+    2300014: obelisco3new
+    2300016: obelisco4new
+    2300018: piramide1
+    2300020: piramide2
+    2300022: piramide3
+    2300024: PlaneHighPoly
+    2300026: PlaneLowPoly
+    3300000: esfinge
+    3300002: obelisco1.base
+    3300004: obelisco1.base.001
+    3300006: obelisco1.base.002
+    3300008: obelisco1.base.003
+    3300010: obelisco1new
+    3300012: obelisco2new
+    3300014: obelisco3new
+    3300016: obelisco4new
+    3300018: piramide1
+    3300020: piramide2
+    3300022: piramide3
+    3300024: PlaneHighPoly
+    3300026: PlaneLowPoly
+    4300000: piramide3
+    4300002: piramide2
+    4300004: piramide1
+    4300006: obelisco4new
+    4300008: obelisco1.base.003
+    4300010: obelisco3new
+    4300012: obelisco1.base.002
+    4300014: obelisco2new
+    4300016: obelisco1.base.001
+    4300018: obelisco1new
+    4300020: obelisco1.base
+    4300022: PlaneHighPoly
+    4300024: PlaneLowPoly
+    4300026: esfinge
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

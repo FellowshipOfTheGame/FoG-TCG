@@ -55,10 +55,8 @@ public class CardClick : Clickable {
     }
 
     public override void OnClick(int mouseButton) {
-        if (inHand)
-        {
-            if (mouseButton == 0 && CanBePlayed())
-            {
+        if (inHand){
+            if (mouseButton == 0 && CanBePlayed()){
                 isDragging = true;
                 Slot.isChoosingPlace = true;
                 originPos = new Vector3(this.transform.position.x, this.transform.parent.position.y, this.transform.position.z); ;
@@ -68,9 +66,11 @@ public class CardClick : Clickable {
                 board.dragCard = this.gameObject;
             }
         }
-        else
-        {
-            GetComponent<Card>().Attack();
+        else{
+            if (mouseButton == 0)
+                GetComponent<Card>().Attack();
+            else if (mouseButton == 1)
+                GetComponent<Card>().OnRightClick();
         }
     }
 

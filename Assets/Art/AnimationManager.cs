@@ -28,7 +28,7 @@ public class AnimationManager : MonoBehaviour {
 
     public void setAnim(string animName) {
         int i = 0;
-
+        anim.enabled = false;
         while (allAnim[i].name != "ctrl_" + animName && i < allAnim.Length)
             i++;
 

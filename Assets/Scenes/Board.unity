@@ -524,7 +524,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280749151001038, guid: 776dae208ca58a94488564800f1f16cc, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114651264105635882, guid: 776dae208ca58a94488564800f1f16cc,
         type: 2}
@@ -761,7 +761,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280749151001038, guid: 776dae208ca58a94488564800f1f16cc, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114651264105635882, guid: 776dae208ca58a94488564800f1f16cc,
         type: 2}
@@ -2200,11 +2200,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalDeck:
-  - Manfred
+  - Olifante
   - Goblin
-  - Ravina
-  - Faust
-  - Sol Forte
+  - Deserto
+  - Gato
+  - Rio
   - Montanha
   deckList: []
   index: 1
@@ -6056,7 +6056,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280749151001038, guid: 776dae208ca58a94488564800f1f16cc, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114651264105635882, guid: 776dae208ca58a94488564800f1f16cc,
         type: 2}
@@ -7047,7 +7047,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280749151001038, guid: 776dae208ca58a94488564800f1f16cc, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114651264105635882, guid: 776dae208ca58a94488564800f1f16cc,
         type: 2}

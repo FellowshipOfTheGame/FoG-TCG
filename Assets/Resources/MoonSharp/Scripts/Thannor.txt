@@ -1,34 +1,90 @@
 return{
 	title = "Thannor",
 	type = 'c',
-	aspects = {0, 0, 0, 0},
+	aspects = {0, 0, 2, 0},
 	desc = "Ganha +1/+2 se estiver sobre um terreno de terra",
-	flavor = "Treinado por seu pai a usar um arco longo para cacar desde pequeno, Thannor viu sua aldeia ser dizimada por orcs e foi forcado a fugir. Agora ele faz parte da resistencia que luta para livrar a regiao do controle dos orcs que destruiram seu lar.",
-	cost = 3,
-	atk = 3,
-	hp = 6,
+	flavor = "Sua cabeça é melhor que qualquer mapa que os melhores cartógrafos de Sorawa poderiam traçar, e Thannor sabe muito bem como usá-la em batalhas.",
+	cost = 4,
+	atk = 2,
+	hp = 4,
 
-	OnEnter = function(args)
-		local board = args[1]
-		local self =  args[2]
-		local player = board.currPlayer
-		local terrain
-		if player == 1 then
-			terrain =  board.GetMatrixValue(0,self.pos[2])
-		end 
-		if player == 2 then
-			 terrain =  board.GetMatrixValue(4,self.pos[2])
-		end
-		
-		if terrain ~= nil then
-			if terrain.Data.elements[3] > 0 then
-				self.Data.atk = self.Data.atk + 1
-				self.Data.hp = self.Data.hp + 2
-				print("Aumented")
-				print(self.Data.hp)
+
+		OnEnter = function(args)
+			local board = args[1]
+			local self = args[2]
+			local player = board.currPlayer
+			local terrain
+			if player == 1 then
+				for i=0,4 do
+					terrain =  board.GetMatrixValue(0,i)
+					if terrain ~=nil then
+						if terrain.Data.elements[3] > 0 then
+							card = board.GetMatrixValue(1,i)
+							if card ~= nil then
+								card.changeAnimation("buff");
+								card.Data.atk = card.Data.atk + 1
+								card.Data.hp = card.Data.hp +2  
+							end
+						end
+					end
+				end	
+			end 
+			if player == 2 then
+				for i=0,4 do
+					terrain =  board.GetMatrixValue(3,i)
+					if terrain ~=nil then
+						if terrain.Data.elements[3] > 0 then
+							card = board.GetMatrixValue(2,i)
+							if card ~= nil then
+								card.changeAnimation("buff");
+								card.Data.atk = card.Data.atk + 1
+								card.Data.hp = card.Data.hp +2  
+							end 
+						end
+					end
+				end	
+			end
+		end,
+
+		OnNewCardInField = function(args)
+			local board = args[1]
+			local card = args[3]
+			local player = board.currPlayer
+					
+			if card.type == "c" then
+				local posX = (card.pos[1] - 1) * 3
+				local posY = card.pos[2]
+				local terrain = board.GetMatrixValue(posX,posY)
+				
+				print(card.pos[0])
+				if terrain ~= nil then
+			 
+					if terrain.Data.elements[3] > 0 then
+						print("Bom amigos")
+						card.changeAnimation("buff");
+						card.Data.atk = card.Data.atk + 1;
+						card.Data.hp = card.Data.hp +2	
+					end
+				end
+			end
+
+		end,
+
+		OnExit = function(args)
+			local board = args[1]
+			local self = args[2]
+			for n=1,2 do
+				for i=0,4 do
+					local card = board.GetMatrixValue(n,i)
+					if card ~= nil then
+						if card.Data.aspects[3] > 0 then
+							card.changeAnimation("debuff");
+							card.Data.atk = card.Data.atk - 1;
+							card.Data.hp = card.Data.hp - 2
+						end
+					end
+					print(self.Data.atk)
+				end
 			end
 		end
-
-
-	end
 }

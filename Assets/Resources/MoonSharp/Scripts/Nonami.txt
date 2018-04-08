@@ -12,6 +12,7 @@ return{
 		local self = args[3]
 		local damage = args[4]
 		if self.Data.hp == self.Data.hp and damage > 0 then
+			self.addAnimation("buff");
 			self.Data.atk =  self.Data.atk + 2
 		end
 		print(self.Data.atk)
@@ -20,6 +21,7 @@ return{
 
 	OnHeal = function(self, board, healValue)
 		if (self.Data.hp + healValue) >= 4 then
+			self.addAnimation("debuff");
 			self.Data.atk = self.Data.atk -2
 		end
 	end

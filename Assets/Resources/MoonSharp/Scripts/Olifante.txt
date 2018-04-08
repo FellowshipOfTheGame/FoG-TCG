@@ -1,9 +1,9 @@
-return{
+return {
 	title = "Olifante",
 	type = 'c',
 	aspects = {0, 0, 2, 0},
 	desc = "Sofre -1 de dano em ataques",
-	flavor = "Dizem por ai que se voce matar um desses, vai ouvir um anao bravo gritando *Ainda assim, so conta como um!*",
+	flavor = "Grandes bestas de guerra manuseadas pelos guardioes para afugentar ou esmagar invasores. Tem um passo surpreendentemente delicado, sendo capazes de viajar entre as arvores sem quebrar um galho.",
 	cost = 3,
 	atk = 2,
 	hp = 6,

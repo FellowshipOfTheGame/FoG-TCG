@@ -1,0 +1,28 @@
+return{
+	title = "Somur",
+	type = 'c',
+	aspects = {1, 0, 1, 0},
+	desc = "Ao entrar em campo, destrói o terreno a sua frente",
+	flavor = "O único gigante 'racional' conhecido, Somur luta junto aos saqueadores de Estergund não pelo dinheiro ou pela glória, mas sim porque gosta de destruir as coisas.",
+	cost = 4,
+	atk = 2,
+	hp = 5,
+
+	OnEnter = function(args)
+		local board = args[1]
+		local self =  args[2]
+		local player = board.currPlayer
+		local terrain
+		if player == 1 then
+			terrain =  board.GetMatrixValue(3,self.pos[2])
+		end 
+		if player == 2 then
+			 terrain =  board.GetMatrixValue(0,self.pos[2])
+		end
+		
+		if terrain ~= nil then
+			terrain.Remove()
+		end
+		
+	end
+}

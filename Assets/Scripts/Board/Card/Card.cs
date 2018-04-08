@@ -24,6 +24,7 @@ public class Card : MonoBehaviour {
 
     public event CardEventDelegate NewCardInFieldEvent;
     public event CardEventDelegate ModifierEvent;
+    public event CardEventDelegate RightClickEvent;
 
     public Table Data;
     public AnimationManager am;
@@ -94,6 +95,7 @@ public class Card : MonoBehaviour {
 
         NewCardInFieldEvent += LoadDefaultEventHandler("OnNewCardInField");
         ModifierEvent += LoadDefaultEventHandler("Modifier");
+        RightClickEvent += LoadDefaultEventHandler("OnRightClick");
     }
 
 	protected CardEventDelegate LoadDefaultEventHandler(string eventName) {
@@ -132,6 +134,10 @@ public class Card : MonoBehaviour {
 
     public virtual void OnNewCardInField(Card newCard) {
         NewCardInFieldEvent(createTable(board, this, newCard));
+    }
+
+    public virtual void OnRightClick() {
+        RightClickEvent(createTable(board, this));
     }
 
     public Table createTable(params object[] args)

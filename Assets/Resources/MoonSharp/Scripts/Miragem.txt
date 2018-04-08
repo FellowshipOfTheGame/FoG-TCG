@@ -1,0 +1,35 @@
+return{
+	title = "Miragem",
+	type = 't',
+	aspects = {0, 0, 0, 0},
+	desc = "Remove um terreno a sua escolha",
+	flavor = "Com persistencia, concentracao, e um pequeno meteoro, quase qualquer terreno pode perder suas caracteristicas mais significativas.",
+	cost = 2,
+
+
+
+	OnEnter = function(args)
+		local board = args[1]
+		local self =  args[2]
+		local player = board.currPlayer
+		
+
+		if player == 1 then
+			local terrain = board.GetMatrixValue(3,self.pos[2])
+			self.Data.title = terrain.Data.title
+			local generate = terrain.Data.elements
+		end
+
+
+		if player == 2 then
+			local terrain = board.GetMatrixValue(0,self.pos[2])
+			self.Data.title = terrain.Data.title
+			self.Data.desc = terrain.Data.desc
+			local generate = terrain.Data.elements
+		end
+	
+
+		board.AddAspects(board.currPlayer, generate);
+
+	end
+	}

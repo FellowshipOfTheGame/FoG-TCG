@@ -50,7 +50,7 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
         desc.text = "";
 
         int lineSize = 27;
-        while (d.Length >= lineSize) {
+        while (d.Length > lineSize) {
             if (d.Substring(lineSize, 1) != " ") {
                 string a = d.Substring(0, lineSize);
                 desc.text += a.Substring(0, a.LastIndexOf(" ")) + "\n";

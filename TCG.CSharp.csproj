@@ -364,32 +364,32 @@
     <None Include="Assets\Art\DepthText.shader" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Amazona.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Arbusto.txt" />
-    <None Include="Assets\Resources\MoonSharp\Scripts\Atm1.txt" />
-    <None Include="Assets\Resources\MoonSharp\Scripts\Atm2.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Ceu Limpo.txt" />
+    <None Include="Assets\Resources\MoonSharp\Scripts\Deserto.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Diabrete.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Faust.txt" />
+    <None Include="Assets\Resources\MoonSharp\Scripts\Floresta.txt" />
+    <None Include="Assets\Resources\MoonSharp\Scripts\Gato.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Goblin.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Guaxininja.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Hikari.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Lucius.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Manfred.txt" />
+    <None Include="Assets\Resources\MoonSharp\Scripts\Miragem.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Montanha.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Nonami.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Olifante.txt" />
-    <None Include="Assets\Resources\MoonSharp\Scripts\Oquefalta.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Pantano.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Ravina.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Rio.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Sol Forte.txt" />
+    <None Include="Assets\Resources\MoonSharp\Scripts\Somur.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Terraformar.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Thannor.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Tritao.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Troll.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Volgarr.txt" />
-    <None Include="Assets\Resources\MoonSharp\Scripts\creature.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\status.txt" />
-    <None Include="Assets\Resources\MoonSharp\Scripts\terrain.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

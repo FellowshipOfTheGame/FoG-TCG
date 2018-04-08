@@ -1,0 +1,18 @@
+return {
+	title = "Floresta",
+	type = 't',
+	aspects = {0, 0, 0, 0},
+	desc = "Se a vida da criatura sobre esse terreno for maior que o ataque do inimigo, ela recebe -1 de dano ",
+	flavor = "Amplo local para se esconder, Florestas são um pesadelo logístico para atacantes e uma salvação para defensores.",
+	cost = 1,
+	
+	OnIncomingDamage = function(args)
+		local board = args[1]
+		local self = args[2]
+		local player = board.currPlayer
+		local target = board.GetMatrixValue(3 - player,self.pos[2])
+		target.hp = target.hp + 1
+		target.Data.hp = target.Data.hp + 1
+		print(target.Data.title)
+	end,
+}

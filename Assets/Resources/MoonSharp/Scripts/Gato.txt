@@ -1,0 +1,18 @@
+return{
+	title = "Gato",
+	type = 'c',
+	aspects = {0, 0, 0, 0},
+	desc = "Gera uma mana para você",
+	flavor = "Ao ser violentamente assassinado junto a seu querido gato, o corpo do grande ladino Shadowill desapareceu. Meses depois, rumores de um gato portando adagas começaram a espalhar-se por Caldyr...",
+	cost = 2,
+	atk = 1,
+	hp = 3,
+
+	OnEnter = function(args)
+		local self = args[2]
+		local board = args[1]
+		local player = board.players[board.currPlayer]
+		player.mana = player.mana + 3
+		
+	end
+}

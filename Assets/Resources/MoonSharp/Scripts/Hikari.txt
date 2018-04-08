@@ -1,24 +1,23 @@
 return{
 	title = "Hikari",
 	type = 'c',
-	aspects = {0, 0, 0, 0},
-	desc = "Devorar(+1)",
-	flavor = "Nao se sabe ao certo a origem dessa criatura. Com tantas similaridades com uma besta, deve mesmo ser tratada como humana?",
-	cost = 3,
+	aspects = {0, 1, 0, 0},
+	desc = "Pague 1 mana, Hikari ganha +1/+0 nesse turno",
+	flavor = "Com o terrível espírito do lobo de nove caudas preso em seu corpo, Hikari procura balancear sua humanidade e bestialidade enquanto viaja pelo mundo, tentando usar seus poderes para corrigir o mal aonde quer que ele esteja.",
+	cost = 2,
 	atk = 2,
 	hp = 3,
 
 	buff = 0,
 
-	OnOutgoingDamage = function(args)
+	OnRightClick = function(args)
 		local self = args[2]
-		args[4] = args[4] + self.Data.buff
-	end,
-
-	OnDamageDealt = function(args)
-		local board, self, enemy, dmg = unpack(args)
-		if enemy.Data.hp <= 0 then
-			self.Data.buff = self.Data.buff + 1
+		local board = args[1]
+		local player = board.players[board.currPlayer]
+		if player.mana > 0 then
+			player.mana = player.mana - 1
+			self.changeAnimation("buff");
+			self.Data.atk = self.Data.atk + 1
 		end
 	end
 }
