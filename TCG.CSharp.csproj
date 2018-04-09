@@ -292,6 +292,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Art\AnimationManager.cs" />
+    <Compile Include="Assets\Art\Art3D\TCG_Oceano\Scripts\Displace.cs" />
+    <Compile Include="Assets\Art\Art3D\TCG_Oceano\Scripts\GerstnerDisplace.cs" />
+    <Compile Include="Assets\Art\Art3D\TCG_Oceano\Scripts\MeshContainer.cs" />
+    <Compile Include="Assets\Art\Art3D\TCG_Oceano\Scripts\PlanarReflection.cs" />
+    <Compile Include="Assets\Art\Art3D\TCG_Oceano\Scripts\SpecularLighting.cs" />
+    <Compile Include="Assets\Art\Art3D\TCG_Oceano\Scripts\Water.cs" />
+    <Compile Include="Assets\Art\Art3D\TCG_Oceano\Scripts\WaterBase.cs" />
+    <Compile Include="Assets\Art\Art3D\TCG_Oceano\Scripts\WaterTile.cs" />
     <Compile Include="Assets\Scripts\AttackTest.cs" />
     <Compile Include="Assets\Scripts\Board\Board.cs" />
     <Compile Include="Assets\Scripts\Board\BoardManager.cs" />
@@ -361,6 +369,9 @@
     <Compile Include="Assets\Scripts\Struct\Tuple.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Art\Art3D\TCG_Oceano\Shaders\FXWater4Advanced.shader" />
+    <None Include="Assets\Art\Art3D\TCG_Oceano\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\Art\Art3D\TCG_Oceano\Shaders\WaterInclude.cginc" />
     <None Include="Assets\Art\DepthText.shader" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Amazona.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Arbusto.txt" />
@@ -378,10 +389,10 @@
     <None Include="Assets\Resources\MoonSharp\Scripts\Miragem.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Montanha.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Nonami.txt" />
+    <None Include="Assets\Resources\MoonSharp\Scripts\Oceano.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Olifante.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Pantano.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Ravina.txt" />
-    <None Include="Assets\Resources\MoonSharp\Scripts\Rio.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Sol Forte.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Somur.txt" />
     <None Include="Assets\Resources\MoonSharp\Scripts\Terraformar.txt" />

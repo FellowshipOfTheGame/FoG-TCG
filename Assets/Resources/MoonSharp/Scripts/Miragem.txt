@@ -3,7 +3,7 @@ return{
 	type = 't',
 	aspects = {0, 0, 0, 0},
 	desc = "Remove um terreno a sua escolha",
-	flavor = "Com persistencia, concentracao, e um pequeno meteoro, quase qualquer terreno pode perder suas caracteristicas mais significativas.",
+	flavor = "Uma coisa e ser enganado por uma miragem. Outra e ser enganado por um vendedor e comprar uma miragem.",
 	cost = 2,
 
 

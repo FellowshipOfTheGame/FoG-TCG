@@ -8,5 +8,26 @@ return {
 	atk = 2,
 	hp = 2
 
-	--reposicionar
+	OnRightClick = function(args)
+		local board = args[1]
+		local self = args[2]
+		
+		board.WaitForTarget(self);
+	end,
+
+	OnChosenTarget = function(args)
+		local board = args[1]
+		local self = args[2]
+		local pos = self.pos[2]
+		local destiny = args[4]
+		local target = board.GetMatrixValue(self.pos[1], destiny);
+		self.Move(self.pos[1], destiny);
+		self.canCast = false
+		self.canAttack = false
+		if target ~= nil then
+			target.canAttack = false
+			target.canCast = false
+			target.Move(self.pos[1], pos);
+		end
+	end
 }
