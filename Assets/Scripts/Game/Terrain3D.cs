@@ -6,11 +6,11 @@ public class Terrain3D : MonoBehaviour {
 
     public Transform model;
     Vector3 originalPos, destiny;
-    public float hidePos;
+    public float hidePos, offset;
     bool move = false;
 	// Use this for initialization
 	void Start () {
-        originalPos = model.position;
+        originalPos = model.position + Vector3.forward * offset;
         model.position = originalPos + Vector3.forward * hidePos;
         ascend();
 	}

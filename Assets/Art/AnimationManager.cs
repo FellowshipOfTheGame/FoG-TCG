@@ -28,13 +28,15 @@ public class AnimationManager : MonoBehaviour {
 
     public void setAnim(string animName) {
         int i = 0;
-        anim.enabled = false;
         while (allAnim[i].name != "ctrl_" + animName && i < allAnim.Length)
             i++;
 
         if (i != allAnim.Length) {
             anim.enabled = true;
-            anim.runtimeAnimatorController = allAnim[i];
+            if (anim.runtimeAnimatorController.name != allAnim[i].name)
+                anim.runtimeAnimatorController = allAnim[i];
+            else
+                anim.Rebind();
         }
     }
     public void refresh() {

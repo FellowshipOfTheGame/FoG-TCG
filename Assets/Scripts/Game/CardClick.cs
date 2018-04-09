@@ -67,10 +67,12 @@ public class CardClick : Clickable {
             }
         }
         else{
-            if (mouseButton == 0)
-                GetComponent<Card>().Attack();
-            else if (mouseButton == 1)
-                GetComponent<Card>().OnRightClick();
+            if (board.castCard == null) {
+                if (mouseButton == 0)
+                    GetComponent<Card>().Attack();
+                else if (mouseButton == 1)
+                    GetComponent<Card>().OnRightClick();
+            }
         }
     }
 
@@ -129,6 +131,7 @@ public class CardClick : Clickable {
                 } else
                     Debug.Log("cannot find 3D model of " + info.name);
 
+                board.slot.GetComponent<Slot>().openGate();
                 if (board.currPlayer == 1) {
                     board.cardMatrix[0, pos[1]] = this.gameObject;
                     this.GetComponent<Card>().pos[0] = 0;
@@ -163,6 +166,9 @@ public class CardClick : Clickable {
 
         if (inHand && CanBePlayed())
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + elevation, this.transform.position.z);
+
+        if (board.castCard != null) 
+            this.transform.parent.GetComponent<Slot>().show();
     }
 
     public override void OnPointerExit() {
@@ -172,8 +178,13 @@ public class CardClick : Clickable {
         if (board.illusionPos2.childCount != 0)
             Destroy(board.illusionPos2.GetChild(0).gameObject);
 
+
+
         if (inHand && CanBePlayed())
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - elevation, this.transform.position.z);
+
+        if (board.castCard != null)
+            this.transform.parent.GetComponent<Slot>().hide();
     }
 
     public bool CanBePlayed() {

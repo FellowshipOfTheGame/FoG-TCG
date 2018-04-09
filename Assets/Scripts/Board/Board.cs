@@ -21,7 +21,8 @@ public class Board : MonoBehaviour {
     public Script luaEnv;
     [HideInInspector] public int currPlayer = 1;
     public Player[] players;
-    [HideInInspector] public GameObject[,] cardMatrix = new GameObject[4,5];
+    [HideInInspector] public GameObject[,] cardMatrix = new GameObject[4, 5];
+    [HideInInspector] public GameObject[,] slotMatrix = new GameObject[4, 5];
     public GameObject cardAtm;
     [HideInInspector] public GameObject slot;
     public Vector3 mousePosition;
@@ -30,6 +31,9 @@ public class Board : MonoBehaviour {
     public Transform illusionPos2;
     [HideInInspector] public MiniMenu miniMenu = null;
     [HideInInspector] public ResourceData data;
+    [HideInInspector] public Card castCard;
+    
+
     Vector3 playerPosition;
     public GameObject GameOverScr;
     int counter = 1;
@@ -52,6 +56,17 @@ public class Board : MonoBehaviour {
         {
             //print(cardMatrix[x, y]);
             return cardMatrix[x, y].GetComponent<Card>();
+        }
+
+        //print("null");
+        return null;
+    }
+
+    public Slot GetSlot(int x, int y) {
+        //print("x " + x + " y " + y);
+        if (slotMatrix[x, y] != null) {
+            //print(cardMatrix[x, y]);
+            return slotMatrix[x, y].GetComponent<Slot>();
         }
 
         //print("null");
@@ -170,6 +185,16 @@ public class Board : MonoBehaviour {
             EndTurn();
         }
         time += Time.deltaTime;
+
+        if (castCard != null && Input.GetMouseButtonDown(0)) {
+            if (slot != null) {
+                castCard.OnChosenTarget(slot.GetComponent<Slot>().pos[0], slot.GetComponent<Slot>().pos[1]);
+                slot.GetComponent<Slot>().GetComponent<SpriteRenderer>().color = Color.clear;
+                slot = null;
+            }
+            castCard = null;
+            BlockAllowPlayer(currPlayer - 1, true);
+        }
 	}
 
     public void changeMusic(bool isEnd) {
@@ -192,6 +217,19 @@ public class Board : MonoBehaviour {
         }
         if (cardAtm != null)
             cardAtm.GetComponent<Card>().OnNewCardInField(c);
+    }
+
+    public void WaitForTarget(Card caster) {
+        castCard = caster;
+        BlockAllowPlayer(currPlayer - 1, false);
+    }
+
+    void BlockAllowPlayer(int p, bool v) {
+        players[p].canBuy = v;
+        players[p].canPlay = v;
+        players[p].capt.canBuy = v;
+        players[p].capt.canGenerate = v;
+        players[p].capt.canMove = v;
     }
 
     public void EndTurn() {

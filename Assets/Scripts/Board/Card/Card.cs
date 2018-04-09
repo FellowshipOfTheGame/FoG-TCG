@@ -25,6 +25,7 @@ public class Card : MonoBehaviour {
     public event CardEventDelegate NewCardInFieldEvent;
     public event CardEventDelegate ModifierEvent;
     public event CardEventDelegate RightClickEvent;
+    public event CardEventDelegate ChosenTargetEvent;
 
     public Table Data;
     public AnimationManager am;
@@ -42,7 +43,7 @@ public class Card : MonoBehaviour {
     [HideInInspector] public char type;
     [HideInInspector] public int atk;
     [HideInInspector] public int hp;
-    [HideInInspector] public bool canAttack, haveModifier = false;
+    [HideInInspector] public bool canAttack, canCast, haveModifier = false;
     [HideInInspector] public int timer = 0;
 
 	// LoadScript MUST be called from the Board who creates the instance
@@ -64,9 +65,9 @@ public class Card : MonoBehaviour {
 	}
 
 	protected virtual void RegisterDefaultEvents() {
-		EnterEvent = delegate { canAttack = true; };
+		EnterEvent = delegate { canAttack = true; canCast = true; };
 		ExitEvent = delegate {};
-		TurnStartEvent = delegate { canAttack = true; };
+		TurnStartEvent = delegate { canAttack = true; canCast = true; };
 		TurnEndEvent = delegate {};
 
 		EnterEvent += LoadDefaultEventHandler ("OnEnter");
@@ -96,6 +97,7 @@ public class Card : MonoBehaviour {
         NewCardInFieldEvent += LoadDefaultEventHandler("OnNewCardInField");
         ModifierEvent += LoadDefaultEventHandler("Modifier");
         RightClickEvent += LoadDefaultEventHandler("OnRightClick");
+        ChosenTargetEvent += LoadDefaultEventHandler("OnChosenTarget");
     }
 
 	protected CardEventDelegate LoadDefaultEventHandler(string eventName) {
@@ -122,6 +124,7 @@ public class Card : MonoBehaviour {
 
 	public virtual void OnTurnStart() {
         canAttack = true;
+        canCast = true;
         if (haveModifier)
             ModifierEvent(createTable(board, this));
 		TurnStartEvent (createTable(this));
@@ -137,7 +140,14 @@ public class Card : MonoBehaviour {
     }
 
     public virtual void OnRightClick() {
+        if (!canCast)
+            return;
+
         RightClickEvent(createTable(board, this));
+    }
+
+    public virtual void OnChosenTarget(int lin, int col) {
+        ChosenTargetEvent(createTable(board, this, lin, col));
     }
 
     public Table createTable(params object[] args)
@@ -243,6 +253,21 @@ public class Card : MonoBehaviour {
         am2.LoadAll();
         am2.oneShot = true;
         am2.setAnim(anim);
+    }
+
+    public void Move(int lin, int col) {
+        Slot s = board.GetSlot(lin, col); Debug.Log(col);
+        s.cards[1] = this.gameObject;
+        if (this.transform.parent.GetComponent<Slot>().cards[1] == this.gameObject) {
+            Debug.Log("perde ref");
+            board.cardMatrix[pos[0], pos[1]] = null;
+            this.transform.parent.GetComponent<Slot>().cards[1] = null;
+        }
+        board.cardMatrix[lin, col] = this.gameObject;
+        this.GetComponent<Card>().pos[0] = lin;
+        this.GetComponent<Card>().pos[1] = col;
+        this.transform.SetParent(s.transform);
+        this.transform.position = s.transform.position;
     }
 
     public void addModifier(Card card, string eventName) {
