@@ -5,9 +5,10 @@ using UnityEngine;
 public class ConfigInformation {
 	
 	public int money = 9000;
-	public string ActiveDeck = "";
+	public string ActiveDeck1 = "";
+    public string ActiveDeck2 = "";
 
-	public int vit = 0;
+    public int vit = 0;
 	public string com_vit = "";
 	public int derr = 0;
 	public string com_derr = "";

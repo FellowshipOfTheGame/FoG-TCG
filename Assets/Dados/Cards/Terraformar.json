@@ -1,1 +1,1 @@
-{"title":"Terraformar","desc":"destruir terreno","flavor":"","number":8,"type":115,"cost":2,"ATK":0,"HP":0,"manaToGive":0,"qtdd":0,"price":100,"lvl":1,"lvl_price":200,"aspects":[0,0,0,0],"aspectsToGive":[0,0,0,0]}
+{"title":"Terraformar","desc":"Remove 1 terreno","flavor":"Por mais forçado que pareça, um mago fez isso é a explicação mais plausível para os constantes abalos sísmicos de Idaran.","number":8,"type":115,"cost":2,"ATK":0,"HP":0,"manaToGive":0,"qtdd":0,"price":100,"lvl":1,"lvl_price":200,"aspects":[0,1,0,0],"aspectsToGive":[0,0,0,0]}

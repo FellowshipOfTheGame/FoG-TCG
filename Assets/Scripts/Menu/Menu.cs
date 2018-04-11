@@ -38,6 +38,7 @@ public class Menu : MonoBehaviour {
     public Book1C[] books;
 	private EventSystem ES;
 	public PlaySceneMusic Music;
+    public Dropdown[] selDecks;
 	public GameManager GM;
 
     int cBook = 0;
@@ -57,7 +58,7 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void PlaySelected() {
-        GM.SetGameDeck();
+        GameManager.instance.SetGameDeck();
         SceneManager.LoadScene("Board"); // carregar jogo(trocar Game pelo nome da scene)
 	}
 
@@ -88,6 +89,22 @@ public class Menu : MonoBehaviour {
     }
 
 	public void JogarSelected() {
+        GameManager.instance.LoadDecks();
+        int a = -1, b = -1;
+        for (int i = 0; i < GameData.Decks.Count; i++) {
+            selDecks[0].options.Add(new Dropdown.OptionData(GameData.Decks[i].name));
+            if (GameData.Decks[i].name == GameData.playerInfo.ActiveDeck1)
+                a = i;
+            selDecks[1].options.Add(new Dropdown.OptionData(GameData.Decks[i].name));
+            if (GameData.Decks[i].name == GameData.playerInfo.ActiveDeck2)
+                b = i;
+        }
+        if (a != -1)
+            selDecks[0].captionText.text = selDecks[0].options[a].text;
+
+        if (b != -1)
+            selDecks[0].captionText.text = selDecks[0].options[b].text;
+
         cBook = 0;
 		GOJogar.SetActive (true);
         books[0].anim.SetTrigger("Open");
@@ -127,14 +144,20 @@ public class Menu : MonoBehaviour {
         books[2].nextPage = GODecks;
         books[2].nextSide = GOLatDeck;
         books[2].anim.SetTrigger("Open");
-		GM.LoadDecks ();
+        GameManager.instance.LoadDecks ();
 	}
+
+    public void ChooseDeck (int i) {
+        LoadDeck.clickedDeck = selDecks[i].captionText.text;
+        GameManager.instance.SelectDeck(i + 1);
+    }
 
     public void VoltarDeck() {
         CollectionDraggable.canDrag = false;
         books[2].nextPage = GODecks;
         books[2].nextSide = GOLatDeck;
         books[2].anim.SetTrigger("Prev");
+        GameManager.instance.LoadDecks();
     }
 
 	public void NovoDeckSelected() {
@@ -167,7 +190,6 @@ public class Menu : MonoBehaviour {
 	public void ContaSelected() {
 		Desativar();
 		GOConta.SetActive (true);
-		ES.SetSelectedGameObject (VoltarConfig.gameObject);
 	}
 
 	public void OpcoesSelected() {
@@ -182,20 +204,17 @@ public class Menu : MonoBehaviour {
 
 	public void LoginSelected() {
 		Desativar();
-		GOLogin.SetActive (true);
-		ES.SetSelectedGameObject (VoltarCred.gameObject);		
+		GOLogin.SetActive (true);		
 	}
 
 	public void CadastSelected() {
 		Desativar();
-		GOCadast.SetActive (true);
-		ES.SetSelectedGameObject (VoltarCred.gameObject);		
+		GOCadast.SetActive (true);	
 	}
 
 	public void VoltarMenu() {
         books[cBook].anim.SetTrigger("Close");
 		GOMenu.SetActive (true);
-		ES.SetSelectedGameObject (Play.gameObject);
 	}
 
     public void SureExit() {

@@ -2,9 +2,9 @@ return{
 	title = "Sol Forte",
 	type = 'a',
 	aspects = {0, 0, 0, 0},
-	desc = "TODAS as criaturas com aspecto e fogo tem +1/+1",
+	desc = "Todas as criaturas com aspecto e fogo tem +1/+1",
 	flavor = "Em dias como esse, pessoas matariam por um pouco de chuva.",
-	cost = 1,
+	cost = 0,
 
 	OnEnter = function(args)
 		local board = args[1]

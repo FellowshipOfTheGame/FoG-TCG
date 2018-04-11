@@ -1,1 +1,1 @@
-{"title":"Volgarr","desc":"Atropelar","flavor":"No caminho de um guerreiro há apenas morte.","number":7,"type":99,"cost":4,"ATK":3,"HP":6,"manaToGive":0,"qtdd":1,"price":100,"lvl":1,"lvl_price":200,"aspects":[1,0,0,0],"aspectsToGive":[0,0,0,0]}
+{"title":"Volgarr","desc":"Atropelar,Sofre -1 de dano em ataques","flavor":"No caminho desse guerreiro, há apenas a guerra. É melhor deixá-lo passar.","number":7,"type":99,"cost":3,"ATK":3,"HP":6,"manaToGive":0,"qtdd":1,"price":100,"lvl":1,"lvl_price":200,"aspects":[1,0,1,0],"aspectsToGive":[0,0,0,0]}

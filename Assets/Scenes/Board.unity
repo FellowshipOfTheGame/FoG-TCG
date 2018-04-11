@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  limit: 3000
+  limit: 30
   initialHand: 3
   loadDeckFromMenu: 0
   maxHP: 5
@@ -2238,7 +2238,7 @@ MonoBehaviour:
   originalDeck:
   - Olifante
   - Goblin
-  - Oceano
+  - Guaxininja
   - Gato
   - Oceano
   - Montanha
@@ -2887,7 +2887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &520529248
 Transform:
   m_ObjectHideFlags: 0
@@ -5690,7 +5690,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1133846468}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.88, y: -0.244, z: -3.27}
+  m_LocalPosition: {x: -4.53, y: -0.73, z: -3.27}
   m_LocalScale: {x: 0.81725997, y: 0.40809998, z: 1}
   m_Children:
   - {fileID: 1393757853}

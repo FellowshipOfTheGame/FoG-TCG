@@ -4,14 +4,16 @@ return{
 	aspects = {0, 1, 1, 0},
 	desc = "Envenenar",
 	flavor = "",
-	cost = 2,
+	cost = 3,
 	atk = 2,
 	hp = 5,
 
 	OnDamageDealt = function(args)
 		local self = args[2]
 		local enemy = args[3]
-		enemy.addModifier(self, "Poisoned");
+		if enemy ~= nil then
+			enemy.addModifier(self, "Poisoned");
+		end
 	end,
 
 	Poisoned = function(args)

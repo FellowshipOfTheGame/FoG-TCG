@@ -119,6 +119,8 @@ public class Card : MonoBehaviour {
 	}
 
 	public virtual void OnExit() {
+        if (type == 't')
+            this.transform.parent.GetComponent<Slot>().closeGate();
         ExitEvent (createTable(board, this));
 	}
 
@@ -271,7 +273,7 @@ public class Card : MonoBehaviour {
     }
 
     public void addModifier(Card card, string eventName) {
-        ModifierEvent += card.LoadDefaultEventHandler(eventName);
+        ModifierEvent = card.LoadDefaultEventHandler(eventName);
         haveModifier = true;
     }
 }

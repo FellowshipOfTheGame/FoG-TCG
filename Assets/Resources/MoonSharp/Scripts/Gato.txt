@@ -1,8 +1,8 @@
 return{
 	title = "Gato",
 	type = 'c',
-	aspects = {0, 0, 0, 0},
-	desc = "Gera uma mana para você",
+	aspects = {0, 1, 0, 0},
+	desc = "Gera uma mana",
 	flavor = "Ao ser violentamente assassinado junto a seu querido gato, o corpo do grande ladino Shadowill desapareceu. Meses depois, rumores de um gato portando adagas começaram a espalhar-se por Caldyr...",
 	cost = 2,
 	atk = 1,

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     public static char currScene= 'm';
+    public static GameManager instance;
 
 	//Variaveis de salvar deck
 	public Transform Deck;
@@ -22,9 +23,10 @@ public class GameManager : MonoBehaviour {
 	public Transform ListaDeDecks;
 	public GameObject DeckPrefab;
 
-    public static List<string> chosenDeck;
+    public static List<string> chosenDeck1;
+    public static List<string> chosenDeck2;
 
-	public void SaveDeck() {
+    public void SaveDeck() {
 		savingDeck = new DeckInformation ();
 
 		//setando dados
@@ -162,19 +164,37 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void SelectDeck() {
-		GameData.playerInfo.ActiveDeck = LoadDeck.clickedDeck;
+	public void SelectDeck(int i) {
+        if (i == 1)
+		    GameData.playerInfo.ActiveDeck1 = LoadDeck.clickedDeck;
+        else if (i == 2)
+            GameData.playerInfo.ActiveDeck2 = LoadDeck.clickedDeck;
         SaveInfos ();
 	}
 
     void Awake() {
-		DontDestroyOnLoad(transform.gameObject);
-		Deckpath = Application.dataPath + "/Dados/Decks/"; 
-		Cardpath = Application.dataPath + "/Dados/Cards/";
-		AnotherPath = Application.dataPath + "/Dados/"; 
+        if (instance != null) {
+            GameManager gm = instance;
+            gm.AnotherPath = AnotherPath;
+            gm.Cardpath = Cardpath;
+            gm.Commander = Commander;
+            gm.Deck = Deck;
+            gm.DeckName = DeckName;
+            gm.Deckpath = Deckpath;
+            gm.DeckPrefab = DeckPrefab;
+            gm.ListaDeDecks = ListaDeDecks;
+            gm.savingDeck = savingDeck;
+            Destroy(this.gameObject);
+        } else {
+            GameManager.instance = this.GetComponent<GameManager>();
+            DontDestroyOnLoad(transform.gameObject);
+            Deckpath = Application.dataPath + "/Dados/Decks/";
+            Cardpath = Application.dataPath + "/Dados/Cards/";
+            AnotherPath = Application.dataPath + "/Dados/";
 
-		LoadCards ();
-		LoadInfos ();
+            LoadCards();
+            LoadInfos();
+        }
     }
 
     public void SetGameDeck() {
@@ -184,18 +204,18 @@ public class GameManager : MonoBehaviour {
             while (GameData.Decks[index++].name != LoadDeck.clickedDeck) ;
             deck = GameData.Decks[index - 1];
         }else {
-            string file = Deckpath + GameData.playerInfo.ActiveDeck + ".json";
+            string file = Deckpath + GameData.playerInfo.ActiveDeck1 + ".json";
             if (File.Exists(file)) {
                 string JsonDeck = File.ReadAllText(file);
                 deck = JsonUtility.FromJson<DeckInformation>(JsonDeck);
             }
         }
-        chosenDeck = new List<string>();
+        chosenDeck1 = new List<string>();
         int i = 0, j = 0;
         index = 0;
         while (i < deck.size) {
             for (j = 0; j < deck.Cards[index].number; j++) {
-                chosenDeck.Add(deck.Cards[index].name);
+                chosenDeck1.Add(deck.Cards[index].name);
             }
             i += j;
             index++;

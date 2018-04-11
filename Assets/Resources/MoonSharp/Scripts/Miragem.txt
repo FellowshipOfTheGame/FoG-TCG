@@ -1,10 +1,10 @@
 return{
 	title = "Miragem",
-	type = 't',
+	type = 's',
 	aspects = {0, 0, 0, 0},
 	desc = "Remove um terreno a sua escolha",
 	flavor = "Uma coisa e ser enganado por uma miragem. Outra e ser enganado por um vendedor e comprar uma miragem.",
-	cost = 2,
+	cost = 1,
 
 
 

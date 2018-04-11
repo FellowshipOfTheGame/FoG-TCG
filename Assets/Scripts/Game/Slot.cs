@@ -113,10 +113,10 @@ public class Slot : Clickable {
 
     public void openGate() {
         moveGate = true;
-        if (pos[0] == 1)
+        if (pos[0] <= 1)
             destiny = gatepos - 1.5f;
         else
-            destiny = gatepos - 1.5f;
+            destiny = gatepos + 1.5f;
     }
 
     public void closeGate() {
