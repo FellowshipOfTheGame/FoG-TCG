@@ -170,6 +170,15 @@ public class Menu : MonoBehaviour {
         books[2].anim.SetTrigger("Next");
 	}
 
+    public void SalvarDeck() {
+        GameManager.instance.SaveDeck();
+        VoltarDeck();
+    }
+
+    public void DeletarDeck() {
+        GameManager.instance.DeleteDeck();
+    }
+
     public void ConfigSelected() {
         GOConfig.GetComponent<Animator>().SetTrigger("Move");
     }

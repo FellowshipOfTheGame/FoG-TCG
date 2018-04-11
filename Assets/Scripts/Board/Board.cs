@@ -90,16 +90,14 @@ public class Board : MonoBehaviour {
     void SetPlayer(int index) {
         players[index - 1].HP = maxHP;
         players[index - 1].mana = 1;
-        if (loadDeckFromMenu && GameManager.chosenDeck1 != null) {
-            if (index == 1) {
-                for (int i = 0; i < GameManager.chosenDeck1.Count; i++)
-                    players[0].deckList.Add(GameManager.chosenDeck1[i]);
-            }else if (index == 2) {
-                for (int i = 0; i < GameManager.chosenDeck2.Count; i++)
-                    players[1].deckList.Add(GameManager.chosenDeck2[i]);
-            }
-            
+        if (loadDeckFromMenu && index == 1 && GameManager.chosenDeck1 != null) {
+            for (int i = 0; i < GameManager.chosenDeck1.Count; i++)
+                players[0].deckList.Add(GameManager.chosenDeck1[i]);
+        } else if (loadDeckFromMenu && index == 2 && GameManager.chosenDeck2 != null) {
+            for (int i = 0; i < GameManager.chosenDeck2.Count; i++)
+                players[1].deckList.Add(GameManager.chosenDeck2[i]);
         } else {
+            Debug.Log("No Deck " + index + " Found");
             for (int i = 0; i < players[index - 1].originalDeck.Count; i++)
                 players[index - 1].deckList.Add(players[index - 1].originalDeck[i]);
         }

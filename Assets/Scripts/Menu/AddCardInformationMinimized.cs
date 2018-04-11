@@ -11,7 +11,7 @@ public class AddCardInformationMinimized : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        name = card.title; 
+        name = card.title;
         title.text = card.title;
 		quantityText.text = "x"+ quantity;
     }

@@ -198,28 +198,58 @@ public class GameManager : MonoBehaviour {
     }
 
     public void SetGameDeck() {
-        int index = 0;
-        DeckInformation deck = new DeckInformation();
-        if (GameData.Decks.Count > 0) {
-            while (GameData.Decks[index++].name != LoadDeck.clickedDeck) ;
-            deck = GameData.Decks[index - 1];
-        }else {
-            string file = Deckpath + GameData.playerInfo.ActiveDeck1 + ".json";
-            if (File.Exists(file)) {
-                string JsonDeck = File.ReadAllText(file);
-                deck = JsonUtility.FromJson<DeckInformation>(JsonDeck);
+        if (GameData.playerInfo.ActiveDeck1 != string.Empty) {
+            int index = 0;
+            DeckInformation deck = new DeckInformation();
+            if (GameData.Decks.Count > 0) {
+                while (GameData.Decks[index++].name != LoadDeck.clickedDeck) ;
+                deck = GameData.Decks[index - 1];
+            } else {
+                string file = Deckpath + GameData.playerInfo.ActiveDeck1 + ".json";
+                if (File.Exists(file)) {
+                    string JsonDeck = File.ReadAllText(file);
+                    deck = JsonUtility.FromJson<DeckInformation>(JsonDeck);
+                }
             }
-        }
-        chosenDeck1 = new List<string>();
-        int i = 0, j = 0;
-        index = 0;
-        while (i < deck.size) {
-            for (j = 0; j < deck.Cards[index].number; j++) {
-                chosenDeck1.Add(deck.Cards[index].name);
+            chosenDeck1 = new List<string>();
+            int i = 0, j = 0;
+            index = 0;
+            while (i < deck.size) {
+                for (j = 0; j < deck.Cards[index].number; j++) {
+                    chosenDeck1.Add(deck.Cards[index].name);
+                }
+                i += j;
+                index++;
             }
-            i += j;
-            index++;
-        }
+        } else
+            chosenDeck1 = null;
+
+        if (GameData.playerInfo.ActiveDeck2 != string.Empty) {
+            Debug.Log(GameData.playerInfo.ActiveDeck1);
+            int index = 0;
+            DeckInformation deck = new DeckInformation();
+            if (GameData.Decks.Count > 0) {
+                while (GameData.Decks[index++].name != LoadDeck.clickedDeck) ;
+                deck = GameData.Decks[index - 1];
+            } else {
+                string file = Deckpath + GameData.playerInfo.ActiveDeck2 + ".json";
+                if (File.Exists(file)) {
+                    string JsonDeck = File.ReadAllText(file);
+                    deck = JsonUtility.FromJson<DeckInformation>(JsonDeck);
+                }
+            }
+            chosenDeck2 = new List<string>();
+            int i = 0, j = 0;
+            index = 0;
+            while (i < deck.size) {
+                for (j = 0; j < deck.Cards[index].number; j++) {
+                    chosenDeck2.Add(deck.Cards[index].name);
+                }
+                i += j;
+                index++;
+            }
+        } else
+            chosenDeck2 = null;
     }
 
 }
