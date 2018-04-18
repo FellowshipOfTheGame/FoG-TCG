@@ -111,6 +111,14 @@ public class Slot : Clickable {
         }
     }
 
+    public void Reset() {
+        gate.transform.position = new Vector3(gate.transform.position.x, gatepos, gate.transform.position.z);
+        cards[0] = null;
+        cards[1] = null;
+        for (int i = 0; i < this.transform.childCount; i++)
+            Destroy(this.transform.GetChild(i).gameObject);
+    }
+
     public void openGate() {
         moveGate = true;
         if (pos[0] <= 1)

@@ -16,9 +16,12 @@ public class Captain : Clickable {
     bool dragging = false;
     Vector3 diff;
     public AnimationManager[] anims;
+    SpriteRenderer spr;
+    public Color inColor, offColor;
 	// Use this for initialization
 	void Start () {
         board = GameObject.FindObjectOfType<Board>() as Board;
+        spr = this.GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -29,6 +32,22 @@ public class Captain : Clickable {
                 Dropping();
         }
 	}
+
+    public override void OnPointerEnter() {
+        if (canMove || canGenerate || canBuy)
+        spr.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+    }
+
+    public override void OnPointerExit() {
+        spr.color = Color.clear;
+    }
+
+    public void block() {
+        spr.color = Color.clear;
+        canBuy = false;
+        canGenerate = false;
+        canMove = false;
+    }
 
     public override void OnClick(int mouseButton) {
         if (mouseButton == 0 && canMove) {
@@ -47,7 +66,7 @@ public class Captain : Clickable {
     }
 
     void AddAspectMenu(Vector3 position, GameObject mainMenu) {
-        GameObject menuAux = this.GetComponent<MenuGenerator>().CreateMiniMenu(4, mainMenu, null);
+        GameObject menuAux = this.GetComponent<MenuGenerator>().CreateMiniMenu(3, mainMenu, null);
         mainMenu.GetComponent<MiniMenu>().nextMenu = menuAux;
         menuAux.transform.position = position;
         Player player = board.players[board.currPlayer - 1];
@@ -57,8 +76,6 @@ public class Captain : Clickable {
         menuAux.GetComponent<MiniMenu>().buttons[1].transform.GetChild(0).GetComponent<Text>().text = "Water";
         menuAux.GetComponent<MiniMenu>().buttons[2].GetComponent<Button>().onClick.AddListener(() => { AddAspect(2, player, menuAux); });
         menuAux.GetComponent<MiniMenu>().buttons[2].transform.GetChild(0).GetComponent<Text>().text = "Earth";
-        menuAux.GetComponent<MiniMenu>().buttons[3].GetComponent<Button>().onClick.AddListener(() => { AddAspect(3, player, menuAux); });
-        menuAux.GetComponent<MiniMenu>().buttons[3].transform.GetChild(0).GetComponent<Text>().text = "Air";
     }
 
     void AddAspect(int index, Player player, GameObject menu) {
@@ -102,15 +119,19 @@ public class Captain : Clickable {
             pos--;
             canGenerate = false;
             canBuy = false;
-            board.players[board.currPlayer - 1].canPlay = false;
         } else if (this.transform.position.x - originalPos > (posDefaults[1] - posDefaults[0]) / 2) {
             pos++;
             canGenerate = false;
             canBuy = false;
-            board.players[board.currPlayer - 1].canPlay = false;
         }
         this.transform.position = new Vector3(posDefaults[pos - 1], this.transform.position.y, this.transform.position.z);
         dragging = false;
         //canMove = false;
     }
+
+    public void Reset() {
+        pos = 2;
+        this.transform.position = new Vector3(posDefaults[1], this.transform.position.y, this.transform.position.z);
+    }
+
 }

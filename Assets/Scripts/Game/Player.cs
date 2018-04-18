@@ -88,7 +88,7 @@ public class Player : MonoBehaviour {
         print(HP);
 
         if (prevHP > board.critic && HP <= board.critic)
-            board.changeMusic(true);
+            board.changeState(true, index);
 
         if (HP <= 0) {
             Board.winner = 3 - index;

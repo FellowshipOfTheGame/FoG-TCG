@@ -157,8 +157,7 @@ public class Card : MonoBehaviour {
         return DynValue.FromObject(board.luaEnv, args as object[]).Table;
     }
 
-    public void Attack()
-    {
+    public void Attack(){
         if (!canAttack)
             return;
         Table args;

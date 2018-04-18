@@ -32,7 +32,7 @@ public class Board : MonoBehaviour {
     [HideInInspector] public MiniMenu miniMenu = null;
     [HideInInspector] public ResourceData data;
     [HideInInspector] public Card castCard;
-    
+    bool[] endLife;
 
     Vector3 playerPosition;
     public GameObject GameOverScr;
@@ -117,6 +117,9 @@ public class Board : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        endLife = new bool[2];
+        endLife[0] = false;
+        endLife[1] = false;
         players = new Player[2];
         players[0] = transform.Find("Player1").GetComponent<Player>();
         players[1] = transform.Find("Player2").GetComponent<Player>();
@@ -141,7 +144,6 @@ public class Board : MonoBehaviour {
     }
 
     public void EndGame() {
-        Time.timeScale = 0;
         GameOverScr.SetActive(true);
         GameOverScr.GetComponent<GameOverScreen>().Show();
     }
@@ -159,6 +161,9 @@ public class Board : MonoBehaviour {
             for (j = 0; j < 5; j++) {
                 if (cardMatrix[i, j] != null)
                     Destroy(cardMatrix[i, j]);
+
+                if (slotMatrix[i, j] != null)
+                    slotMatrix[i, j].GetComponent<Slot>().Reset();
 
                 cardMatrix[i, j] = null;
             }
@@ -179,7 +184,8 @@ public class Board : MonoBehaviour {
             players[0].PickUpCard();
             players[1].PickUpCard();
         }
-
+        players[0].capt.Reset();
+        players[1].capt.Reset();
         currPlayer = 1;
     }
 	
@@ -201,15 +207,20 @@ public class Board : MonoBehaviour {
         }
 	}
 
-    public void changeMusic(bool isEnd) {
-        if (isEnd && audioPlayer.clip == startMusic) {
-            audioPlayer.PlayOneShot(endMusic);
-            audioPlayer.volume = 0.5f;
+    public void changeState(bool value, int index) {
+        if (endLife[index] != value){
+            if (value && !endLife[1-index]) {
+                audioPlayer.Stop();
+                audioPlayer.PlayOneShot(endMusic);
+                audioPlayer.volume = 0.5f;
+            }
+            if (!value && endLife[1 - index]) {
+                audioPlayer.Stop();
+                audioPlayer.PlayOneShot(startMusic);
+                audioPlayer.volume = 1.0f;
+            }
         }
-        if (!isEnd && audioPlayer.clip == endMusic) {
-            audioPlayer.PlayOneShot(startMusic);
-            audioPlayer.volume = 1.0f;
-        }
+        endLife[index] = value;
     }
 
     public void CallCardPlacedEvents(Card c) {
@@ -231,9 +242,7 @@ public class Board : MonoBehaviour {
     void BlockAllowPlayer(int p, bool v) {
         players[p].canBuy = v;
         players[p].canPlay = v;
-        players[p].capt.canBuy = v;
-        players[p].capt.canGenerate = v;
-        players[p].capt.canMove = v;
+        players[p].capt.block();
     }
 
     public void EndTurn() {

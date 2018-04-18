@@ -149,7 +149,6 @@ public class CardClick : Clickable {
                 this.GetComponent<Card>().pos[1] = -1;
                 board.cardAtm = this.gameObject;
             }
-            board.players[board.currPlayer - 1].capt.canMove = false;
             board.slot = null;
             this.GetComponent<Card>().OnEnter();
             board.CallCardPlacedEvents(this.GetComponent<Card>());
