@@ -21,7 +21,7 @@ return{
 		end
 		
 		if terrain ~= nil then
-			terrain.Remove()
+			terrain.Die()
 		end
 
 		self.Remove()

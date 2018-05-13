@@ -9,6 +9,8 @@ public class MenuInGame : MonoBehaviour {
 	public GameObject play;
 	public GameObject pause;
 	public GameObject Confirm;
+    [Space(10)]
+    public Raycaster raycaster;
 
 	private bool paused = false;
 	private string saida;
@@ -40,11 +42,13 @@ public class MenuInGame : MonoBehaviour {
 			Time.timeScale = 1;
 			pause.SetActive (true);
 			play.SetActive (false);
+            raycaster.enabled = true;
 			paused = false;
 		} else {
 			Time.timeScale = 0;
 			pause.SetActive (false);
 			play.SetActive (true);
+            raycaster.enabled = false;
 			paused = true;
 		}
 	}

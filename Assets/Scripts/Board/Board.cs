@@ -7,7 +7,7 @@ using MoonSharp.Interpreter;
 [MoonSharpUserData]
 public class Board : MonoBehaviour {
 
-    public float time;
+    [HideInInspector] public float time;
     public float limit;
     public float initialHand;
     public bool loadDeckFromMenu;
@@ -20,18 +20,20 @@ public class Board : MonoBehaviour {
     [Space(5)]
     public Script luaEnv;
     [HideInInspector] public int currPlayer = 1;
-    public Player[] players;
+    [HideInInspector] public Player[] players;
     [HideInInspector] public GameObject[,] cardMatrix = new GameObject[4, 5];
     [HideInInspector] public GameObject[,] slotMatrix = new GameObject[4, 5];
-    public GameObject cardAtm;
+    [HideInInspector] public GameObject cardAtm;
     [HideInInspector] public GameObject slot;
-    public Vector3 mousePosition;
+    [HideInInspector] public Vector3 mousePosition;
     [HideInInspector] public GameObject dragCard;
     public Transform illusionPos;
     public Transform illusionPos2;
     [HideInInspector] public MiniMenu miniMenu = null;
     [HideInInspector] public ResourceData data;
     [HideInInspector] public Card castCard;
+    public Raycaster ray;
+    public GameObject turnScreen;
     bool[] endLife;
 
     Vector3 playerPosition;
@@ -88,6 +90,7 @@ public class Board : MonoBehaviour {
     }
 
     void SetPlayer(int index) {
+        turnScreen.SetActive(false);
         players[index - 1].HP = maxHP;
         players[index - 1].mana = 1;
         if (loadDeckFromMenu && index == 1 && GameManager.chosenDeck1 != null) {
@@ -191,19 +194,21 @@ public class Board : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (time > limit) {
-            EndTurn();
-        }
-        time += Time.deltaTime;
-
-        if (castCard != null && Input.GetMouseButtonDown(0)) {
-            if (slot != null) {
-                castCard.OnChosenTarget(slot.GetComponent<Slot>().pos[0], slot.GetComponent<Slot>().pos[1]);
-                slot.GetComponent<Slot>().GetComponent<SpriteRenderer>().color = Color.clear;
-                slot = null;
+        if (ray.enabled) {
+            if (time > limit) {
+                EndTurn();
             }
-            castCard = null;
-            BlockAllowPlayer(currPlayer - 1, true);
+            time += Time.deltaTime;
+
+            if (castCard != null && Input.GetMouseButtonDown(0)) {
+                if (slot != null) {
+                    castCard.OnChosenTarget(slot.GetComponent<Slot>().pos[0], slot.GetComponent<Slot>().pos[1]);
+                    slot.GetComponent<Slot>().GetComponent<SpriteRenderer>().color = Color.clear;
+                    slot = null;
+                }
+                castCard = null;
+                BlockAllowPlayer(currPlayer - 1, true);
+            }
         }
 	}
 
@@ -281,7 +286,7 @@ public class Board : MonoBehaviour {
             else
                 players[1].mana = 10;
 
-            StartPlayerTurn(1);
+            //StartPlayerTurn(1);
         }else {
             EndPlayerTurn(1);
 
@@ -293,9 +298,21 @@ public class Board : MonoBehaviour {
                 players[0].mana = counter;
             else
                 players[0].mana = 10;
-
-            StartPlayerTurn(0);
+            
         }
+        LockTurn();
+    }
+
+    void LockTurn() {
+        ray.enabled = false;
+        turnScreen.SetActive(true);
+        Time.timeScale = 1;
+    }
+
+    public void UnlockTurn() {
+        ray.enabled = true;
+        turnScreen.SetActive(false);
+        StartPlayerTurn(currPlayer - 1);
         time = 0;
         players[currPlayer - 1].ResetTurn();
     }
