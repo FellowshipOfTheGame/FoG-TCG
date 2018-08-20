@@ -24,7 +24,7 @@ public class Board : MonoBehaviour {
     [HideInInspector] public GameObject[,] cardMatrix = new GameObject[4, 5];
     [HideInInspector] public GameObject[,] slotMatrix = new GameObject[4, 5];
     [HideInInspector] public GameObject cardAtm;
-    [HideInInspector] public GameObject slot;
+    public GameObject slot;
     [HideInInspector] public Vector3 mousePosition;
     [HideInInspector] public GameObject dragCard;
     public Transform illusionPos;
@@ -203,7 +203,7 @@ public class Board : MonoBehaviour {
             if (castCard != null && Input.GetMouseButtonDown(0)) {
                 if (slot != null) {
                     castCard.OnChosenTarget(slot.GetComponent<Slot>().pos[0], slot.GetComponent<Slot>().pos[1]);
-                    slot.GetComponent<Slot>().GetComponent<SpriteRenderer>().color = Color.clear;
+                    slot.GetComponent<Slot>().hide();
                     slot = null;
                 }
                 castCard = null;
@@ -307,6 +307,7 @@ public class Board : MonoBehaviour {
         ray.enabled = false;
         turnScreen.SetActive(true);
         Time.timeScale = 1;
+
     }
 
     public void UnlockTurn() {

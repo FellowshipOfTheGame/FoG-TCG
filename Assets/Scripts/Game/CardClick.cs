@@ -67,12 +67,12 @@ public class CardClick : Clickable {
             }
         }
         else{
-            if (board.castCard == null) {
+            
                 if (mouseButton == 0)
                     GetComponent<Card>().Attack();
                 else if (mouseButton == 1)
                     GetComponent<Card>().OnRightClick();
-            }
+            
         }
     }
 
@@ -110,10 +110,12 @@ public class CardClick : Clickable {
             if (this.GetComponent<Card>().type == 'c') {
                 board.slot.GetComponent<Slot>().cards[1] = this.gameObject;
                 board.cardMatrix[pos[0], pos[1]] = this.gameObject;
-                this.GetComponent<Card>().pos = pos;
+                this.GetComponent<Card>().pos[0] = pos[0];
+                this.GetComponent<Card>().pos[1] = pos[1];
                 minCard.SetActive(true);
             } else if (this.GetComponent<Card>().type == 's') {
-                this.GetComponent<Card>().pos = pos;
+                this.GetComponent<Card>().pos[0] = pos[0];
+                this.GetComponent<Card>().pos[1] = pos[1];
             } else if (this.GetComponent<Card>().type == 't') {
                 board.slot.GetComponent<Slot>().cards[0] = this.gameObject;
                 //make card terrain invisible and unclickable

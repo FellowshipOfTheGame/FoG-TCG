@@ -39,7 +39,7 @@ public class Card : MonoBehaviour {
     [HideInInspector] public string infoName;
     [HideInInspector] public int cost;
     [HideInInspector] public int[] aspects;
-    [HideInInspector] public int[] pos = new int[2];
+    public int[] pos = new int[2];
     [HideInInspector] public char type;
     [HideInInspector] public int atk;
     [HideInInspector] public int hp;
@@ -93,6 +93,8 @@ public class Card : MonoBehaviour {
 
         NewCardInFieldEvent = delegate { };
         ModifierEvent = delegate { };
+        RightClickEvent = delegate { };
+        ChosenTargetEvent = delegate { };
 
         NewCardInFieldEvent += LoadDefaultEventHandler("OnNewCardInField");
         ModifierEvent += LoadDefaultEventHandler("Modifier");
@@ -258,15 +260,23 @@ public class Card : MonoBehaviour {
 
     public void Move(int lin, int col) {
         Slot s = board.GetSlot(lin, col); Debug.Log(col);
-        s.cards[1] = this.gameObject;
-        if (this.transform.parent.GetComponent<Slot>().cards[1] == this.gameObject) {
-            Debug.Log("perde ref");
-            board.cardMatrix[pos[0], pos[1]] = null;
-            this.transform.parent.GetComponent<Slot>().cards[1] = null;
+        board.cardMatrix[pos[0], pos[1]] = null;
+        this.transform.parent.GetComponent<Slot>().cards[1] = null;
+        if (s.cards[1] != null) {
+            Card aux = s.cards[1].GetComponent<Card>();
+
+            aux.pos[0] = pos[0];
+            aux.pos[1] = pos[1];
+            board.cardMatrix[pos[0], pos[1]] = aux.gameObject;
+            this.transform.parent.GetComponent<Slot>().cards[1] = aux.gameObject;
+            aux.transform.SetParent(this.transform.parent);
+            aux.transform.position = this.transform.position;
         }
+        s.cards[1] = this.gameObject;
         board.cardMatrix[lin, col] = this.gameObject;
-        this.GetComponent<Card>().pos[0] = lin;
-        this.GetComponent<Card>().pos[1] = col;
+
+        this.pos[0] = lin;
+        this.pos[1] = col;
         this.transform.SetParent(s.transform);
         this.transform.position = s.transform.position;
     }
