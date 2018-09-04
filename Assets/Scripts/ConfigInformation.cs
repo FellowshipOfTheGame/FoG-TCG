@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConfigInformation {
 	
-	public int money = 9000;
+	public int money = 500000;
 	public string ActiveDeck1 = "";
     public string ActiveDeck2 = "";
 
@@ -13,8 +13,8 @@ public class ConfigInformation {
 	public int derr = 0;
 	public string com_derr = "";
 
-	public int max_money = 0;
-	public int ac_money = 0;
+	public int max_money = 500000;
+	public int ac_money = 500000;
 	public string fav_card = "";
 	public int time = 0;
 

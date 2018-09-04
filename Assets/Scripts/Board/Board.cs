@@ -33,7 +33,7 @@ public class Board : MonoBehaviour {
     [HideInInspector] public ResourceData data;
     [HideInInspector] public Card castCard;
     public Raycaster ray;
-    public GameObject turnScreen;
+    public TurnChangeScreen turnScreen;
     bool[] endLife;
 
     Vector3 playerPosition;
@@ -90,7 +90,6 @@ public class Board : MonoBehaviour {
     }
 
     void SetPlayer(int index) {
-        turnScreen.SetActive(false);
         players[index - 1].HP = maxHP;
         players[index - 1].mana = 1;
         if (loadDeckFromMenu && index == 1 && GameManager.chosenDeck1 != null) {
@@ -305,14 +304,14 @@ public class Board : MonoBehaviour {
 
     void LockTurn() {
         ray.enabled = false;
-        turnScreen.SetActive(true);
+        turnScreen.show(currPlayer);
         Time.timeScale = 1;
 
     }
 
     public void UnlockTurn() {
         ray.enabled = true;
-        turnScreen.SetActive(false);
+        turnScreen.hide();
         StartPlayerTurn(currPlayer - 1);
         time = 0;
         players[currPlayer - 1].ResetTurn();

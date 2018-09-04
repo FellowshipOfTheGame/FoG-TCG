@@ -60,7 +60,7 @@ public class LoadCard : MonoBehaviour {
             flavor.text = clickedCard.flavor;
 
             if (!inGallery) {
-                if (GameData.playerInfo.money >= clickedCard.price * (clickedCard.qtdd + 1) && clickedCard.qtdd < 3) {
+                if (GameData.playerInfo.money >= clickedCard.price * (clickedCard.qtdd + 1) && clickedCard.qtdd < 7) {
                     comprar.interactable = true;
                     comprar.gameObject.SetActive(true);
                 } else {

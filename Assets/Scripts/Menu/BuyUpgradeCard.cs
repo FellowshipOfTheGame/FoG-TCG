@@ -8,7 +8,7 @@ public class BuyUpgradeCard : MonoBehaviour {
 
 	public void BuyCard() {
 		Debug.Log (""+LoadCard.clickedCard.price);
-		if (GameData.playerInfo.money >= LoadCard.clickedCard.price*(LoadCard.clickedCard.qtdd+1) && LoadCard.clickedCard.qtdd < 3) {
+		if (GameData.playerInfo.money >= LoadCard.clickedCard.price*(LoadCard.clickedCard.qtdd+1) && LoadCard.clickedCard.qtdd < 7) {
 			GameData.playerInfo.money -= LoadCard.clickedCard.price*(LoadCard.clickedCard.qtdd+1);
 			LoadCard.clickedCard.qtdd++;
 		}

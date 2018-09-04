@@ -28,7 +28,7 @@ public class DeckListManager : MonoBehaviour {
         {
             if(transform.GetChild(i).name == cardName)
             {
-                if(transform.GetChild(i).GetComponent<AddCardInformationMinimized>().quantity < 3)
+                if(transform.GetChild(i).GetComponent<AddCardInformationMinimized>().quantity < 7)
                 {
                     return true;
                 }
