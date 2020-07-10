@@ -10,6 +10,12 @@ public class LoadTabs : MonoBehaviour {
 	public GameObject dunnoCard;
     GameObject newCard = null;
 
+    bool loaded;
+
+    void Start(){
+        loaded = false;
+    }
+
 	private void DeleteCardsFromTabs() {
 		for(int i = 1; i <= 5; i++){
 			Transform abax = abas.Find ("Aba"+i).GetChild (0).GetChild (0);
@@ -68,12 +74,14 @@ public class LoadTabs : MonoBehaviour {
 
 	public void LoadGalery() {
 
-		DeleteCardsFromTabs ();
-
-		foreach (CardInformation card in GameData.Cards) {
-			LoadCard (card, genericCard, true);
-			
-		}
+		//DeleteCardsFromTabs ();
+        if(!loaded){
+            foreach (CardInformation card in GameData.Cards) {
+                LoadCard (card, genericCard, true);
+                
+            }
+            loaded = true;
+        }
 	}
 
 }

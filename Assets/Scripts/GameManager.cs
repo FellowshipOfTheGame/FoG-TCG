@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour {
 	public Transform ListaDeDecks;
 	public GameObject DeckPrefab;
 
+	[HideInInspector] public MoonLoader loader;
+
     public static List<string> chosenDeck1;
     public static List<string> chosenDeck2;
 
@@ -115,6 +117,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void LoadCards() {
+		/*
 		string[] ExistingCardsPaths = Directory.GetFiles(Cardpath , "*.json");
 		GameData.Cards.Clear ();
 
@@ -127,9 +130,9 @@ public class GameManager : MonoBehaviour {
 				CardInformation aux = JsonUtility.FromJson<CardInformation> (JsonCard);
 
 				//para mudar alguma coisa nas cartas, usar essa parte comentada
-				/*string JsonData = JsonUtility.ToJson (aux);
-				string filePath2 = Cardpath + aux.title + ".json";
-				File.WriteAllText (filePath2, JsonData);*/
+				//string JsonData = JsonUtility.ToJson (aux);
+				//string filePath2 = Cardpath + aux.title + ".json";
+				//File.WriteAllText (filePath2, JsonData);
 
 				GameData.Cards.Add (aux);
 
@@ -139,12 +142,28 @@ public class GameManager : MonoBehaviour {
 				GameData.Images.Add (ci);
 			}
 		}
+		*/
+
+		TextAsset[] files = Resources.LoadAll<TextAsset>("MoonSharp/Scripts/");
+		foreach( TextAsset card in files){
+			CardInformation aux = new CardInformation();
+			aux.LoadScript(loader, card.name);
+
+			GameData.Cards.Add (aux);
+
+			CardImage ci = new CardImage ();
+			ci.card = aux.title;
+			ci.imagem = Resources.Load<Sprite>(aux.title.ToLower());
+			GameData.Images.Add (ci);
+		}
+		Debug.Log(GameData.Cards.Count);
+		
 
 		CardImage def = new CardImage ();
 		def.card = "default";
 		def.imagem = Resources.Load<Sprite>("default");
 		if (def.imagem == null)
-			Debug.Log ("Vc  eh trouxa");
+			Debug.Log ("No image found");
 		GameData.Images.Add (def);
 	}
 
@@ -185,22 +204,23 @@ public class GameManager : MonoBehaviour {
     void Awake() {
         if (instance != null) {
             GameManager gm = instance;
-            gm.AnotherPath = Application.dataPath + "/Dados/";
-            gm.Cardpath = Application.dataPath + "/Dados/Cards/";
+            gm.AnotherPath = Application.dataPath + "/Settings/";
+            gm.Cardpath = Application.dataPath + "/";
            	gm.Commander = Commander;
             gm.Deck = Deck;
             gm.DeckName = DeckName;
-           	gm.Deckpath = Application.dataPath + "/Dados/Decks/";
+           	gm.Deckpath = Application.dataPath + "/Decks/";
             gm.DeckPrefab = DeckPrefab;
            	gm.ListaDeDecks = ListaDeDecks;
             gm.savingDeck = savingDeck;
             Destroy(this.gameObject);
         } else {
             GameManager.instance = this.GetComponent<GameManager>();
+			loader = this.gameObject.AddComponent<MoonLoader>();
             DontDestroyOnLoad(transform.gameObject);
-            Deckpath = Application.dataPath + "/Dados/Decks/";
-            Cardpath = Application.dataPath + "/Dados/Cards/";
-            AnotherPath = Application.dataPath + "/Dados/";
+            Deckpath = Application.dataPath + "/Decks/";
+            Cardpath = Application.dataPath + "/";
+            AnotherPath = Application.dataPath + "/Settings/";
 
             LoadCards();
             LoadInfos();
@@ -210,9 +230,9 @@ public class GameManager : MonoBehaviour {
 	public void ResetGameManager(){
 		GameManager.instance = this.GetComponent<GameManager>();
             DontDestroyOnLoad(transform.gameObject);
-            Deckpath = Application.dataPath + "/Dados/Decks/";
-            Cardpath = Application.dataPath + "/Dados/Cards/";
-            AnotherPath = Application.dataPath + "/Dados/";
+            Deckpath = Application.dataPath + "/Decks/";
+            Cardpath = Application.dataPath + "/";
+            AnotherPath = Application.dataPath + "/Settings/";
 
             LoadCards();
             LoadInfos();

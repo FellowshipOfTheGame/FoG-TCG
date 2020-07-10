@@ -55,7 +55,7 @@ public class Card : MonoBehaviour {
 	// LoadScript MUST be called from the Board who creates the instance
 	public void LoadScript(string name) {
         infoName = name;
-		Data = board.luaEnv.DoFile (name).Table;
+		Data = board.loader.luaEnv.DoFile (name).Table;
 		//SetDefaultValues ();
         this.GetComponent<AddCardInformationSemCanvas>().Initialize();
 		RegisterDefaultEvents ();
@@ -202,7 +202,7 @@ public class Card : MonoBehaviour {
 
     public Table createTable(params object[] args)
     {
-        return DynValue.FromObject(board.luaEnv, args as object[]).Table;
+        return DynValue.FromObject(board.loader.luaEnv, args as object[]).Table;
     }
 
     public void Attack(){
@@ -283,7 +283,7 @@ public class Card : MonoBehaviour {
     
         int currentHP = this["hp"].ToObject<int>();
         int newHP = currentHP - args.Get(4).ToObject<int>();
-        this["hp"] = DynValue.FromObject(board.luaEnv, newHP);
+        this["hp"] = DynValue.FromObject(board.loader.luaEnv, newHP);
 
         if (checkDeath && newHP <= 0) {
             Die();

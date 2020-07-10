@@ -19,7 +19,8 @@ public class Board : MonoBehaviour {
     public AudioClip startMusic;
     public AudioClip endMusic;
     [Space(5)]
-    public Script luaEnv;
+    //public Script luaEnv;
+    public MoonLoader loader;
     [HideInInspector] public int currPlayer = 1;
     [HideInInspector] public Player[] players;
     [HideInInspector] public GameObject[,] cardMatrix = new GameObject[4, 5];
@@ -49,11 +50,12 @@ public class Board : MonoBehaviour {
     public static int winner = 0; //winner = 0 -> ninguem venceu; winner = 1  -> player 1 venceu; winner = 2 -> player 2 venceu
 
     public int startMana, maxMana;
-
+    /*
     public static Card GetCardFromObject(DynValue obj)
     {
         return obj.ToObject<GameObject>().GetComponent<Card>();
     }
+    */
 
     public void AddAspects(int playerIndex, int[] aspects) {
         for (int i = 0; i < 4; i++)
@@ -83,11 +85,12 @@ public class Board : MonoBehaviour {
         //print("null");
         return null;
     }
-
+    /*
     public void Print(DynValue val)
     {
         print(val.ToString());
     }
+    */
 
     public void SendMessage(string msg){
         msgText.text = msg; 
@@ -106,11 +109,13 @@ public class Board : MonoBehaviour {
 
     void Awake()
     {
-        UserData.RegisterAssembly();
-        luaEnv = new Script();
-        luaEnv.Globals["GetCard"] = (Func<DynValue, Card>) (obj => { return GetCardFromObject(obj); }) ;
-        luaEnv.Globals["print"] = (Action<DynValue>) (obj => { Print(obj); });
+        //UserData.RegisterAssembly();
+        //luaEnv = new Script();
+        //luaEnv.Globals["GetCard"] = (Func<DynValue, Card>) (obj => { return GetCardFromObject(obj); }) ;
+        //luaEnv.Globals["print"] = (Action<DynValue>) (obj => { Print(obj); });
         data = this.GetComponent<ResourceData>();
+        if (loadDeckFromMenu) loader = GameManager.instance.loader;
+        else loader = this.gameObject.AddComponent<MoonLoader>();
     }
 
     void SetPlayer(int index) {

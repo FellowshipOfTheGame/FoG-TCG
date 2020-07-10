@@ -10316,7 +10316,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 633871877}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -16227,7 +16227,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 824473618}
-        m_MethodName: LoadBoughtCards
+        m_MethodName: LoadGalery
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18839,7 +18839,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 824473618}
-        m_MethodName: LoadBoughtCards
+        m_MethodName: LoadGalery
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23879,6 +23879,7 @@ MonoBehaviour:
   DeckName: {fileID: 475170560}
   ListaDeDecks: {fileID: 112134177}
   DeckPrefab: {fileID: 1000013173510008, guid: 4f332371be0317f47a9c6d4540828708, type: 2}
+  loader: {fileID: 0}
   names:
   - Player 1
   - Player 2

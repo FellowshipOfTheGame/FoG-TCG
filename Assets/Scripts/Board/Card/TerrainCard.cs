@@ -7,13 +7,13 @@ public class TerrainCard : Card {
 	public event CardEventDelegate CreatureTakeDamagedEvent;
 	
 	public virtual void OnCreatureAttack(CreatureCard src, CreatureCard target, ref int dmg) {
-		DynValue luaArgs = DynValue.FromObject (board.luaEnv, new object[] { src, target, dmg });
+		DynValue luaArgs = DynValue.FromObject (board.loader.luaEnv, new object[] { src, target, dmg });
 		CreatureAttackEvent(luaArgs.Table);
 		dmg = (int) luaArgs.ToObject<object[]>()[2];
 	}
 
     public virtual void OnCreatureTakeDamage(Card src, CreatureCard target, ref int dmg) {
-		DynValue luaArgs = DynValue.FromObject (board.luaEnv, new object[] { src, target, dmg });
+		DynValue luaArgs = DynValue.FromObject (board.loader.luaEnv, new object[] { src, target, dmg });
 		CreatureTakeDamagedEvent(luaArgs.Table);
 		dmg = (int) luaArgs.ToObject<object[]>()[2];
 	}

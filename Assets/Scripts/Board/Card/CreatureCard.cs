@@ -95,31 +95,31 @@ public class CreatureCard : Card {
 	}
 
 	public void OnIncomingDamage(Card src, ref int dmg) {
-		DynValue luaArgs = DynValue.FromObject (board.luaEnv, new object[] { src, this, dmg });
+		DynValue luaArgs = DynValue.FromObject (board.loader.luaEnv, new object[] { src, this, dmg });
 		IncomingDamageEvent (luaArgs.Table);
 		dmg = (int) luaArgs.ToObject<object[]>()[2];
 	}
 
 	public void OnTakeDamage(Card src, int dmg) {
-		TakeDamageEvent (DynValue.FromObject(board.luaEnv, new object[] { src, this, dmg }).Table);
+		TakeDamageEvent (DynValue.FromObject(board.loader.luaEnv, new object[] { src, this, dmg }).Table);
 	}
 
 	public void OnDamageTaken(Card src, int dmg) {
-		DamageTakenEvent (DynValue.FromObject(board.luaEnv, new object[] { src, this, dmg }).Table);
+		DamageTakenEvent (DynValue.FromObject(board.loader.luaEnv, new object[] { src, this, dmg }).Table);
 	}
 
 	public void OnOutgoingDamage(Card target, ref int dmg) {
-		DynValue args = DynValue.FromObject(board.luaEnv, new object[] { this, target, dmg });
+		DynValue args = DynValue.FromObject(board.loader.luaEnv, new object[] { this, target, dmg });
 		OutgoingDamageEvent (args.Table);
 		dmg = (int)args.ToObject<object[]>() [2];
 	}
 
 	public void OnDealDamage(Card target, int dmg) {
-		DealDamageEvent (DynValue.FromObject(board.luaEnv, new object[] { this, target, dmg }).Table);
+		DealDamageEvent (DynValue.FromObject(board.loader.luaEnv, new object[] { this, target, dmg }).Table);
 	}
 
 	public void OnDamageDealt(Card target, int dmg) {
-		DamageDealtEvent (DynValue.FromObject(board.luaEnv, new object[] { this, target, dmg }).Table);
+		DamageDealtEvent (DynValue.FromObject(board.loader.luaEnv, new object[] { this, target, dmg }).Table);
 	}
 
 }

@@ -150,6 +150,7 @@ MonoBehaviour:
   audioPlayer: {fileID: 1013051098}
   startMusic: {fileID: 8300000, guid: 9eff2c59777d4ea469d79aa284d23caf, type: 3}
   endMusic: {fileID: 8300000, guid: 1926ecee265617a44aec441523b67b32, type: 3}
+  loader: {fileID: 0}
   currPlayer: 1
   players: []
   cardAtm: {fileID: 0}
@@ -12035,7 +12036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2003926073
 RectTransform:
   m_ObjectHideFlags: 0
