@@ -18,7 +18,11 @@ public class Captain : Clickable {
     public AnimationManager[] anims;
     SpriteRenderer spr;
     public Color inColor, offColor;
+
+    public GameObject menu;
 	// Use this for initialization
+
+    [HideInInspector] public Player player;
 	void Start () {
         board = GameObject.FindObjectOfType<Board>() as Board;
         spr = this.GetComponent<SpriteRenderer>();
@@ -35,11 +39,12 @@ public class Captain : Clickable {
 
     public override void OnPointerEnter() {
         if (canMove || canGenerate || canBuy)
-        spr.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+            spr.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
     }
 
     public override void OnPointerExit() {
-        spr.color = Color.clear;
+        if (canMove || canGenerate || canBuy)
+            spr.color = Color.clear;
     }
 
     public void block() {
@@ -55,43 +60,41 @@ public class Captain : Clickable {
             dragging = true;
             diff = this.transform.position - board.mousePosition;
         }else if(mouseButton == 1 && canGenerate && canBuy){
-            GameObject menu = this.GetComponent<MenuGenerator>().CreateMiniMenu(2, null, null);
-            menu.transform.position = Input.mousePosition;
-            Player player = board.players[board.currPlayer - 1];
-            menu.GetComponent<MiniMenu>().buttons[0].GetComponent<Button>().onClick.AddListener(() => { AddAspectMenu(menu.transform.position + new Vector3(120.0f,0.0f,0.0f), menu); });
-            menu.GetComponent<MiniMenu>().buttons[0].transform.GetChild(0).GetComponent<Text>().text = "Create Aspect";
-            menu.GetComponent<MiniMenu>().buttons[1].GetComponent<Button>().onClick.AddListener(() => { BuyAnCard(player, menu); });
-            menu.GetComponent<MiniMenu>().buttons[1].transform.GetChild(0).GetComponent<Text>().text = "Buy Another Card";
+            Command();
         }
     }
 
-    void AddAspectMenu(Vector3 position, GameObject mainMenu) {
-        GameObject menuAux = this.GetComponent<MenuGenerator>().CreateMiniMenu(3, mainMenu, null);
-        mainMenu.GetComponent<MiniMenu>().nextMenu = menuAux;
-        menuAux.transform.position = position;
-        Player player = board.players[board.currPlayer - 1];
-        menuAux.GetComponent<MiniMenu>().buttons[0].GetComponent<Button>().onClick.AddListener(() => { AddAspect(0, player, menuAux); });
-        menuAux.GetComponent<MiniMenu>().buttons[0].transform.GetChild(0).GetComponent<Text>().text = "Fire";
-        menuAux.GetComponent<MiniMenu>().buttons[1].GetComponent<Button>().onClick.AddListener(() => { AddAspect(1, player, menuAux); });
-        menuAux.GetComponent<MiniMenu>().buttons[1].transform.GetChild(0).GetComponent<Text>().text = "Water";
-        menuAux.GetComponent<MiniMenu>().buttons[2].GetComponent<Button>().onClick.AddListener(() => { AddAspect(2, player, menuAux); });
-        menuAux.GetComponent<MiniMenu>().buttons[2].transform.GetChild(0).GetComponent<Text>().text = "Earth";
+    public void Command(){
+        board.ray.enabled = false;
+        menu.SetActive(true);
     }
 
-    void AddAspect(int index, Player player, GameObject menu) {
+    public void AddAspect(int index) {
         player.aspects[index]++;
         player.capt.canBuy = false;
         player.capt.canGenerate = false;
         player.capt.canMove = false;
-        menu.GetComponent<MiniMenu>().DestroyMenu(true);
+
+        if (index == 0) player.display.notify("Fire", 1, 0f);
+        if (index == 1) player.display.notify("Water", 1, 0f);
+        if (index == 2) player.display.notify("Earth", 1, 0f);
+
+        HideMenu();
     }
 
-    void BuyAnCard(Player player, GameObject menu) {
+    public void HideMenu(){
+        board.ray.enabled = true;
+        //spr.color = new Color(0.2f, 0.2f, 0.2f, 0.5f);
+        menu.SetActive(false);
+    }
+
+    public void BuyAnCard() {
         player.PickUpCard();
         player.capt.canBuy = false;
         player.capt.canGenerate = false;
         player.capt.canMove = false;
-        menu.GetComponent<MiniMenu>().DestroyMenu(true);
+
+        HideMenu();
     }
 
     void Dragging() {

@@ -10,13 +10,35 @@ return{
 	OnEnter = function(args)
 		local board = args[1];
 		generate = {0, 0, 1, 0};
-		board.AddAspects(board.currPlayer, generate);
+		local self = args[2];
+		local index;
+		if (self.pos[1] == 0) then
+			index = 1
+		else
+			index = 2
+		end
+
+		board.AddAspects(index, generate);
+
+		local player = board.players[index];
+		player.notify("Earth", 1, 0);
 	end,
 
 	OnExit = function(args)
 		local board = args[1];
 		generate = {0,0,-1,0};
-		board.AddAspects(3-board.currPlayer, generate);
+		local self = args[2];
+		local index;
+		if (self.pos[1] == 0) then
+			index = 1
+		else
+			index = 2
+		end
+
+		board.AddAspects(index, generate);
+
+		local player = board.players[index];
+		player.notify("Earth", -1, 0);
 	end
 
 	}

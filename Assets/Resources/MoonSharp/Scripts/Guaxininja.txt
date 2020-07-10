@@ -2,32 +2,50 @@ return{
 	title = "Guaxininja",
 	type = 'c',
 	aspects = {0, 0, 0, 0},
-	desc = "Reposicionar",
+	desc = "Reposicionar (*)",
 	flavor = "Apos anos de missoes perigosas, esse guaxinim se aposentou e arranjou um emprego num restaurante chines, onde repassa seus ensinamentos de guerra por meio de biscoitinhos da sorte.",
 	cost = 2,
 	atk = 1,
 	hp = 3,
 
+	OnEnter = function(args)
+		local self = args[2]
+		self.canCast = true
+	end,
+
+	OnTurnStart = function(args)
+		local self = args[1]
+		self.canCast = true
+	end,
+
+	OnAttack = function(args)
+		local self = args[2]
+		self.canCast = false
+	end,
+
 	OnRightClick = function(args)
 		local board = args[1]
 		local self = args[2]
 		
-		board.WaitForTarget(self);
+		self.WaitForTarget('x','Escolha o destino do Guaxininja');
 	end,
 
 	OnChosenTarget = function(args)
 		local board = args[1]
 		local self = args[2]
-		local lin = args[3]
-		local col = args[4]
+		local origin = self.pos[2]
+		local destiny = args[4]
+		local target = board.GetMatrixValue(self.pos[1], destiny);
 
-		local target = board.GetMatrixValue(lin, col);
-		self.Move(lin, col);
+		self.Move(self.pos[1], destiny);
 		self.canCast = false
 		self.canAttack = false
+		self.changeAnimation('sleep');
+
 		if target ~= nil then
 			target.canAttack = false
 			target.canCast = false
+			target.Move(self.pos[1], origin);
 		end
 	end
 }

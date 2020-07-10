@@ -2,36 +2,65 @@ return {
 	title = "Faust",
 	type = 'c',
 	aspects = {0, 0, 1, 0},
-	desc = "Reposicionar, Recebe menos 1 de dano em ataques",
+	desc = "Reposicionar (*). Recebe menos 1 de dano em ataques.",
 	flavor = "Faust treinou toda sua vida em uma ordem reclusa de monges. Depois de anos de disciplina e trabalho duro, tornou-se um guerreiro extremamente formidavel.",
 	cost = 3,
 	atk = 2,
 	hp = 4,
 
+	OnEnter = function(args)
+		local self = args[2]
+		self.canCast = true
+	end,
+
+	OnTurnStart = function(args)
+		local self = args[1]
+		self.canCast = true
+	end,
+
+	OnAttack = function(args)
+		local self = args[2]
+		self.canCast = false
+	end,
+
 	OnRightClick = function(args)
 		local board = args[1]
 		local self = args[2]
-		
-		board.WaitForTarget(self);
+
+		self.WaitForTarget('x','Escolha o destino do Faust');
 	end,
 
 	OnChosenTarget = function(args)
 		local board = args[1]
 		local self = args[2]
-		local pos = self.pos[2]
+		local origin = self.pos[2]
 		local destiny = args[4]
 		local target = board.GetMatrixValue(self.pos[1], destiny);
+
 		self.Move(self.pos[1], destiny);
 		self.canCast = false
 		self.canAttack = false
+		self.changeAnimation('sleep');
+
 		if target ~= nil then
 			target.canAttack = false
 			target.canCast = false
-			target.Move(self.pos[1], pos);
+			target.changeAnimation('sleep');
+			target.Move(self.pos[1], origin);
 		end
-	end
+	end,
 
 	OnIncomingDamage = function(args)
+		local self = args[3]
+		local damage = args[4]
+
+		if damage > 1 then
+			self.changeAnimation("def");
+		else
+			print(damage)
+			self.changeAnimation("shield");
+		end
+
 		args[4] = args[4] - 1
 	end
 }

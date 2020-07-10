@@ -16,6 +16,7 @@ public class AddDeckInformation : MonoBehaviour {
 		nome.text = deck.name;
 		vitorias.text = "" + deck.victories;
 		criacao.text =  "" + deck.criationDate;
+		Debug.Log(this.GetComponent<RectTransform>().sizeDelta);
 
 	}
 

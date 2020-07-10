@@ -12,6 +12,9 @@ public class IllusionScript : MonoBehaviour {
     public TextMesh cost;
     public TextMesh atk;
     public TextMesh hp;
+
+    public TextMesh modifier;
+    public SpriteRenderer effect;
     public GameObject aspects;
     [Space(5)]
     public float spinVelocity;
@@ -31,6 +34,15 @@ public class IllusionScript : MonoBehaviour {
         desc.text = original.GetComponent<AddCardInformationSemCanvas>().desc.text;
         flavor.text = original.GetComponent<AddCardInformationSemCanvas>().flavor.text;
         image.sprite = original.GetComponent<AddCardInformationSemCanvas>().image.sprite;
+
+        Card info = original.GetComponent<Card>();
+        if (info.haveModifier){
+            modifier.text = info.am.name;
+            effect.sprite = info.am.modifier;
+            modifier.gameObject.SetActive(true);
+        }else{
+            modifier.gameObject.SetActive(false);
+        }
 
         float r = 3.0f / image.sprite.bounds.extents.x;
         image.transform.localScale = Vector3.one * r;

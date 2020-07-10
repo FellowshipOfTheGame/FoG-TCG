@@ -28,12 +28,12 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
                     cardCopy = Instantiate(this.gameObject);
                     cardCopy.GetComponent<AddCardInformation>().card = this.GetComponent<AddCardInformation>().card;
                     RectTransform rt = cardCopy.GetComponent<RectTransform>();
-                    rt.sizeDelta = new Vector2(90, 135);
+                    rt.sizeDelta = new Vector2(79.1f, 110.7f);
                     cardCopy.transform.SetParent(canvas.transform);
                     cardCopy.transform.localScale = this.transform.localScale;
                     currentZone = collectionZone.transform;
                     cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
-
+                
                     dragging = true;
                 } else {
                     print("You have too many of that card in your deck!");
@@ -61,13 +61,16 @@ public class CollectionDraggable : MonoBehaviour, IBeginDragHandler, IDragHandle
         if (dragging)
         {
             if (currentZone.tag == "DeckList"){
+                
+
                 GameObject mc = Instantiate(minimizedCard, currentZone) as GameObject;
                 mc.GetComponent<AddCardInformationMinimized>().card = this.GetComponent<AddCardInformation>().card;
                 mc.GetComponent<DeckListDraggable>().deckListZone = currentZone.gameObject;
                 mc.GetComponent<DeckListDraggable>().canvas = canvas;
                 mc.transform.localScale = Vector3.one;
                 currentZone.GetComponent<DeckListManager>().deckSize++;
-
+                
+                GameManager.instance.ValidateDeck();
                 currentZone.GetComponent<DeckListManager>().OrderChildren();
                 currentZone.GetComponent<DeckListManager>().CheckForMultiples();
             }

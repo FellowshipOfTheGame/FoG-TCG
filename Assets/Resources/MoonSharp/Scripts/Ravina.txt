@@ -1,22 +1,16 @@
 return{
 	title = "Ravina",
 	type = 't',
-	aspects = {0, 0, 0, 0},
-	elements = {1, 0, 0, 0},
-	desc = "Gera 1 aspecto de Fogo",
+	aspects = {1, 0, 0, 0},
+	desc = "A criatura que estiver nesse terreno causa +1 dano",
 	flavor = "As profundas rachaduras que permeiam o planeta sao reminescentes de epocas anteriores, mais instaveis e violentas...",
 	cost = 1,
-	
-	OnEnter = function(args)
-		local board = args[1];
-		generate = {1, 0, 0, 0};
-		board.AddAspects(board.currPlayer, generate);
-	end,
 
+	OnOutgoingDamage = function(args)
+		local dealer = args[2]
+		dealer.addAnimation("charge")
 
-	OnExit = function(args)
-		local board = args[1];
-		generate = {-1,0,0,0};
-		board.AddAspects(3-board.currPlayer, generate);
+		args[4] = args[4] + 1
+		print(args[4])
 	end
 }

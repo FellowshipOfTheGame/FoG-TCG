@@ -23,6 +23,8 @@ public class Card : MonoBehaviour {
     public event CardEventDelegate DamageTakenEvent;
 
     public event CardEventDelegate NewCardInFieldEvent;
+    public event CardEventDelegate AnyCardMoveEvent;
+    public event CardEventDelegate DeadCardInFieldEvent;
     public event CardEventDelegate ModifierEvent;
     public event CardEventDelegate RightClickEvent;
     public event CardEventDelegate ChosenTargetEvent;
@@ -43,14 +45,19 @@ public class Card : MonoBehaviour {
     [HideInInspector] public char type;
     [HideInInspector] public int atk;
     [HideInInspector] public int hp;
-    [HideInInspector] public bool canAttack, canCast, haveModifier = false;
+    [HideInInspector] public bool canAttack, canCast = false, haveModifier = false;
     [HideInInspector] public int timer = 0;
+
+    [HideInInspector] public int reg1; //registrador disponível para algum efeito especial da carta
+
+    bool waiting = false;
 
 	// LoadScript MUST be called from the Board who creates the instance
 	public void LoadScript(string name) {
         infoName = name;
 		Data = board.luaEnv.DoFile (name).Table;
 		//SetDefaultValues ();
+        this.GetComponent<AddCardInformationSemCanvas>().Initialize();
 		RegisterDefaultEvents ();
 	}
 	/*
@@ -65,10 +72,10 @@ public class Card : MonoBehaviour {
 	}
 
 	protected virtual void RegisterDefaultEvents() {
-		EnterEvent = delegate { canAttack = true; canCast = true; };
+		EnterEvent = delegate { canAttack = true; };
 		ExitEvent = delegate {};
-		TurnStartEvent = delegate { canAttack = true; canCast = true; };
-		TurnEndEvent = delegate {};
+		TurnStartEvent = delegate { canAttack = true; if (!haveModifier) changeAnimation("none");};
+		TurnEndEvent = delegate { waiting = false; };
 
 		EnterEvent += LoadDefaultEventHandler ("OnEnter");
 		ExitEvent += LoadDefaultEventHandler ("OnExit");
@@ -76,7 +83,7 @@ public class Card : MonoBehaviour {
 		TurnEndEvent += LoadDefaultEventHandler ("OnTurnEnd");
 
         OutgoingDamageEvent = delegate { };
-        AttackEvent = delegate { canAttack = false; };
+        AttackEvent = delegate { canAttack = false;};
         DamageDealtEvent = delegate { };
 
         OutgoingDamageEvent += LoadDefaultEventHandler("OnOutgoingDamage");
@@ -92,11 +99,15 @@ public class Card : MonoBehaviour {
         DamageTakenEvent += LoadDefaultEventHandler("OnDamageTaken");
 
         NewCardInFieldEvent = delegate { };
+        DeadCardInFieldEvent = delegate { };
+        AnyCardMoveEvent = delegate { };
         ModifierEvent = delegate { };
         RightClickEvent = delegate { };
         ChosenTargetEvent = delegate { };
 
         NewCardInFieldEvent += LoadDefaultEventHandler("OnNewCardInField");
+        AnyCardMoveEvent += LoadDefaultEventHandler("OnAnyCardMove");
+        DeadCardInFieldEvent += LoadDefaultEventHandler("OnDeadCardInField");
         ModifierEvent += LoadDefaultEventHandler("Modifier");
         RightClickEvent += LoadDefaultEventHandler("OnRightClick");
         ChosenTargetEvent += LoadDefaultEventHandler("OnChosenTarget");
@@ -136,11 +147,20 @@ public class Card : MonoBehaviour {
 
 	public virtual void OnTurnEnd() {
         canAttack = false;
+        if (type == 'c') changeAnimation("sleep");
 		TurnEndEvent (createTable(this));
 	}
 
     public virtual void OnNewCardInField(Card newCard) {
         NewCardInFieldEvent(createTable(board, this, newCard));
+    }
+
+    public virtual void AnyCardMove(Card movedCard, int OriginLin, int OriginCol) {
+        AnyCardMoveEvent(createTable(board, this, movedCard, OriginLin, OriginCol));
+    }
+
+    public virtual void OnDeadCardInField(Card deadCard) {
+        DeadCardInFieldEvent(createTable(board, this, deadCard));
     }
 
     public virtual void OnRightClick() {
@@ -150,7 +170,33 @@ public class Card : MonoBehaviour {
         RightClickEvent(createTable(board, this));
     }
 
+    
+
+    public void WaitForTarget(char type, string text){
+        board.BlockAllowPlayer(board.currPlayer - 1, false);
+        board.SendMessage(text);
+        board.dragCardType = type;
+        Slot.isChoosingPlace = true;
+        waiting = true;
+    }
+
+    void Update (){
+        if (waiting && Input.GetMouseButtonDown(0)){
+            Slot slot =  board.slot.GetComponent<Slot>();
+            if (slot != null){
+                slot.hide();
+                OnChosenTarget(slot.pos[0], slot.pos[1]);
+            }
+
+            board.BlockAllowPlayer(board.currPlayer - 1, true);
+            board.dragCardType = type;
+            Slot.isChoosingPlace = false;
+            waiting = false;
+        }
+    }
+
     public virtual void OnChosenTarget(int lin, int col) {
+        board.HideMessage();
         ChosenTargetEvent(createTable(board, this, lin, col));
     }
 
@@ -177,8 +223,15 @@ public class Card : MonoBehaviour {
 
                 Player target = board.players[2 - pos[0]];
                 target.capt.anims[pos[1] - cap.pos + 1].setAnim("hit");
-                args = createTable(board, this, target, dmg);
+                args = createTable(board, this, null, dmg);
+                
                 this.OutgoingDamageEvent(args);
+                GameObject targetTerrain = GetComponent<Card>().board.cardMatrix[(3 * pos[0] - 3) % 4, pos[1]];
+                if (targetTerrain != null) {
+                    Card aux = targetTerrain.GetComponent<Card>();
+                    aux.OutgoingDamageEvent(args);
+                }
+
                 this.AttackEvent(args);
                 target.Damage(args);
                 this.DamageDealtEvent(args);
@@ -195,6 +248,12 @@ public class Card : MonoBehaviour {
             args = createTable(board, this, target, dmg);
 
             this.OutgoingDamageEvent(args);
+            GameObject targetTerrain = GetComponent<Card>().board.cardMatrix[(3 * pos[0] - 3) % 4, pos[1]];
+            if (targetTerrain != null) {
+                Card aux = targetTerrain.GetComponent<Card>();
+                aux.OutgoingDamageEvent(args);
+            }
+
             this.AttackEvent(args);
             target.Damage(args, false);
             this.DamageDealtEvent(args);
@@ -206,20 +265,22 @@ public class Card : MonoBehaviour {
                 target.am.setAnim("die");
             }
         }
-        GameObject targetTerrain = GetComponent<Card>().board.cardMatrix[(pos[0] + 2) % 4, pos[1]];
-        if (targetTerrain != null) {
-            Card aux = targetTerrain.GetComponent<Card>();
-            args = createTable(board, aux, this, dmg);
-            aux.IncomingDamageEvent(args);
-        }
+        
     }
 
     public void Damage(Table args, bool checkDeath=true)
     {
         this.IncomingDamageEvent(args);
-        //print(args[4]);
+
+        Card dealer = args.Get(2).ToObject<Card>();
+        GameObject targetTerrain = GetComponent<Card>().board.cardMatrix[(dealer.pos[0] + 2) % 4, dealer.pos[1]];
+        if (targetTerrain != null) {
+            Card aux = targetTerrain.GetComponent<Card>();
+            aux.IncomingDamageEvent(args);
+        }
+
         this.DefendEvent(args);
-        //print(args[4]);
+    
         int currentHP = this["hp"].ToObject<int>();
         int newHP = currentHP - args.Get(4).ToObject<int>();
         this["hp"] = DynValue.FromObject(board.luaEnv, newHP);
@@ -229,19 +290,26 @@ public class Card : MonoBehaviour {
             
         }
     }
+
     public void Die() {
         am.transform.SetParent(this.transform.parent);
-        addAnimation("die");
+        changeAnimation("die");
+    }
+
+    public void ShowTarget(){
+        //addAnimation("target");
     }
 
     public void Remove(){
+        this.OnExit();
+        board.CallCardRemovedEvents(this);
+        
         if (type != 'a')
             board.cardMatrix[pos[0], pos[1]] = null;
 
         if (type == 't')
             this.GetComponent<CardClick>().DestroyTerrain();
 
-        this.OnExit();
         Destroy(this.gameObject);
         print("DESTRUCTION");
     }
@@ -275,14 +343,17 @@ public class Card : MonoBehaviour {
         s.cards[1] = this.gameObject;
         board.cardMatrix[lin, col] = this.gameObject;
 
+        int originLin = this.pos[0], originCol = this.pos[1];
         this.pos[0] = lin;
         this.pos[1] = col;
         this.transform.SetParent(s.transform);
         this.transform.position = s.transform.position;
+        board.CallCardMovedEvents(this.GetComponent<Card>(), originLin, originCol);
     }
 
-    public void addModifier(Card card, string eventName) {
+    public void addModifier(Card card, string eventName, string effect, float delay) {
         ModifierEvent = card.LoadDefaultEventHandler(eventName);
+        am.addModifier(effect, delay);
         haveModifier = true;
     }
 }

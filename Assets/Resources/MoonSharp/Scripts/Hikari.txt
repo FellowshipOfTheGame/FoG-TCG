@@ -2,22 +2,44 @@ return{
 	title = "Hikari",
 	type = 'c',
 	aspects = {0, 1, 0, 0},
-	desc = "Pague 1 mana, Hikari ganha +1/+0 nesse turno",
-	flavor = "Com o terrível espírito do lobo de nove caudas preso em seu corpo, Hikari procura balancear sua humanidade e bestialidade enquanto viaja pelo mundo, tentando usar seus poderes para corrigir o mal aonde quer que ele esteja.",
+	desc = "Gaste 1 mana: Hikari ganha +1/+0 nesse turno (*)",
+	flavor = "Com o terrivel espirito do lobo de nove caudas preso em seu corpo, Hikari procura balancear sua humanidade e bestialidade enquanto viaja pelo mundo, tentando usar seus poderes para corrigir o mal aonde quer que ele esteja.",
 	cost = 2,
 	atk = 2,
 	hp = 3,
 
-	buff = 0,
+	OnEnter = function(args)
+		local self = args[2]
+		self.canCast = true
+		self.reg1 = 0
+	end,
+
+	OnTurnStart = function(args)
+		local self = args[1]
+		self.canCast = true
+		self.reg1 = 0
+	end,
 
 	OnRightClick = function(args)
 		local self = args[2]
 		local board = args[1]
-		local player = board.players[board.currPlayer]
+		local player = board.players[self.pos[1]]
 		if player.mana > 0 then
 			player.mana = player.mana - 1
 			self.changeAnimation("buff");
 			self.Data.atk = self.Data.atk + 1
+			self.reg1 = self.reg1 + 1
+		else
+			board.SendTempMessage("Mana insuficiente", 0.7);
+		end
+	end,
+
+	OnTurnEnd = function(args)
+		local self = args[1]
+
+		if self.reg1 > 0 then
+			self.changeAnimation("debuff");
+			self.Data.atk = self.Data.atk - self.reg1;
 		end
 	end
 }

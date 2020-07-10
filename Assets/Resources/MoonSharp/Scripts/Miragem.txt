@@ -1,35 +1,45 @@
 return{
 	title = "Miragem",
 	type = 's',
-	aspects = {0, 0, 0, 0},
-	desc = "Remove um terreno a sua escolha",
+	aspects = {0, 1, 0, 0},
+	desc = "Copia um terreno para seu campo",
 	flavor = "Uma coisa e ser enganado por uma miragem. Outra e ser enganado por um vendedor e comprar uma miragem.",
 	cost = 1,
 
 
 
 	OnEnter = function(args)
-		local board = args[1]
-		local self =  args[2]
-		local player = board.currPlayer
+		local board = args[1];
+		local self =  args[2];
+		local player = board.currPlayer;
+
+		if self.pos[1] == 1 then
+			terrain =  board.GetMatrixValue(0,self.pos[2]);
+		end 
+		if self.pos[1] == 2 then
+			 terrain =  board.GetMatrixValue(3,self.pos[2]);
+		end
+		
+		if terrain ~= nil then
+			self.WaitForTarget('t','Escolha o destino de seu novo terreno');
+		else
+			self.Remove();
+		end
+			
+	end,
+
+
+	OnChosenTarget = function(args)
+		local board = args[1];
+		local self = args[2];
+		local lin = args[3];
+		local col = args[4];
+
 		
 
-		if player == 1 then
-			local terrain = board.GetMatrixValue(3,self.pos[2])
-			self.Data.title = terrain.Data.title
-			local generate = terrain.Data.elements
-		end
-
-
-		if player == 2 then
-			local terrain = board.GetMatrixValue(0,self.pos[2])
-			self.Data.title = terrain.Data.title
-			self.Data.desc = terrain.Data.desc
-			local generate = terrain.Data.elements
-		end
-	
-
-		board.AddAspects(board.currPlayer, generate);
-
+		clone = board.players[board.currPlayer].SummonCard(terrain.infoName);
+		board.SpawnCard(clone, lin, col);
+		
+		self.Remove();
 	end
 	}

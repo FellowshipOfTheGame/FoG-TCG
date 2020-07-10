@@ -3,7 +3,7 @@ return{
 	type = 'c',
 	aspects = {0, 1, 1, 0},
 	desc = "Envenenar",
-	flavor = "",
+	flavor = "Um dos diversos moradores das vastas florestas de Caldyr, Lucius e um mestre das emboscadas, nao deixando invasor algum sair impune.",
 	cost = 3,
 	atk = 2,
 	hp = 5,
@@ -12,7 +12,7 @@ return{
 		local self = args[2]
 		local enemy = args[3]
 		if enemy ~= nil then
-			enemy.addModifier(self, "Poisoned");
+			enemy.addModifier(self, "Poisoned", "poison", 0.5);
 		end
 	end,
 

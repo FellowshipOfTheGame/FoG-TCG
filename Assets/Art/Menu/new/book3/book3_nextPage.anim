@@ -3,7 +3,7 @@
 --- !u!74 &7400000
 AnimationClip:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: book3_nextPage
   serializedVersion: 6
@@ -95,7 +95,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.25
-    functionName: changeSide
+    functionName: changeLateral
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

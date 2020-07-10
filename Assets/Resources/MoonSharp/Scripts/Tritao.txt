@@ -2,7 +2,7 @@ return{
 	title = "Tritao",
 	type = 'c',
 	aspects = {0, 0, 0, 0},
-	desc = "Ganha +1/+2 para cada aspecto de Agua que voce controlar",
+	desc = "Ganha +1/+2 para cada aspecto de Agua que voce possuir",
 	flavor = "Nas profundezas dos Grandes Lagos, uma nacao de guerreiros vive em isolamento, especialistas em tecnicas marciais com o tridente.",
 	cost = 4,
 	atk = 1,
@@ -11,9 +11,49 @@ return{
 	OnEnter = function(args)
 		local self = args[2]
 		local board = args[1]
-		local player = board.players[board.currPlayer]
-		self.Data.hp = self.Data.hp + (2 * player.aspects[2])
-		self.Data.atk = self.Data.atk + 1
-		print(self.Data.hp)
+		local player = board.players[self.pos[1]]
+
+		if player.aspects[2] > 0 then
+			self.addAnimation('buff')
+			self.Data.hp = 2 + 2 * player.aspects[2]
+			self.Data.atk = 1 + player.aspects[2]
+		end
+	end,
+
+	OnNewCardInField = function(args)
+		local self = args[2]
+		local board = args[1]
+		local player = board.players[self.pos[1]]
+
+		local prev = self.Data.atk - 1
+		if player.aspects[2] ~= prev then
+			self.Data.hp = 2 + 2 * player.aspects[2]
+			self.Data.atk = 1 + 1 * player.aspects[2]
+
+			if player.aspects[2] > prev then
+				self.addAnimation('buff')
+			else
+				self.addAnimation('debuff')
+			end
+		end
+
+	end,
+	
+	OnDeadCardInField = function(args)
+		local self = args[2]
+		local board = args[1]
+		local player = board.players[self.pos[1]]
+
+		local prev = self.Data.atk - 1
+		if player.aspects[2] ~= prev then
+			self.Data.hp = 2 + 2 * player.aspects[2]
+			self.Data.atk = 1 + 1 * player.aspects[2]
+
+			if player.aspects[2] > prev then
+				self.addAnimation('buff')
+			else
+				self.addAnimation('debuff')
+			end
+		end
 	end
 }

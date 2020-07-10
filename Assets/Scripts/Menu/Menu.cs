@@ -5,19 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
-	public Button Play;
-	public Button Camp;
-	public Button VoltarStats;
-	public Button VoltarConta;
-	public Button VoltarConfig;
-	public Button VoltarDecks;
-	public Button VoltarOpt;
-	public Button VoltarCred;
-	public Button Login;
-	public Button Cadast;
+	public Button Config;
 
 	public GameObject GOMenu;
 	public GameObject GOJogar;
+
+    public GameObject GOplayer1;
 	public GameObject GOCartas;
     public GameObject GOEscolher;
 	public GameObject GOComprarC;
@@ -36,12 +29,28 @@ public class Menu : MonoBehaviour {
 	public GameObject GOCadast;
     public GameObject GOConfirmSair;
     public Book1C[] books;
+
+    public Button[] bookButtons;
 	private EventSystem ES;
 	public PlaySceneMusic Music;
     public Dropdown[] selDecks;
 	public GameManager GM;
 
+    public GameObject blockConfig;
+
+    public GameObject cardMinPrefab;
+    
+    public GameObject[] playDeckPlace;
+
+    public Animator outdoor;
+
     int cBook = 0;
+
+    bool configOpen = false, configTabOpen = false, gameStarted = false;
+
+    void Start(){
+        gameStarted = false;
+    }
 	void Update() {
 		ES = EventSystem.current;
         /*
@@ -55,12 +64,23 @@ public class Menu : MonoBehaviour {
 			if (GOCredit.activeInHierarchy)
 				ES.SetSelectedGameObject (VoltarCred.gameObject);
 		}*/
+
+        if (!gameStarted && Input.GetKeyDown(KeyCode.Return)){
+            outdoor.SetTrigger("start");
+            gameStarted = true;
+        }
 	}
 
 	public void PlaySelected() {
         GameManager.instance.SetGameDeck();
-        SceneManager.LoadScene("Board"); // carregar jogo(trocar Game pelo nome da scene)
+        //SceneManager.LoadScene("Board"); // carregar jogo(trocar Game pelo nome da scene)
+        outdoor.SetTrigger("play");
+        Invoke("StartGame", 0.5f);
 	}
+
+    void StartGame(){
+        SceneManager.LoadScene("Board"); // carregar jogo(trocar Game pelo nome da scene)
+    }
 
 	public void Desativar() {
 		GOJogar.SetActive (false);
@@ -79,16 +99,17 @@ public class Menu : MonoBehaviour {
 		GOMenu.SetActive (false);
 	}
 
-    public void MudarLivro() {
+    public void MudarLivro(int book) {
         books[cBook].transform.parent.gameObject.SetActive(false);
-        cBook++;
-        if (cBook > 2)
-            cBook = 0;
-
+        bookButtons[cBook].interactable = true;
+        cBook = book;
+        bookButtons[cBook].interactable = false;
         books[cBook].transform.parent.gameObject.SetActive(true);
     }
 
 	public void JogarSelected() {
+        if (configOpen) ResetConfig();
+        Config.interactable = false;
         GameManager.instance.LoadDecks();
         int a = -1, b = -1;
         for (int i = 0; i < GameData.Decks.Count; i++) {
@@ -99,36 +120,76 @@ public class Menu : MonoBehaviour {
             if (GameData.Decks[i].name == GameData.playerInfo.ActiveDeck2)
                 b = i;
         }
-        if (a != -1)
-            selDecks[0].captionText.text = selDecks[0].options[a].text;
+        if (a != -1) selDecks[0].value = a;
+        else selDecks[0].value = 0;
+        selDecks[0].RefreshShownValue();
+        LoadPlayDeck(0, selDecks[0].captionText.text);
 
-        if (b != -1)
-            selDecks[0].captionText.text = selDecks[0].options[b].text;
+        if (b != -1) selDecks[1].value = b;
+        else selDecks[1].value = 0;
+        selDecks[1].RefreshShownValue();
+        LoadPlayDeck(1, selDecks[1].captionText.text);
 
         cBook = 0;
 		GOJogar.SetActive (true);
+
+        books[0].nextPage = GOplayer1;
+        books[0].changePage();
+
         books[0].anim.SetTrigger("Open");
 	}
 
 	public void CartasSelected() {
+        if (configOpen) ResetConfig();
+        Config.interactable = false;
         cBook = 1;
 		GOCartas.SetActive (true);
         GOComprarC.SetActive(false);
         GOGaleria.SetActive(false);
         books[1].nextPage = GOEscolher;
         books[1].changePage();
+        books[1].nextLateral = null;
         books[1].anim.SetTrigger("Open");
 	}
 
     public void VoltarCartas() {
         books[1].nextPage = GOEscolher;
+        books[1].nextLateral = null;
         books[1].anim.SetTrigger("Back");
     }
 
-	public void ComprarCSelected() {
-        books[1].nextPage = GOComprarC;
+	public void RegrasSelected(GameObject pagina) {
+        books[1].nextPage = pagina;
         books[1].anim.SetTrigger("Go");
 	}
+
+    public void MudarPagRegras(GameObject novaPagina){
+        books[1].nextPage = novaPagina;
+        books[1].anim.SetTrigger("Next");
+    }
+
+    public void VoltarPagRegras(GameObject novaPagina){
+        books[1].nextPage = novaPagina;
+        books[1].anim.SetTrigger("Prev");
+    }
+
+    public void MudarLatRegras(GameObject novaLat){
+        books[1].nextLateral = novaLat;
+    }
+
+    public void MudarLatDeck(GameObject novaLat){
+        books[2].nextLateral = novaLat;
+    }
+
+    public void MudarPagJogar(GameObject novaPagina){
+        books[0].nextPage = novaPagina;
+        books[0].anim.SetTrigger("Next");
+    }
+
+    public void VoltarPagJogar(GameObject novaPagina){
+        books[0].nextPage = novaPagina;
+        books[0].anim.SetTrigger("Prev");
+    }
 
 	public void GaleriaSelected() {
         books[1].nextPage = GOGaleria;
@@ -137,6 +198,8 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void DecksSelected() {
+        if (configOpen) ResetConfig();
+        Config.interactable = false;
         cBook = 2;
         CollectionDraggable.canDrag = false;
         GODecks.SetActive(false);
@@ -148,8 +211,28 @@ public class Menu : MonoBehaviour {
 	}
 
     public void ChooseDeck (int i) {
-        LoadDeck.clickedDeck = selDecks[i].captionText.text;
-        GameManager.instance.SelectDeck(i + 1);
+        LoadPlayDeck(i, selDecks[i].captionText.text);
+        GameManager.instance.SelectDeck(i + 1, selDecks[i].captionText.text);
+    }
+     public void LoadPlayDeck(int player, string deckName){
+		int index = 0;
+		while (GameData.Decks [index++].name != deckName);
+
+		DeckInformation deck = GameData.Decks [index-1];
+
+		foreach (Transform child in playDeckPlace[player].transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+
+		for (int i = 0; i < deck.Cards.Count; i++) {
+			GameObject aux = Instantiate (cardMinPrefab, playDeckPlace[player].transform);
+
+			int aux2=0;
+			while (GameData.Cards [aux2++].title != deck.Cards[i].name && aux2 <= GameData.Cards.Count);
+
+			aux.GetComponent<AddCardInformationMinimized> ().card = GameData.Cards [aux2-1];
+			aux.GetComponent<AddCardInformationMinimized> ().quantity = deck.Cards[i].number;
+        }
     }
 
     public void VoltarDeck() {
@@ -180,15 +263,22 @@ public class Menu : MonoBehaviour {
     }
 
     public void ConfigSelected() {
+        configOpen = true;
         GOConfig.GetComponent<Animator>().SetTrigger("Move");
     }
 
     public void VoltarConfiguracao() {
+        configOpen = false;
         GOConfig.GetComponent<Animator>().SetTrigger("Move");
     }
 
     public void VoltarAba() {
+        configTabOpen = false;
         GOConfig.GetComponent<Animator>().SetTrigger("Prev");
+    }
+
+    public void ResetConfig(){
+        blockConfig.SetActive(true);
     }
 
     public void StatsSelected() {
@@ -202,11 +292,13 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void OpcoesSelected() {
+        configTabOpen = true;
         Pergaminho.activeTab = GOOpcoes.GetComponent<Animator>();
         GOConfig.GetComponent<Animator>().SetTrigger("Next");
     }
 
 	public void CreditsSelected() {
+        configTabOpen = true;
         Pergaminho.activeTab = GOCredit.GetComponent<Animator>();
         GOConfig.GetComponent<Animator>().SetTrigger("Next");
     }
@@ -223,6 +315,9 @@ public class Menu : MonoBehaviour {
 
 	public void VoltarMenu() {
         books[cBook].anim.SetTrigger("Close");
+        books[2].nextLateral = null;
+        Config.interactable = true;
+        blockConfig.SetActive(false);
 		GOMenu.SetActive (true);
 	}
 

@@ -1,16 +1,20 @@
 return{
 	title = "Troll",
 	type = 'c',
-	aspects = {0, 0, 1, 0},
+	aspects = {0, 0, 0, 0},
 	desc = "Regenerar",
-	flavor = "Esse especime fascinante pode morar em dois tipos de habitats distintos: debaixo de pontes, ou em foruns da internet.",
+	flavor = "Habitantes de locais inespitos, Trolls sao famosos por sua resistencia fisica e mental. Sao tao insistentes que, ao se assentarem numa regiao, so podem ser tirados de la mortos.",
 	cost = 2,
 	atk = 1,
 	hp = 3,
 
 	OnTurnStart = function(args)
 		local self = args[1]
-		self.Data.hp = self.Data.hp + 1
-		print(self.Data.hp)
+
+		if self.Data.hp < 3 then
+			self.addAnimation('buff')
+			self.Data.hp = self.Data.hp + 1
+			print(self.Data.hp)
+		end
 	end
 	}

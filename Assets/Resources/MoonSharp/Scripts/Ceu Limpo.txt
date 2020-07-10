@@ -2,7 +2,7 @@ return {
 	title = "Ceu Limpo",
 	type = 'a',
 	aspects = {0, 0, 0, 0},
-	desc = "desc",
-	flavor = "flavor",
+	desc = "Condicoes normais de jogo",
+	flavor = "Algumas nuvens ao horizonte, temperatura agradavel, e um sol suave aquecendo sua pele... Otimo dia para uma batalha.",
 	cost = 0,
 }

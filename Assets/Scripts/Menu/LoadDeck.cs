@@ -41,13 +41,13 @@ public class LoadDeck : MonoBehaviour {
 			nome.text = deck.name;
 			if (deck.size < 10) numCartas.text = "0";
 			else numCartas.text = "";
-			numCartas.text +=  "" + deck.size;
+			numCartas.text +=  deck.size + "/30";
 
 		} else {
 			nomeI.text = deck.name;
 			if (deck.size < 10) numCartas.text = "0";
 			else numCartas.text = "";
-			numCartas.text +=  "" + deck.size + " / 30";
+			numCartas.text +=  deck.size + " / 30";
 			CardList.GetComponent<DeckListManager> ().deckSize = deck.size;
 		}
 		commander.text = "" + deck.commander;
@@ -88,11 +88,11 @@ public class LoadDeck : MonoBehaviour {
 
 	public void limpar() {
 
-		if (nome != null) nome.text = "";
+		if (nome != null) nome.text = "Nome...";
 		else nomeI.text = "";
 
 		commander.text = "";
-		numCartas.text =  "";
+		numCartas.text =  "00 / 30";
 
 		if (selecionar != null) {
 			selecionar.interactable = false;

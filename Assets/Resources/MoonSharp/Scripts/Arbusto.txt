@@ -3,14 +3,22 @@ return {
 	type = 't',
 	aspects = {0, 0, 0, 0},
 	desc = "Causa 1 de dano em inimigos que atacam essa posicao",
-	flavor = "flavor",
+	flavor = "As famosas Vinhas de Drasil tem o pessimo costume de emaranhar-se nos pes das pessoas, e de cortarem e apertarem quem tenta forca-las...",
 	cost = 2,
 	
 	OnIncomingDamage = function(args)
+		local board = args[1]
 		local target = args[3]
-		local self = args[2]
+		
+		local lin = 0
+		if target.pos[1] == 2 then
+			lin = 3
+		end 
 
-		target.addAnimation("hit");
-		target.Damage(self.createTable(args[1], args[2], args[3], 1), true)
+		local self = board.GetMatrixValue(lin, target.pos[2])
+		local dealer = args[2]
+
+		dealer.addAnimation("hit");
+		dealer.Damage(self.createTable(board, self, dealer, 1), true)
 	end
 }

@@ -1,9 +1,9 @@
 return{
 	title = "Nonami",
 	type = 'c',
-	aspects = {0, 0, 0, 0},
+	aspects = {2, 0, 0, 0},
 	desc = "Furia(+2)",
-	flavor = "Algumas pessoas nao a levavam a serio olhando para seu rosto adoravel. Elas mudam de ideia rapidamente",
+	flavor = "Algumas pessoas nao a levavam a serio olhando para seu rosto adoravel. Elas mudaram de ideia rapidamente ao olhar para seu machado",
 	cost = 3,
 	atk = 3,
 	hp = 4,
@@ -11,7 +11,7 @@ return{
 	OnIncomingDamage = function(args)
 		local self = args[3]
 		local damage = args[4]
-		if self.Data.hp == self.Data.hp and damage > 0 then
+		if self.Data.hp >= 4 and damage > 0 then
 			self.addAnimation("buff");
 			self.Data.atk =  self.Data.atk + 2
 		end
@@ -19,10 +19,13 @@ return{
 	end,
 
 
-	OnHeal = function(self, board, healValue)
-		if (self.Data.hp + healValue) >= 4 then
+	OnHeal = function(args)
+		local self = args[3]
+		local heal = args[4]
+		if self.Data.hp + heal >= 4 then
 			self.addAnimation("debuff");
-			self.Data.atk = self.Data.atk -2
+			self.Data.atk =  self.Data.atk - 2
 		end
+		print(self.Data.atk)
 	end
 }

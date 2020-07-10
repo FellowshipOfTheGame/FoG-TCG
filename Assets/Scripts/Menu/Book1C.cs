@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Book1C : MonoBehaviour {
     Button book;
-    GameObject activePage, activeSide;
+    GameObject activePage, activeSide, activeLateral;
     public Animator anim;
-    public GameObject nextPage, nextSide;
+    public GameObject nextPage, nextSide, nextLateral;
     Animator parentAnim;
-    public GameObject lateral;
+    public GameObject lateral, auxPage;
     public Button changeButton;
 
     // Use this for initialization
@@ -17,6 +17,8 @@ public class Book1C : MonoBehaviour {
         anim = this.GetComponent<Animator>();
         parentAnim = this.transform.parent.parent.GetComponent<Animator>();
         book = this.transform.GetChild(0).GetComponent<Button>();
+        if (auxPage != null)
+            auxPage.SetActive(false);
     }
 
     public void move() {
@@ -24,7 +26,7 @@ public class Book1C : MonoBehaviour {
     }
 
     public void stop() {
-        parentAnim.SetTrigger("Stop");
+        //parentAnim.SetTrigger("Stop");
     }
 
     public void block() {
@@ -38,28 +40,61 @@ public class Book1C : MonoBehaviour {
     public void letOpen() {
         anim.SetTrigger("Stay");
         book.image.raycastTarget = false;
-        changeButton.interactable = false;
+        //changeButton.interactable = false;
+        if (auxPage != null)
+            auxPage.SetActive(true);
+    }
+
+    public void hideAuxPage(){
+        if (auxPage != null)
+            auxPage.SetActive(false);
     }
 
     public void letClose() {
         anim.SetTrigger("Stay");
         book.image.raycastTarget = true;
-        changeButton.interactable = true;
+        //changeButton.interactable = true;
     }
 
     public void acelera() {
-        lateral.SetActive(true);
+        if(activeLateral == null)
+            lateral.SetActive(true);
+        else
+            lateral.SetActive(false);
         //foreach (GameObject child in lateral.transform.ge)
         parentAnim.SetTrigger("Rush");
     }
 
+    public void freia(){
+        if(activeLateral == null)
+            lateral.SetActive(true);
+        else
+            lateral.SetActive(false);
+        //foreach (GameObject child in lateral.transform.ge)
+        parentAnim.SetTrigger("Slow");
+    }
+
     public void liberaLateral() {
-        lateral.SetActive(true);
+        if(activeLateral == null)
+            lateral.SetActive(true);
+        else
+            lateral.SetActive(false);
+
         activeSide = nextSide;
     }
 
     public void ocultaLateral() {
         lateral.SetActive(false);
+    }
+
+    public void changeLateral(){
+        if (activeLateral != null)
+            activeLateral.SetActive(false);
+
+        if (nextLateral != null)
+            nextLateral.SetActive(true);
+            
+        activeLateral = nextLateral;
     }
 
     public void changePage() {

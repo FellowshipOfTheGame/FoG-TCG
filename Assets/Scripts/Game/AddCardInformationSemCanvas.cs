@@ -24,14 +24,18 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
     public Sprite earth;
     public Sprite air;
     public float spacament;
+    
+    [Space(10)]
+    public SpriteRenderer frame;
+    public Color terrain, atm, spell;
 
     // Use this for initialization
-    void Start() {
+    public void Initialize() {
         //add information in Card class
         this.GetComponent<Card>().cost = info["cost"].ToObject<int>();
         this.GetComponent<Card>().type = info["type"].ToObject<char>();
         this.GetComponent<Card>().aspects = info["aspects"].ToObject<int[]>();
-        if(this.GetComponent<Card>().type == 'c') {
+        if(info["type"].ToObject<char>() == 'c') {
             atk.transform.parent.gameObject.SetActive(true);
             this.GetComponent<Card>().atk = info["atk"].ToObject<int>();
             atk.text = info["atk"].ToObject<int>().ToString();
@@ -40,6 +44,10 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
             minAtk.transform.parent.parent.gameObject.SetActive(true);
             minAtk.text = atk.text;
             minHp.text = hp.text;
+        }else{
+            //if(info["type"].ToObject<char>() == 't') frame.color = terrain;
+            //if(info["type"].ToObject<char>() == 'a') frame.color = atm;
+            //if(info["type"].ToObject<char>() == 's') frame.color = spell;
         }
         
         //draw infomation

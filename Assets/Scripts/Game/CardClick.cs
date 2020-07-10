@@ -10,21 +10,21 @@ public class CardClick : Clickable {
     public GameObject genericIllusion;
     Vector3 diff;
     public bool isDragging = false;
-    bool inHand = true;
+    public bool inHand = true;
     public Vector3 originPos;
     Vector3 colliderSize;
     public GameObject normalCard, minCard;
     TextMesh minAtk, minHp;
-    Card info;
+    public Card info;
     public float[] limit;
     GameObject model3D;
 
     // Use this for initialization
     void Start () {
-        board = GameObject.FindObjectOfType<Board>() as Board;
+        //board = GameObject.FindObjectOfType<Board>() as Board;
         colliderSize = this.GetComponent<BoxCollider>().size;
-        normalCard.SetActive(true);
-        minCard.SetActive(false);
+        //normalCard.SetActive(true);
+        //minCard.SetActive(false);
         info = this.GetComponent<AddCardInformationSemCanvas>().info;
         minAtk = this.GetComponent<AddCardInformationSemCanvas>().minAtk;
         minHp = this.GetComponent<AddCardInformationSemCanvas>().minHp;
@@ -64,14 +64,15 @@ public class CardClick : Clickable {
                 diff.z = 0.0f;
                 this.GetComponent<BoxCollider>().enabled = false;
                 board.dragCard = this.gameObject;
+                board.dragCardType = this.info.type;
             }
         }
         else{
-            
-                if (mouseButton == 0)
-                    GetComponent<Card>().Attack();
-                else if (mouseButton == 1)
-                    GetComponent<Card>().OnRightClick();
+            board.EndIllusion();
+            if (mouseButton == 0)
+                GetComponent<Card>().Attack();
+            else if (mouseButton == 1)
+                GetComponent<Card>().OnRightClick();
             
         }
     }
@@ -90,8 +91,8 @@ public class CardClick : Clickable {
 
     public void OnDropping() {
         isDragging = false;
+        
         if (board.slot != null) {
-
             this.transform.parent.GetComponent<Player>().mana -= this.GetComponent<Card>().cost;
             if (this.GetComponent<Card>().type == 'a' && board.slot.transform.childCount > 0) {
                 board.slot.transform.GetChild(0).GetComponent<Card>().Remove();
@@ -105,7 +106,7 @@ public class CardClick : Clickable {
             
             int[] pos = board.slot.GetComponent<Slot>().pos;
             board.slot.GetComponent<SpriteRenderer>().color = Color.clear;
-
+           
             normalCard.SetActive(false);
             if (this.GetComponent<Card>().type == 'c') {
                 board.slot.GetComponent<Slot>().cards[1] = this.gameObject;
@@ -121,18 +122,18 @@ public class CardClick : Clickable {
                 //make card terrain invisible and unclickable
                 this.GetComponent<BoxCollider>().size = new Vector3(0.0f, 0.0f, 0.0f);
                 colliderSize = new Vector3(0.0f, 0.0f, 0.0f);
-
+                
                 //spawn 3D model
                 int index = 0;
                 while (index < board.data.allTerrains.Length && board.data.allTerrains[index].name != "T_" + info.name)
                     index++;
-
+                
                 if (index < board.data.allTerrains.Length) {
                     model3D = Instantiate(board.data.allTerrains[index], board.slot.transform);
                     model3D.transform.localPosition = Vector3.zero;
                 } else
                     Debug.Log("cannot find 3D model of " + info.name);
-
+                
                 board.slot.GetComponent<Slot>().openGate();
                 if (board.currPlayer == 1) {
                     board.cardMatrix[0, pos[1]] = this.gameObject;
@@ -152,14 +153,17 @@ public class CardClick : Clickable {
                 board.cardAtm = this.gameObject;
             }
             board.slot = null;
+            Slot.isChoosingPlace = false;
+            this.GetComponent<BoxCollider>().enabled = true;
+            board.dragCard = null;
             this.GetComponent<Card>().OnEnter();
             board.CallCardPlacedEvents(this.GetComponent<Card>());
         } else {
             this.transform.position = originPos;
+            Slot.isChoosingPlace = false;
+            this.GetComponent<BoxCollider>().enabled = true;
+            board.dragCard = null;
         }
-        Slot.isChoosingPlace = false;
-        this.GetComponent<BoxCollider>().enabled = true;
-        board.dragCard = null;
     }
 
     public override void OnPointerEnter() {

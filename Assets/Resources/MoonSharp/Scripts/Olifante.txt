@@ -9,6 +9,16 @@ return {
 	hp = 6,
 
 	OnIncomingDamage = function(args)
+		local self = args[3]
+		local damage = args[4]
+
+		if damage > 1 then
+			self.changeAnimation("def");
+		else
+			print(damage)
+			self.changeAnimation("shield");
+		end
+
 		args[4] = args[4] - 1
 	end
 }

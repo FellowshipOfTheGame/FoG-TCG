@@ -26,12 +26,12 @@ public class LoadTabs : MonoBehaviour {
             if (addInfo) newCard.GetComponent<AddCardInformation>().card = card;
             onTab = true;
         }
-        if (card.aspects[1] > 0 || card.aspectsToGive[0] > 0) {
+        if (card.aspects[1] > 0 || card.aspectsToGive[1] > 0) {
             newCard = Instantiate(prefab, abas.Find("Aba2").GetChild(0).GetChild(0));
             if (addInfo) newCard.GetComponent<AddCardInformation>().card = card;
             onTab = true;
         }
-        if (card.aspects[2] > 0 || card.aspectsToGive[0] > 0) {
+        if (card.aspects[2] > 0 || card.aspectsToGive[2] > 0) {
             newCard = Instantiate(prefab, abas.Find("Aba3").GetChild(0).GetChild(0));
             if (addInfo) newCard.GetComponent<AddCardInformation>().card = card;
             onTab = true;
@@ -71,11 +71,8 @@ public class LoadTabs : MonoBehaviour {
 		DeleteCardsFromTabs ();
 
 		foreach (CardInformation card in GameData.Cards) {
-			if (card.qtdd > 0) {
-				LoadCard (card, genericCard, true);
-			} else {
-				LoadCard (card, dunnoCard, false);
-			}
+			LoadCard (card, genericCard, true);
+			
 		}
 	}
 

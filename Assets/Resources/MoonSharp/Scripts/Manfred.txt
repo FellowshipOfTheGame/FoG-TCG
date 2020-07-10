@@ -2,32 +2,51 @@ return {
 	title = "Manfred",
 	type = 'c',
 	aspects = {1, 0, 0, 0},
-	desc = "desc",
-	flavor = "flavor",
+	desc = "Reposicionar (*)",
+	flavor = "Criador de uma maquina voadora notavelmente instavel, Manfred representa bem o espirito de Idaran: voce pode fazer tudo que os outros nao podem te impedir de fazer.",
 	cost = 2,
 	atk = 2,
-	hp = 2
+	hp = 2,
+
+	OnEnter = function(args)
+		local self = args[2]
+		self.canCast = true
+	end,
+
+	OnTurnStart = function(args)
+		local self = args[1]
+		self.canCast = true
+	end,
+
+	OnAttack = function(args)
+		local self = args[2]
+		self.canCast = false
+	end,
 
 	OnRightClick = function(args)
 		local board = args[1]
 		local self = args[2]
 		
-		board.WaitForTarget(self);
+		self.WaitForTarget('x','Escolha o destino do Manfred');
 	end,
 
 	OnChosenTarget = function(args)
 		local board = args[1]
 		local self = args[2]
-		local pos = self.pos[2]
+		local origin = self.pos[2]
 		local destiny = args[4]
 		local target = board.GetMatrixValue(self.pos[1], destiny);
+
 		self.Move(self.pos[1], destiny);
 		self.canCast = false
 		self.canAttack = false
+		self.changeAnimation('sleep');
+
 		if target ~= nil then
 			target.canAttack = false
 			target.canCast = false
-			target.Move(self.pos[1], pos);
+			target.changeAnimation('sleep');
+			target.Move(self.pos[1], origin);
 		end
 	end
 }

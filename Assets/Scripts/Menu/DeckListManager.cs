@@ -9,6 +9,7 @@ public class DeckListManager : MonoBehaviour {
 	public Text qttd;
 
     public int deckSize = 0;
+    public GameObject saveButton;
 
     public int GetDeckSize()
     {

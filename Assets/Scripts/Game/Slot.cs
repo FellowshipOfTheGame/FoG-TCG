@@ -33,8 +33,8 @@ public class Slot : Clickable {
 
     void Update() {
         if (isChoosingPlace) {
-            char cardType = board.dragCard.GetComponent<Card>().type;
-            if ((cardType != 'a' && board.currPlayer == pos[0]) || (cardType == 'a' && pos[0] == 4))
+            char cardType = board.dragCardType;
+            if ((cardType == 's' && pos[0] != 4) || (cardType != 'a' && board.currPlayer == pos[0]) || (cardType == 'a' && pos[0] == 4))
                 rightPlace = true;
             else
                 rightPlace = false;
@@ -45,7 +45,7 @@ public class Slot : Clickable {
                 isFull = false;
             } else if ((cardType == 't') && cards[0] == null) {
                 isFull = false;
-            } else if (cardType == 's' || cardType == 'a') {
+            } else if (cardType == 's' || cardType == 'a' || cardType == 'x') {
                 isFull = false;
             } else {
                 isFull = true;
@@ -61,7 +61,6 @@ public class Slot : Clickable {
     }
 
 	public override void OnPointerEnter() {
-       
         if ((isChoosingPlace && rightPlace && !isFull) || board.castCard != null) {
             renderer.color = slotColor;
             board.slot = this.gameObject;

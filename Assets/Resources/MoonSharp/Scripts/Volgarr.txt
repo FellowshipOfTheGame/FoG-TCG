@@ -1,18 +1,20 @@
 return{
 	title = "Volgarr",
 	type = 'c',
-	aspects = {0, 0, 0, 0},
+	aspects = {1, 0, 1, 0},
 	desc = "Atropelar",
 	flavor = "No caminho desse guerreiro ha apenas a morte. Nao a dele, e claro.",
-	cost = 4,
+	cost = 3,
 	atk = 3,
 	hp = 6,
 
-	OnDamageDealt = function(args)
+	OnOutgoingDamage = function(args)
 		local board, self, enemy, dmg = unpack(args)
-		local player = 6/(board.currPlayer * 3)
-		if self.Data.atk > enemy.Data.hp then
-			board.players[player].hP = board.players[player].hP + enemy.Data.hp
+		local player = board.players[3 - board.currPlayer]
+
+		if enemy ~= nil and self.Data.atk > enemy.Data.hp then
+			player.animateCaptain('hit', self.pos[2])
+			player.Damage(self.createTable(board, self, null, self.Data.atk - enemy.Data.hp))
 		end
 	end
 	}

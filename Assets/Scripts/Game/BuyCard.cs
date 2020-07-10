@@ -18,13 +18,12 @@ public class BuyCard : Clickable {
     }
 
     public override void OnPointerEnter(){
-        if (board.players[board.currPlayer - 1].canBuy)
+        if (board.players[board.currPlayer - 1].capt.canBuy)
             spr.sprite = sprites[1];
     }
     public override void OnClick(int mouseButton) {
-        if (board.players[board.currPlayer - 1].GetComponent<Player>().canBuy) {
-            board.players[board.currPlayer - 1].GetComponent<Player>().PickUpCard();
-            board.players[board.currPlayer - 1].GetComponent<Player>().canBuy = false;
+        if (board.players[board.currPlayer - 1].capt.canBuy) {
+            board.players[board.currPlayer - 1].capt.Command();
             spr.sprite = sprites[0];
         }
     }

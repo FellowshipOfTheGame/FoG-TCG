@@ -2,17 +2,30 @@ return{
 	title = "Gato",
 	type = 'c',
 	aspects = {0, 1, 0, 0},
-	desc = "Gera uma mana",
-	flavor = "Ao ser violentamente assassinado junto a seu querido gato, o corpo do grande ladino Shadowill desapareceu. Meses depois, rumores de um gato portando adagas começaram a espalhar-se por Caldyr...",
+	desc = "Gera uma mana (*)",
+	flavor = "Rez a lenda e, após ter seu espírito aprisionado no corpo de seu gato de estimação, o grande ladino Shadowill passou a fazer de outros gatos da região seus seguidores. Não se sabe se isso é verdade, mas rumores fortes de gatos portando adagas começaram a espalhar-se por Caldyr...",
 	cost = 2,
 	atk = 1,
 	hp = 3,
 
 	OnEnter = function(args)
 		local self = args[2]
+		self.canCast = true
+	end,
+
+	OnTurnStart = function(args)
+		local self = args[1]
+		self.canCast = true
+	end,
+
+	OnRightClick = function(args)
+		local self = args[2]
 		local board = args[1]
-		local player = board.players[board.currPlayer]
-		player.mana = player.mana + 3
 		
+		local player = board.players[self.pos[1]]
+		player.mana = player.mana + 1
+		player.notify("Mana", 1, 0.5)
+		self.changeAnimation("invoke")
+		self.canCast = false
 	end
 }

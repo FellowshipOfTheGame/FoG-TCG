@@ -15,6 +15,12 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
     GameObject cardCopy;
     bool draggingCopy = false;
 
+    DeckListManager deckListManager;
+
+    void Start(){
+        deckListManager = this.transform.parent.GetComponent<DeckListManager>();
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         mouseOffset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
@@ -30,7 +36,7 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             draggingCopy = true;
             cardCopy = Instantiate(this.gameObject);
             RectTransform rt = cardCopy.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(180, 30);
+            rt.sizeDelta = new Vector2(274.5f, 64.0f);
             cardCopy.transform.SetParent(canvas.transform);
             cardCopy.transform.localScale = Vector3.one;
             cardCopy.GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -62,6 +68,7 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             if (draggingCopy)
             {
                 this.GetComponent<AddCardInformationMinimized>().quantity++;
+                GameManager.instance.ValidateDeck();
                 currentZone.GetComponent<DeckListManager>().UpdateChildrenQuantity();
                 Destroy(cardCopy);
                 draggingCopy = false;
@@ -83,6 +90,7 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             else {
                 Destroy(this.gameObject);
             }
+            GameManager.instance.ValidateDeck();
             deckListZone.GetComponent<DeckListManager>().deckSize--;
 		}
 		deckListZone.GetComponent<DeckListManager> ().setDeckSizeLabel ();
@@ -90,15 +98,28 @@ public class DeckListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        print(this.GetComponent<AddCardInformationMinimized>().quantity);
-        if(this.GetComponent<AddCardInformationMinimized>().quantity == 1)
-        {
-            Destroy(this.gameObject);
+        if(eventData.button == PointerEventData.InputButton.Left){
+            if(this.GetComponent<AddCardInformationMinimized>().quantity == 1){
+                Destroy(this.gameObject);
+            }else{
+                this.GetComponent<AddCardInformationMinimized>().quantity--;
+                deckListZone.GetComponent<DeckListManager>().UpdateChildrenQuantity();
+            }
+            deckListManager.deckSize--;
+        }else if (eventData.button == PointerEventData.InputButton.Right){
+            if (deckListManager.GetDeckSize() < 30 && deckListManager.CheckCardCount(this.name)) {
+                    this.GetComponent<AddCardInformationMinimized>().quantity++;
+                    deckListManager.deckSize++;
+                    deckListZone.GetComponent<DeckListManager>().UpdateChildrenQuantity();
+                } else {
+                    print("You have too many of that card in your deck!");
+            
+                }
         }
-        else
-        {
-            this.GetComponent<AddCardInformationMinimized>().quantity--;
-            deckListZone.GetComponent<DeckListManager>().UpdateChildrenQuantity();
-        }
+
+        GameManager.instance.ValidateDeck();
+        deckListManager.OrderChildren();
+        deckListManager.CheckForMultiples();
+        deckListZone.GetComponent<DeckListManager>().setDeckSizeLabel();
     }
 }

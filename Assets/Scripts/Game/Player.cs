@@ -21,18 +21,27 @@ public class Player : MonoBehaviour {
     public bool canBuy = true;
     public bool canPlay = true;
 
+    public StatusDisplay display;
+
     public Board board;
     // Use this for initialization
     void Start () {
         aspects = new int[4];
+        capt.player = this;
         int i;
         for (i = 0; i < 4; i++)
             aspects[i] = 0;
 	}
 	
     public void ResetTurn() {
-        canBuy = true;
+        //canBuy = true;
         canPlay = true;
+        PickUpCard();
+        Debug.Log("OEEE");
+    }
+
+    public void notify(string kind, int value, float delay){
+        display.notify(kind, value, delay);
     }
 
     public void PickUpCard() { //load a random card from decklist
@@ -43,7 +52,9 @@ public class Player : MonoBehaviour {
 
             GameObject newCard = Instantiate(genericCard, this.transform);
             newCard.GetComponent<Card>().board = this.transform.parent.GetComponent<Board>();
+            newCard.GetComponent<CardClick>().board = this.transform.parent.GetComponent<Board>();
             newCard.GetComponent<AddCardInformationSemCanvas>().info = newCard.GetComponent<Card>();
+            newCard.GetComponent<CardClick>().info = newCard.GetComponent<Card>();
             newCard.GetComponent<Card>().LoadScript(deckList[index]);
             deckList.RemoveAt(index);
             newCard = null;
@@ -51,8 +62,20 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public Card SummonCard(string cardName){
+        GameObject newCard = Instantiate(genericCard, this.transform);
+        newCard.GetComponent<Card>().board = this.transform.parent.GetComponent<Board>();
+        newCard.GetComponent<CardClick>().board = this.transform.parent.GetComponent<Board>(); 
+        newCard.GetComponent<AddCardInformationSemCanvas>().info = newCard.GetComponent<Card>();
+        newCard.GetComponent<CardClick>().info = newCard.GetComponent<Card>();
+        newCard.GetComponent<Card>().LoadScript(cardName);
+        RefreshChildPositon();
+        Debug.Log(cardName + " Player " + index);
+        return newCard.GetComponent<Card>();
+    }
+
     public void RefreshChildPositon() {
-        Vector3 myPos = this.transform.position;
+        Vector3 myPos = this.transform.position, newPos;
         float initialShift;
         if (this.transform.childCount % 2 == 0) {
             initialShift = (cardDist + cardWeight) / 2;
@@ -83,16 +106,22 @@ public class Player : MonoBehaviour {
     }
 
     public void Damage(Table args){
-        int prevHP = HP;
-        HP -= args.Get(4).ToObject<int>();
+        int prevHP = HP, damage = args.Get(4).ToObject<int>();
+        HP -= damage;
         print(HP);
 
+        if (damage > 0) notify("Life", -damage, 0.5f);
+
         if (prevHP > board.critic && HP <= board.critic)
-            board.changeState(true, index);
+            board.changeState(true, index - 1);
 
         if (HP <= 0) {
             Board.winner = 3 - index;
             board.EndGame();
         }
+    }
+
+    public void animateCaptain(string animation, int pos){
+        capt.anims[pos - capt.pos + 1].setAnim(animation);
     }
 }

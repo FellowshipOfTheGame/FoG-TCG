@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using MoonSharp.Interpreter;
 
 [MoonSharpUserData]
@@ -27,6 +28,7 @@ public class Board : MonoBehaviour {
     public GameObject slot;
     [HideInInspector] public Vector3 mousePosition;
     [HideInInspector] public GameObject dragCard;
+    [HideInInspector] public char dragCardType;
     public Transform illusionPos;
     public Transform illusionPos2;
     [HideInInspector] public MiniMenu miniMenu = null;
@@ -36,10 +38,17 @@ public class Board : MonoBehaviour {
     public TurnChangeScreen turnScreen;
     bool[] endLife;
 
+    public GameObject msgScreen;
+    public Text msgText;
+
+    public TextMesh clock;
+
     Vector3 playerPosition;
     public GameObject GameOverScr;
-    int counter = 1;
+    int counter;
     public static int winner = 0; //winner = 0 -> ninguem venceu; winner = 1  -> player 1 venceu; winner = 2 -> player 2 venceu
+
+    public int startMana, maxMana;
 
     public static Card GetCardFromObject(DynValue obj)
     {
@@ -80,6 +89,21 @@ public class Board : MonoBehaviour {
         print(val.ToString());
     }
 
+    public void SendMessage(string msg){
+        msgText.text = msg; 
+        msgScreen.SetActive(true);
+    }
+    public void SendTempMessage(string msg, float time){
+        msgText.text = msg; 
+        msgScreen.SetActive(true);
+        CancelInvoke();
+        Invoke("HideMessage", time);
+    }
+    public void HideMessage(){
+        CancelInvoke();
+        msgScreen.SetActive(false);
+    }
+
     void Awake()
     {
         UserData.RegisterAssembly();
@@ -91,7 +115,7 @@ public class Board : MonoBehaviour {
 
     void SetPlayer(int index) {
         players[index - 1].HP = maxHP;
-        players[index - 1].mana = 1;
+        players[index - 1].mana = startMana;
         if (loadDeckFromMenu && index == 1 && GameManager.chosenDeck1 != null) {
             for (int i = 0; i < GameManager.chosenDeck1.Count; i++)
                 players[0].deckList.Add(GameManager.chosenDeck1[i]);
@@ -110,11 +134,25 @@ public class Board : MonoBehaviour {
         players[index - 1].capt.canMove = newState;
         players[index - 1].capt.canGenerate = newState;
         players[index - 1].capt.canBuy = newState;
+        players[index - 1].transform.position = new Vector3(playerPosition.x, -3f, playerPosition.z);
+    }
 
-        if (newState)
-            players[index - 1].transform.position = playerPosition;
-        else
-            players[index - 1].transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
+    void RevealPlayer(int index){
+        //players[index - 1].transform.position = playerPosition;
+        Debug.Log("VAI");
+        StartCoroutine( PlayerLerp(index, playerPosition) );
+    }
+
+    IEnumerator PlayerLerp(int index, Vector3 destiny){
+        float currentTime = 0, duration = 0.2f;
+        Vector3 currPos = players[index - 1].transform.position;
+
+        while (currentTime < duration){
+            currentTime += Time.deltaTime;
+            players[index - 1].transform.position = Vector3.Lerp(currPos, destiny, currentTime / duration);
+            yield return null;
+        }
+        yield break;
     }
 
     // Use this for initialization
@@ -129,8 +167,9 @@ public class Board : MonoBehaviour {
         SetPlayer(1);
         SetPlayer(2);
         SwitchPlayerState(1, true);
+        //RevealPlayer(1);
         SwitchPlayerState(2, false);
-
+        counter = startMana;
         illusionPos = this.transform.Find("Table").Find("IllusionPos");
         illusionPos2 = this.transform.Find("Table").Find("IllusionPos2");
         int i, j;
@@ -143,21 +182,32 @@ public class Board : MonoBehaviour {
             players[0].PickUpCard();
             players[1].PickUpCard();
         }
+        msgScreen.SetActive(false);
+        ray.enabled = false;
+        turnScreen.reset();
+        Invoke("LetItGo", 2f);
+    }
+
+    public void LetItGo(){
+        ray.enabled = true;
+        RevealPlayer(1);
     }
 
     public void EndGame() {
+        HideMessage();
         GameOverScr.SetActive(true);
         GameOverScr.GetComponent<GameOverScreen>().Show();
     }
 
     public void ResetGame() {
+        counter = startMana;
         Time.timeScale = 1;
         GameOverScr.SetActive(false);
         SetPlayer(1);
         SetPlayer(2);
         SwitchPlayerState(1, true);
         SwitchPlayerState(2, false);
-
+        HideMessage();
         int i, j;
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 5; j++) {
@@ -189,6 +239,10 @@ public class Board : MonoBehaviour {
         players[0].capt.Reset();
         players[1].capt.Reset();
         currPlayer = 1;
+
+        ray.enabled = false;
+        turnScreen.reset();
+        Invoke("LetItGo", 2f);
     }
 	
 	// Update is called once per frame
@@ -199,15 +253,12 @@ public class Board : MonoBehaviour {
             }
             time += Time.deltaTime;
 
-            if (castCard != null && Input.GetMouseButtonDown(0)) {
-                if (slot != null) {
-                    castCard.OnChosenTarget(slot.GetComponent<Slot>().pos[0], slot.GetComponent<Slot>().pos[1]);
-                    slot.GetComponent<Slot>().hide();
-                    slot = null;
-                }
-                castCard = null;
-                BlockAllowPlayer(currPlayer - 1, true);
-            }
+            float aux = Mathf.Ceil(limit - time);
+
+            if (aux >= 10)
+                clock.text = aux.ToString();
+            else
+                clock.text = "0" + aux.ToString();
         }
 	}
 
@@ -238,38 +289,55 @@ public class Board : MonoBehaviour {
             cardAtm.GetComponent<Card>().OnNewCardInField(c);
     }
 
-    public void WaitForTarget(Card caster) {
-        castCard = caster;
-        BlockAllowPlayer(currPlayer - 1, false);
+    public void CallCardRemovedEvents(Card c) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (cardMatrix[i, j] != null && cardMatrix[i, j] != c.gameObject)
+                    cardMatrix[i, j].GetComponent<Card>().OnDeadCardInField(c);
+            }
+        }
+        if (cardAtm != null)
+            cardAtm.GetComponent<Card>().OnDeadCardInField(c);
     }
 
-    void BlockAllowPlayer(int p, bool v) {
+    public void CallCardMovedEvents(Card c, int OriginLin, int OriginCol) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (cardMatrix[i, j] != null)
+                    cardMatrix[i, j].GetComponent<Card>().AnyCardMove(c, OriginLin, OriginCol);
+            }
+        }
+        if (cardAtm != null)
+            cardAtm.GetComponent<Card>().AnyCardMove(c, OriginLin, OriginCol);
+    }
+
+    public void BlockAllowPlayer(int p, bool v) {
         players[p].canBuy = v;
         players[p].canPlay = v;
         players[p].capt.block();
     }
 
+    public void SpawnCard(Card card, int lin, int col){
+        slot = GetSlot(lin, col).gameObject;
+        card.GetComponent<CardClick>().OnDropping();
+    }
+
     public void EndTurn() {
         if (Slot.isChoosingPlace) {
-            Slot.isChoosingPlace = false;
-            dragCard.transform.position = dragCard.GetComponent<CardClick>().originPos;
-            dragCard.GetComponent<CardClick>().isDragging = false;
-            dragCard.GetComponent<BoxCollider>().enabled = true;
-            dragCard = null;
-
+            if(dragCard != null){
+                dragCard.transform.position = dragCard.GetComponent<CardClick>().originPos;
+                dragCard.GetComponent<CardClick>().isDragging = false;
+                dragCard.GetComponent<BoxCollider>().enabled = true;
+                dragCard = null;
+            }
             if (slot != null) {
                 slot.GetComponent<SpriteRenderer>().color = Color.clear;
                 slot = null;
             }
+            Slot.isChoosingPlace = false;
         }
 
-        if (illusionPos.childCount > 0) {
-            Destroy(illusionPos.GetChild(0).gameObject);
-        }
-
-        if (illusionPos2.childCount > 0) {
-            Destroy(illusionPos2.GetChild(0).gameObject);
-        }
+        EndIllusion();
 
         if (miniMenu != null)
             miniMenu.DestroyMenu(true);
@@ -280,10 +348,10 @@ public class Board : MonoBehaviour {
             SwitchPlayerState(1, false);
             SwitchPlayerState(2, true);
             currPlayer = 2;
-            if (counter < 10)
+            if (counter < maxMana)
                 players[1].mana = counter + 1;
             else
-                players[1].mana = 10;
+                players[1].mana = maxMana;
 
             //StartPlayerTurn(1);
         }else {
@@ -293,18 +361,19 @@ public class Board : MonoBehaviour {
             SwitchPlayerState(1, true);
             currPlayer = 1;
             counter++;
-            if (counter <= 10)
+            if (counter <= maxMana)
                 players[0].mana = counter;
             else
-                players[0].mana = 10;
+                players[0].mana = maxMana;
             
         }
+        HideMessage();
+        turnScreen.show(currPlayer);
         LockTurn();
     }
 
     void LockTurn() {
         ray.enabled = false;
-        turnScreen.show(currPlayer);
         Time.timeScale = 1;
 
     }
@@ -314,7 +383,18 @@ public class Board : MonoBehaviour {
         turnScreen.hide();
         StartPlayerTurn(currPlayer - 1);
         time = 0;
+        RevealPlayer(currPlayer);
         players[currPlayer - 1].ResetTurn();
+    }
+
+    public void EndIllusion(){
+        if (illusionPos.childCount > 0) {
+            Destroy(illusionPos.GetChild(0).gameObject);
+        }
+
+        if (illusionPos2.childCount > 0) {
+            Destroy(illusionPos2.GetChild(0).gameObject);
+        }
     }
 
     private void StartPlayerTurn(int player)
