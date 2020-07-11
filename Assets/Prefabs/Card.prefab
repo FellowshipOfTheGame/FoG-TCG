@@ -545,12 +545,12 @@ MonoBehaviour:
   cost: {fileID: 114150706029582928}
   atk: {fileID: 114217365281177408}
   hp: {fileID: 114111737036451170}
-  frame: {fileID: 114918831799977454}
-  terrain: {r: 0.5849056, g: 0.37386933, b: 0.30072978, a: 1}
-  atm: {r: 0, g: 0, b: 0, a: 0}
-  spell: {r: 0, g: 0, b: 0, a: 0}
   aspects:
   - {fileID: 0}
+  frame: {fileID: 114918831799977454}
+  terrain: {r: 0.8679245, g: 0.5946511, b: 0.50356, a: 1}
+  atm: {r: 0.8584906, g: 0.7667445, b: 0.5061855, a: 1}
+  spell: {r: 0.8113208, g: 0.5931827, b: 0.75013566, a: 1}
 --- !u!114 &114732584596108334
 MonoBehaviour:
   m_ObjectHideFlags: 1

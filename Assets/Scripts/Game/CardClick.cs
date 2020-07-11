@@ -13,7 +13,7 @@ public class CardClick : Clickable {
     public bool inHand = true;
     public Vector3 originPos;
     Vector3 colliderSize;
-    public GameObject normalCard, minCard;
+    public GameObject normalCard, minCard, castIcon;
     TextMesh minAtk, minHp;
     public Card info;
     public float[] limit;
@@ -46,6 +46,7 @@ public class CardClick : Clickable {
 
         if (!inHand) {
             //refreshCard();
+            castIcon.SetActive(info.canCast);
         }
     }
 
@@ -65,11 +66,12 @@ public class CardClick : Clickable {
                 this.GetComponent<BoxCollider>().enabled = false;
                 board.dragCard = this.gameObject;
                 board.dragCardType = this.info.type;
+                if(this.info.type == 's') board.dragCardType = this.info["mark"].ToObject<char>();
             }
         }
         else{
             board.EndIllusion();
-            if (mouseButton == 0)
+            if (mouseButton == 0 && info.type == 'c')
                 GetComponent<Card>().Attack();
             else if (mouseButton == 1)
                 GetComponent<Card>().OnRightClick();
@@ -157,6 +159,8 @@ public class CardClick : Clickable {
             this.GetComponent<BoxCollider>().enabled = true;
             board.dragCard = null;
             this.GetComponent<Card>().OnEnter();
+            if (info.canCast) castIcon.transform.parent.gameObject.SetActive(true);
+
             board.CallCardPlacedEvents(this.GetComponent<Card>());
         } else {
             this.transform.position = originPos;

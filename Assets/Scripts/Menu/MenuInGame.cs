@@ -13,27 +13,17 @@ public class MenuInGame : MonoBehaviour {
     public Raycaster raycaster;
 
 	private bool paused = false;
-	private string saida;
 
 	public void Confirmar() {
-		if(saida.Equals("desistir")) 
-			SceneManager.LoadScene ("Menu");
-
-		if(saida.Equals("sair")) 
-			Application.Quit ();
+		Time.timeScale = 1;
+		SceneManager.LoadScene ("Menu");
 	}
 
 	public void Ficar() {
 		Confirm.SetActive (false);
 	}
 
-	public void desistir() {
-		saida = "desistir";
-		Confirm.SetActive (true);
-	}
-
 	public void sair () {
-		saida = "sair";
 		Confirm.SetActive (true);
 	}
 

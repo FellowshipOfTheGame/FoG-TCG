@@ -18,6 +18,7 @@ public class Slot : Clickable {
     float gatepos, destiny;
     public GameObject genericIllusion;
 
+    public Animator atmEffect;
 	void Start() {
         if(gate != null)
             gatepos = gate.transform.position.y;
@@ -121,9 +122,9 @@ public class Slot : Clickable {
     public void openGate() {
         moveGate = true;
         if (pos[0] <= 1)
-            destiny = gatepos - 1.5f;
+            destiny = gatepos - 1.5f * transform.up.y;
         else
-            destiny = gatepos + 1.5f;
+            destiny = gatepos + 1.5f * transform.up.y;
     }
 
     public void closeGate() {

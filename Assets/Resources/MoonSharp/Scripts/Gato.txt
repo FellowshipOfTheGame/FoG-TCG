@@ -18,6 +18,11 @@ return{
 		self.canCast = true
 	end,
 
+	OnAttack = function(args)
+		local self = args[2]
+		self.canCast = false
+	end,
+
 	OnRightClick = function(args)
 		local self = args[2]
 		local board = args[1]

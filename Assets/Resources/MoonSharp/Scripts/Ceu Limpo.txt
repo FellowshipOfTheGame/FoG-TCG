@@ -1,8 +1,23 @@
 return {
 	title = "Ceu Limpo",
-	type = 'a',
+	type = 's',
 	aspects = {0, 0, 0, 0},
-	desc = "Condicoes normais de jogo",
+	desc = "Destroi a atmosfera atual",
 	flavor = "Algumas nuvens ao horizonte, temperatura agradavel, e um sol suave aquecendo sua pele... Otimo dia para uma batalha.",
 	cost = 0,
+
+	mark = 'a',
+
+	OnEnter = function(args)
+		local board = args[1]
+		local self =  args[2]
+		local target = board.GetAtm()
+		
+		if target ~= nil then
+			target.Die()
+		end
+
+		self.Remove()
+
+	end
 }

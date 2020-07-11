@@ -13,6 +13,9 @@ public class AddCardInformation : MonoBehaviour {
     public Text atk;
     public Text hp;
     public GameObject[] aspects;
+    
+    public Image frame;
+    public Color terrain, atm, spell;
 
 	// Use this for initialization
     void Start() {
@@ -25,6 +28,11 @@ public class AddCardInformation : MonoBehaviour {
             atk.transform.parent.gameObject.SetActive(true);
             atk.text = card.ATK.ToString();
             hp.text = card.HP.ToString();
+        }else{
+            atk.transform.parent.gameObject.SetActive(false);
+            if(card.type == 't') frame.color = terrain;
+            else if(card.type == 'a') frame.color = atm;
+            else if(card.type == 's') frame.color = spell;
         }
 
 		int aux2=0;

@@ -39,13 +39,8 @@ return {
 
 		self.Move(self.pos[1], destiny);
 		self.canCast = false
-		self.canAttack = false
-		self.changeAnimation('sleep');
 
 		if target ~= nil then
-			target.canAttack = false
-			target.canCast = false
-			target.changeAnimation('sleep');
 			target.Move(self.pos[1], origin);
 		end
 	end

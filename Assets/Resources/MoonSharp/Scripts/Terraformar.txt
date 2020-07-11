@@ -6,6 +6,7 @@ return{
 	flavor = "Com persistencia, concentracao, e um pequeno meteoro, quase qualquer terreno pode perder suas caracteristicas mais significativas.",
 	cost = 2,
 
+	mark = 's',
 
 
 	OnEnter = function(args)

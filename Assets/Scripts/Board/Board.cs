@@ -44,6 +44,8 @@ public class Board : MonoBehaviour {
 
     public TextMesh clock;
 
+    public Animator table, atmEffect;
+
     Vector3 playerPosition;
     public GameObject GameOverScr;
     int counter;
@@ -72,6 +74,12 @@ public class Board : MonoBehaviour {
         }
 
         //print("null");
+        return null;
+    }
+
+     public Card GetAtm() {
+        if (cardAtm != null) return cardAtm.GetComponent<Card>();
+
         return null;
     }
 
@@ -143,7 +151,10 @@ public class Board : MonoBehaviour {
     }
 
     void RevealPlayer(int index){
-        //players[index - 1].transform.position = playerPosition;
+        players[index - 1].endBtn.SetWork(true);
+        players[index - 1].buyBtn.SetWork(true);
+        players[2 - index].endBtn.SetWork(false);
+        players[2 - index].buyBtn.SetWork(false);
         Debug.Log("VAI");
         StartCoroutine( PlayerLerp(index, playerPosition) );
     }
@@ -344,6 +355,10 @@ public class Board : MonoBehaviour {
 
         EndIllusion();
 
+        //switch display
+        players[0].display.Refresh();
+        players[1].display.Refresh();
+
         if (miniMenu != null)
             miniMenu.DestroyMenu(true);
 
@@ -380,7 +395,7 @@ public class Board : MonoBehaviour {
     void LockTurn() {
         ray.enabled = false;
         Time.timeScale = 1;
-
+        table.SetTrigger("spin");
     }
 
     public void UnlockTurn() {
@@ -390,6 +405,14 @@ public class Board : MonoBehaviour {
         time = 0;
         RevealPlayer(currPlayer);
         players[currPlayer - 1].ResetTurn();
+
+        //rotate cards
+        if(cardAtm != null) cardAtm.transform.Rotate(0f, 0f, 180f, Space.Self);
+        for (int i = 0; i < 5; i++){
+            if (cardMatrix[1, i] != null) cardMatrix[1, i].transform.Rotate(0f, 0f, 180f, Space.Self);
+            if (cardMatrix[2, i] != null) cardMatrix[2, i].transform.Rotate(0f, 0f, 180f, Space.Self);
+        }
+        
     }
 
     public void EndIllusion(){

@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour {
     void Awake() {
         if (instance != null) {
             GameManager gm = instance;
-            gm.AnotherPath = Application.dataPath + "/Settings/";
+            gm.AnotherPath = Application.dataPath + "/Resources/";
             gm.Cardpath = Application.dataPath + "/";
            	gm.Commander = Commander;
             gm.Deck = Deck;
@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(transform.gameObject);
             Deckpath = Application.dataPath + "/Decks/";
             Cardpath = Application.dataPath + "/";
-            AnotherPath = Application.dataPath + "/Settings/";
+            AnotherPath = Application.dataPath + "/Resources/";
 
             LoadCards();
             LoadInfos();
@@ -232,7 +232,7 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(transform.gameObject);
             Deckpath = Application.dataPath + "/Decks/";
             Cardpath = Application.dataPath + "/";
-            AnotherPath = Application.dataPath + "/Settings/";
+            AnotherPath = Application.dataPath + "/Resources/";
 
             LoadCards();
             LoadInfos();

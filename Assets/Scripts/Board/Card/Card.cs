@@ -127,6 +127,10 @@ public class Card : MonoBehaviour {
 	}
 
     public virtual void OnEnter() {
+        if (type == 'a'){
+            board.atmEffect.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Atms/" + infoName);
+            board.atmEffect.SetTrigger("show");
+        }
 
 		EnterEvent (createTable(board, this));
 	}
@@ -134,12 +138,13 @@ public class Card : MonoBehaviour {
 	public virtual void OnExit() {
         if (type == 't')
             this.transform.parent.GetComponent<Slot>().closeGate();
+        else if (type == 'a')
+            board.atmEffect.SetTrigger("erase");
         ExitEvent (createTable(board, this));
 	}
 
 	public virtual void OnTurnStart() {
         canAttack = true;
-        canCast = true;
         if (haveModifier)
             ModifierEvent(createTable(board, this));
 		TurnStartEvent (createTable(this));
@@ -147,7 +152,7 @@ public class Card : MonoBehaviour {
 
 	public virtual void OnTurnEnd() {
         canAttack = false;
-        if (type == 'c') changeAnimation("sleep");
+        if (type == 'c') changeAnimation("none");
 		TurnEndEvent (createTable(this));
 	}
 
@@ -216,43 +221,35 @@ public class Card : MonoBehaviour {
         if (targetGO == null){
             Captain cap = board.players[2 - pos[0]].capt;
             if (Mathf.Abs(pos[1] - cap.pos) <= 1) {
-                if (board.currPlayer == 1)
-                    am.setAnim("atk");
-                else
-                    am.setAnim("atk2");
+                am.setAnim("atk");
 
                 Player target = board.players[2 - pos[0]];
                 target.capt.anims[pos[1] - cap.pos + 1].setAnim("hit");
                 args = createTable(board, this, null, dmg);
                 
                 this.OutgoingDamageEvent(args);
-                GameObject targetTerrain = GetComponent<Card>().board.cardMatrix[(3 * pos[0] - 3) % 4, pos[1]];
-                if (targetTerrain != null) {
-                    Card aux = targetTerrain.GetComponent<Card>();
-                    aux.OutgoingDamageEvent(args);
-                }
+                Card myTerrain = board.GetMatrixValue( (3 * pos[0] - 3) % 4, pos[1] );
+                if (myTerrain != null) myTerrain.OutgoingDamageEvent(args);
+                
 
+                Card targetTerrain = board.GetMatrixValue( (6 - 3 * pos[0]) % 4, pos[1] );
+                if (targetTerrain != null) targetTerrain.IncomingDamageEvent(args);
+                
                 this.AttackEvent(args);
                 target.Damage(args);
                 this.DamageDealtEvent(args);
             }
 
         } else {
-            if (board.currPlayer == 1)
-                am.setAnim("atk");
-            else
-                am.setAnim("atk2");
+            am.setAnim("atk");
 
             Card target = targetGO.GetComponent<Card>();
-            target.am.setAnim("hit");
+            target.addAnimation("hit");
             args = createTable(board, this, target, dmg);
 
             this.OutgoingDamageEvent(args);
-            GameObject targetTerrain = GetComponent<Card>().board.cardMatrix[(3 * pos[0] - 3) % 4, pos[1]];
-            if (targetTerrain != null) {
-                Card aux = targetTerrain.GetComponent<Card>();
-                aux.OutgoingDamageEvent(args);
-            }
+            Card myTerrain = board.GetMatrixValue( (3 * pos[0] - 3) % 4, pos[1] );
+            if (myTerrain != null) myTerrain.OutgoingDamageEvent(args);
 
             this.AttackEvent(args);
             target.Damage(args, false);
@@ -304,7 +301,7 @@ public class Card : MonoBehaviour {
         this.OnExit();
         board.CallCardRemovedEvents(this);
         
-        if (type != 'a')
+        if (type != 'a' && pos[0] != 4)
             board.cardMatrix[pos[0], pos[1]] = null;
 
         if (type == 't')

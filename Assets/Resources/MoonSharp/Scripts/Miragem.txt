@@ -6,7 +6,7 @@ return{
 	flavor = "Uma coisa e ser enganado por uma miragem. Outra e ser enganado por um vendedor e comprar uma miragem.",
 	cost = 1,
 
-
+	mark = 's',
 
 	OnEnter = function(args)
 		local board = args[1];

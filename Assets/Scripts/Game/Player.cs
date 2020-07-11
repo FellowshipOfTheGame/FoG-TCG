@@ -22,6 +22,8 @@ public class Player : MonoBehaviour {
     public bool canPlay = true;
 
     public StatusDisplay display;
+    public EndTurn endBtn;
+    public BuyCard buyBtn;
 
     public Board board;
     // Use this for initialization
@@ -36,8 +38,8 @@ public class Player : MonoBehaviour {
     public void ResetTurn() {
         //canBuy = true;
         canPlay = true;
+        endBtn.SetWork(true);
         PickUpCard();
-        Debug.Log("OEEE");
     }
 
     public void notify(string kind, int value, float delay){

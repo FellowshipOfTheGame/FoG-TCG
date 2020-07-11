@@ -23,7 +23,8 @@ public class IllusionScript : MonoBehaviour {
     [Space(5)]
     public float spacament;
 
-
+    public SpriteRenderer frame;
+    public Color terrain, atm, spell;
 
 
     // Use this for initialization
@@ -51,6 +52,10 @@ public class IllusionScript : MonoBehaviour {
             atk.transform.parent.gameObject.SetActive(true);
             atk.text = original.GetComponent<AddCardInformationSemCanvas>().atk.text;
             hp.text = original.GetComponent<AddCardInformationSemCanvas>().hp.text;
+        }else{
+            if(original.GetComponent<Card>().type == 't') frame.color = terrain;
+            else if(original.GetComponent<Card>().type == 'a') frame.color = atm;
+            else if(original.GetComponent<Card>().type == 's') frame.color = spell;
         }
 
         int i;

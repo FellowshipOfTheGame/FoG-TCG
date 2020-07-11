@@ -26,7 +26,7 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
     public float spacament;
     
     [Space(10)]
-    public SpriteRenderer frame;
+    public SpriteRenderer[] frame;
     public Color terrain, atm, spell;
 
     // Use this for initialization
@@ -45,9 +45,10 @@ public class AddCardInformationSemCanvas : MonoBehaviour {
             minAtk.text = atk.text;
             minHp.text = hp.text;
         }else{
-            //if(info["type"].ToObject<char>() == 't') frame.color = terrain;
-            //if(info["type"].ToObject<char>() == 'a') frame.color = atm;
-            //if(info["type"].ToObject<char>() == 's') frame.color = spell;
+            if(info["type"].ToObject<char>() == 't') frame[0].color = terrain;
+            if(info["type"].ToObject<char>() == 'a') frame[0].color = atm;
+            if(info["type"].ToObject<char>() == 's') frame[0].color = spell;
+            frame[1].color = frame[0].color;
         }
         
         //draw infomation

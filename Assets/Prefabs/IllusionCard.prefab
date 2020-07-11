@@ -382,7 +382,7 @@ Transform:
   m_GameObject: {fileID: 1508392673701036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 2.5325744}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 4328135602106900}
   - {fileID: 4025365117977424}
@@ -956,6 +956,10 @@ MonoBehaviour:
   spinVelocity: 0.04
   maxAngle: 2
   spacament: 0.32
+  frame: {fileID: 212435520605627598}
+  terrain: {r: 0.8679245, g: 0.5946511, b: 0.50356, a: 0.83137256}
+  atm: {r: 0.8584906, g: 0.7667445, b: 0.5061855, a: 0.83137256}
+  spell: {r: 0.8113208, g: 0.5931827, b: 0.75013566, a: 0.83137256}
 --- !u!212 &212100505771976308
 SpriteRenderer:
   m_ObjectHideFlags: 1

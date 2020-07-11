@@ -75,9 +75,9 @@ public class Captain : Clickable {
         player.capt.canGenerate = false;
         player.capt.canMove = false;
 
-        if (index == 0) player.display.notify("Fire", 1, 0f);
-        if (index == 1) player.display.notify("Water", 1, 0f);
-        if (index == 2) player.display.notify("Earth", 1, 0f);
+        if (index == 0) player.notify("Fire", 1, 0f);
+        if (index == 1) player.notify("Water", 1, 0f);
+        if (index == 2) player.notify("Earth", 1, 0f);
 
         HideMenu();
     }

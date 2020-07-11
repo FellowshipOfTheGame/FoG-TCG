@@ -8,15 +8,14 @@ return {
 	
 	OnIncomingDamage = function(args)
 		local board = args[1]
-		local target = args[3]
+		local dealer = args[2]
 		
 		local lin = 0
-		if target.pos[1] == 2 then
+		if dealer.pos[1] == 1 then
 			lin = 3
 		end 
 
-		local self = board.GetMatrixValue(lin, target.pos[2])
-		local dealer = args[2]
+		local self = board.GetMatrixValue(lin, dealer.pos[2])
 
 		dealer.addAnimation("hit");
 		dealer.Damage(self.createTable(board, self, dealer, 1), true)
